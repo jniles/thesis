@@ -100,7 +100,7 @@ Dr. David Gillman
 
 \chapter{Methods}
 
-\section{Data Collection \& Processing}
+\section{Data Collection}
 
 The HiC datasets used in this thesis were downloaded from the Gene
 Expression Omnibus as Sequence Read archive files (.sra).
@@ -126,6 +126,16 @@ marker and ligated at low concentrations that favor within ligation between
 reads bound to the same complex.  The reads are captured and sequenced,
 building what is known as a HiC library.
 
+%% Regulatory Elements from Ensembl
+
+%% Translocations from COSMIC
+
+%% Genes from Biomart
+%% Hg19 from UCSC
+
+
+\section{Mapping and Alignment}
+
 The HiC library is formed largely of \texit{chimeric} DNA sequences, or
 sequences made of material from more than one source.  The ligation process
 creates novel DNA sequences with a portion of sequence from one region of
@@ -136,15 +146,22 @@ have truncated reads to a fixed cutoff size before realignment with a short
 read alignment algorithm.  In a recent paper, Imakaev and collegues
 describe an algorithm to repeated algin reads with different truncation sizes
 and analyzing reads with the maximum alignment score\cite{Imakaev2012}.  We followed
-this proceedure to realign the IMR90 HiC libraries for six replicates,
-with an average of XX million reads remaining per replicate.
+this proceedure to realign the IMR90 HiC libraries for six replicates to 
+the Human Genome build 19 (hg1), with an average of XX million reads
+mapped per replicate.
+
+%% Data Validation
+
+\section{Analysis}
+
+%% Iterative Correction and Eigenvalue Expansion
+
+%% Visualization Tools
+%% Replication Timing Analysis..?
+
+\chapter{Results & Discussion}
 
 
-
-%% \chapter{Chapter 3}
-%%
-%% \chapter{Chapter 4}
-%%
 %%\appendix
 %%\chapter{Chapter 1 of appendix}
 %%Appendix chapter 1 text goes here
