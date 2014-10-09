@@ -1,0 +1,14 @@
+# ignore editor files
+*.swp
+*.swo
+*~
+
+# ignore latex files
+*.aux
+*.log
+*._log
+*.vim
+
+# ignore templates
+template/*
+
