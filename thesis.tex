@@ -37,19 +37,23 @@
 \makecopyright
 
 \begin{abstract}
-I present evidence that the 3D structure of the genome regulates
-chromosomal fragility, heavily determining the translocation
-frequencies between neighboring sequences and providing insight
-into the mechanism between chromosomal fragile site breakage.
+Chromosomal rearrangements and sequence translocations are
+canonical hallmarks of cancerous cells.  The canonical models
+for these chromosomal breakage events involve spatially
+independent molecular mechanisms of double-strand break
+repair and non-homologous end joining.  The recent development of high
+throughput techniques to interrogate genome-wide chromatin
+conformation allows for the spatial dynamics of chromosomal
+breakage to be examined and correlated with translocations
+frequencies and other genomic rearrangements.  I present
+evidence for translocaction frequency based on distances between
+translocating sites in 3D space.  I also propose experiments
+to further elucidate the interplay between distance and
+genomic rearrangements in cells.
 \end{abstract}
 
-\begin{biosketch}
-Your biosketch goes here. Make sure it sits inside
-the brackets.
-\end{biosketch}
-
 \begin{dedication}
-This document is dedicated to Miriam Fountain.
+This document is dedicated to Miriam Paul Fountain.
 \end{dedication}
 
 \begin{acknowledgements}
@@ -66,6 +70,12 @@ Dr. David Gillman
 \pagestyle{cornell} \addtolength{\parskip}{0.5\baselineskip}
 
 \chapter{Introduction}
+
+
+% I present evidence that the 3D structure of the genome regulates
+% chromosomal fragility, heavily determining the translocation
+% frequencies between neighboring sequences and providing insight
+% into the mechanism between chromosomal fragile site breakage.
 
 %% \section{SECTION 1}
 %% The text for Section 1 goes here, without brackets.
@@ -146,7 +156,7 @@ have truncated reads to a fixed cutoff size before realignment with a short
 read alignment algorithm.  In a recent paper, Imakaev and collegues
 describe an algorithm to repeated algin reads with different truncation sizes
 and analyzing reads with the maximum alignment score\cite{Imakaev2012}.  We followed
-this proceedure to realign the IMR90 HiC libraries for six replicates to 
+this proceedure to realign the IMR90 HiC libraries for six replicates to
 the Human Genome build 19 (hg1), with an average of XX million reads
 mapped per replicate.
 
@@ -159,13 +169,61 @@ mapped per replicate.
 %% Visualization Tools
 %% Replication Timing Analysis..?
 
+
+%% The Graph Theory Section
+\chapter{The Interaction Graph}
+
+\section{Motivation and Preliminaries}
+
+The interation matrix $M$ describes an undirected graph of genomic interactions
+at the selected bin size.  It is natural to leverage graph theoretic ideas 
+and extend our analysis to the topology and structure of the interaction graph,
+to better understand the underlying chromatin structure.  Additionally, graph
+theory contains strong notions of network stability and degree, allowing us an
+additional avenue to create comparisons between experiments, cell lines, and cell
+states.  Finally, graphs are a powerfully illustrative tool, allowing the
+researcher to make quick judgements about the dataset and the generating
+mechanics which produced it.
+
+\begin{definition}
+  Let $V_{n}$ be a collection of $n$ genomic bins (vertices).  Let $E_{m}$ be a
+  collection of $m$ interactions (edges) between bins in $V_{n}$ with weights
+  $w_{m}$ corresponding to interaction frequencies.  We define the  genomic
+  interaction graph at resolution $n$ to be $G_{n} := (V_{n}, E_{n})$.
+\end{definition}
+
+The graph $G_{n}$ is an undirected graph that decribes the all-to-all
+interactions from a given Hi-C experiment.  Since the human genome is
+partitioned in the nucleus into chromosomal territories, it makes sense to
+partition the graph by chromosome to better reflect the biological reality.
+
+\begin{definition}
+  Let $C_{n,i}$ be a partition of $G_{n}$ where all bins in $C_{n,i}$ are
+  located in chromosome $i$.
+\end{definition}
+
+The graph partition $C_{n,i}$ gives us a tool to analyze the topology of
+intrachrosomal interations.
+
+\section{Analysis}
+
+Now we have developed the terminology and intution into the interaction
+graphs below, we can begin to interrogate and evaluation our model.
+
+\subsection{Cycles}
+
+It is of interest to determine if there are any cycles present in the
+interaction graphs.  Intuitvely, cycles correspond to molecular domains which
+may have functional significance.
+
+
 \chapter{Results & Discussion}
 
 
 %%\appendix
 %%\chapter{Chapter 1 of appendix}
 %%Appendix chapter 1 text goes here
-%%
-%%\bibliography{bibliography}
+
+\bibliography{bibliography}
 
 \end{document}
