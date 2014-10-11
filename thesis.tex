@@ -177,7 +177,13 @@ graphs below, we can begin to interrogate and evaluation our model.
 
 It is of interest to determine if there are any cycles present in the
 interaction graphs.  Intuitvely, cycles correspond to molecular domains which
-may have functional significance.
+may have functional significance.  Our approach is to identify cycles at the
+smallest resolution possible, and gradually increase our bin size to understand
+how these small regulatory units fit into the megabase-size and larger regulatory
+landscape.  It is also of interest to determine if cycles cease to exist in the
+graph after relaxing past certain resolutions, perhaps characterising chromosomes
+that are composed of many smaller, independent domains rather than large loops.
+
 
 
 \chapter{Results & Discussion}
