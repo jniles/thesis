@@ -206,9 +206,34 @@ that are composed of many smaller, independent domains rather than large loops.
 \chapter{Results & Discussion}
 
 
-%%\appendix
-%%\chapter{Chapter 1 of appendix}
-%%Appendix chapter 1 text goes here
+\appendix
+\chapter{Supplimental Methods}
+
+\section{Spearman's Rank Correlation Calculation}
+
+In order to make meaningful comparisons between datasets (replicates,
+in this case), we must show that some degree of relationship exists between
+the datasets and comparisons or combinations of the data from disperate sets
+are valid to a degree of uncertainty.  Spearman's Rank Correlation Coefficient
+(denoted by the Greek letter \textit{rho} $\rho$) is a nonparametric measure
+of association between two variables.  Spearman's coefficient is an appropriate
+measure for deriving association between interaction datatsets because it
+assumes some monotonic relationship between variables, rather than a linear
+relationship as in Pearson's correlation coefficient.  The formula for Spearman's
+$\rho$ is given as follows:
+
+$
+\rho = 1 - \frac{\sum_{i=1}{n}(d_i^2)}{n(n^2 - 1)}
+$
+
+where $\rho$ is the correlation coefficient taking values between $-1$ and $+1$,
+$d_i = x_i - y_i$ where $x_i, y_i$ are ranks derived from the raw scores $X$ and
+$Y$ respectively.  
+
+%% Question: Is this 
+
+The six replicate experiments in our 
+
 
 \bibliography{bibliography}
 
