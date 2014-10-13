@@ -74,7 +74,7 @@ the vast instruction set for the cells growth, function, and death.  The cell
 programme, however, is dictated not only by the instruction set, but also
 how the instructions are read, compiled, and exectuted, and is influenced
 by a myriad of factors in addition to the primary sequence.  Increasingly,
-modern cancer research is indicating this epigenetic landscape plays strategic 
+modern cancer research is indicating this epigenetic landscape plays strategic
 role in determining cell fate.  Understanding the landmark epigenetic features,
 the conditions which bring about their development, and the impact they have on
 the cell is of paramount importance and difficultly.
@@ -156,7 +156,7 @@ mapped per replicate.
 \section{Motivation and Preliminaries}
 
 The interation matrix $M$ describes an undirected graph of genomic interactions
-at the selected bin size.  It is natural to leverage graph theoretic ideas 
+at the selected bin size.  It is natural to leverage graph theoretic ideas
 and extend our analysis to the topology and structure of the interaction graph,
 to better understand the underlying chromatin structure.  Additionally, graph
 theory contains strong notions of network stability and degree, allowing us an
@@ -214,13 +214,16 @@ that are composed of many smaller, independent domains rather than large loops.
 In order to make meaningful comparisons between datasets (replicates,
 in this case), we must show that some degree of relationship exists between
 the datasets and comparisons or combinations of the data from disperate sets
-are valid to a degree of uncertainty.  Spearman's Rank Correlation Coefficient
-(denoted by the Greek letter \textit{rho} $\rho$) is a nonparametric measure
-of association between two variables.  Spearman's coefficient is an appropriate
-measure for deriving association between interaction datatsets because it
-assumes some monotonic relationship between variables, rather than a linear
-relationship as in Pearson's correlation coefficient.  The formula for Spearman's
-$\rho$ is given as follows:
+are valid to a degree of uncertainty.  It is also essential to understand if the
+experimental replicates indeed managed to replicate the conditions of the primary
+experiment, or if experimental errors prevent the comparison between replicates.
+
+Spearman's Rank Correlation Coefficient (denoted by the Greek letter \textit{rho}
+$\rho$) is a nonparametric measurei of association between two variables.
+Spearman's coefficient assumes some monotonic relationship between variables,
+rather than a linear relationship (as in Pearson's), making it appropriate
+to compare the IM90 interaction datasets.  The formula for Spearman's $\rho$ is
+given as follows:
 
 $
 \rho = 1 - \frac{\sum_{i=1}{n}(d_i^2)}{n(n^2 - 1)}
@@ -228,11 +231,30 @@ $
 
 where $\rho$ is the correlation coefficient taking values between $-1$ and $+1$,
 $d_i = x_i - y_i$ where $x_i, y_i$ are ranks derived from the raw scores $X$ and
-$Y$ respectively.  
+$Y$ respectively.
 
-%% Question: Is this 
+%% Question: Is this symmetric? To some degree?
 
-The six replicate experiments in our 
+The first replicate IMR90 interation dataset was labeled the "primary" dataset
+and the remaining five were compared using Spearman's Rank Correlation.  The
+results are given in Table X.
+
+%% Example data for now.
+\begin{tabular}{l c}
+  \hline
+  Replicate Number & $\rho$ \\
+  \hline
+  2 && 0.34 \\
+  3 && 0.76 \\
+  4 && 0.94 \\
+  5 && 0.81 \\
+  6 && 0.49 \\
+  \hline
+  \caption{Spearman's $\rho$ for all experimental replicates.}
+  \label{tab:spearmans}
+\end{tablular}
+
+Given the
 
 
 \bibliography{bibliography}
