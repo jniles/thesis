@@ -1,8 +1,9 @@
+% An Applied Mathematic/Biology Thesis
+% By Jonathan Niles
+
 \documentclass[phd,tocprelim]{cornell}
 
-% An Applied Mathematics/Biology thesis by Jonathan Niles
-
-% Some possible packages to include
+% packages
 \usepackage{graphicx,pstricks}
 \usepackage{graphics}
 \usepackage{moreverb}
@@ -12,22 +13,39 @@
 \usepackage{hangcaption}
 \usepackage{txfonts}
 \usepackage{palatino}
+\usepackage[toc]{glossaries}
 
+% Set tolerance for box model
 \tolerance=9999
 
-\bibliographystyle{cbe}
 
 \renewcommand{\caption}[1]{\singlespacing\hangcaption{#1}\normalspacing}
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.75}
 
-\title {Structural Machinery for Chromosomal Fragility and Translocation Frequency}
-\author {Jonathan Niles}
-\conferraldate {June}{2014}
-\degreefield {Bachelor of Science}
+\title{Structural Machinery for Chromosomal Fragility and Translocation Frequency}
+\author{Jonathan Niles}
+\conferraldate{June}{2014}
+\degreefield{Bachelor of Science}
 \copyrightholder{Jonathan Niles}
 \copyrightyear{2014}
+
+\bibliographystyle{cbe}
+
+% Glossary Definitions
+\newacronym{dna}{DNA}{Deoxyribonucleic Acid}
+\newacronym{rna}{RNA}{Ribonucleic Acid}
+\newacronym{geo}{GEO}{Gene Expression Omnibus}
+\newacronym{ncbi}{NCBI}{National Center for Biotechnology Information}
+\newacronym{sra}{SRA}{Sequence Read Archive}
+\newacronym[longpural=Topologically Association Domains]
+  {tad}{TAD}{Topologically Associating Domain}
+\newacronym[longpural=Lamina Association Domains]
+  {lad}{LAD}{Lamina Associating Domain}
+
+% Make a glossary using the glossaries package
+\makeglossaries
 
 \begin{document}
 
@@ -66,6 +84,9 @@ Dr. David Gillman
 
 \normalspacing \setcounter{page}{1} \pagenumbering{arabic}
 \pagestyle{cornell} \addtolength{\parskip}{0.5\baselineskip}
+
+% make the glossaries
+\makeglossaries
 
 \chapter{Introduction}
 
@@ -126,8 +147,8 @@ building what is known as a HiC library.
 
 \section{Mapping and Alignment}
 
-The HiC library is formed largely of \texit{chimeric} DNA sequences, or
-sequences made of material from more than one source.  The ligation process
+A HiC library is formed largely of \texit{chimeric} DNA sequences,
+sequences composed of material from more than one source.  The ligation process
 creates novel DNA sequences with a portion of sequence from one region of
 the genome and the remaining portion from a different genomic region.  In
 order to discover to which two regions each probe corresponds, the probes
@@ -206,10 +227,35 @@ that are composed of many smaller, independent domains rather than large loops.
 \chapter{Results & Discussion}
 
 
-\appendix
-\chapter{Supplimental Methods}
+%
+% APPENDIX
+%
 
-\section{Spearman's Rank Correlation Calculation}
+\appendix
+\appendixpage
+\addappheadtotoc
+\chapter{Iterative Alignment of Probes}
+
+Probes were aligned to the human genome build 19 using proceedures outlined by
+Imakaev and collegues\cite{imakaev2013}.  The chimeric nature of the reads
+requires that probes be aligned iteratively, starting from a small, truncated
+region from the beginning of the read, mapping this truncated area, increasing
+the truncation size and recursing a fixed number of steps or until the alignment
+scores become sufficiently poor.  Due to the large number of reads requiring
+alignment, we opted to use a fixed truncation length (based on sequence length)
+and four steps in the iterative alignment protocol.  The calculation
+for the truncation and step size can be found in the the iterativeMapping.py
+script provided in the Appendix: Code.  Most reads were 100 base pairs, resulting
+in an initial truncation length of 28 base pairs, and step size of 18 base pairs.
+
+Using the mapping functionality from the hiclib python package\cite{imakaev2013},
+sequences from the six experimental replicates were realigned to the genome.  The
+alignment employed the fast Bowtie2 alignment algorithm\cite{Langmead2012}.  Once
+aligned, the probes were stored as an interaction matrix in the high performance
+HDF5\cite{hdf5} data format, a total of 25Gb for all replicates.
+
+
+\chapter{Spearman's Rank Correlation Calculation}
 
 In order to make meaningful comparisons between datasets (replicates,
 in this case), we must show that some degree of relationship exists between
@@ -254,7 +300,9 @@ results are given in Table X.
   \label{tab:spearmans}
 \end{tablular}
 
-Given the
+%
+% BIBLIOGRAPHY
+%
 
 \bibliography{bibliography}
 
