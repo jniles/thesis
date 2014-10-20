@@ -4,27 +4,35 @@
 \documentclass[phd,tocprelim]{cornell}
 
 % packages
-\usepackage{graphicx,pstricks}
-\usepackage{graphics}
-\usepackage{moreverb}
-\usepackage{subfigure}
-\usepackage{epsfig}
-\usepackage{subfigure}
-\usepackage{hangcaption}
-\usepackage{txfonts}
-\usepackage{palatino}
+%\usepackage{graphicx,pstricks}
+%\usepackage{graphics}
+%\usepackage{moreverb}
+%\usepackage{subfigure}
+%\usepackage{epsfig}
+%\usepackage{subfigure}
+%\usepackage{hangcaption}
+%\usepackage{txfonts}
+%\usepackage{palatino}
+\usepackage{ifpdf}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{appendix}
+\usepackage[hidelinks]{hyperref}
 \usepackage[toc]{glossaries}
 
 % Set tolerance for box model
 \tolerance=9999
 
 
-\renewcommand{\caption}[1]{\singlespacing\hangcaption{#1}\normalspacing}
+% New Commands, refreshers
+%\renewcommand{\caption}[1]{\singlespacing\hangcaption{#1}\normalspacing}
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.75}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+  \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
-\title{Structural Machinery for Chromosomal Fragility and Translocation Frequency}
+\title{Machinery for Chromosomal Fragility and Translocation Frequency}
 \author{Jonathan Niles}
 \conferraldate{June}{2014}
 \degreefield{Bachelor of Science}
@@ -39,10 +47,8 @@
 \newacronym{geo}{GEO}{Gene Expression Omnibus}
 \newacronym{ncbi}{NCBI}{National Center for Biotechnology Information}
 \newacronym{sra}{SRA}{Sequence Read Archive}
-\newacronym[longpural=Topologically Association Domains]
-  {tad}{TAD}{Topologically Associating Domain}
-\newacronym[longpural=Lamina Association Domains]
-  {lad}{LAD}{Lamina Associating Domain}
+\newacronym{tad}{TAD}{Topologically Associating Domain}
+\newacronym{lad}{LAD}{Lamina Associating Domain}
 
 % Make a glossary using the glossaries package
 \makeglossaries
@@ -85,9 +91,6 @@ Dr. David Gillman
 \normalspacing \setcounter{page}{1} \pagenumbering{arabic}
 \pagestyle{cornell} \addtolength{\parskip}{0.5\baselineskip}
 
-% make the glossaries
-\makeglossaries
-
 \chapter{Introduction}
 
 The human genome is a three billion nucleotide string that encodes the
@@ -108,18 +111,17 @@ but why they arise is a question still without an answer.
 Here, I investigate genome-wide interaction data to and show that proximity in
 genomic space strongly correlates with translocation probability.
 
+\chapter{The Nuclear Architecture}
+
+One of the longest persisting questions
 
 \chapter{Methods}
 
 \section{Data Collection}
 
 The HiC datasets used in this thesis were downloaded from the Gene
-Expression Omnibus as Sequence Read archive files (.sra).
-  \footnote{
-    The data can be acquire under access number
-    \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}
-    {GSE43070}.\cite{Ren2013}
-  }
+Expression Omnibus as Sequence Read archive files
+(.sra).\footnote{The data can be acquire under access number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.\cite{Ren2013}}
 A lung fibroblast cell line, IMR90 was chosen due to the abundance of
 HiC interaction data, as well as being a represenatative cell line
 for lung cancer studies.  A script was written to recover six experimental
@@ -147,7 +149,7 @@ building what is known as a HiC library.
 
 \section{Mapping and Alignment}
 
-A HiC library is formed largely of \texit{chimeric} DNA sequences,
+A HiC library is formed largely of \textit{chimeric} DNA sequences,
 sequences composed of material from more than one source.  The ligation process
 creates novel DNA sequences with a portion of sequence from one region of
 the genome and the remaining portion from a different genomic region.  In
@@ -224,7 +226,7 @@ that are composed of many smaller, independent domains rather than large loops.
 
 
 
-\chapter{Results & Discussion}
+\chapter{Results \& Discussion}
 
 
 %
@@ -254,6 +256,22 @@ alignment employed the fast Bowtie2 alignment algorithm\cite{Langmead2012}.  Onc
 aligned, the probes were stored as an interaction matrix in the high performance
 HDF5\cite{hdf5} data format, a total of 25Gb for all replicates.
 
+Statistics for iterative alignment are given below:
+
+\begin{center}
+  \begin{table}
+    \begin{tabular}{l l}
+    \toprule
+    Total Reads & 2,124,453,478 \\
+    Total DS Reads & 1,422,870,270 \\
+    Valid Pairs & 713,897,554 \\
+    Filtered Reads & 457,298,174 \\
+    Percent \textit{trans} Reads & 49.42\% \\
+    \bottomrule
+    \end{tabular}
+  \end{table}
+\end{center}
+
 
 \chapter{Spearman's Rank Correlation Calculation}
 
@@ -281,29 +299,30 @@ $Y$ respectively.
 
 %% Question: Is this symmetric? To some degree?
 
-The first replicate IMR90 interation dataset was labeled the "primary" dataset
+The first replicate IMR90 interation dataset was labeled the primary dataset
 and the remaining five were compared using Spearman's Rank Correlation.  The
 results are given in Table X.
 
 %% Example data for now.
-\begin{tabular}{l c}
-  \hline
-  Replicate Number & $\rho$ \\
-  \hline
-  2 && 0.34 \\
-  3 && 0.76 \\
-  4 && 0.94 \\
-  5 && 0.81 \\
-  6 && 0.49 \\
-  \hline
-  \caption{Spearman's $\rho$ for all experimental replicates.}
-  \label{tab:spearmans}
-\end{tablular}
+\begin{table}
+  \begin{tabular}{|c|*{6}{c|}}
+    \toprule
+    \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\ \midrule
+    0.83 & \textbf{R2} & 0.82 & 0.83 & 0.79 & 0.75 \\ \midrule
+    0.77 & 0.82 & \textbf{R3} & 0.77 & 0.74 & 0.73 \\ \midrule
+    0.77 & 0.83 & 0.77 & \textbf{R4} & 0.75 & 0.71 \\ \midrule
+    0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\ \midrule
+    0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\
+    \bottomrule
+  \end{tabular}
+  \caption{Spearman's $\rho$ across all datasets.}
+\label{tab:correlations}
+\end{table}
 
 %
 % BIBLIOGRAPHY
 %
 
-\bibliography{bibliography}
+\bibliography{thesis.bib}
 
 \end{document}

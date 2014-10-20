@@ -8,6 +8,7 @@
 *.log
 *._log
 *.vim
+*.glo
 
 # ignore templates
 template/*
