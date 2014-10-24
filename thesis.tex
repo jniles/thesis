@@ -115,20 +115,52 @@ genomic space strongly correlates with translocation probability.
 
 One of the longest persisting questions
 
+
+\chapter{Fragility in the Code}
+
+Fragile sites were first described by Debakan and collegues in
+1965\cite{leyden2008}.  Unfortunately, the definition of a fragile site in the
+literature is typically cast in light of the methodology employed to 
+characterize the region, moreso than an identifying mechanism or structure. 
+Fragile sites have been described as regions that are particularly sensative to
+forming gaps or breaks on metaphase chromosomes\cite{glover2005}, sites where
+chromatin fails to compact under mitosis\cite{leyden2008}, and nonrandomly
+distributed loci that exhibit an increased frequency of breakage under
+replicational stress\cite{franchitto2013}.  In general terms, a
+\textit{fragile site} is a region on the chromosome that is prone to complex
+rearrangements when subjected to replicational stress, particularly
+double-strand breaks, repeat expansions, and translocations.  These
+rearrangements play pivitol roles in severely debilitating genetic diseases
+such as Fragile X Syndrome.  All males and an estimated that 60\% of females
+with repeat anomalies near the FRM1 gene on the X chromosome suffer
+from severe mental handicap due to these alterations\cite{sutherland1995}.
+Additionally, fragiles sites are often found rearranged in human
+cancers\cite{glover2005}.  Despite these findings, reason fragile site are
+fragile is still an unanswered question.
+
+
+Fragile sites come in two flavors: common fragile sites
+(CFS) and rare fragile sites (RFS).  Fragile sites are classified into a group
+based on their prevalence in the nuclear population, and the conditions under
+which their fragility is induced\cite{leyden2008}.  Common fragile sites are
+thought to be germain to all humans, while rare fragile sites may be expressed
+in a portion of the population.  
+
+
 \chapter{Methods}
 
 \section{Data Collection}
 
 The HiC datasets used in this thesis were downloaded from the Gene
 Expression Omnibus as Sequence Read archive files
-(.sra).\footnote{The data can be acquire under access number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.\cite{Ren2013}}
+(.sra).\footnote{The data can be acquire under access number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.\cite{ren2013}}
 A lung fibroblast cell line, IMR90 was chosen due to the abundance of
 HiC interaction data, as well as being a represenatative cell line
 for lung cancer studies.  A script was written to recover six experimental
 replicates from GEO.
 
 The cell lines were prepared with no treatment according to the protocol
-described by Dekker and collegues\cite{Dekker2013}.  In brief, the cells
+described by Dekker and colleagues\cite{dekker2013}.  In brief, the cells
 are washed with a formaldehyde fixation solution to cross-links
 DNA and protein molecules near each other in genomic space.  The cells are
 lysed and the nuclear contents are treated with a non-specific restriction
@@ -158,7 +190,7 @@ must be realigned to the human genome.  Previous methods (\textit{citation neede
 have truncated reads to a fixed cutoff size before realignment with a short
 read alignment algorithm.  In a recent paper, Imakaev and collegues
 describe an algorithm to repeated algin reads with different truncation sizes
-and analyzing reads with the maximum alignment score\cite{Imakaev2012}.  We followed
+and analyzing reads with the maximum alignment score\cite{imakaev2012}.  We followed
 this proceedure to realign the IMR90 HiC libraries for six replicates to
 the Human Genome build 19 (hg1), with an average of XX million reads
 mapped per replicate.
@@ -173,56 +205,6 @@ mapped per replicate.
 %% Replication Timing Analysis..?
 
 
-%% The Graph Theory Section
-\chapter{The Interaction Graph}
-
-\section{Motivation and Preliminaries}
-
-The interation matrix $M$ describes an undirected graph of genomic interactions
-at the selected bin size.  It is natural to leverage graph theoretic ideas
-and extend our analysis to the topology and structure of the interaction graph,
-to better understand the underlying chromatin structure.  Additionally, graph
-theory contains strong notions of network stability and degree, allowing us an
-additional avenue to create comparisons between experiments, cell lines, and cell
-states.  Finally, graphs are a powerfully illustrative tool, allowing the
-researcher to make quick judgements about the dataset and the generating
-mechanics which produced it.
-
-\begin{definition}
-  Let $V_{n}$ be a collection of $n$ genomic bins (vertices).  Let $E_{m}$ be a
-  collection of $m$ interactions (edges) between bins in $V_{n}$ with weights
-  $w_{m}$ corresponding to interaction frequencies.  We define the  genomic
-  interaction graph at resolution $n$ to be $G_{n} := (V_{n}, E_{n})$.
-\end{definition}
-
-The graph $G_{n}$ is an undirected graph that decribes the all-to-all
-interactions from a given Hi-C experiment.  Since the human genome is
-partitioned in the nucleus into chromosomal territories, it makes sense to
-partition the graph by chromosome to better reflect the biological reality.
-
-\begin{definition}
-  Let $C_{n,i}$ be a partition of $G_{n}$ where all bins in $C_{n,i}$ are
-  located in chromosome $i$.
-\end{definition}
-
-The graph partition $C_{n,i}$ gives us a tool to analyze the topology of
-intrachrosomal interations.
-
-\section{Analysis}
-
-Now we have developed the terminology and intution into the interaction
-graphs below, we can begin to interrogate and evaluation our model.
-
-\subsection{Cycles}
-
-It is of interest to determine if there are any cycles present in the
-interaction graphs.  Intuitvely, cycles correspond to molecular domains which
-may have functional significance.  Our approach is to identify cycles at the
-smallest resolution possible, and gradually increase our bin size to understand
-how these small regulatory units fit into the megabase-size and larger regulatory
-landscape.  It is also of interest to determine if cycles cease to exist in the
-graph after relaxing past certain resolutions, perhaps characterising chromosomes
-that are composed of many smaller, independent domains rather than large loops.
 
 
 
@@ -252,7 +234,7 @@ in an initial truncation length of 28 base pairs, and step size of 18 base pairs
 
 Using the mapping functionality from the hiclib python package\cite{imakaev2013},
 sequences from the six experimental replicates were realigned to the genome.  The
-alignment employed the fast Bowtie2 alignment algorithm\cite{Langmead2012}.  Once
+alignment employed the fast Bowtie2 alignment algorithm\cite{langmead2012}.  Once
 aligned, the probes were stored as an interaction matrix in the high performance
 HDF5\cite{hdf5} data format, a total of 25Gb for all replicates.
 
@@ -323,6 +305,6 @@ results are given in Table X.
 % BIBLIOGRAPHY
 %
 
-\bibliography{thesis.bib}
+\bibliography{thesis}
 
 \end{document}
