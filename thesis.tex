@@ -146,6 +146,8 @@ is induced\cite{leyden2008}.  Common fragile sites are thought to be common
 most chromsomes and to all humans, while rare fragile sites may be expressed
 in small fraction (less than 5\%) of the population\cite{wells2006}.  
 
+% CFS's may be epigenetically defined. (Molecular profiling of CFS in human fibroblasts
+% CFS are conserved based on cell types
 
 \chapter{Methods}
 
@@ -255,7 +257,7 @@ Statistics for iterative alignment are given below:
 \end{center}
 
 
-\chapter{Spearman's Rank Correlation Calculation}
+\chapter{Validation of Data Correctness}
 
 In order to make meaningful comparisons between datasets (replicates,
 in this case), we must show that some degree of relationship exists between
@@ -279,14 +281,12 @@ where $\rho$ is the correlation coefficient taking values between $-1$ and $+1$,
 $d_i = x_i - y_i$ where $x_i, y_i$ are ranks derived from the raw scores $X$ and
 $Y$ respectively.
 
-%% Question: Is this symmetric? To some degree?
-
 The first replicate IMR90 interation dataset was labeled the primary dataset
 and the remaining five were compared using Spearman's Rank Correlation.  The
 results are given in Table X.
 
 %% Example data for now.
-\begin{table}
+\bfgin{table}
   \begin{tabular}{|c|*{6}{c|}}
     \toprule
     \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\ \midrule
