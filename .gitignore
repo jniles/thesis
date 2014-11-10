@@ -1,6 +1,4 @@
 # ignore editor files
-*.swp
-*.swo
 *~
 
 # ignore latex files
@@ -9,6 +7,17 @@
 *._log
 *.vim
 *.glo
+
+# ignore compiled files
+thesis.glo 
+thesis.bbl
+thesis.blg
+thesis.ist
+thesis.lof
+thesis.lot
+thesis.out
+thesis.pdf
+thesis.toc
 
 # ignore templates
 template/*

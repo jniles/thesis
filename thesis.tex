@@ -163,19 +163,19 @@ Additionally, fragiles sites are often found rearranged in human
 cancers\cite{glover2005}.  Despite these findings, reason fragile site are
 fragile is still an unanswered question.
 
-
 % CFS's may be epigenetically defined. (Molecular profiling of CFS in human fibroblasts
 % CFS are conserved based on cell types
+
 
 \chapter{Methods}
 
 \section{Data Collection}
 
-The HiC datasets used in this thesis were downloaded from the Gene
+The Hi-C datasets used in this thesis were downloaded from the Gene
 Expression Omnibus as Sequence Read archive files
 (.sra).\footnote{The data can be acquire under access number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.\cite{ren2013}}
 A lung fibroblast cell line, IMR90 was chosen due to the abundance of
-HiC interaction data, as well as being a represenatative cell line
+Hi-C interaction data, as well as being a represenatative cell line
 for lung cancer studies.  A script was written to recover six experimental
 replicates from GEO.
 
@@ -189,7 +189,7 @@ is washed so that the remaining contents are short DNA sequences or cross
 -linked DNA-protein complexes.  The DNA reads are labeled with a biotin
 marker and ligated at low concentrations that favor within ligation between
 reads bound to the same complex.  The reads are captured and sequenced,
-building what is known as a HiC library.
+building what is known as a Hi-C library.
 
 %% Regulatory Elements from Ensembl
 
@@ -201,7 +201,7 @@ building what is known as a HiC library.
 
 \section{Mapping and Alignment}
 
-A HiC library is formed largely of \textit{chimeric} DNA sequences,
+A Hi-C library is formed largely of \textit{chimeric} DNA sequences,
 sequences composed of material from more than one source.  The ligation process
 creates novel DNA sequences with a portion of sequence from one region of
 the genome and the remaining portion from a different genomic region.  In
@@ -211,9 +211,42 @@ have truncated reads to a fixed cutoff size before realignment with a short
 read alignment algorithm.  In a recent paper, Imakaev and collegues
 describe an algorithm to repeated algin reads with different truncation sizes
 and analyzing reads with the maximum alignment score\cite{imakaev2012}.  We followed
-this proceedure to realign the IMR90 HiC libraries for six replicates to
+this proceedure to realign the IMR90 Hi-C libraries for six replicates to
 the Human Genome build 19 (hg1), with an average of XX million reads
 mapped per replicate.
+
+\section{Normalization of Contact Maps}
+
+Understanding and accounting the biases inherent in a dataset is vital to
+producing accurate, biologically relevant analysis.  To this end, several methods
+have been proposed identify biases and normalize contact maps between replicates
+and experiments\cite{yaffe2011}\cite{hu2012}\cite{yang2014}.  The earliest methods on low
+resolution samples did not perform any normalization at all\cite{aiden2009};
+however, as higher resolution datasets have come available, better
+normalization methods are being explored to identify reproducible,
+fine-grained chromatin structures.
+
+Normalizing data from Hi-C experiments is quite challenging.  As previously
+discussed, the Hi-C datasets are heterogenous in nature, encorporating interaction encorporating interaction encorporating interaction encorporating
+interactions from cells in every position of cell cycle.  As evidence of phenomena,
+the interaction matrices produced by the Hi-C experiments have nonzero contact
+probabilities between nearly every genomic coordinate\cite{dekker2013}.  This
+finding is further reinforced by the observation that single cell Hi-C analysis
+shows high variability in chromatin architecture\cite{nagano2013}.  Despite this
+variability, existing normalization techniques for Hi-C datasets typically
+assume the majority of the cells in the sampled ensemble are in a static
+chromatin conformation reflective of \textit{in vivo} cell populations.
+
+One approach to normalization described by Yaffe and colleagues\cite{yaffe2011}
+attempts to describe the total interaction frequence between loci as the product
+of a true interaction frequency and a set of experimental biases.  These biases
+are present in all chromosomal capture techniques.  They include biases due to
+PCR in efficiency, read depth per region, sequencing bias, chromatin compaction,
+and random background collisions during
+ligation\cite{benner2014}\cite{dekker2006}.
+
+
+
 
 %% Data Validation
 
@@ -323,7 +356,7 @@ results are given in Table X.
 This is from\cite{FragSites2001}.
 
 \begin{table}
-  \begin{tabular}{|c|*{4}{c|}}
+  \begin{tabular}{l*{4}{l}}
     \toprule
      Gene symbol & Chromosome band location & Type & Group \\   \midrule
      FRA1A  & 1p36     & Common, aphidicolin   & 4 \\
