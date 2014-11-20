@@ -34,7 +34,7 @@
 
 \bibliographystyle{cbe}
 
-% Glossary Definitions
+% Acronym Definitions
 \newacronym{dna}{DNA}{Deoxyribonucleic Acid}
 \newacronym{rna}{RNA}{Ribonucleic Acid}
 \newacronym{geo}{GEO}{Gene Expression Omnibus}
@@ -43,9 +43,15 @@
 \newacronym{tad}{TAD}{Topologically Associating Domain}
 \newacronym{lad}{LAD}{Lamina Associating Domain}
 
+% Glossary definitions
 \newglossaryentry{karyotype}{%
-  name={karyotype},%
+  name={karyotype},
   description={A photomicrograph of chromosomes arranged according to a standard classification.}%
+}
+
+\newglossaryentry{polymer}{%
+  name={polymer},
+  description={A substance that has a molecular structure consisting chiefly or entirely of a large number of similar units bonded together, e.g., many synthetic organic materials used as plastics and resins.}
 }
 
 % Make a glossary using the glossaries package
@@ -112,9 +118,9 @@ genomic space strongly correlates with translocation probability.
 \chapter{The Nuclear Architecture}
 
 It is difficult to overstate the importance of the nuclear topology in
-every aspect of a cell's life.  The morass of nucleic acids and proteins
-packed tightly inside the nuclear envelope contains the entireity of the
-information necessary to completely duplicate the cell.
+every aspect of a Eukaryotic cell's life.  The morass of nucleic acids and
+proteins packed tightly inside the nuclear envelope contains the entireity of
+the information necessary to completely duplicate the cell.
 
 The sheer complexity of the nucleus requires us to investigate the biological
 phenomena at multiple layers of granularity.  Ironically, the finest resolution
@@ -131,11 +137,18 @@ construction of this stratum provides researchers with a conceptual tool with
 which to model and consider the topology of the nuclear contents.
 
 The fundemental informational unit of the nucleus is the nucleotide, often
-called a baser or base pair when joined in a molecule or strand.  Eukaryotic
+called a base or base pair when joined in a molecule or strand.  Eukaryotic
 cells have a four-character alphabet of nucleotides, distinguished by their
-\textit{nucleobases}: adenine, cytosine, guanine, and thymine.  These bases
-are joined together in sequence by a phosphate backbone
-
+\textit{nucleobases}: adenine, cytosine, guanine, and thymine.  These
+nucleotides are affixed to a phosphate backbone into a long, coiling polymer
+chain.  The famous publication of the structure of DNA in 1953 by researchers
+Watson and Crick determined that these polymers exist in the nucleus as double
+helices\cite{watson1953}, with hydrogen bonds holding the opposing strands
+together.  It is important to note that despite maintaining this helical
+structure, DNA is an intrinsically flexible molecule.  This flexibility
+is sequence dependent, and is explained locally by the progression and ordering
+of base pairs, and globally by the sequence composition of the molecule%
+\cite{travers2004}.  
 
 
 
@@ -192,13 +205,22 @@ fragile is still an unanswered question.
 
 \section{Data Collection}
 
-The Hi-C datasets used in this thesis were downloaded from the Gene
-Expression Omnibus as Sequence Read archive files
-(.sra).\footnote{The data can be acquire under access number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.\cite{ren2013}}
-A lung fibroblast cell line, IMR90 was chosen due to the abundance of
-Hi-C interaction data, as well as being a represenatative cell line
-for lung cancer studies.  A script was written to recover six experimental
-replicates from GEO.
+The Hi-C datasets used in this thesis were obtained from the Gene
+Expression Omnibus (GEO)\cite{edgar2002} as Sequence Read Archive (SRA) files.%
+\footnote{Accession Number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.}
+IMR90, the human lung fibroblast cell line, was selected for analysis due to
+an abundance of high resolution, publically available interaction data.
+Additionally, certain common fragile sites serve as frequent breakpoints in
+lung cancers\cite{tunca2002}\cite{dhillon2003}.  A small script was written to
+recover six experimental replicates from GEO onto a local research server for
+analysis.  Additionally, analyzed tracks for DNA methylation at base pair
+resolution were obtained from GEO\cite{lister2009}.  The liftOver tool from
+the University of California Santa Cruise was used to update the methylation
+data from human genome build hg18 to hg19 for meaningful comparison\cite{hinrichs2006}.
+
+The detailed description of the treatment protocol used in creating the Hi-C
+library can be found in the original paper\cite{ren2013}.  Briefly, the IMR90
+cells were cultured in growth media.
 
 The cell lines were prepared with no treatment according to the protocol
 described by Dekker and colleagues\cite{dekker2013}.  In brief, the cells
