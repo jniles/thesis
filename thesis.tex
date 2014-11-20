@@ -1,21 +1,14 @@
-% An Applied Mathematic/Biology Thesis
+% An Applied Mathematics/Biology Thesis
 % By Jonathan Niles
 
 \documentclass[phd,tocprelim]{cornell}
 
 % packages
-%\usepackage{graphicx,pstricks}
-%\usepackage{graphics}
-%\usepackage{moreverb}
-%\usepackage{subfigure}
-%\usepackage{epsfig}
-%\usepackage{subfigure}
-%\usepackage{hangcaption}
-%\usepackage{txfonts}
-%\usepackage{palatino}
+\usepackage{natbib}
+\usepackage{geometry}
+\usepackage{longtable}
 \usepackage{ifpdf}
 \usepackage{amsmath}
-\usepackage{booktabs}
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc]{glossaries}
@@ -49,8 +42,11 @@
 \newacronym{sra}{SRA}{Sequence Read Archive}
 \newacronym{tad}{TAD}{Topologically Associating Domain}
 \newacronym{lad}{LAD}{Lamina Associating Domain}
-\newglossaryentry{karyotype}
-{A photomicrograph of chromosomes arranged according to a standard classification.}
+
+\newglossaryentry{karyotype}{%
+  name={karyotype},%
+  description={A photomicrograph of chromosomes arranged according to a standard classification.}%
+}
 
 % Make a glossary using the glossaries package
 \makeglossaries
@@ -76,9 +72,9 @@ to further elucidate the interplay between distance and
 genomic rearrangements in cells.
 \end{abstract}
 
-\begin{dedication}
-This document is dedicated to Miriam Paul Fountain.
-\end{dedication}
+%\begin{dedication}
+%This document is dedicated to Miriam Paul Fountain.
+%\end{dedication}
 
 \begin{acknowledgements}
 Dr. Tyrone Ryba
@@ -115,7 +111,7 @@ genomic space strongly correlates with translocation probability.
 
 \chapter{The Nuclear Architecture}
 
-It is difficult to overstate the importance of the nuclear topology in 
+It is difficult to overstate the importance of the nuclear topology in
 every aspect of a cell's life.  The morass of nucleic acids and proteins
 packed tightly inside the nuclear envelope contains the entireity of the
 information necessary to completely duplicate the cell.
@@ -123,7 +119,7 @@ information necessary to completely duplicate the cell.
 The sheer complexity of the nucleus requires us to investigate the biological
 phenomena at multiple layers of granularity.  Ironically, the finest resolution
 of the nucleus is also the most well studied: the primary sequence of nucleic
-acid bases which compose the DNA molecule itself.  One level of abstraction 
+acid bases which compose the DNA molecule itself.  One level of abstraction
 above the primary sequence considers the interactions of the primary sequence
 with architectural proteins such as histones, and the secondary structures that
 result from these couplings.  Even higher up the abstraction tree lies
@@ -137,7 +133,7 @@ which to model and consider the topology of the nuclear contents.
 The fundemental informational unit of the nucleus is the nucleotide, often
 called a baser or base pair when joined in a molecule or strand.  Eukaryotic
 cells have a four-character alphabet of nucleotides, distinguished by their
-\textit{nucleobases}: adenine, cytosine, guanine, and thymine.  These bases 
+\textit{nucleobases}: adenine, cytosine, guanine, and thymine.  These bases
 are joined together in sequence by a phosphate backbone
 
 
@@ -268,7 +264,7 @@ of a true interaction frequency and a set of experimental biases.  These biases
 are present in all chromosomal capture techniques.  They include biases due to
 PCR in efficiency, read depth per region, sequencing bias, chromatin compaction,
 and random background collisions during
-ligation\cite{benner2014}\cite{dekker2006}.
+ligation\cite{benner2014} \cite{dekker2006}.
 
 
 
@@ -297,7 +293,7 @@ ligation\cite{benner2014}\cite{dekker2006}.
 \chapter{Iterative Alignment of Probes}
 
 Probes were aligned to the human genome build 19 using proceedures outlined by
-Imakaev and collegues\cite{imakaev2013}.  The chimeric nature of the reads
+Imakaev and collegues\cite{imakaev2012}.  The chimeric nature of the reads
 requires that probes be aligned iteratively, starting from a small, truncated
 region from the beginning of the read, mapping this truncated area, increasing
 the truncation size and recursing a fixed number of steps or until the alignment
@@ -308,7 +304,7 @@ for the truncation and step size can be found in the the iterativeMapping.py
 script provided in the Appendix: Code.  Most reads were 100 base pairs, resulting
 in an initial truncation length of 28 base pairs, and step size of 18 base pairs.
 
-Using the mapping functionality from the hiclib python package\cite{imakaev2013},
+Using the mapping functionality from the hiclib python package\cite{imakaev2012},
 sequences from the six experimental replicates were realigned to the genome.  The
 alignment employed the fast Bowtie2 alignment algorithm\cite{langmead2012}.  Once
 aligned, the probes were stored as an interaction matrix in the high performance
@@ -319,13 +315,11 @@ Statistics for iterative alignment are given below:
 \begin{center}
   \begin{table}
     \begin{tabular}{l l}
-    \toprule
     Total Reads & 2,124,453,478 \\
     Total DS Reads & 1,422,870,270 \\
     Valid Pairs & 713,897,554 \\
     Filtered Reads & 457,298,174 \\
     Percent \textit{trans} Reads & 49.42\% \\
-    \bottomrule
     \end{tabular}
   \end{table}
 \end{center}
@@ -362,29 +356,39 @@ results are given in Table X.
 %% Example data for now.
 \begin{table}
   \begin{tabular}{|c|*{6}{c|}}
-    \toprule
-    \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\ \midrule
-    0.83 & \textbf{R2} & 0.82 & 0.83 & 0.79 & 0.75 \\ \midrule
-    0.77 & 0.82 & \textbf{R3} & 0.77 & 0.74 & 0.73 \\ \midrule
-    0.77 & 0.83 & 0.77 & \textbf{R4} & 0.75 & 0.71 \\ \midrule
-    0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\ \midrule
+    \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\ \hline
+    0.83 & \textbf{R2} & 0.82 & 0.83 & 0.79 & 0.75 \\ \hline
+    0.77 & 0.82 & \textbf{R3} & 0.77 & 0.74 & 0.73 \\ \hline
+    0.77 & 0.83 & 0.77 & \textbf{R4} & 0.75 & 0.71 \\ \hline
+    0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\ \hline
     0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\
-    \bottomrule
   \end{tabular}
   \caption{Spearman's $\rho$ across all datasets.}
-\label{tab:correlations}
+  \label{tab:correlations}
 \end{table}
 
 \chapter{Common Fragile Sites}
 This is from\cite{FragSites2001}.
 
-\begin{table}
-  \begin{tabular}{l*{4}{l}}
-    \toprule
-     Gene symbol & Chromosome band location & Type & Group \\   \midrule
+\begin{center}
+  \begin{longtable}{|l|l|l|l|}
+    \caption[Human Fragile Sites]{Human Fragile Sites
+    } \label{grid_hfs} \\ \hline
+
+    \endfirsthead
+    {{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\ \hline
+    \endhead
+
+    \hline \multicolumn{3}{|r|}{{Continued on next page}} \\ \hline
+    \endfoot
+
+    \hline \hline
+    \endlastfoot
+
+     Gene Symbol & Chromosome Band Location & Type & Group \\ \hline
      FRA1A  & 1p36     & Common, aphidicolin   & 4 \\
      FRA1B  & 1p32     & Common, aphidicolin   & 4 \\
-     FRA1C  & 1p31.2   & Common, aphidicolin   & 4 \\
+     FRA1C  & 2p31.2   & Common, aphidicolin   & 4 \\
      FRA1L  & 1p31     & Common, aphidicolin   & 4 \\
      FRA1D  & 1p22     & Common, aphidicolin   & 4 \\
      FRA1M  & p21.3    & Rare, folic acid    & 1 \\
@@ -499,11 +503,8 @@ This is from\cite{FragSites2001}.
      FRAXA  & Xq27.3   & Rare, folic acid    & 1 \\
      FRAXE  & Xq28     & Rare, folic acid    & 1 \\
      FRAXF  & Xq28     & Rare, folic acid    & 1 \\
-    \bottomrule
-  \end{tabular}
-  \caption{The 117 fragile sites in the human genome (rare sites are emboldened)}
-\label{tab:CFS}
-\end{table}
+  \end{longtable}
+\end{center}
 
 %
 % BIBLIOGRAPHY
