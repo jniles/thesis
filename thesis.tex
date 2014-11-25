@@ -52,6 +52,11 @@
   description={A substance that has a molecular structure consisting chiefly or entirely of a large number of similar units bonded together, e.g., many synthetic organic materials used as plastics and resins.}
 }
 
+\newglossaryentry{restriction enzyme}{%
+  name={restriction enzyme},
+  description={An enzyme that restricts, or performs double-strand cut at a specific DNA sequence motif.}
+}
+
 % Make a glossary using the glossaries package
 \makeglossaries
 
@@ -180,7 +185,9 @@ higher order chromatin structures.
 \subsection{Epigenetics And Chromatin Modeling}
 
 
-\section{Chromosomal Conformational Capture and Derivatives}
+
+
+\chapter{Chromosomal Conformational Capture and Derivatives}
 
 The field of molecular biology is advancing rapidly, propelled forth by a
 surge of automated techniques.  So-called `high-throughput' techniques enable
@@ -196,7 +203,17 @@ collegues described a technique known as Chromosomal Conformational Capture
 (most named a variation on `3C') have been developed to interrogate
 different types of chromatin interactions and achieve higher throughput.
 
-The conceptual idea behind chromosomal capture technique is remarkably simple.
+The conceptual idea behind chromosomal conformation capture is remarkably
+simple --- to interrogate interacting regions, the experimenter attempts to
+freeze the nucleus and assess contacts between regions.  To acomplish this
+goal, a population of cells is cultured in appropriate medium, and fixed with
+formaldehyde, a cross-linking reagent.  The overall affect of formaldehyde
+fixation is to fuse together all DNA and protein structures that are nearby in
+the genomic space.  Cross-linking the entire cell ensures that the nucleus is
+fixed before any other experiment disruptions, exactly capturing the growing
+cell's nuclear structure.  The cells are homogenized and subjected to a
+restriction digest (typically with HindIII or Nco1), which leave a 5' overhang.
+The overhang is filled in with a biotinylated.
 
 
 
@@ -618,6 +635,6 @@ This is from\cite{fragsites2001}.
 %
 
 \bibliography{thesis}{}
-\cibliographystyle{plain}
+\bibliographystyle{plain}
 
 \end{document}
