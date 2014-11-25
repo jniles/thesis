@@ -57,13 +57,18 @@
   description={An enzyme that restricts, or performs double-strand cut at a specific DNA sequence motif.}
 }
 
+\newglossaryentry{ligation}{%
+  name={ligation}
+  description={The joining of two DNA strands or other molecules by a phosphate ester linkage.}
+}
+
 % Make a glossary using the glossaries package
-\makeglossaries
+\makeglossaries%
 
 \begin{document}
 
 \maketitle
-\makecopyright
+\makecopyright%
 
 \begin{abstract}
 Chromosomal rearrangements and sequence translocations are
@@ -86,16 +91,16 @@ genomic rearrangements in cells.
 %\end{dedication}
 
 \begin{acknowledgements}
-Dr. Tyrone Ryba
-Dr. Patrick McDonald
-Dr. David Gillman
+I would like to thank my faculty sponsors for their patience,
+dedication, and sympathy: Dr. Tyrone Ryba, Dr. Patrick McDonald,
+and Dr. David Gillman.
 \end{acknowledgements}
 
-\contentspage
-\tablelistpage
-\figurelistpage
+\contentspage%
+\tablelistpage%
+\figurelistpage%
 
-\normalspacing \setcounter{page}{1} \pagenumbering{arabic}
+\normalspacing\setcounter{page}{1} \pagenumbering{arabic}
 \pagestyle{cornell} \addtolength{\parskip}{0.5\baselineskip}
 
 \chapter{Introduction}
@@ -184,6 +189,17 @@ higher order chromatin structures.
 
 \subsection{Epigenetics And Chromatin Modeling}
 
+Where the primary sequence furnishes favorable properties for the formation of
+looping and bound structures structures, the epigenetic landscape determines
+the formation, maintenance, and conformation of higher order structures.  The
+most ubiquitous class of proteins are the histone architecural proteins,
+responsible for non-specifically binding DNA at regular intervals.  Histones
+and their composite structure, the nucleosome, are the principle, but not singular,
+regulators of chromatin accessibility, shape, and dynamics at the epigenetic
+level.
+
+The
+
 
 
 
@@ -203,18 +219,70 @@ collegues described a technique known as Chromosomal Conformational Capture
 (most named a variation on `3C') have been developed to interrogate
 different types of chromatin interactions and achieve higher throughput.
 
-The conceptual idea behind chromosomal conformation capture is remarkably
-simple --- to interrogate interacting regions, the experimenter attempts to
-freeze the nucleus and assess contacts between regions.  To acomplish this
-goal, a population of cells is cultured in appropriate medium, and fixed with
-formaldehyde, a cross-linking reagent.  The overall affect of formaldehyde
-fixation is to fuse together all DNA and protein structures that are nearby in
-the genomic space.  Cross-linking the entire cell ensures that the nucleus is
-fixed before any other experiment disruptions, exactly capturing the growing
-cell's nuclear structure.  The cells are homogenized and subjected to a
-restriction digest (typically with HindIII or Nco1), which leave a 5' overhang.
-The overhang is filled in with a biotinylated.
+The original chromosome conformation capture technique developed by Dekker and
+collegues provides an average measurement of the juxtaposition frequence between
+two specific genomic loci\cite{frase2014}.  The frequency of this measurement over a population
+is thought to be indicative of the proximity of the two loci in genomic space.
+The first derivative technique on 3C, aptly named Chromosome Conformation Capture-
+on-Chip (4C), extended the number contacts assessed from two loci to all
+contacts made with a particular genomic loci by assessing contacts on a
+whole genome microaray\cite{simonis2006}.  Most recently, the Dekker lab has
+developed a technique using biotinylated probes to assess contacts between any
+given genomic region\cite{berkum2010}.  The method, known as Hi-C, boasts
+the first truly global assessment of all genomic contacts at a given time.
 
+The conceptual idea behind chromosomal conformation capture is remarkably
+simple --- to assess nearby regions, the experimenter attempts to fuse
+together molecules that are physically close, then determine the interaction
+partners of each segment of DNA captured in this fashion.  The 3C proceedure
+involves five steps.   Initially,  apopulation of (mammalian) cells is cultured in an appropriate growth medium
+until a population size of $\~{}2.5 \times 10^7$ cells is achieved\cite{berkum2010}.
+The entire population is treated with formaldehyde, a small chemical commonly
+used to fix both small samples for microscopy experiments and large specimens
+for organismal analysis.  Importantly, formadehyde is a mutagen known to form
+DNA-protein crosslinks\cite{merk1998}.  The global affect of the formaldehyde
+treatment is fusing together DNA and protein structures that are nearby in
+the genomic space.  Crosslinking the entire cell ensures that the nuclear contents
+are fixed before any further experimental intervention, exactly capturing
+the growing cell's nuclear structure.  In the second step, the cells are
+homogenized and the chromatin is digested by a restriction enzyme (typically
+HindIII or Nco1)\cite{berkmun2010}.  Digestion creates two populations of
+DNA fragments; though bound to proteins and other DNA sequences, and an unbound
+population.  The unbound population is discarded through filtering.  In the
+third step, the bound sequences are ligated (joined) in highly diluted
+concentrations, to bias towards ligation reactions between DNA strands bound
+to the same molecular complex.  The ligation process combines DNA sequences
+from different loci into a single sequence.  The fourth step is to reverse
+the crosslinks and release the recombined sequences from their complexes.  The
+final step comprises quantifying the restriction fragments by PCR using fragments
+specific for the population being studied\cite{simonis2007}.
+
+%
+% FIXME
+%   The 4C protocol is not very well understood.  Please round out this
+% knowledge and fill in the section appropriately.
+%
+
+In the derivative methods 4C, 5C, and ChIP-loop, the basic protocol remains
+unchanged; however, the capture and analysis of fragments varies depending on
+the application.  Chromosome Conformation Capture-on-Chip (4C) leverages a
+DNA microarray to systematically screen the entire genome in an unbiased
+manner for DNA loci that contact each other\cite{simonis2006}.  The microarray
+is tiled with probes located $< 100$ base pairs away from a restriction site.
+Rather than performing the PCR step from the canonical 3C assay, the restriction
+fragments are shortened with a second restriction enzyme, circularized, and
+amplified by inverse PCR\@.  The amplified probes are detected on the designed
+microarray\cite{simonis2006}.  Chromosome Conformation Capture Carbon-Copy (5C)
+
+
+
+
+
+ANALYSIS
+
+Chromosome Conformation Capture is a quantitative assay and meaningful
+results are gleaned by comparison of relative interation frequencies
+between genomic regions. %talk about controls, controls controls
 
 
 
@@ -308,8 +376,8 @@ cells were cultured in growth media.
 
 The cell lines were prepared with no treatment according to the protocol
 described by Dekker and colleagues\cite{dekker2013}.  In brief, the cells
-are washed with a formaldehyde fixation solution to cross-links
-DNA and protein molecules near each other in genomic space.  The cells are
+are washed with a formaldehyde fixation solution to crosslinks DNA and
+protein molecules near each other in genomic space.  The cells are
 lysed and the nuclear contents are treated with a non-specific restriction
 enzyme, \textit{HindIII}.  After restriction, the remaining nuclear material
 is washed so that the remaining contents are short DNA sequences or cross
