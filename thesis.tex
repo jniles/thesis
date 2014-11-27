@@ -6,9 +6,11 @@
 % packages
 \usepackage{natbib}
 \usepackage{geometry}
+\usepackage{graphicx}
 \usepackage{longtable}
-\usepackage{ifpdf}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ifpdf}
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc]{glossaries}
@@ -24,13 +26,12 @@
 \newenvironment{definition}[1][Definition]{\begin{trivlist}
   \item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
-\title{Machinery for Chromosomal Fragility and Translocation Frequency}
+\title{TBD}
 \author{Jonathan Niles}
 \conferraldate{June}{2014}
 \degreefield{Bachelor of Science}
 \copyrightholder{Jonathan Niles}
 \copyrightyear{2014}
-
 
 % Acronym Definitions
 \newacronym{dna}{DNA}{Deoxyribonucleic Acid}
@@ -58,8 +59,13 @@
 }
 
 \newglossaryentry{ligation}{%
-  name={ligation}
+  name={ligation},
   description={The joining of two DNA strands or other molecules by a phosphate ester linkage.}
+}
+
+\newglossaryentry{oligonucleotide}{%
+  name={oligonucleotide},
+  description={A polynucleotide whose molecules contain a relatively small number of nucleotides.}
 }
 
 % Make a glossary using the glossaries package
@@ -175,22 +181,22 @@ Although a DNA molecule is a helical structure, it is an intrinsically
 flexible molecule.  A naive calculation reveals that the human genome is
 roughly two meters in length%
 \footnote{%
-  A diploid human genome consists of two copies of the \~{}$5.2MB$ DNA molecule,
+  A diploid human genome consists of two copies of the $\sim5.2MB$ DNA molecule,
   based off estimates from the NCBI human genome reference build 37.
   Each base pair is assumed to be roughly $0.34\times10^{-9}m$.
   $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176$
 }
-, yet the entire genome fits into a nuclear volume of \~{}$374^3\mu{}m$
+, yet the entire genome fits into a nuclear volume of $\sim374^3\mu{}m$
 \cite{marks2011}.  Furthermore, loops as small as 100 bases have been
 observed in enhancer and repressor activation pathways\cite{wong2008}, and
-can form in the absense of proteins\cite{vafabakhsh2012}.  Altogether,DNA's
+can form in the absense of proteins\cite{vafabakhsh2012}.  Altogether, DNA's
 inherent flexibility provides a foundation for the formation of many complex
 higher order chromatin structures.
 
 \subsection{Epigenetics And Chromatin Modeling}
 
 Where the primary sequence furnishes favorable properties for the formation of
-looping and bound structures structures, the epigenetic landscape determines
+mooping and bound structures structures, the epigenetic landscape determines
 the formation, maintenance, and conformation of higher order structures.  The
 most ubiquitous class of proteins are the histone architecural proteins,
 responsible for non-specifically binding DNA at regular intervals.  Histones
@@ -204,6 +210,8 @@ The
 
 
 \chapter{Chromosomal Conformational Capture and Derivatives}
+
+\section{Capturing the Conformations}
 
 The field of molecular biology is advancing rapidly, propelled forth by a
 surge of automated techniques.  So-called `high-throughput' techniques enable
@@ -236,7 +244,7 @@ simple --- to assess nearby regions, the experimenter attempts to fuse
 together molecules that are physically close, then determine the interaction
 partners of each segment of DNA captured in this fashion.  The 3C proceedure
 involves five steps.   Initially,  apopulation of (mammalian) cells is cultured in an appropriate growth medium
-until a population size of $\~{}2.5 \times 10^7$ cells is achieved\cite{berkum2010}.
+until a population size of $\sim2.5 \times 10^7$ cells is achieved\cite{berkum2010}.
 The entire population is treated with formaldehyde, a small chemical commonly
 used to fix both small samples for microscopy experiments and large specimens
 for organismal analysis.  Importantly, formadehyde is a mutagen known to form
@@ -263,7 +271,7 @@ specific for the population being studied\cite{simonis2007}.
 % knowledge and fill in the section appropriately.
 %
 
-In the derivative methods 4C, 5C, and ChIP-loop, the basic protocol remains
+In the derivative methods 4C, 5C, and HiC, the basic protocol remains
 unchanged; however, the capture and analysis of fragments varies depending on
 the application.  Chromosome Conformation Capture-on-Chip (4C) leverages a
 DNA microarray to systematically screen the entire genome in an unbiased
@@ -273,16 +281,63 @@ Rather than performing the PCR step from the canonical 3C assay, the restriction
 fragments are shortened with a second restriction enzyme, circularized, and
 amplified by inverse PCR\@.  The amplified probes are detected on the designed
 microarray\cite{simonis2006}.  Chromosome Conformation Capture Carbon-Copy (5C)
+extends the 3C method by replacing the PCR amplification step with multiplexed
+ligation-mediated amplification.  Ligation-mediated amplification (LMA) is a
+technique to detect and amplify specific target sequences using primer pairs
+that anneal next to each other on the same DNA strand\cite{dostie2006}.
+Critically, the 5C method only amplifies strands which are bound by two
+primers that are ligated together, allowing fine control over the amplified
+sequences through primer design.  Primers are designed such that forward and
+reverse 5C primers are ligated across ligation junctions in the 3C library.
+Furthermore, 5C primers also contain universal tails for amplification,
+permitting all bound sequences to be simultaneously amplified.  Thus, through
+the appropriate choice of primers, a selected genomic loci is `carbon-copied'
+and amplified, allowing high resolution analysis of a given target
+interaction\cite{dostie2006}.  The most recent derivation of the technique,
+HiC, allows comprehensive capture of all interacting segments in the genome
+using Next Generation Sequencing techniques (NGS).  To purify all interacting
+segments of the genome, the HiC protocol calls for the labeling of all junctions
+with biotin markers, effectively marking each genomic junction. Like other
+derivative methods, HiC replaces the PCR methods of 3C and instead uses
+steptavidin beads to pull down chimeric DNA sequences.  The captured sequences
+can then be sequenced using next generation sequences or hybridized to a
+microarray.  More targeted methods ChiA-PET and ChIP-loop encorporate
+immunoprecipitation to select complexes containing certain proteins.
 
 
+\begin{figure}[b]
+  \centering
+  \caption{An overview of 3C methods.}
+  \includegraphics[width=\textwidth]{figures/CompareChromosomeCapture}
+  \medskip
+  \small
+  Chromatin is uniformly crosslinked and digested with a restriction enzyme.
+  Bound sequences are immunoprecipitated or biotinylated, depending on the
+  assay, and strands are ligated.  Ligation yeilds novel chimeric sequences
+  which are purified.  The number of interactions are assess by qPCR in
+  the canonical 3C method and ChIP-loop, inverse PCR in 4C, multiplexed
+  sequencing with oligonucleotides in 5C, and paired end sequencing in Hi-C
+  and ChIA-PET\@.  Adapted from Montavon \textit{et al.}\cite{montavon2012}.
+\end{figure}
 
 
+% chimeric!
 
-ANALYSIS
+\section{Analysis}
+
+The perceptive reader will note that much can go wrong in a 3C experiment.
+Every 3C method involves some level of digestion, ligation, and amplification,
+and errors may be introduced at each step.  In particular, Dekker provides
+guidelines for three important control steps to ensure the methodology remains
+integrous: control of PCR efficiency, determination of background random
+collisions and data normalization\cite{dekker2006}.  Many derivative methods
+omit the PCR step, however all methodologies must be cognizant that biases are
+introduced in any replacement protocol.
+
 
 Chromosome Conformation Capture is a quantitative assay and meaningful
 results are gleaned by comparison of relative interation frequencies
-between genomic regions. %talk about controls, controls controls
+between genomic regions.
 
 
 
@@ -441,7 +496,6 @@ and random background collisions during
 ligation\cite{benner2014} \cite{dekker2006}.
 
 
-
 %% Data Validation
 
 \section{Analysis}
@@ -467,19 +521,20 @@ ligation\cite{benner2014} \cite{dekker2006}.
 \chapter{Data Collection}
 
 Methylation data was downloaded from the Salk Institute for Biology Studies in
-two files from two biological replicates.  Each file contained $~{}600$ million
+two files from two biological replicates.  Each file contained $\sim600$ million
 reads from the
 
-\begin{center}
-  \begin{tabular}{lcr}
+\begin{table}
+  \centering
+  \begin{tabular}{lccr}
     \hline
-    Replicate & Hg18 Reads & Hg19 Reads & Unlifted \\
-    \hline
+    Replicate & Hg18 Reads & Hg19 Reads & Unlifted Reads \\ \hline
     1 & 563,354,527 & 563,071,323 & 566,408 \\
     2 & 620,520,572 & 620,227,842 & 585,460 \\
     \hline
   \end{tabular}
-\end{center}
+  \caption{Genomic methylation data for IMR90}
+\end{table}
 
 
 \chapter{Iterative Alignment of Probes}
@@ -545,15 +600,15 @@ The first replicate IMR90 interation dataset was labeled the primary dataset
 and the remaining five were compared using Spearman's Rank Correlation.  The
 results are given in Table X.
 
-%% Example data for now.
 \begin{table}
   \begin{tabular}{|c|*{6}{c|}}
+    \hline
     \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\ \hline
     0.83 & \textbf{R2} & 0.82 & 0.83 & 0.79 & 0.75 \\ \hline
     0.77 & 0.82 & \textbf{R3} & 0.77 & 0.74 & 0.73 \\ \hline
     0.77 & 0.83 & 0.77 & \textbf{R4} & 0.75 & 0.71 \\ \hline
     0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\ \hline
-    0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\
+    0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\ \hline
   \end{tabular}
   \caption{Spearman's $\rho$ across all datasets.}
   \label{tab:correlations}
@@ -563,9 +618,9 @@ results are given in Table X.
 This is from\cite{fragsites2001}.
 
 \begin{center}
-  \begin{longtable}{|l|l|l|l|}
-    \caption[Human Fragile Sites]{Human Fragile Sites
-    } \label{grid_hfs} \\ \hline
+  \begin{longtable}{|l|c|c|r|}
+    \caption[Human Fragile Sites]{Human Fragile Sites}
+    \label{grid_hfs} \\ \hline
 
     \endfirsthead
     {{\bfseries \tablename\ \thetable{} -- continued from previous page}} \\ \hline
