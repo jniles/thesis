@@ -138,46 +138,50 @@ genomic space strongly correlates with translocation probability.
 
 \section{Building from the Basics}
 
-It is difficult to overstate the importance of the nuclear topology in
+It is difficult to overstate the importance of chromatin topology in
 every aspect of a eukaryotic cell's life.  The morass of nucleic acids and
-proteins packed tightly inside the nuclear envelope contains the entireity of
-the information necessary to completely duplicate the cell.
+proteins packed tightly inside the nuclear envelope contains all the
+information necessary for cell function and duplication.
 
-The sheer complexity of the nucleus requires us to investigate the biological
-phenomena at multiple layers of granularity.  Ironically, the finest resolution
+The sheer complexity of the nucleus requires us to investigate its biological
+structure at multiple layers of granularity.  Ironically, the smallest resolution
 of the nucleus is also the most well studied: the primary sequence of nucleic
 acid bases which compose the DNA molecule itself.  One level of abstraction
 above the primary sequence considers the interactions of the primary sequence
 with architectural proteins such as histones, and the secondary structures that
 result from these couplings.  Even higher up the abstraction tree lies
 \textit{epigenetics} (literally `above genetics'\cite{dictepi2014}), a loose
-classification for secondary modifications that can be heritible or characteristic
-of a cell state.  Finally, chromosomes and chromosomal territories compose the
-highest and most recently characterized levels of nuclear architecture.  The
-construction of this stratum provides researchers with a conceptual tool with
-which to model and consider the topology of the nuclear contents.
+classification for secondary modifications to DNA and architectural proteins
+which may be heritible or characteristic of cell state.  Finally, chromosomes
+and chromosomal territories comprise the highest and most recently understood
+levels of nuclear architecture.  Conceptualizing nuclear organization in
+stata such as this furnishes researchers with a conceptual tool to model
+and categorize the topology of nuclear contents.
 
 \subsection{Foundations: The  Primary Sequence}
 
-The fundemental informational unit of the nucleus is the nucleotide, often
-called a base or base pair when joined in a molecule or strand.  Eukaryotic
+The fundemental informational unit of the cell is the nucleotide, often
+termed base or base pair when joined in a molecule or strand.  Eukaryotic
 cells have a principle four character alphabet of nucleotides, distinguished
 by their \textit{nucleobases}: adenine, cytosine, guanine, and thymine.  These
 nucleotides are affixed to a phosphate backbone into a long, coiling polymer
 chain.  The famous publication of the structure of DNA in 1953 by researchers
-Watson and Crick determined that these polymers exist in the nucleus as double
+Watson and Crick demonstracted these polymers exist in the nucleus as double
 helices\cite{watson1953}, with hydrogen bonds holding the opposing strands
-together.  Importantly, adenine and thymine form a two hydrogen bond
-complimentary pair, while guanine and cytosine form three bonds.  In this way,
-one particular side of the helix can determine the other side (in most circumstances)
-and deviations from this pattern can lead to mutations of various types\cite{cox2012}.
+together.  Adenine and guanine are purine bases, while thymine and cytosine are
+pyridine bases.  It is important to note that adenine and thymine are
+complementary bases and form two hydrogen bonds between them.  Similarly,
+guanine and cytosine are complementary, and form three hydrogen bonds between
+their bases.  In this fashion, one particular side of the helix completely
+determines the oppsing side and perturbations from this structure may lead
+to strand mutations\cite{cox2012}.
 
-One cannot ignore the consituents of the primary sequence, particular when
+One cannot ignore the consituents of the primary sequence, particularly when
 considering macroscopic properties of the genome.  Indeed, the order and
-nucleotide content can change the local flexibility and both directly (by
-forming binding sites) and indirectly (by supporting the binding of histones)
-modules the binding of important architectural proteins\cite{travers2004}.
-Although a DNA molecule is a helical structure, it is an intrinsically
+nucleotide content can change the local flexibility and directly (by
+encoding binding sites) and indirectly (by supporting the binding of histones)
+modulates the binding of important architectural proteins\cite{travers2004}.
+Although a DNA strand is a helical structure, it is an intrinsically
 flexible molecule.  A naive calculation reveals that the human genome is
 roughly two meters in length%
 \footnote{%
@@ -185,85 +189,83 @@ roughly two meters in length%
   based off estimates from the NCBI human genome reference build 37.
   Each base pair is assumed to be roughly $0.34\times10^{-9}m$.
   $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176$
-}
-, yet the entire genome fits into a nuclear volume of $\sim374^3\mu{}m$
-\cite{marks2011}.  Furthermore, loops as small as 100 bases have been
-observed in enhancer and repressor activation pathways\cite{wong2008}, and
-can form in the absense of proteins\cite{vafabakhsh2012}.  Altogether, DNA's
+},
+yet the entire genome fits into a nuclear volume of $\sim374^3\mu{}m$
+\cite{marks2011}.  Furthermore, loops as small as 100 bases in length have been
+reported in enhancer and repressor element activation pathways\cite{wong2008}.
+These loops can form independently of proteins\cite{vafabakhsh2012}.  Altogether, DNA's
 inherent flexibility provides a foundation for the formation of many complex
 higher order chromatin structures.
 
 \subsection{Epigenetics And Chromatin Modeling}
 
-Where the primary sequence furnishes favorable properties for the formation of
-mooping and bound structures structures, the epigenetic landscape determines
-the formation, maintenance, and conformation of higher order structures.  The
-most ubiquitous class of proteins are the histone architecural proteins,
-responsible for non-specifically binding DNA at regular intervals.  Histones
-and their composite structure, the nucleosome, are the principle, but not singular,
-regulators of chromatin accessibility, shape, and dynamics at the epigenetic
-level.
+The epigenetic landscape determines the formation, maintenance, and
+conformation of higher order structures. The most ubiquitous class of
+proteins in the nucleus are the histone class of architecural proteins,
+responsible for non-specifically binding and coiling DNA bases at regular
+intervals.  Histones and their composite structure, the nucleosome, are the
+principle regulators of DNA accessibility, shape, and dynamics.  The amalgamation
+of DNA and architectural proteins is collectively called chromatin.
 
-The
 
 
 
 
 \chapter{Chromosomal Conformational Capture and Derivatives}
 
-\section{Capturing the Conformations}
+\section{Capturing Conformations}
 
 The field of molecular biology is advancing rapidly, propelled forth by a
-surge of automated techniques.  So-called `high-throughput' techniques enable
-biologists and bioinformaticians to generate and process massive datasets with
-both ease, reliability, and efficiency.  The first reference build of the
+surge of automated techniques.  These so-called `high-throughput' methodologies
+enable biologists and bioinformaticians to generate massive datasets with
+relative ease, reliability, and efficiency.  The first reference build of the
 human genome is a testament to their success\cite{hgsc2004}.  However,
 until recently, investigating chromosomal architecture remained an
-exhaustively manual process, relying on flourescent microscopy experiments and
-visual inspection by researchers.  It wasn't until 2003, when Job Dekker and
+exhaustively manual process, relying on flourescence microscopy experiments and
+visual inspection by researchers.  It was not until 2003, when Job Dekker and
 collegues described a technique known as Chromosomal Conformational Capture
 (3C) that the study of nuclear architecture gained a high throughput methodology
-\cite{dekker2002}. Since then, a family of conformational capture techniques
-(most named a variation on `3C') have been developed to interrogate
-different types of chromatin interactions and achieve higher throughput.
+\cite{dekker2002}. Since then, a family of high-throughput capture techniques,
+most named a variation on `3C', have been developed to interrogate
+different scales and types of chromatin interactions.
 
 The original chromosome conformation capture technique developed by Dekker and
-collegues provides an average measurement of the juxtaposition frequence between
-two specific genomic loci\cite{frase2014}.  The frequency of this measurement over a population
-is thought to be indicative of the proximity of the two loci in genomic space.
-The first derivative technique on 3C, aptly named Chromosome Conformation Capture-
-on-Chip (4C), extended the number contacts assessed from two loci to all
-contacts made with a particular genomic loci by assessing contacts on a
-whole genome microaray\cite{simonis2006}.  Most recently, the Dekker lab has
-developed a technique using biotinylated probes to assess contacts between any
-given genomic region\cite{berkum2010}.  The method, known as Hi-C, boasts
-the first truly global assessment of all genomic contacts at a given time.
+collegues provides an average measurement of the juxtaposition frequency between
+two specific genomic loci in a cell population\cite{frase2014}.  This
+interaction frequency measurement is thought to be reflective of the distance
+between two associated loci in genomic space.  The first extension of the 3C
+experiment, aptly named Chromosome Conformation Capture-on-Chip (4C), increased
+the number of interrogated regions from two loci (one to one) to all loci
+interacting with a chosen target region (one to all)\cite{simonis2006}.  Most
+recently, the Dekker lab extended the method further using biotinylated probes
+to assess contacts across the entire genome (all to all)\cite{berkum2010}.
+The method, known as Hi-C, boasts the first truly global quantization of every
+genomic contact at a given time.
 
 The conceptual idea behind chromosomal conformation capture is remarkably
 simple --- to assess nearby regions, the experimenter attempts to fuse
 together molecules that are physically close, then determine the interaction
 partners of each segment of DNA captured in this fashion.  The 3C proceedure
-involves five steps.   Initially,  apopulation of (mammalian) cells is cultured in an appropriate growth medium
-until a population size of $\sim2.5 \times 10^7$ cells is achieved\cite{berkum2010}.
+involves five steps.   Initially, a population of cells is cultured in an appropriate
+growth medium to a population size of $\sim2.5 \times 10^7$ cells\cite{berkum2010}.
 The entire population is treated with formaldehyde, a small chemical commonly
-used to fix both small samples for microscopy experiments and large specimens
-for organismal analysis.  Importantly, formadehyde is a mutagen known to form
-DNA-protein crosslinks\cite{merk1998}.  The global affect of the formaldehyde
-treatment is fusing together DNA and protein structures that are nearby in
-the genomic space.  Crosslinking the entire cell ensures that the nuclear contents
-are fixed before any further experimental intervention, exactly capturing
-the growing cell's nuclear structure.  In the second step, the cells are
-homogenized and the chromatin is digested by a restriction enzyme (typically
-HindIII or Nco1)\cite{berkmun2010}.  Digestion creates two populations of
-DNA fragments; though bound to proteins and other DNA sequences, and an unbound
-population.  The unbound population is discarded through filtering.  In the
-third step, the bound sequences are ligated (joined) in highly diluted
-concentrations, to bias towards ligation reactions between DNA strands bound
-to the same molecular complex.  The ligation process combines DNA sequences
-from different loci into a single sequence.  The fourth step is to reverse
-the crosslinks and release the recombined sequences from their complexes.  The
-final step comprises quantifying the restriction fragments by PCR using fragments
-specific for the population being studied\cite{simonis2007}.
+used to fix both cellular samples for microscopy experiments and large specimens
+for organismal analysis.  Formaldehyde is a mutagen known to form DNA-DNA and
+DNA-protein crosslinks\cite{merk1998}.  Importantly, the formaldehyde
+treatment covalently binds together proximal DNA and protein structures.
+In the second step, the cells are homogenized and chromatin is digested by a
+restriction endonuclease, an enzyme that create double-strand cuts at certain
+base pair sequences\cite{berkum2010}.  Digestion creates two populations of
+DNA fragments: fragements bound to protein/DNA complexes, and an unbound
+population.  The unbound population is discarded by filtering.  In the
+third step, the bound double-strand sequences are ligated, or joined together,
+in highly diluted concentrations. Dilution is critical to ensure ligation
+reactions occur only between DNA strands bound to the same molecular complex.
+The result of the ligation process is a population of chimeric DNA sequences.
+The fourth step reverses the crosslinks and release the recombined sequences
+from their complexes.  The final step comprises quantifying the restriction
+fragments by PCR using primers specific for the population under
+study\cite{simonis2007}.
 
 %
 % FIXME
@@ -272,34 +274,35 @@ specific for the population being studied\cite{simonis2007}.
 %
 
 In the derivative methods 4C, 5C, and HiC, the basic protocol remains
-unchanged; however, the capture and analysis of fragments varies depending on
-the application.  Chromosome Conformation Capture-on-Chip (4C) leverages a
-DNA microarray to systematically screen the entire genome in an unbiased
-manner for DNA loci that contact each other\cite{simonis2006}.  The microarray
-is tiled with probes located $< 100$ base pairs away from a restriction site.
-Rather than performing the PCR step from the canonical 3C assay, the restriction
-fragments are shortened with a second restriction enzyme, circularized, and
-amplified by inverse PCR\@.  The amplified probes are detected on the designed
-microarray\cite{simonis2006}.  Chromosome Conformation Capture Carbon-Copy (5C)
+unchanged; however, the capture and analysis of chimeric fragments varies
+depending on the application.  Chromosome Conformation Capture-on-Chip (4C)
+leverages a DNA microarray to systematically screen the entire genome in an
+unbiased manner for DNA loci that contact a single locus\cite{simonis2006}.
+The microarray is tiled with probes which match sequences $< 100$ base pairs
+away from a restriction site.  Instead of performing the PCR step from the
+canonical 3C assay, restriction fragments are shortened with a second restriction
+enzyme, circularized, and amplified by inverse PCR\@.  Amplified probes
+are detected by microarray\cite{simonis2006}.  Chromosome Conformation Capture Carbon-Copy (5C)
 extends the 3C method by replacing the PCR amplification step with multiplexed
 ligation-mediated amplification.  Ligation-mediated amplification (LMA) is a
 technique to detect and amplify specific target sequences using primer pairs
 that anneal next to each other on the same DNA strand\cite{dostie2006}.
 Critically, the 5C method only amplifies strands which are bound by two
-primers that are ligated together, allowing fine control over the amplified
-sequences through primer design.  Primers are designed such that forward and
-reverse 5C primers are ligated across ligation junctions in the 3C library.
+primers ligated across the DNA ligation junction, allowing fine control over
+the amplified sequences through primer careful design.  Primers are
+designed such that forward and reverse 5C primers are ligated across ligation
+junctions of select loci in the 3C library.
 Furthermore, 5C primers also contain universal tails for amplification,
 permitting all bound sequences to be simultaneously amplified.  Thus, through
 the appropriate choice of primers, a selected genomic loci is `carbon-copied'
 and amplified, allowing high resolution analysis of a given target
 interaction\cite{dostie2006}.  The most recent derivation of the technique,
 HiC, allows comprehensive capture of all interacting segments in the genome
-using Next Generation Sequencing techniques (NGS).  To purify all interacting
+using Next Generation Sequencing (NGS) techniques.  To purify all interacting
 segments of the genome, the HiC protocol calls for the labeling of all junctions
 with biotin markers, effectively marking each genomic junction. Like other
-derivative methods, HiC replaces the PCR methods of 3C and instead uses
-steptavidin beads to pull down chimeric DNA sequences.  The captured sequences
+derivative methods, HiC abolishes the PCR step of 3C and replaes it with filtration
+using steptavidin beads to pull down chimeric DNA sequences.  The captured sequences
 can then be sequenced using next generation sequences or hybridized to a
 microarray.  More targeted methods ChiA-PET and ChIP-loop encorporate
 immunoprecipitation to select complexes containing certain proteins.
