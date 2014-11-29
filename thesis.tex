@@ -68,6 +68,11 @@
   description={A polynucleotide whose molecules contain a relatively small number of nucleotides.}
 }
 
+\newglossaryentry{nucleosome}{%
+  name={nucleosome},
+  description={A chromatin secondary structure consisting of $\sim147$ base pairs of DNA wrapped 1.75 times around an octamer of core histone proteins.}
+}
+
 % Make a glossary using the glossaries package
 \makeglossaries%
 
@@ -190,24 +195,62 @@ roughly two meters in length%
   Each base pair is assumed to be roughly $0.34\times10^{-9}m$.
   $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176$
 },
-yet the entire genome fits into a nuclear volume of $\sim374^3\mu{}m$
+yet the entire genome fits into a nuclear volume of $\sim523\mu{}m$
 \cite{marks2011}.  Furthermore, loops as small as 100 bases in length have been
 reported in enhancer and repressor element activation pathways\cite{wong2008}.
 These loops can form independently of proteins\cite{vafabakhsh2012}.  Altogether, DNA's
-inherent flexibility provides a foundation for the formation of many complex
-higher order chromatin structures.
+inherent flexibility is the foundation for  many complex higher order
+chromatin structures.
+
+%% FIXME DNA METHLYATION
 
 \subsection{Epigenetics And Chromatin Modeling}
 
-The epigenetic landscape determines the formation, maintenance, and
-conformation of higher order structures. The most ubiquitous class of
-proteins in the nucleus are the histone class of architecural proteins,
-responsible for non-specifically binding and coiling DNA bases at regular
-intervals.  Histones and their composite structure, the nucleosome, are the
-principle regulators of DNA accessibility, shape, and dynamics.  The amalgamation
-of DNA and architectural proteins is collectively called chromatin.
+How a DNA molecule is packaged and condensed within a cell nucleus remains
+one of the basic questions of cell biology.  Intellectual curiousity aside,
+why is it so important to unravel the chromosomal architecture?  J.C. Hansen
+notes, `In biology, structure is inexorably linked to function.'\cite{hansen2012}
+The pursuit of an accurate \textit{in vivo} model for DNA and protein packaging
+continues to persist today, despite a legacy of experimental, conceptual, and
+mathematical models.
 
+In 1974, Kornberg discovered that chromatin contained roughly equal amounts of
+DNA and protein\cite{kornberg1974}.  A year later, Pierre Chambon and collegues
+described the separation of chromatin into protein complexes spaced evenly on the DNA
+molecule as `beads on a string.'\cite{oudet1975}  The observed beads are nucleosomes,
+bundles composed of a histone octamer and $\sim200$ bases (later reported to be
+$167$ bases\cite{robinson2006}) of coiled DNA\@.
+Much as the nucleotide is the fundemental unit of the genome, nucleosomes are
+the fundemental units of the epigenome.  Nucleosomes in series are called a
+nucleosome array.  A nucleosome consists of two components: a core particle
+wrapping $\sim146$ base pairs of DNA, yeilding a 6 fold compaction in length,
+and a linker portion of varying length of $0$ to $\sim80$ base pairs.  The
+linker component connects adjacent nucleosomes in a nucleosome array\cite{wu2007}%
+\cite{hansen2012}.  These arrays are $10-nm$ in diameter, provoking them to be
+often called the `$10-nm$' fibers.
 
+Despite years of research trying to understand how the composition,
+modification, and interactions of individual nucleosome particles, debate
+persists over possible secondary structures of nucleosome arrays.  Does
+another higher order structure exist above the $10-nm$ fiber?
+\textit{In vitro}, nucleosome arrays suspended in ionic solution fold
+naturally into a $30-nm$ fiber\cite{tremethick2007},
+however, it is unclear whether this motif forms \textit{in vivo} and whether
+its conformation may be different in the nuclear context\cite{bian2012}.  Even
+so, the $30-nm$ firber is of particular interest to explain the highly condensed
+structure of mitotic chromosomes.  The $30-nm$ fiber, if it exists, likely is
+formed of nucleosomes coiled in either a solenoid or double-helix structure
+(for full review, see Grigoryev and Woodcock\cite{grigoryev2012}).  Recently,
+experiments using cryo-electron microscopy (cryo-EM) suggested that genome
+organisation may be a fractal arrangement of $10-nm$ fibers, without invoking
+a higher origanizational unit\cite{nishino2012}\cite{hansen2012}.
+
+A critical feature of gene regulation is the ability to form long range
+interactions between distal elements of the genome.
+
+The highest level of genome organization is the chomosome neighborhood.  It is
+hypothesized that these neighboorhoods exist to protect gene dense chromosomes
+at the core of the nucleus from the 
 
 
 
