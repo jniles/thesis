@@ -265,10 +265,10 @@
     \begin{center}
       \@subtitlesize
       A \ifphd Dissertation \else Thesis \fi \\
-      Presented to the Faculty of the Graduate School \\
-      of Cornell University \\
+      Presented to the Faculty of the \\
+      New College of Florida \\
       in Partial Fulfillment of the Requirements for the Degree of \\
-      \ifphd Doctor of Philosophy \else \@degreefield \fi
+      \ifphd Bachelor of Arts in Applied Mathematics/Biology\else \@degreefield \fi
     \end{center}
     \vfill
     \begin{center}
@@ -334,8 +334,8 @@
     \ifphd%
       {\def\\{\noexpand\\} \xdef\@abstracttitle{\@abstracttitle}}
       \expandafter\uppercase\expandafter{\@abstracttitle} \\
-      \@author,\ Ph.D. \\
-      Cornell University\ \@conferralyear%
+      \@author \\
+      New College of Florida \ \@conferralyear%
     \else
       \normalsize \bfseries\selectfont
       ABSTRACT
