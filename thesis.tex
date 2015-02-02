@@ -159,6 +159,8 @@ and a single gene's expression profile is
 We wish to compare differences in gene expression profiles for particular, or all, genes between samples.  This amounts to comparing
 \textit{distances} between gene expression vectors.  There are several methods for doing so.
 
+\subsection{Euclidean Distance}
+
 The simplest genometic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \textif{norm}, known as
 the 2-norm.  Geometrically, the norm is a measure of `size' or `proximity' in $n-$dimensional space.  The 2-norm for a vector $x$ is
 defined as
@@ -167,14 +169,16 @@ defined as
 \]
 
 The distance between two vectors in a vector space can now be found using the triangle inequality on the 2-norm.  As a norm, the Euclidean
-norm has some desirable properties, notably, non-negativity, positivity, and a definition of the triangle inequality $\|x + y\| = \|x\| + \|y\|$.
-Directly from the triangle inequality, we define the Euclidean distance in $n-$dimensions to be
+norm has some desirable properties, notably, non-negativity, positivity, and a definition of the triangle inequality
+$\|x + y\| = \|x\| + \|y\|$\cite{horn2013}.  Directly from the triangle inequality, we define the Euclidean distance
+in $n-$dimensions to be
 
 \[
   D_{Euc}(x,y) = \|x\| - \|y\| = {(\sum_{i=1}^{n}{(a_i - b_i)}^2)}^{\frac{1}{2}}
 \]
 
-A second 
+\subsection{Pearson's Correlation Coefficient}
+An ohnson_
 
 % biology chapter
 \chapter{Biological Preliminaries}
