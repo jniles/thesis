@@ -191,12 +191,12 @@ work by Tanay and Yaffe\cite{yaffe2011}.  In the following section, I will descr
 prove convergence properties for the algorithm.
 
 Genome-wide interaction maps form matrix of observed contact frequencies between genomic segments.  Observed contacts are expected to
-be noisy do to biases introduced in the experimental proceedure and inherent differences in mappability for different genomic regions 
+be noisy do to biases introduced in the experimental proceedure and inherent differences in mappability for different genomic regions
 (e.g.\ centromeres).
 
 % Why are biases factorizable?
 
-The ICE algorithm decomposes a contact map into the product of true contact frequencies and a set of biases for every region 
+The ICE algorithm decomposes a contact map into the product of true contact frequencies and a set of biases for every region
 \[
   \Epsilon_{ij} = B_{i}B_{j}T_{ij}
 \]
@@ -550,7 +550,7 @@ fragile is still an unanswered question.
 
 % TODO NOT SURE WHERE THIS GOES
 % The H1 human embryonic stem cell line and IMR90, the human lung fibroblast cell line, were selected for analysis due to
-% the abundance of publically available, high resolution interaction data.  
+% the abundance of publically available, high resolution interaction data.
 
 \chapter{Methods}
 
@@ -573,7 +573,7 @@ using custom scripts written in the Python programming language.
 
 % FIXME Make sure appendix numbers/labels are correct
 I noted that the aligned interactions matrices by replicate are highly correlated (Spearman's $\rho \gte 0.69$)  % FIXME p-value!
-for both cell lines, and signicantly different from random (Appendix III).  The 
+for both cell lines, and signicantly different from random (Appendix III).  The
 
 % TODO Do the python statistics here to validate that the data is good.  This includes:
 % 1) Spearman's between H1 and IMR90
@@ -698,6 +698,37 @@ and random background collisions during ligation\cite{benner2014}\cite{dekker200
 %% Replication Timing Analysis..?
 
 \chapter{Results \& Discussion}
+
+\section{Differentiation induces fibroblast-specific gene products in IMR90}
+
+The transition from embryonic pluripotency to a specialized cell type naturally introduces a change in the expressed cell products.
+Using Affymetrix microarrays, we observe that the overall trend towards differentiation marginally increases gene expression across
+the entire proteome (mean = ?).  This observation is not surprising, and is thoroughly documented in the literature\cite{tuomela2012}
+for various cell types.
+
+We then sought to understand how expression changes were related to molecular function in the cell.  Using the ConsensusPathDB
+tool\cite{kamburov2012}, we performed both overexpression and gene ontologoy analysis of the 1\%  largest positively and negatively
+changing gene products.  Upregulated genes tend to be involved in the extracellular matrix formation, collagen synthesis and formation,
+and signalling pathways.  Furthermore, downregulated genes are involved in transcriptional regulation of pluripotent stem cells.
+
+We asked whether transcriptional upregulation during differentiation could predict mutations, lesions, or break points seen in lung
+cancer studies.  We acquired data for every type of lung cancer lesions from the Catalogue of Somatic Mutations in Cancer
+(COSMIC)\cite{forbes2009} by gene.  Interestingly, the frequency of lesions reported by COSMIC was uncorrelated to those genes
+expression changes (Pearsons $0.07$, $p < 1 \times 10^{-18}$.  There are a number of potential causes for the lack of signal in
+our expression data.  Perhaps the expression arrays are not able to identify gene fusion products, a non-negligible portion of
+the COSMIC mutation database.  More likely, as reported recently by Asworth and colleages, it is mutations in transcription factors
+that cause gene expression changes in cancers, rather than in the genes themselves\cite{ashworth2014}.
+
+\section{Contact maps of cell lines change drastically during differentiation}
+% TODO
+
+\section{ETC is conserved}
+
+\begin{figure}
+
+\end{figure}
+
+
 
 %
 % APPENDIX
