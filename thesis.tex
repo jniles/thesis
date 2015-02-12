@@ -37,11 +37,11 @@
 \copyrightyear{2014}
 
 % Acronym Definitions
-\newacronym{dna}{DNA}{Deoxyribonucleic Acid}
-\newacronym{rna}{ROA}{Ribonucleic Acid}
-\newacronym{geo}{GEO}{Gene Expression Omnibus}
-\newacronym{ncbi}{OCBI}{National Center for Biotechnology Information}
-\newacronym{sra}{SRA}{Sequence Read Archive}
+\newacronym{DNA}{DNA}{Deoxyribonucleic Acid}
+\newacronym{RNA}{RNA}{Ribonucleic Acid}
+\newacronym{GEO}{GEO}{Gene Expression Omnibus}
+\newacronym{NCBI}{NCBI}{National Center for Biotechnology Information}
+\newacronym{SRA}{SRA}{Sequence Read Archive}
 \newacronym{tad}{TAD}{Topologically Associating Domain}
 \newacronym{lad}{LAD}{Lamina Associating Domain}
 
@@ -91,13 +91,13 @@
 
 \begin{abstract}
 Chromosomal rearrangements and sequence translocations are canonical hallmarks of cancerous cells.  Frequent
-occurences of rearrangments at specific loci may give insight into uncharacterised mechanisms that explain
-macro-moleclar breaks in the genome.  The canonical models for these `common fragile sites' involve spatially
+occurrences of rearrangements at specific loci may give insight into uncharacterized mechanisms that explain
+macro-molecular breaks in the genome.  The canonical models for these `common fragile sites' involve spatially
 independent molecular mechanisms of double-strand break repair and non-homologous end joining.  However, the
 inherent fragility of genomic compartments may be explained on a structural basis, instead or in addition to,
 the biochemical models for sequence rearrangements.  We propose a possible architectural model underlying the
 fragility of certain rearranged genes and describe further experiments to understand interplay of form and
-disfunction.
+dysfunction.
 \end{abstract}
 
 \begin{dedication}
@@ -120,8 +120,8 @@ Dr.\ Tyrone Ryba, Dr.\ Patrick McDonald, and Dr.\ Necmettin Yildirim.
 
 The human genome is a six billion nucleotide string that encodes the
 the vast instruction set for the cells growth, function, and death.  The cell
-programme is not only dictated by the instruction set, but also
-how the instructions are read, compiled, and exectuted, and is influenced
+program is not only dictated by the instruction set, but also
+how the instructions are read, compiled, and executed, and is influenced
 by a myriad of factors in addition to the primary sequence.  Increasingly,
 modern cancer research is indicating this epigenetic landscape plays strategic
 role in determining cell fate.  Understanding the landmark epigenetic features,
@@ -161,7 +161,7 @@ We wish to compare differences in gene expression profiles for particular, or al
 
 \subsection{Euclidean Distance}
 
-The simplest genometic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \textif{norm}, known as
+The simplest genomic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \textif{norm}, known as
 the 2-norm.  Geometrically, the norm is a measure of `size' or `proximity' in $n-$dimensional space.  The 2-norm for a vector $x$ is
 defined as
 \[
@@ -183,15 +183,15 @@ in $n-$dimensions to be
 
 \section{Iterative Correction of Interaction Maps}
 
-Massive data mining experiments must be congizant of any inherent biases in the data set and seek to eliminate them prior to performing
+Massive data mining experiments must be cognizant of any inherent biases in the data set and seek to eliminate them prior to performing
 meaningful data analysis.  In this thesis, we depend on accurate reporting of contact frequency between genomic loci, which is prone
 to a number of experimental, mechanical, and biological biases\cite{dekker2006}.  In order to compare data sets, I employ an algorithm,
-iterative correction and eigenvector decomposition (ICE) developed by Imakaev and collegues\cite{imakaev2012} established on previous
+iterative correction and eigenvector decomposition (ICE) developed by Imakaev and colleagues\cite{imakaev2012} established on previous
 work by Tanay and Yaffe\cite{yaffe2011}.  In the following section, I will describe the motivation for ICE, the algorithm in detail, and
 prove convergence properties for the algorithm.
 
 Genome-wide interaction maps form matrix of observed contact frequencies between genomic segments.  Observed contacts are expected to
-be noisy do to biases introduced in the experimental proceedure and inherent differences in mappability for different genomic regions
+be noisy do to biases introduced in the experimental procedure and inherent differences in mappability for different genomic regions
 (e.g.\ centromeres).
 
 % Why are biases factorizable?
@@ -223,31 +223,31 @@ with architectural proteins such as histones, and the secondary structures that
 result from these couplings.  Even higher up the abstraction tree lies
 \textit{epigenetics} (literally `above genetics'\cite{dictepi2014}), a loose
 classification for secondary modifications to DNA and architectural proteins
-which may be heritible or characteristic of cell state.  Finally, chromosomes
+which may be heritable or characteristic of cell state.  Finally, chromosomes
 and chromosomal territories comprise the highest and most recently understood
 levels of nuclear architecture.  Conceptualizing nuclear organization in
-stata such as this furnishes researchers with a conceptual tool to model
+strata such as this furnishes researchers with a conceptual tool to model
 and categorize the topology of nuclear contents.
 
 \subsection{The Primary Sequence}
 
-The fundemental informational unit of the cell is the nucleotide, often
+The fundamental informational unit of the cell is the nucleotide, often
 termed base or base pair when joined in a molecule or strand.  Eukaryotic
 cells have a principle four character alphabet of nucleotides, distinguished
 by their \textit{nucleobases}: adenine, cytosine, guanine, and thymine.  These
 nucleotides are affixed to a phosphate backbone into a long, coiling polymer
 chain.  The famous publication of the structure of DNA in 1953 by researchers
-Watson and Crick demonstracted these polymers exist in the nucleus as double
+Watson and Crick demonstrated these polymers exist in the nucleus as double
 helices\cite{watson1953}, with hydrogen bonds holding the opposing strands
 together.  Adenine and guanine are purine bases, while thymine and cytosine are
 pyridine bases.  It is important to note that adenine and thymine are
 complementary bases and form two hydrogen bonds between them.  Similarly,
 guanine and cytosine are complementary, and form three hydrogen bonds between
 their bases.  In this fashion, one particular side of the helix completely
-determines the oppsing side and perturbations from this structure may lead
+determines the opposing side and perturbations from this structure may lead
 to strand mutations\cite{cox2008}.
 
-One cannot ignore the consituents of the primary sequence, particularly when
+One cannot ignore the constituents of the primary sequence, particularly when
 considering macroscopic properties of the genome.  The order and
 nucleotide content can change the local flexibility and directly (by
 encoding binding sites) and indirectly (by supporting the binding of histones)
@@ -257,8 +257,8 @@ flexible molecule.  A naive calculation reveals that the human genome is
 roughly two meters in length%
 \footnote{%
   A diploid human genome consists of two copies of the $\sim3.1MB$ DNA molecule,
-  based off estimates from the OCBI human genome reference build 37.
-  Each base pair is assumed to ce roughly $0.34\times10^{-9}m$.  Therefore, the
+  based off estimates from the NCBI human genome reference build 37.
+  Each base pair is assumed to be roughly $0.34\times10^{-9}m$.  Therefore, the
   entire length is $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176m$
 },
 yet the entire genome fits into a nuclear volume of $\sim523\mu{}m$
@@ -274,7 +274,7 @@ chromatin structures.
 \subsection{Epigenetics And Chromatin Modeling}
 
 How a DNA molecule is packaged and condensed within a cell nucleus remains
-one of the basic questions of cell biology.  Intellectual curiousity aside,
+one of the basic questions of cell biology.  Intellectual curiosity aside,
 why is it so important to unravel the chromosomal architecture?  J.C. Hansen
 notes, `In biology, structure is inexorably linked to function.'\cite{hansen2012}
 The pursuit of an accurate \textit{in vivo} model for DNA and protein packaging
@@ -282,15 +282,15 @@ continues to persist today, despite a legacy of experimental, conceptual, and
 mathematical models.
 
 In 1974, Kornberg discovered that chromatin contained roughly equal amounts of
-DNA and protein\cite{kornberg1974}.  A year later, Pierre Chambon and collegues
+DNA and protein\cite{kornberg1974}.  A year later, Pierre Chambon and colleagues
 described the separation of chromatin into protein complexes spaced evenly on the DNA
 molecule as `beads on a string.'\cite{oudet1975}  The observed beads are nucleosomes,
 bundles composed of a histone octamer and $\sim200$ bases (later reported to be
 $167$ bases\cite{robinson2006}) of coiled DNA\@.
-Much as the nucleotide is the fundemental unit of the genome, nucleosomes are
-the fundemental units of the epigenome.  Nucleosomes in series are called a
+Much as the nucleotide is the fundamental unit of the genome, nucleosomes are
+the fundamental units of the epigenome.  Nucleosomes in series are called a
 nucleosome array.  A nucleosome consists of two components: a core particle
-wrapping $\sim146$ base pairs of DNA, yeilding a 6 fold compaction in length,
+wrapping $\sim146$ base pairs of DNA, yielding a 6 fold compaction in length,
 and a linker portion of varying length of $0$ to $\sim80$ base pairs.  The
 linker component connects adjacent nucleosomes in a nucleosome array\cite{wu2007}%
 \cite{hansen2012}.  These arrays are $10-nm$ in diameter, provoking them to be
@@ -316,7 +316,7 @@ both interphase and mitotic chromosome structure.
 
 The nucleosome core particle is a central actor controlling gene expression
 through local transcription regulation.  It is well established that nucleosomes
-cause an attentuation of gene expression when present at physiological
+cause an attenuation of gene expression when present at physiological
 concentrations\cite{brown1984}\cite{lorch1987}\cite{laybourn1991}\cite{juan1994}.
 How then does the cell maintain some genes as actively transcribed while others
 are silenced?  Nucleosomes regulate gene expression by regulating accessibility.
@@ -333,10 +333,10 @@ sequence is called \textit{euchromatin}.
 A critical feature of gene regulation is the ability to form long range
 interactions between distal elements of the genome.  Note, cite heintzman et al.
 
-\subsection{Chromosomes are organised in territories}
+\subsection{Chromosomes are organized in territories}
 
-The highest level of genome organization is the chromosome territory (CT) or chromosome neighboorhood\cite{cremer2001}.
-The hypothesis that chromosomes were segregated into nuclear subvolumes dates back more than 100
+The highest level of genome organization is the chromosome territory (CT) or chromosome neighborhood\cite{cremer2001}.
+The hypothesis that chromosomes were segregated into nuclear sub-volumes dates back more than 100
 years\cite{cremer1993}.  The raison d'etre of these territories is not well understood; however, it is
 proposed that CT distribution in the nucleus protects the gene-rich chromosomes by localizing them to
 the nuclear center\cite{boyle2001}\cite{federico2006}, CTs create gene expression `pockets' with localized
@@ -354,13 +354,13 @@ non-spherical nuclear shapes, chromosomal arrangements may deviate from this pat
 more specialized functions\cite{bolzer2005}.
 
 There is strong evidence that chromosomal territories contain small decondensed regions serving as gene
-expression hotspots.  Unlike bacterial chromosomes, where genes from the same pathway are grouped on the
-chromosome in units called \textit{operons}, eukaryotic genes are distributed seemingly randomly thoughout
+expression hot-spots.  Unlike bacterial chromosomes, where genes from the same pathway are grouped on the
+chromosome in units called \textit{operons}, eukaryotic genes are distributed seemingly randomly throughout
 the genome\cite{jacob1961}.  It is well known that transcriptionally active chromatin compartmentalizes based
-on replication timing\cite{ferreira1997}\cite{sadoni1999}\cite{thevenin2014}.  Moreover, recent obervations
+on replication timing\cite{ferreira1997}\cite{sadoni1999}\cite{thevenin2014}.  Moreover, recent observations
 reveal in order to facilitate transcription of genes in a pathway, chromosomal territories co-localize
 functionally related genes with transcriptional machinery.  When considering only inter-chromosomal gene pairs,
-Thevenin and collegues observed that co-functioning genes exhibit significant local concentrations, regardless
+Thevenin and colleagues observed that co-functioning genes exhibit significant local concentrations, regardless
 of linear distance on the primary sequence\cite{thevenin2014}.
 
 % TODO Topologically associated domans?
@@ -375,20 +375,20 @@ of linear distance on the primary sequence\cite{thevenin2014}.
 
 The field of molecular biology is advancing rapidly, propelled forth by a
 surge of automated techniques.  These so-called `high-throughput' methodologies
-enable biologists and bioinformaticians to generate massive datasets with
+enable biologists and bioinformaticians to generate massive data sets with
 relative ease, reliability, and efficiency.  The first reference build of the
 human genome is a testament to their success\cite{hgsc2004}.  However,
 until recently, investigating chromosomal architecture remained an
-exhaustively manual process, relying on flourescence microscopy experiments and
+exhaustively manual process, relying on fluorescence microscopy experiments and
 visual inspection by researchers.  It was not until 2003, when Job Dekker and
-collegues described a technique known as Chromosomal Conformational Capture
+colleagues described a technique known as Chromosomal Conformational Capture
 (3C) that the study of nuclear architecture gained a high throughput methodology
 \cite{dekker2002}. Since then, a family of high-throughput capture techniques,
 most named a variation on `3C', have been developed to interrogate
 different scales and types of chromatin interactions.
 
 The original chromosome conformation capture technique developed by Dekker and
-collegues provides an average measurement of the juxtaposition frequency between
+colleagues provides an average measurement of the juxtaposition frequency between
 two specific genomic loci in a cell population\cite{frase2014}.  This
 interaction frequency measurement is thought to be reflective of the distance
 between two associated loci in genomic space.  The first extension of the 3C
@@ -403,24 +403,24 @@ genomic contact at a given time.
 The conceptual idea behind chromosomal conformation capture is remarkably
 simple --- to assess nearby regions, the experimenter attempts to fuse
 together molecules that are physically close, then determine the interaction
-partners of each segment of DNA captured in this fashion.  The 3C proceedure
+partners of each segment of DNA captured in this fashion.  The 3C procedure
 involves five steps.   Initially, a population of cells is cultured in an appropriate
 growth medium to a population size of $\sim2.5 \times 10^7$ cells\cite{berkum2010}.
 The entire population is treated with formaldehyde, a small chemical commonly
 used to fix both cellular samples for microscopy experiments and large specimens
 for organismal analysis.  Formaldehyde is a mutagen known to form DNA-DNA and
-DNA-protein crosslinks\cite{merk1998}.  Importantly, the formaldehyde
+DNA-protein cross-links\cite{merk1998}.  Importantly, the formaldehyde
 treatment covalently binds together proximal DNA and protein structures.
 In the second step, the cells are homogenized and chromatin is digested by a
 restriction endonuclease, an enzyme that create double-strand cuts at certain
 base pair sequences\cite{berkum2010}.  Digestion creates two populations of
-DNA fragments: fragements bound to protein/DNA complexes, and an unbound
+DNA fragments: fragments bound to protein/DNA complexes, and an unbound
 population.  The unbound population is discarded by filtering.  In the
 third step, the bound double-strand sequences are ligated, or joined together,
 in highly diluted concentrations. Dilution is critical to ensure ligation
 reactions occur only between DNA strands bound to the same molecular complex.
 The result of the ligation process is a population of chimeric DNA sequences.
-The fourth step reverses the crosslinks and release the recombined sequences
+The fourth step reverses the cross-links and release the recombined sequences
 from their complexes.  The final step comprises quantifying the restriction
 fragments by PCR using primers specific for the population under
 study\cite{simonis2007}.
@@ -460,10 +460,10 @@ Hi-C, allows comprehensive capture of all interacting segments in the genome
 using Next Generation Sequencing (NGS) techniques.  To purify all interacting
 segments of the genome, the Hi-C protocol calls for the labeling of all junctions
 with biotin markers, effectively marking each genomic junction. Like other
-derivative methods, Hi-C abolishes the PCR step of 3C and replaes it with filtration
-using steptavidin beads to pull down chimeric DNA sequences.  The captured sequences
+derivative methods, Hi-C abolishes the PCR step of 3C and replaces it with filtration
+using streptavidin beads to pull down chimeric DNA sequences.  The captured sequences
 can then be sequenced using next generation sequences or hybridized to a
-microarray.  More targeted methods ChiA-PET and ChIP-loop encorporate
+microarray.  More targeted methods ChIA-PET and ChIP-loop incorporate
 immunoprecipitation to select complexes containing certain proteins.
 
 
@@ -473,9 +473,9 @@ immunoprecipitation to select complexes containing certain proteins.
   \includegraphics[width=\textwidth]{figures/CompareChromosomeCapture}
   \medskip
   \small
-  Chromatin is uniformly crosslinked and digested with a restriction enzyme.
+  Chromatin is uniformly cross-linked and digested with a restriction enzyme.
   Bound sequences are immunoprecipitated or biotinylated, depending on the
-  assay, and strands are ligated.  Ligation yeilds novel chimeric sequences
+  assay, and strands are ligated.  Ligation yields novel chimeric sequences
   which are purified.  The number of interactions are assess by qPCR in
   the canonical 3C method and ChIP-loop, inverse PCR in 4C, multiplexed
   sequencing with oligonucleotides in 5C, and paired end sequencing in Hi-C
@@ -496,7 +496,7 @@ introduced in any replacement protocol.
 
 
 Chromosome Conformation Capture is a quantitative assay and meaningful
-results are gleaned by comparison of relative interation frequencies
+results are gleaned by comparison of relative interaction frequencies
 
 
 
@@ -507,41 +507,41 @@ examining cell karyotypes.  Despite the development of the karyotype as a
 tool for examining nuclear material in the early 20th
 century\cite{levitsky1924}, it wasn't until 1954 the number of chromosomes in
 a human cell were definitely described\cite{tjio1956}.  Early investigations
-into nuclear architecture, even at the course level of a karytype, were
+into nuclear architecture, even at the course level of a karyotype, were
 hampered by technical limitations and chromosomal phenomena such as
 non-dysjunction and breakage.  It is not surprising that soon after the
-initial description the human chromosomal number, Debakan and collegues
+initial description the human chromosomal number, Debakan and colleagues
 characterized common sites were chromosomes would undergo breakage or
 translocations.  They termed these regions
 \textit{chromosomal fragile sites}\cite{leyden2008}.
 
 Many particularities render studying fragile sites difficult.  The
 first difficulty is semantic; chromosomal fragile sites are not precisely
-defined in the literature.  When a study is performed that encompases fragile
+defined in the literature.  When a study is performed that encompasses fragile
 sites, typically one of three definitions is used: regions that are particularly
-sensative to forming gaps or breaks on metaphase chromosomes\cite{glover2005},
-sites where chromatin fails to compace under mitosis\cite{leyden2008}, and
-nonrandomly distributed loci that exhibit an increased frequency of breakage
+sensitive to forming gaps or breaks on metaphase chromosomes\cite{glover2005},
+sites where chromatin fails to compact under mitosis\cite{leyden2008}, and
+non-randomly distributed loci that exhibit an increased frequency of breakage
 under replicational stress\cite{franchitto2013}.  For the purposes of this
 discussion, a \textit{fragile site} is a region on the chromosome prone to
-forming complex rearrangements, particulary double-strand breaks, repeat
+forming complex rearrangements, particularly double-strand breaks, repeat
 extensions, and translocations, when subjected to replicational stress.  These
-rearrangements play a pivitol role in many severly delibitating genetic
+rearrangements play a pivotal role in many severely deliberating genetic
 diseases.
 
 Fragile sites come in two flavors: common fragile sites (CFS) and rare fragile
 sites (RFS).  Fragile sites are classified into a group based on their
 prevalence in the population, and the conditions under which their fragility
 is induced\cite{leyden2008}.  Common fragile sites are thought to be common
-most chromsomes and to all humans, while rare fragile sites may be expressed
+most chromosomes and to all humans, while rare fragile sites may be expressed
 in small fraction (less than 5\%) of the population\cite{wells2006}.
 
 These
-rearrangements play pivitol roles in severely debilitating genetic diseases
+rearrangements play pivotal roles in severely debilitating genetic diseases
 such as Fragile X Syndrome.  All males and an estimated that 60\% of females
 with repeat anomalies near the FRM1 gene on the X chromosome suffer
 from severe mental handicap due to these alterations\cite{sutherland1995}.
-Additionally, fragiles sites are often found rearranged in human
+Additionally, fragile sites are often found rearranged in human
 cancers\cite{glover2005}.  Despite these findings, reason fragile site are
 fragile is still an unanswered question.
 
@@ -562,18 +562,18 @@ and mappings.
 
 \subsection{Processing Chromatin Interaction Data}
 
-The Hi-C datasets used in this thesis were obtained from the Gene Expression Omnibus (GEO)\cite{edgar2002}
+The Hi-C data sets used in this thesis were obtained from the Gene Expression Omnibus (GEO)\cite{edgar2002}
 as Sequence Read Archive (SRA) files\footnote{Accession Number %
 \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.}.  A bash script was written
 to download six experimental replicates of IMR90 cells and two replicates of H1 hESCs from GEO onto a
-local machine for analysis.  Using the Hi-C library prepared by Imakaev and collegues\cite{imakaev2012},
+local machine for analysis.  Using the Hi-C library prepared by Imakaev and colleagues\cite{imakaev2012},
 the chimeric reads were realigned to the human genome (UCSC build hg19) using the Bowtie2 alignment
-alorithm\cite{langmead2012} with default parameters.  The interactions matrices were prepared and processed
+algorithm\cite{langmead2012} with default parameters.  The interactions matrices were prepared and processed
 using custom scripts written in the Python programming language.
 
 % FIXME Make sure appendix numbers/labels are correct
 I noted that the aligned interactions matrices by replicate are highly correlated (Spearman's $\rho \gte 0.69$)  % FIXME p-value!
-for both cell lines, and signicantly different from random (Appendix III).  The
+for both cell lines, and significantly different from random (Appendix III).  The
 
 % TODO Do the python statistics here to validate that the data is good.  This includes:
 % 1) Spearman's between H1 and IMR90
@@ -599,9 +599,9 @@ taking the log2 transform of the averaged signal, yielding signal for $23,100$ g
 
 To understand expression changes during differentiation from stem cell to lung cell, I subtracted the lung expression
 signal from the stem cell line.  Taking the log2 transform yields the fold change in gene expression level per gene.
-Two groups of genes were selected for futher analysis: the 100 most upregulated genes and the 100 most downregulated
+Two groups of genes were selected for further analysis: the 100 most upregulated genes and the 100 most downregulated
 genes.  I was curious to find out whether classes of genes were changing together.  Using the ConsensusPathDB
-tool\cite{kamburov2013}, I performed over-representation analysis for pathways and gene ontologies.
+tool\cite{kamburov2012}, I performed over-representation analysis for pathways and gene ontologies.
 
 \subsection{Histone Binding}
 
@@ -623,7 +623,7 @@ cells were cultured in growth media.
 
 The cell lines were prepared with no treatment according to the protocol
 described by Dekker and colleagues\cite{dekker2013}.  In brief, the cells
-are washed with a formaldehyde fixation solution to crosslinks DNA and
+are washed with a formaldehyde fixation solution to cross-links DNA and
 protein molecules near each other in genomic space.  The cells are
 lysed and the nuclear contents are treated with a non-specific restriction
 enzyme, \textit{HindIII}.  After restriction, the remaining nuclear material
@@ -650,32 +650,32 @@ the genome and the remaining portion from a different genomic region.  In
 order to discover to which two regions each probe corresponds, the probes
 must be realigned to the human genome.  Previous methods (\textit{citation needed})
 have truncated reads to a fixed cutoff size before realignment with a short
-read alignment algorithm.  In a recent paper, Imakaev and collegues
-describe an algorithm to repeated algin reads with different truncation sizes
+read alignment algorithm.  In a recent paper, Imakaev and colleagues
+describe an algorithm to repeated align reads with different truncation sizes
 and analyzing reads with the maximum alignment score\cite{imakaev2012}.  We followed
-this proceedure to realign the IMR90 Hi-C libraries for six replicates to
+this procedure to realign the IMR90 Hi-C libraries for six replicates to
 the human genome build 19 (CRCh38/hg19), with an average of XX million reads
 mapped per replicate.
 
 \section{Normalization of Contact Maps}
 
-Understanding and accounting the biases inherent in a dataset is vital to
+Understanding and accounting the biases inherent in a data set is vital to
 producing accurate, biologically relevant analysis.  To this end, several methods
-have been proposed identify ciases and normalize contact maps between replicates
+have been proposed identify biases and normalize contact maps between replicates
 and experiments\cite{yaffe2011}\cite{hu2012}\cite{yang2014}.  The earliest methods on low
 resolution samples did not perform any normalization at all\cite{aiden2009};
-however, as higher resolution datasets have come available, better
+however, as higher resolution data sets have come available, better
 normalization methods are being explored to identify reproducible,
 fine-grained chromatin structures.
 
 Normalizing data from Hi-C experiments is quite challenging.  As previously
-discussed, the Hi-C datasets are heterogenous in nature, encorporating
+discussed, the Hi-C data sets are heterogeneous in nature, incorporating
 interactions from cells in every position of cell cycle.  As evidence of phenomena,
 the interaction matrices produced by the Hi-C experiments have nonzero contact
 probabilities between nearly every genomic coordinate\cite{dekker2013}.  This
 finding is further reinforced by the observation that single cell Hi-C analysis
 shows high variability in chromatin architecture\cite{nagano2013}.  Despite this
-variability, existing normalization techniques for Hi-C datasets typically
+variability, existing normalization techniques for Hi-C data sets typically
 assume the majority of the cells in the sampled ensemble are in a static
 chromatin conformation reflective of \textit{in vivo} cell populations.
 
@@ -707,8 +707,8 @@ the entire proteome (mean = ?).  This observation is not surprising, and is thor
 for various cell types.
 
 We then sought to understand how expression changes were related to molecular function in the cell.  Using the ConsensusPathDB
-tool\cite{kamburov2012}, we performed both overexpression and gene ontologoy analysis of the 1\%  largest positively and negatively
-changing gene products.  Upregulated genes tend to be involved in the extracellular matrix formation, collagen synthesis and formation,
+tool\cite{kamburov2012}, we performed both over expression and gene ontology analysis of the 1\%  largest positively and negatively
+changing gene products.  Upregulated genes tend to be involved in the extra cellular matrix formation, collagen synthesis and formation,
 and signalling pathways.  Furthermore, downregulated genes are involved in transcriptional regulation of pluripotent stem cells.
 
 We asked whether transcriptional upregulation during differentiation could predict mutations, lesions, or break points seen in lung
@@ -716,7 +716,7 @@ cancer studies.  We acquired data for every type of lung cancer lesions from the
 (COSMIC)\cite{forbes2009} by gene.  Interestingly, the frequency of lesions reported by COSMIC was uncorrelated to those genes
 expression changes (Pearsons $0.07$, $p < 1 \times 10^{-18}$.  There are a number of potential causes for the lack of signal in
 our expression data.  Perhaps the expression arrays are not able to identify gene fusion products, a non-negligible portion of
-the COSMIC mutation database.  More likely, as reported recently by Asworth and colleages, it is mutations in transcription factors
+the COSMIC mutation database.  More likely, as reported recently by Ashworth and colleagues, it is mutations in transcription factors
 that cause gene expression changes in cancers, rather than in the genes themselves\cite{ashworth2014}.
 
 \section{Contact maps of cell lines change drastically during differentiation}
@@ -738,16 +738,16 @@ that cause gene expression changes in cancers, rather than in the genes themselv
 \appendixpage%
 \addappheadtotoc%
 
-\chapter{Public Datasets Analyzed}
+\chapter{Public Data sets Analyzed}
 
 \begin{table}
   \centering
   \begin{tabular}{lccr}
     \hline
-    DataSet & Figure & Accession & Reference \\ \hline
+    Data Set & Figure & Accession & Reference \\ \hline
     \hline
   \end{tabular}
-  \caption{Public Datasets Analyzed}
+  \caption{Public Data sets Analyzed}
 \end{table}
 
 
@@ -771,7 +771,7 @@ reads from the
 
 \chapter{Data Migration to Human Genome Build 19}
 
-To make valid comparisons between disperate datasets, it is crucial to ensure all datasets are aligned to the same
+To make valid comparisons between disparate data sets, it is crucial to ensure all data sets are aligned to the same
 build of the human genome.  A genome build is a haploid assembly of sequences from several individuals published by
 the NCBI to provide a reference for an organism gene and feature set, though not necessarily every allele.  A build assembly
 refers to a particular published sequence annotation set.  Human Genome Build 19 (HG19) is the University of California Santa
@@ -786,7 +786,7 @@ batch coordinate conversion.  Each file was unzipped and updated to HG19 prior t
   \centering
   \begin{tabular}{lccr}
     \hline
-    Sample & HG18 Reads & HG19 Seads & Unlifted Reads \\ \hline
+    Sample & HG18 Reads & HG19 Reads & Unlifted Reads \\ \hline
     H3K27ac & 16374518 & 16371125 & 3,393 \\
     p65 & 16371125 & 6165230 & 947 \\
     H3K4me1 & 18713234 & 18709033 & 4201 \\
@@ -799,8 +799,8 @@ batch coordinate conversion.  Each file was unzipped and updated to HG19 prior t
 
 \chapter{Iterative Alignment of Probes}
 
-Probes were aligned to the human genome build hg19 using proceedures outlined by
-Imakaev and collegues\cite{imakaev2012}.  The chimeric nature of the reads
+Probes were aligned to the human genome build hg19 using procedures outlined by
+Imakaev and colleagues\cite{imakaev2012}.  The chimeric nature of the reads
 requires that probes be aligned iteratively, starting from a small, truncated
 region from the beginning of the read, mapping this truncated area, increasing
 the truncation size and recursing a fixed number of steps or until the alignment
@@ -834,18 +834,18 @@ Statistics for iterative alignment are given below:
 
 \chapter{Validation of Data Correctness}
 
-In order to make meaningful comparisons between datasets (replicates,
+In order to make meaningful comparisons between data sets (replicates,
 in this case), we must show that some degree of relationship exists between
-the datasets and comparisons or combinations of the data from disperate sets
+the data sets and comparisons or combinations of the data from disparate sets
 are valid to a degree of uncertainty.  It is also essential to understand if the
 experimental replicates indeed managed to replicate the conditions of the primary
 experiment, or if experimental errors prevent the comparison between replicates.
 
 Spearman's Rank Correlation Coefficient (denoted by the Greek letter $\rho$) is
-a nonparametric measurei of association between two variables.
+a non-parametric measure of association between two variables.
 Spearman's coefficient assumes some monotonic relationship between variables,
 rather than a linear relationship (as in Pearson's), making it appropriate
-to compare the IM90 interaction datasets.  The formula for Spearman's $\rho$ is
+to compare the IMR90 interaction data sets.  The formula for Spearman's $\rho$ is
 given as follows:
 
 \begin{equation}
@@ -856,7 +856,7 @@ where $\rho$ is the correlation coefficient taking values between $-1$ and $+1$,
 $d_i = x_i - y_i$ where $x_i, y_i$ are ranks derived from the raw scores $X$ and
 $Y$ respectively.
 
-The first replicate IMR90 interation dataset was labeled the primary dataset
+The first replicate IMR90 interaction data set was labeled the primary data set
 and the remaining five were compared using Spearman's Rank Correlation.  The
 results are given in Table X.
 
@@ -870,7 +870,7 @@ results are given in Table X.
     0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\ \midrule
     0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\ \midrule
   \end{tabular}
-  \caption{Spearman's $\rho$ across all datasets.}
+  \caption{Spearman's $\rho$ across all data sets.}
 \label{tab:correlations}
 \end{table}
 
