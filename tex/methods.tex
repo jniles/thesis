@@ -1,0 +1,134 @@
+\chapter{Methods}
+
+\section{Data Collection}
+
+The cell lines used in this thesis are the IMR90 lung fibroblast cell line and the H1 human embryonic stem
+cell line.  Unless otherwise stated, the data obtained for these cell lines are wild type, reference sequences
+and mappings.
+
+\subsection{Processing Chromatin Interaction Data}
+
+The Hi-C data sets used in this thesis were obtained from the Gene Expression Omnibus (GEO)\cite{edgar2002}
+as Sequence Read Archive (SRA) files\footnote{Accession Number %
+\href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.}.  A bash script was written
+to download six experimental replicates of IMR90 cells and two replicates of H1 hESCs from GEO onto a
+local machine for analysis.  Using the Hi-C library prepared by Imakaev and colleagues\cite{imakaev2012},
+the chimeric reads were realigned to the human genome (UCSC build hg19) using the Bowtie2 alignment
+algorithm\cite{langmead2012} with default parameters.  The interactions matrices were prepared and processed
+using custom scripts written in the Python programming language.
+
+% FIXME Make sure appendix numbers/labels are correct
+I noted that the aligned interactions matrices by replicate are highly correlated (Spearman's $\rho \gte 0.69$)  % FIXME p-value!
+for both cell lines, and significantly different from random (Appendix III).  The
+
+% TODO Do the python statistics here to validate that the data is good.  This includes:
+% 1) Spearman's between H1 and IMR90
+% 2) Spearman's between H1 replicates
+% 3) Compute a "random" Hi-C map and take correlation between these
+% 4) Show that normalization does not significantly decrease the correlation
+% 5) Include p-values for everything I state
+
+
+\subsection{DNA Methylation Analysis}
+
+% TODO
+
+\subsection{Gene Expression and Pathway Analysis}
+
+Affymetrix gene expression microarray data for IMR90 and H1 hESCs were obtained from GEO (GSE2672\cite{kim2005}
+and GSE54186\cite{kim2014}, respectively).  Probe annotations were downloaded from the Affymetrix site for
+the Human Genome U133v2 array, and remapped to genes from UCSC\@.  Noticing that expression profiles for replicates
+were similar, the gene expression levels for each cell line were calculated by averaging across replicates, and
+taking the log2 transform of the averaged signal, yielding signal for $23,100$ genes.
+
+% TODO Kolmogorov-Smirnov test w/ normal distribution
+
+To understand expression changes during differentiation from stem cell to lung cell, I subtracted the lung expression
+signal from the stem cell line.  Taking the log2 transform yields the fold change in gene expression level per gene.
+Two groups of genes were selected for further analysis: the 100 most upregulated genes and the 100 most downregulated
+genes.  I was curious to find out whether classes of genes were changing together.  Using the ConsensusPathDB
+tool\cite{kamburov2012}, I performed over-representation analysis for pathways and gene ontologies.
+
+\subsection{Histone Binding}
+
+% TODO
+
+\subsection{Chromatin Accessibility Assay}
+
+% TODO
+
+Additionally, analyzed tracks for DNA methylation at base pair
+resolution were obtained from GEO\cite{lister2009}.  The liftOver tool from
+the University of California Santa Cruise was used to update the methylation
+data from human genome build hg18 to hg19 for meaningful comparison\cite{hinrichs2006}.
+For detailed data collection notes, see Appendix I.
+
+The detailed description of the treatment protocol used in creating the Hi-C
+library can be found in the original paper\cite{ren2013}.  Briefly, the IMR90
+cells were cultured in growth media.
+
+The cell lines were prepared with no treatment according to the protocol
+described by Dekker and colleagues\cite{dekker2013}.  In brief, the cells
+are washed with a formaldehyde fixation solution to cross-links DNA and
+protein molecules near each other in genomic space.  The cells are
+lysed and the nuclear contents are treated with a non-specific restriction
+enzyme, \textit{HindIII}.  After restriction, the remaining nuclear material
+is washed so that the remaining contents are short DNA sequences or cross
+-linked DNA-protein complexes.  The DNA reads are labeled with a biotin
+marker and ligated at low concentrations that favor within ligation between
+reads bound to the same complex.  The reads are captured and sequenced,
+building what is known as a Hi-C library.
+
+%% Regulatory Elements from Ensembl
+
+%% Translocations from COSMIC
+
+%% Genes from Biomart
+%% Hg19 from UCSC
+
+
+\section{Mapping and Alignment}
+
+A Hi-C library is formed largely of \textit{chimeric} DNA sequences,
+sequences composed of material from more than one source.  The ligation process
+creates novel DNA sequences with a portion of sequence from one region of
+the genome and the remaining portion from a different genomic region.  In
+order to discover to which two regions each probe corresponds, the probes
+must be realigned to the human genome.  Previous methods (\textit{citation needed})
+have truncated reads to a fixed cutoff size before realignment with a short
+read alignment algorithm.  In a recent paper, Imakaev and colleagues
+describe an algorithm to repeated align reads with different truncation sizes
+and analyzing reads with the maximum alignment score\cite{imakaev2012}.  We followed
+this procedure to realign the IMR90 Hi-C libraries for six replicates to
+the human genome build 19 (CRCh38/hg19), with an average of XX million reads
+mapped per replicate.
+
+\section{Normalization of Contact Maps}
+
+Understanding and accounting the biases inherent in a data set is vital to
+producing accurate, biologically relevant analysis.  To this end, several methods
+have been proposed identify biases and normalize contact maps between replicates
+and experiments\cite{yaffe2011}\cite{hu2012}\cite{yang2014}.  The earliest methods on low
+resolution samples did not perform any normalization at all\cite{aiden2009};
+however, as higher resolution data sets have come available, better
+normalization methods are being explored to identify reproducible,
+fine-grained chromatin structures.
+
+Normalizing data from Hi-C experiments is quite challenging.  As previously
+discussed, the Hi-C data sets are heterogeneous in nature, incorporating
+interactions from cells in every position of cell cycle.  As evidence of phenomena,
+the interaction matrices produced by the Hi-C experiments have nonzero contact
+probabilities between nearly every genomic coordinate\cite{dekker2013}.  This
+finding is further reinforced by the observation that single cell Hi-C analysis
+shows high variability in chromatin architecture\cite{nagano2013}.  Despite this
+variability, existing normalization techniques for Hi-C data sets typically
+assume the majority of the cells in the sampled ensemble are in a static
+chromatin conformation reflective of \textit{in vivo} cell populations.
+
+One approach to normalization described by Yaffe and colleagues\cite{yaffe2011}
+attempts to describe the total interaction frequency between loci as the product
+of a true interaction frequency and a set of experimental biases.  These biases
+are present in all chromosomal capture techniques.  They include biases due to
+PCR in efficiency, read depth per region, sequencing bias, chromatin compaction,
+and random background collisions during ligation\cite{benner2014}\cite{dekker2006}.
+

@@ -10,17 +10,18 @@
 *.swp
 *.bak
 
+
 # ignore compiled files
-thesis.glo 
-thesis.bbl
-thesis.blg
-thesis.ist
-thesis.lof
-thesis.lot
-thesis.out
-thesis.pdf
-thesis.toc
+*.glsdefs
+*.glo 
+*.bbl
+*.blg
+*.ist
+*.lof
+*.lot
+*.out
+*.pdf
+*.toc
 
 # ignore templates
 template/*
-

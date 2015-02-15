@@ -1,0 +1,87 @@
+% math.tex
+
+\chapter{Analytical Preliminaries}
+
+This thesis endeavors to secure a relationship between chromatin structure and fragility that may potentially lead to
+disease states.  The analysis will include gene expression profiles, iterative curve fitting, and principal component analysis.  This
+beginning will serve as an introduction to the numerical methods used to compare and contrast gene expression and chromatin states
+between the two cell lines examined within.
+
+\section{Normalization of Genomic Contact Maps}
+
+The Hi-C experiment generates a genomic contact map describing the number of observed contacts between any two genomic
+regions.  All \textit{double stranded} reads (those which map uniquely to two genomic loci) can be arranged in a square
+matrix by binning the genome into evenly spaced bins.  These bins are arranged into an $n \times n$ matrix $O$ in which the
+cell $i,j$ represents the number of observed contacts between bins $i$ and $j$.  Depending on the data quality, these bins
+may be as small as 10 kilobases or as large as 2 megabases.
+
+In data analysis, the first step is always to normalize the data set to remove experimental biases and establish reproducibiility.
+Several methods have been proposed to normalize Hi-C interaction matrices.
+
+% TODO
+
+
+\section{Expression Profiling}
+
+The set of genes expressed in a cell, collectively known as the \textit{transcriptome}, provides insight into chromatin accessibility
+and cell state.  A gene expressed in $n$ conditions (or $n$ samples) forms vector in $n-$dimensional space.  Similarly, the expression
+profile the entire transcriptome for a single sample is a vector in $m-$dimensional space, where $m$ is the number of genes assessed.
+We therefore denote an experiment interrogating $n$ genes across $m$ samples as an $m \times n$ matrix $S_{m,n}$.
+\[
+  S_{m,n} = \left[
+    \begin{array}{cccc}
+      s_{1,1} & s_{1,2} & \cdots & s_{1,n} \\
+      s_{2,1} & s_{2,2} & \cdots & s_{2,n} \\
+      \vdots & \vdots & \ddots  & \vdots \\
+      s_{m,1} & s_{m,2} & \cdots & s_{m,n}
+    \end{array}
+  \right]
+\]
+
+and a single gene's expression profile is
+\[ G_{i} = \begin{pmatrix} g_{i1} & g_{i2} & g_{i3} & \cdots & g_{in} & \end{pmatrix} \]
+
+We wish to compare differences in gene expression profiles for particular, or all, genes between samples.  This amounts to comparing
+\textit{distances} between gene expression vectors.  There are several methods for doing so.
+
+\subsection{Euclidean Distance}
+
+The simplest genomic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \textit{norm}, known as
+the 2-norm.  Geometrically, the norm is a measure of `size' or `proximity' in $n-$dimensional space.  The 2-norm for a vector $x$ is
+defined as
+\[
+  \|x\|_{2} = {(|x_1|^2 + |x_2|^2 + \cdots + |x_n|^2)}^{\frac{1}{2}}
+\]
+
+The distance between two vectors in a vector space can now be found using the triangle inequality on the 2-norm.  As a norm, the Euclidean
+norm has some desirable properties, notably, non-negativity, positivity, and a definition of the triangle inequality
+$\|x + y\| = \|x\| + \|y\|$~\cite{horn2013}.  Directly from the triangle inequality, we define the Euclidean distance in $n-$dimensions to
+be
+\[
+  D_{Euc}(x,y) = \|x\| - \|y\| = {(\sum_{i = 1}^{n}{(a_i - b_i)}^2)}^{\frac{1}{2}}
+\]
+
+\subsection{Correlations between Vectors}
+
+\textbf{TODO}
+
+\section{Iterative Correction of Interaction Maps}
+
+Massive data mining experiments must be cognizant of any inherent biases in the data set and seek to eliminate them prior to performing
+meaningful data analysis.  In this thesis, we depend on accurate reporting of contact frequency between genomic loci, which is prone
+to a number of experimental, mechanical, and biological biases\cite{dekker2006}.  In order to compare data sets, I employ an algorithm,
+iterative correction and eigenvector decomposition (ICE) developed by Imakaev and colleagues\cite{imakaev2012} established on previous
+work by Tanay and Yaffe\cite{yaffe2011}.  In the following section, I will describe the motivation for ICE, the algorithm in detail, and
+prove convergence properties for the algorithm.
+
+Genome-wide interaction maps form matrix of observed contact frequencies between genomic segments.  Observed contacts are expected to
+be noisy do to biases introduced in the experimental procedure and inherent differences in mappability for different genomic regions
+(e.g.\ centromeres).
+
+% Why are biases factorizable?
+
+The ICE algorithm decomposes a contact map into the product of true contact frequencies and a set of biases for every region
+\[
+  O_{ij} = B_{i}B_{j}T_{ij}
+\]
+wjth $T_{ij}$ normalized as $\sum_{i,i \neq j,j\pm1}T_{ij} = 1$ for each region $j$.
