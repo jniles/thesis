@@ -90,14 +90,11 @@
 \makecopyright%
 
 \begin{abstract}
-Chromosomal rearrangements and sequence translocations are canonical hallmarks of cancerous cells.  Frequent
-occurrences of rearrangements at specific loci may give insight into uncharacterized mechanisms that explain
-macro-molecular breaks in the genome.  The canonical models for these `common fragile sites' involve spatially
-independent molecular mechanisms of double-strand break repair and non-homologous end joining.  However, the
-inherent fragility of genomic compartments may be explained on a structural basis, instead or in addition to,
-the biochemical models for sequence rearrangements.  We propose a possible architectural model underlying the
-fragility of certain rearranged genes and describe further experiments to understand interplay of form and
-dysfunction.
+Sequence rearrangements and translocations are hallmarks of cancerous cells, yet the underlying causes for these rearrangements have
+not been fully described.  In particular, frequent occurrences of rearrangements at specific loci indicate that there may be an
+epigenetic signature facilitating the development of lesions, translocations, and other abherrant mutations.  Here, we investigate
+the structural changes undertaken by differentiating human embryonic stem cells.  We find X.
+We then suggest a model for structural fragility in the genome.
 \end{abstract}
 
 \begin{dedication}
@@ -105,8 +102,8 @@ dysfunction.
 \end{dedication}
 
 \begin{acknowledgements}
-I would like to thank my faculty sponsors for their patience, work ethic, and sympathy:
-Dr.\ Tyrone Ryba, Dr.\ Patrick McDonald, and Dr.\ Necmettin Yildirim.
+I would like to thank my faculty sponsors for their patience, work ethic, and guidance:  Dr.\ Tyrone Ryba, Dr.\ Patrick McDonald,
+and Dr.\ Necmettin Yildirim.
 \end{acknowledgements}
 
 \contentspage%
@@ -118,23 +115,41 @@ Dr.\ Tyrone Ryba, Dr.\ Patrick McDonald, and Dr.\ Necmettin Yildirim.
 
 \chapter{Introduction}
 
-The human genome is a six billion nucleotide string that encodes the
-the vast instruction set for the cells growth, function, and death.  The cell
-program is not only dictated by the instruction set, but also
-how the instructions are read, compiled, and executed, and is influenced
-by a myriad of factors in addition to the primary sequence.  Increasingly,
-modern cancer research is indicating this epigenetic landscape plays strategic
-role in determining cell fate.  Understanding the landmark epigenetic features,
-the conditions which bring about their development, and the impact they have on
-the cell is of paramount importance and difficultly.
+What causes the genome to break?  The human genome is a six billion nucleotide string that encodes the
+the vast instruction set for the cells growth, function, and death.  All possible expression patterns are
+encoded in this instruction set, yet particular cell types arise when the instructions are compiled differently
+during differentiation.  Modern cancer research indicates the establishment of this epigenetic landscape
+determining cell fate may play a strategic role in cancer genesis.
+
+%For the first time 
+
+We investigate the mechanical and structural changes during differentiation in order to establish an
+architectural link between nuclear topology and the probability of developing cancerous lesions.  We
+assume that mutations occuring frequently in specific cancers are based on the epigenetic architecture
+of the original cell type.  Using human embryonic stem cells and lung fibroblasts, we propose that
+topological changes similar to those that establish patterns of differentiation are responsible for
+introducing lesions seen in many cell type specific cancers.
+
+This thesis will proceed as follows.  First, the analytical tools to perform data analysis on genomic
+data sets is introduced.  These tools include iterative normalization of chromatin contact maps, eigenvalue
+decomposition, and an algorithm to detect topologically associating domains from normalized contact maps.
+A literature review of chromatin architecture is presented to provide a strong biological foundation from which
+to interpret results.  The methods for data acquisition and processing is described, and we conclude with a
+discussion of the results and propose areas of further investigation and improvement.
+
 
 % Mat
 \chapter{Mathematical Preliminaries}
 
-This thesis endeavors to secure a relationship between chromatin structure and fragility that may potentially exacerbate or lead to
+This thesis endeavors to secure a relationship between chromatin structure and fragility that may potentially lead to
 disease states.  The analysis will include gene expression profiles, iterative curve fitting, and principal component analysis.  This
 beginning will serve as an introduction to the numerical methods used to compare and contrast gene expression and chromatin states
 between the two cell lines examined within.
+
+\section{Normalization of Genomic Contact Maps}
+
+% TODO
+
 
 \section{Expression Profiling}
 
@@ -201,6 +216,8 @@ The ICE algorithm decomposes a contact map into the product of true contact freq
   \Epsilon_{ij} = B_{i}B_{j}T_{ij}
 \]
 with $T_{ij}$ normalized as $\sum_{i,i\neqj,j\pm1}T_{ij} = 1$ for each region $j$.
+
+
 
 
 % biology chapter
