@@ -121,7 +121,7 @@ encoded in this instruction set, yet particular cell types arise when the instru
 during differentiation.  Modern cancer research indicates the establishment of this epigenetic landscape
 determining cell fate may play a strategic role in cancer genesis.
 
-%For the first time 
+%For the first time
 
 We investigate the mechanical and structural changes during differentiation in order to establish an
 architectural link between nuclear topology and the probability of developing cancerous lesions.  We
@@ -138,8 +138,8 @@ to interpret results.  The methods for data acquisition and processing is descri
 discussion of the results and propose areas of further investigation and improvement.
 
 
-% Mat
-\chapter{Mathematical Preliminaries}
+% Mathematics Chapter
+\chapter{Analytical Preliminaries}
 
 This thesis endeavors to secure a relationship between chromatin structure and fragility that may potentially lead to
 disease states.  The analysis will include gene expression profiles, iterative curve fitting, and principal component analysis.  This
@@ -147,6 +147,15 @@ beginning will serve as an introduction to the numerical methods used to compare
 between the two cell lines examined within.
 
 \section{Normalization of Genomic Contact Maps}
+
+The Hi-C experiment generates a genomic contact map describing the number of observed contacts between any two genomic
+regions.  All \textit{double stranded} reads (those which map uniquely to two genomic loci) can be arranged in a square
+matrix by binning the genome into evenly spaced bins.  These bins are arranged into an $n \times n$ matrix $O$ in which the
+cell $i,j$ represents the number of observed contacts between bins $i$ and $j$.  Depending on the data quality, these bins
+may be as small as 10 kilobases or as large as 2 megabases.
+
+In data analysis, the first step is always to normalize the data set to remove experimental biases and establish reproducibiility.
+The
 
 % TODO
 
