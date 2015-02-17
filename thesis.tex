@@ -7,7 +7,7 @@
 \usepackage{fixltx2e}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{tabu}
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -16,6 +16,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{natbib}
 \usepackage[toc]{glossaries}
+
 
 % cite package, to clean up citations in the main text. Do not remove.
 %\usepackage{cite}
@@ -32,6 +33,10 @@
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.75}
+
+% My own commands
+\newtheorem{def}{Definition}
+\newcommand{\matr}[1]{\mathbf{#1}}
 
 % Make cornell style
 \normalspacing\setcounter{page}{1}\pagenumbering{arabic}

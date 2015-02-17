@@ -15,11 +15,11 @@ cell $i,j$ represents the number of observed contacts between bins $i$ and $j$. 
 may be as small as 10 kilobases or as large as 2 megabases.
 
 In data analysis, the first step is always to normalize the data set to remove experimental biases and establish reproducibiility.
-Several methods have been proposed to normalize Hi-C interaction matrices.  Tanay and Yaffe\cite{tanay2011} performed the first 
+Several methods have been proposed to normalize Hi-C interaction matrices.  Tanay and Yaffe\cite{tanay2011} performed the first
 robust analysis of the Hi-C assay, reporting on several systematic biases and proposing a non-parametric model to normalize contact
 maps.  Their model has informed all subsequent normalization methods and is therefore worth discussing in to a depth.
 
-Tanay and Yaffe focus on three systematic biases: genome mappability, GC content, and fragment length.  
+Tanay and Yaffe focus on three systematic biases: genome mappability, GC content, and fragment length.
 
 
 
@@ -90,3 +90,54 @@ The ICE algorithm decomposes a contact map into the product of true contact freq
   O_{ij} = B_{i}B_{j}T_{ij}
 \]
 with $T_{ij}$ normalized as $\sum_{i,i \neq j,j \pm 1}T_{ij} = 1$ for each region $j$.
+
+
+\section*{Principal Component Analysis}
+
+The holy grail of data analysis on high-dimensional data is dimensionality reduction --- that is, to find an accurate representation of
+the experiment that need not invoke all the dimensions measured.  The benefits of preprocessing the data set into fewer dimensions are
+increases in storage capacity and analysis speed.  As experiments such as Hi-C produce large and larger quantities of data, researchers
+attempt to find ways to remove redundency, eliminate unneeded parameters and compress datasets.  One of the most popular methods is
+called \gls{PCA}\cite{law1987}.
+
+\begin{definition}[Principal Component Analysis]
+  A statistical proceedure that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables.
+\end{definition}
+
+In practice, there are two methods often used for \gls{PCA}.  The simplest to explain, but more error-prone, is the eigen-decompositon
+method\cite{}.  In this proceedure, the eigenvalues of the covarience matrix $\matr{A}\matr{A}^T$ are calculated directly.  However,
+because this involves an extra matrix multiplication, numerical errors are more likely to be introduced during large computations.
+In practice, \gls{PCA} often derived in conjunction with \gls{SVD} and we will hold to that standard here.
+
+\begin{theorem}[Singular Value Decomposition]
+  Let $\matr{A} \in M_{m,m}$ be given. Then there are unitary matrices $\matr{V} \in M_m$ and $\matr{W} \in M_m$, and a square diagonal
+  matrix
+  \[
+    \matr{\sum} =
+      \begin{bmatrix}
+        \sigma_1 &        & 0        \\
+                 & \ddots &          \\
+        0        &        & \sigma_m \\
+      \end{bmatrix}
+  \]
+  such that $\sigma_1 \gte \sigma_2 \gte \hdots \gte \sigma_m$ and $\matr{A} = \matr{V}\matr{\sum}\matr{W}^T$.  The parameters $\sigma_1$,
+  $\hdots$, $\sigma_m$ are the positive square roots of the decreasingly ordered non-zero eigenvalues of $\matr{A}\matr{A}^T$.
+\end{theorem}
+
+A full proof can be found in Horn and Johnson\cite{horn2013}.  The relationship between \gls{SVD} and \gls{PCA} follows directly from the
+definition of \gls{SVD}.
+
+\begin{theorem}
+  Let $\matr{A} = \matr{V}\matr{\sum}\matr{W}^T$ be the \gls{SVD} of an $N \times N$ dimensional matrix $\matr{A}$ and let \[C = \frac{1}{N - 1}
+    \matr{X}^T\matr{X}\] be the covariance matrix.  The eigenvectors of $\matr{C}$ are the same as the right singular vectors of $\matr{\sum}$.
+\end{theorem}
+
+\begin{proof}
+\end{proof}
+
+
+Mathematically speaking, eliminating redundency is equivalent to eliminating correlations between variables.  \gls{PCA} accomplishes this
+elimination by performing a linear tranformation of the dataset (a matrix of observations) onto an orthogonal bases of \textit{Principal Components}.
+Components are decreasingly ordered by the amount of the original dataset's variance they capture.  The hope is that the majority of
+the dataset's variance will be captured in a small number of principal components.  Researchers then seek to explain what variable or
+combination of variables are encoded in each principal component.
