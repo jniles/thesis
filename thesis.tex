@@ -8,6 +8,7 @@
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
 \usepackage{tabu}
 \usepackage{longtable}
 \usepackage{booktabs}
@@ -21,10 +22,23 @@
 %
 % Definitions
 %
-\newtheorem{def}{Definition}
+\newtheorem{defn}{Definition}
+\newtheorem{thm}{Theorem}
 \newcommand{\matr}[1]{\mathbf{#1}}
 \newcommand*\conj[1]{\bar{#1}}
 
+% make the absolute value command
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+% Swap the definition of \abs* and \norm*, so that \abs
+% and \norm resizes the size of the brackets, and the 
+% starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\let\oldnorm\norm
+\def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
+\makeatother
 
 % cite package, to clean up citations in the main text. Do not remove.
 %\usepackage{cite}
