@@ -2,9 +2,13 @@
 
 \chapter{Analytical Preliminaries}
 
-We endeavor to secure a relationship between chromatin structure and fragility that may potentially lead to disease states.  Our
-analysis will include normalization of chromosome contact maps, eigenvalue decomposition, and statistical tests for reprodicibility
-and significance.
+In this thesis, we endeavor to secure a relationship between chromatin structure and genomic fragility, to help understand the
+progression towards disease states.  Unfortunately, the mathematical tools we will leverage, while both appropriate and necessary,
+do not flow naturally from one mathematical field.  Hence, the following chapter will feel disjointed.  By the end, we will have
+dabbled in linear algebra, numerical optimization, probability and statistics.
+
+This chapter will cover the normalization of chromosome contact maps, eigenvalue decomposition, and statistical tests for
+reprodicibility and significance.
 
 \section*{Normalization of Genomic Contact Maps}
 
@@ -20,7 +24,6 @@ robust analysis of the Hi-C assay, reporting on several systematic biases and pr
 maps.  Their model has informed all subsequent normalization methods and is therefore worth discussing in to a depth.
 
 Tanay and Yaffe focus on three systematic biases: genome mappability, GC content, and fragment length.
-
 
 
 % TODO
@@ -104,27 +107,41 @@ called \gls{PCA}\cite{law1987}.
   A statistical proceedure that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables.
 \end{definition}
 
-In practice, there are two methods often used for \gls{PCA}.  The simplest to explain, but more error-prone, is the eigen-decompositon
+In practice, there are two methods used for \gls{PCA}.  The simplest to explain, but more error-prone, is the eigen-decompositon
 method\cite{}.  In this proceedure, the eigenvalues of the covarience matrix $\matr{A}\matr{A}^T$ are calculated directly.  However,
 because this involves an extra matrix multiplication, numerical errors are more likely to be introduced during large computations.
 In practice, \gls{PCA} often derived in conjunction with \gls{SVD} and we will hold to that standard here.
 
 \begin{theorem}[Singular Value Decomposition]
-  Let $\matr{A} \in M_{m,m}$ be given. Then there are unitary matrices $\matr{V} \in M_m$ and $\matr{W} \in M_m$, and a square diagonal
+  Let $\matr{A} \in M_{n,n}$ be given. Then there are unitary matrices $\matr{V} \in M_n$ and $\matr{W} \in M_n$, and a square diagonal
   matrix
   \[
     \matr{\sum} =
       \begin{bmatrix}
         \sigma_1 &        & 0        \\
                  & \ddots &          \\
-        0        &        & \sigma_m \\
+        0        &        & \sigma_n \\
       \end{bmatrix}
   \]
-  such that $\sigma_1 \gte \sigma_2 \gte \hdots \gte \sigma_m$ and $\matr{A} = \matr{V}\matr{\sum}\matr{W}^T$.  The parameters $\sigma_1$,
-  $\hdots$, $\sigma_m$ are the positive square roots of the decreasingly ordered non-zero eigenvalues of $\matr{A}\matr{A}^T$.
+  such that $\sigma_1 \gte \sigma_2 \gte \hdots \gte \sigma_n$ and $\matr{A} = \matr{V}\matr{\sum}\matr{W}^T$.  The parameters $\sigma_1$,
+  $\hdots$, $\sigma_n$ are the positive square roots of the decreasingly ordered non-zero eigenvalues of $\matr{A}\matr{A}^T$.
 \end{theorem}
 
-A full proof can be found in Horn and Johnson\cite{horn2013}.  The relationship between \gls{SVD} and \gls{PCA} follows directly from the
+\begin{proof}
+  A full proof for complex matrices can be found in Horn and Johnson\cite{horn2013}.  Recall the definition of a (real) Hermetian matrix.
+  $\matr{A} = \conj{\matr{A}^T}$.  The Hermetian real matrices $\matr{A}\matr{A}^T$ and $\matr{A}^T\matr{A}$ have the same eigenvalues,
+  so they are unitarily similar and there is a unitary matrix
+  $\matr{Q}$ such that $\matr{A}^T\matr{A} = \matr{Q}(\matr{A}\matr{A}^T)\matr{Q}^T$.  We compute
+
+  \[
+    {(QA)}^T(QA) = {A}^{T}{Q}^TQA = {A}^TA = QA{A}^T{Q}^T = QA(QA)^T
+  \]
+
+  The
+
+\end{proof}
+
+The relationship between \gls{SVD} and \gls{PCA} follows directly from the
 definition of \gls{SVD}.
 
 \begin{theorem}
@@ -133,8 +150,10 @@ definition of \gls{SVD}.
 \end{theorem}
 
 \begin{proof}
+  %
 \end{proof}
 
+%TODO
 
 Mathematically speaking, eliminating redundency is equivalent to eliminating correlations between variables.  \gls{PCA} accomplishes this
 elimination by performing a linear tranformation of the dataset (a matrix of observations) onto an orthogonal bases of \textit{Principal Components}.

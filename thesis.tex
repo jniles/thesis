@@ -16,13 +16,20 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{natbib}
 \usepackage[toc]{glossaries}
+%\usepackage{setspace} % remove for double spacing
+
+%
+% Definitions
+%
+\newtheorem{def}{Definition}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand*\conj[1]{\bar{#1}}
 
 
 % cite package, to clean up citations in the main text. Do not remove.
 %\usepackage{cite}
 
 % Remove comment for double spacing
-%\usepackage{setspace}
 %\doublespacing
 
 % Set tolerance for box model
@@ -34,10 +41,6 @@
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.75}
 
-% My own commands
-\newtheorem{def}{Definition}
-\newcommand{\matr}[1]{\mathbf{#1}}
-
 % Make cornell style
 \normalspacing\setcounter{page}{1}\pagenumbering{arabic}
 \pagestyle{cornell} \addtolength{\parskip}{0.5\baselineskip}
@@ -46,7 +49,9 @@
 \AtBeginEnvironment{longtabu}{\tiny}{}{}   %% change all longtabu content to foot note size
 
 % Make a glossary using the glossaries package
-\makeglossaries%
+\makeglossaries
+
+
 
 %
 % Actual Document Starts here!
@@ -67,56 +72,6 @@
 \input{./tex/math}
 \input{./tex/bio}
 
-% TODO
-% Combine this chapter and the biology chapter.
-\chapter{Fragility in the Code}
-
-The first investigations into nuclear architecture were conducted by
-examining cell karyotypes.  Despite the development of the karyotype as a
-tool for examining nuclear material in the early 20th
-century\cite{levitsky1924}, it wasn't until 1954 the number of chromosomes in
-a human cell were definitely described\cite{tjio1956}.  Early investigations
-into nuclear architecture, even at the course level of a karyotype, were
-hampered by technical limitations and chromosomal phenomena such as
-non-dysjunction and breakage.  It is not surprising that soon after the
-initial description the human chromosomal number, Debakan and colleagues
-characterized common sites were chromosomes would undergo breakage or
-translocations.  They termed these regions
-\textit{chromosomal fragile sites}\cite{leyden2008}.
-
-Many particularities render studying fragile sites difficult.  The
-first difficulty is semantic; chromosomal fragile sites are not precisely
-defined in the literature.  When a study is performed that encompasses fragile
-sites, typically one of three definitions is used: regions that are particularly
-sensitive to forming gaps or breaks on metaphase chromosomes\cite{glover2005},
-sites where chromatin fails to compact under mitosis\cite{leyden2008}, and
-non-randomly distributed loci that exhibit an increased frequency of breakage
-under replicational stress\cite{franchitto2013}.  For the purposes of this
-discussion, a \textit{fragile site} is a region on the chromosome prone to
-forming complex rearrangements, particularly double-strand breaks, repeat
-extensions, and translocations, when subjected to replicational stress.  These
-rearrangements play a pivotal role in many severely deliberating genetic
-diseases.
-
-Fragile sites come in two flavors: common fragile sites (CFS) and rare fragile
-sites (RFS).  Fragile sites are classified into a group based on their
-prevalence in the population, and the conditions under which their fragility
-is induced\cite{leyden2008}.  Common fragile sites are thought to be common
-most chromosomes and to all humans, while rare fragile sites may be expressed
-in small fraction (less than 5\%) of the population\cite{wells2006}.
-
-These
-rearrangements play pivotal roles in severely debilitating genetic diseases
-such as Fragile X Syndrome.  All males and an estimated that 60\% of females
-with repeat anomalies near the FRM1 gene on the X chromosome suffer
-from severe mental handicap due to these alterations\cite{sutherland1995}.
-Additionally, fragile sites are often found rearranged in human
-cancers\cite{glover2005}.  Despite these findings, reason fragile site are
-fragile is still an unanswered question.
-
-% CFS's may be epigenetically defined. (Molecular profiling of CFS in human fibroblasts
-% CFS are conserved based on cell types
-
 % TODO NOT SURE WHERE THIS GOES
 
 %% Data Validation
@@ -131,7 +86,6 @@ fragile is still an unanswered question.
 %
 % APPENDIX
 %
-
 \appendix
 \appendixpage
 \addappheadtotoc
@@ -139,17 +93,15 @@ fragile is still an unanswered question.
 \input{./tex/appendix/appendix}
 
 %
-% Glossary
-%
-\input{./tex/glossary}
-
-%
 % BIBLIOGRAPHY
 %
-
 \bibliography{bibliography}{}
 \bibliographystyle{plos2015}
 
+%
+% Glossary
+%
+\input{./tex/glossary}
 \printglossaries
 
 \end{document}
