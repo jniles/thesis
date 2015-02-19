@@ -16,10 +16,49 @@ are ordered by increasing genomic coordinates, from the start of chromosome 1 to
 records the number of observed interactions between bins $i$ and $j$.  Depending on the data quality, bin sizes range from tens of
 kilobases to megabases.
 
-The first step of data analysis is remove experimental biases and establish reproducibility.  Several methods have been proposed to
-normalize chromatin maps.  Tanay and Yaffe perform a robust analysis of the Hi-C assay identifying several sources systematic
-biases\cite{tanay2011}. They propose a non-parametric model to normalize contact maps by focusing on three systematic biases: variable
-genome mappability, \gls{GC} content, and variable fragment length.
+The first step of data analysis is to remove experimental biases and establish reproducibility.  Several methods address
+normalizing chromatin maps.  Tanay and Yaffe were among the first authors to undertake analysing the Hi-C experiment\cite{yaffe2011}.
+They perform a robust analysis of the Hi-C assay identifying several sources systematic biases and propose a non-parametric model
+to normalize contact maps by focusing on three systematic biases: variable genome mappability, \gls{GC} content, and fragment length.
+The mappings achieved using Tanay's methods provide robust reproducibility between replicates and experiments by treating
+\gls{trans contacts} and \gls{cis contacts} seperately\cite{yaffe2011}.  However, the analysis is computationally intensive, requiring
+the estimation of contact probabilities on matricies for each bias condition.
+
+Other methods exist for normalizing contact maps.  Hu and collegues propose a method `HiCNorm' based on Poisson regression and achieve
+9000x speed up compared to Tanay's method\cite{hu2012}.  However, we employ a normalization proceedure, \gls{ICE}, developed by Imakaev
+and collegues, due to the availability of its source code for analysis and performance\cite{imakaev2012}.   We will analyze the
+algorithm in detail and provide correctness proofs beyond what the authors report in their paper\cite{imakaev2012}.
+
+\subsection*{\gls{ICE}}
+
+Pursuant of the true contact probility for each genomic region, the \gls{ICE} algorithm makes an important observation that bias matrices
+determined by Yaffe and Tanay\cite{yaffe2011} can be successfully reproduced ($r = 0.99$) by a product of biases $B_i \times B_j$.  This
+leads to the following proposition
+
+\begin{prop}
+  Given the assumption of factorizable biases, the expected contact frequency $\varepsilon_{ij}$ for every pair of regions $(i,j)$ can
+  be written as $\varepsilon_{ij} = B_{i}B_{j}T_{ij}$, where $B_i$ and $B_j$ are biases and $T_{ij}$ is the sought matrix of relative contact
+  probabilities, normalized as $\sum_{i, i \neq j, j \pm 1}T_{ij} = 1$.
+\end{prop}
+
+The authors note that this normalization proceedure results in `equal visibility' regions across the entire genome and maps which are
+comparable between Hi-C datasets.  They propose the following algorithm to obtain the biases $B_i$ and `true' relative contact probabilities
+$T_{ij}$.
+
+\begin{algorithm}[H]
+  \KwData{A matrix of observed interactions $O_{ij}$}
+  \KwResult{A matrix of relative contact probabilities $T_{ij}$ and bias vector $B_i$}
+  initialize $W^{0}_{ij}$; $B^0 = 1$; $k = 1$\;
+  \While{not converged}{%
+    $S_i = \sum_{j}W^{k}_{ij}$\;
+    $\mean{S_i} = \frac{1}{n}\sum_{i = 1}^{n}S_i$\;
+    $\Delta{}B^k_i = \frac{S_i}{\mean{S_i}}$\;
+    $W^{k+1}_{ij} = \frac{W^k_{ij}}{\Delta{}B^k_i\Delta{}B^k_j}$\;
+    $B^{k+1}_i = B^k_i \dot \Delta{}B^k_i$\;
+    $k = k + 1$\;
+  }
+  \caption{Iterative Correction}
+\end{algorithm}
 
 
 % TODO
@@ -65,33 +104,6 @@ be
   D_{Euc}(x,y) = \|x\| - \|y\| = {(\sum_{i = 1}^{n}{(a_i - b_i)}^2)}^{\frac{1}{2}}
 \]
 
-\subsection*{Correlations between Vectors}
-
-\textbf{TODO}
-
-\section*{Iterative Correction of Interaction Maps}
-
-Massive data mining experiments must be cognizant of any inherent biases in the data set and seek to eliminate them prior to performing
-meaningful data analysis.  In this thesis, we depend on accurate reporting of contact frequency between genomic loci, which is prone
-to a number of experimental, mechanical, and biological biases\cite{dekker2006}.  In order to compare data sets, I employ an algorithm,
-iterative correction and eigenvector decomposition (ICE) developed by Imakaev and colleagues\cite{imakaev2012} established on previous
-work by Tanay and Yaffe\cite{yaffe2011}.  In the following section, I will describe the motivation for ICE, the algorithm in detail, and
-prove convergence properties for the algorithm.
-
-Genome-wide interaction maps form matrix of observed contact frequencies between genomic segments.  Observed contacts are expected to
-be noisy do to biases introduced in the experimental procedure and inherent differences in mappability for different genomic regions
-(e.g.\ centromeres).
-
-% Why are biases factorizable?
-
-The ICE algorithm decomposes a contact map into the product of true contact frequencies and a set of biases for every region
-\[
-  O_{ij} = B_{i}B_{j}T_{ij}
-\]
-with $T_{ij}$ normalized as $\sum_{i,i \neq j,j \pm 1}T_{ij} = 1$ for each region $j$.
-
-
-
 
 \section*{Principal Component Analysis}
 
@@ -99,7 +111,7 @@ The holy grail of data analysis on high-dimensional data is dimensionality reduc
 the experiment that need not invoke all the dimensions measured.  The benefits of preprocessing the data set into fewer dimensions are
 increases in storage capacity and analysis speed.  As experiments such as Hi-C produce large and larger quantities of data, researchers
 attempt to find ways to remove redundency, eliminate unneeded parameters and compress datasets.  One of the most popular methods is
-dalled \gls{PCA}\cite{law1987}.
+called \gls{PCA}\cite{law1987}.
 
 \begin{defn}[Principal Component Analysis]
   A statistical proceedure that transforms a number of possibly correlated variables into a smaller number of uncorrelated variables.
@@ -212,4 +224,3 @@ In principal component analysis, we call the ordered eigenvectors \textit{princi
 component, one must analyze the \gls{eigenspectrum}, usually in the form of a \gls{scree plot}.  Conceptually, the normalized size of a component's
 associated eigenvalue conveys the amount of variation that component captures.  A researcher can the choose a suitable subset of components to
 analyze, reducing the dimensionality of the dataset the chosen components.
-
