@@ -7,29 +7,25 @@ progression towards disease states.  Unfortunately, the mathematical tools we wi
 do not flow naturally from one mathematical field.  Hence, the following chapter will feel disjointed.  By the end, we will have
 dabbled in linear algebra, numerical optimization, probability and statistics.
 
-This chapter will cover the normalization of chromosome contact maps, eigenvalue decomposition, and statistical tests for
-reprodicibility and significance.
+\section*{Normalization of Chromatin Contact Maps}
 
-\section*{Normalization of Genomic Contact Maps}
+The entry point for chromatin interaction analysis begins with a chromatin \gls{contact map}.  The Hi-C experiment generates a
+genomic contact map describing the number of observed contacts between any two genomic regions, the details of which are covered
+in Chapter 2.  Contacts are recorded in square matrix $\matr{O}$ by binning the genome into equally sized intervals.  These bins
+are ordered by increasing genomic coordinates, from the start of chromosome 1 to the last bin of chromosome Y.  The cell $O_{ij}$
+records the number of observed interactions between bins $i$ and $j$.  Depending on the data quality, bin sizes range from tens of
+kilobases to megabases.
 
-The Hi-C experiment generates a genomic contact map describing the number of observed contacts between any two genomic
-regions.  All \textit{double stranded} reads (those which map uniquely to two genomic loci) can be arranged in a square
-matrix by binning the genome into evenly spaced bins.  These bins are arranged into an $n \times n$ matrix $O$ in which the
-cell $i,j$ represents the number of observed contacts between bins $i$ and $j$.  Depending on the data quality, these bins
-may be as small as 10 kilobases or as large as 2 megabases.
-
-In data analysis, the first step is always to normalize the data set to remove experimental biases and establish reproducibiility.
-Several methods have been proposed to normalize Hi-C interaction matrices.  Tanay and Yaffe\cite{tanay2011} performed the first
-robust analysis of the Hi-C assay, reporting on several systematic biases and proposing a non-parametric model to normalize contact
-maps.  Their model has informed all subsequent normalization methods and is therefore worth discussing in to a depth.
-
-Tanay and Yaffe focus on three systematic biases: genome mappability, GC content, and fragment length.
+The first step of data analysis is remove experimental biases and establish reproducibility.  Several methods have been proposed to
+normalize chromatin maps.  Tanay and Yaffe perform a robust analysis of the Hi-C assay identifying several sources systematic
+biases\cite{tanay2011}. They propose a non-parametric model to normalize contact maps by focusing on three systematic biases: variable
+genome mappability, \gls{GC} content, and variable fragment length.
 
 
 % TODO
 
 
-\section*{Expression Profiling}
+\section*{Gene Expression Profiling}
 
 The set of genes expressed in a cell, collectively known as the \textit{transcriptome}, provides insight into chromatin accessibility
 and cell state.  A gene expressed in $n$ conditions (or $n$ samples) forms vector in $n-$dimensional space.  Similarly, the expression
