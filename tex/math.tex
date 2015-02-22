@@ -1,6 +1,6 @@
 % math.tex
 
-\chapter{Analytical Preliminaries}
+\chapter{Mathematical Preliminaries}
 
 In this thesis, we endeavor to secure a relationship between chromatin structure and genomic fragility, to help understand the
 progression towards disease states.  Unfortunately, the mathematical tools we will leverage, while both appropriate and necessary,
@@ -55,11 +55,19 @@ $T_{ij}$.
     $\Delta{}B^k_i = \frac{S_i}{\mean{S_i}}$\;
     $W^{k+1}_{ij} = \frac{W^k_{ij}}{\Delta{}B^k_i\Delta{}B^k_j}$\;
     $B^{k+1}_i = B^k_i \dot \Delta{}B^k_i$\;
-    $k = k + 1$\;
+    \eIf{$Var(B^{k+1}) < threshold$}{%
+      converged\;
+    }{%
+      $k = k + 1$\;
+    }
   }
   \caption{Iterative Correction}
 \end{algorithm}
 
+The proposed algorithm is claimed to converge $W_{ij} \rightarrow T_{ij}$.  However, the authors do not provide a proof of convergence or
+explicit bounds on the convergence time.  We will attempt to show the algorithm converges for an interaction matrix $O_{ij}$.
+
+The first step is to reinterpret the contact matrices.
 
 % TODO
 
@@ -224,3 +232,12 @@ In principal component analysis, we call the ordered eigenvectors \textit{princi
 component, one must analyze the \gls{eigenspectrum}, usually in the form of a \gls{scree plot}.  Conceptually, the normalized size of a component's
 associated eigenvalue conveys the amount of variation that component captures.  A researcher can the choose a suitable subset of components to
 analyze, reducing the dimensionality of the dataset the chosen components.
+
+\section*{Detecting chromatin transformation}
+
+\gls{PCA} is a useful technique for identifying gross differences between datasets.  For subtle changes of local chromatin structure, we appropriate a 
+technique developed by Bin Ren and colleagues\cite{ren2013}, termed the \gls{DI}.
+
+The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, we calculate the number of upstream and downstream interactions and
+assign the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the downstream or upstream bias of
+a genomic region.  
