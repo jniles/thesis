@@ -2,38 +2,41 @@
 
 \chapter{Mathematical Preliminaries}
 
-In this thesis, we endeavor to secure a relationship between chromatin structure and genomic fragility, to help understand the
-progression towards disease states.  Unfortunately, the mathematical tools we will leverage, while both appropriate and necessary,
-do not flow naturally from one mathematical field.  Hence, the following chapter will feel disjointed.  By the end, we will have
+We endeavor to secure a relationship between chromatin structure and genomic fragility to elucidate the progression towards
+disease states.  Unfortunately, the mathematical tools we leverage, while both appropriate and necessary, do not flow
+naturally from a single mathematical field.  Therefore, the following chapter will feel disjointed.  By the end, we will have
 dabbled in linear algebra, numerical optimization, probability and statistics.
 
 \section*{Normalization of Chromatin Contact Maps}
 
 The entry point for chromatin interaction analysis begins with a chromatin \gls{contact map}.  The Hi-C experiment generates a
 genomic contact map describing the number of observed contacts between any two genomic regions, the details of which are covered
-in Chapter 2.  Contacts are recorded in square matrix $\matr{O}$ by binning the genome into equally sized intervals.  These bins
-are ordered by increasing genomic coordinates, from the start of chromosome 1 to the last bin of chromosome Y.  The cell $O_{ij}$
-records the number of observed interactions between bins $i$ and $j$.  Depending on the data quality, bin sizes range from tens of
-kilobases to megabases.
+in Chapter 2.  Contacts are recorded in square matrix $\matr{O}$ by binning the genome into equally sized intervals and considering
+the pairwise interactions between each bin.  Bins are ordered by increasing genomic coordinates, from the first bin of chromosome 1 to
+the last bin of chromosome Y.  The cell $O_{ij}$ contains the number of observed interactions between bins $i$ and $j$.  Depending on
+data quality, bin sizes range from tens of kilobases to megabases.
 
-The first step of data analysis is to remove experimental biases and establish reproducibility.  Several methods address
-normalizing chromatin maps.  Tanay and Yaffe were among the first authors to undertake analysing the Hi-C experiment\cite{yaffe2011}.
-They perform a robust analysis of the Hi-C assay identifying several sources systematic biases and propose a non-parametric model
-to normalize contact maps by focusing on three systematic biases: variable genome mappability, \gls{GC} content, and fragment length.
-The mappings achieved using Tanay's methods provide robust reproducibility between replicates and experiments by treating
-\gls{trans contacts} and \gls{cis contacts} seperately\cite{yaffe2011}.  However, the analysis is computationally intensive, requiring
-the estimation of contact probabilities on matricies for each bias condition.
+The first step of data analysis is to \gls{normalize} experimental data; that is, remove experimental biases and establish reproducibility.
+Several methods exist to normalize contact maps.  Tanay and Yaffe were among the first authors to undertake a statistical analysis of the Hi-C experiment\cite{yaffe2011}.
+They identify several sources systematic experimental bias in the Hi-C assay and propose a probabilistic background model representing \gls{GC}
+content, fragment length, and genome mappability.  Corrected contact maps are calculated from the experiments based on these contact maps.  The mappings achieved using Tanay
+and Yaffe's methods provide robust reproducibility between replicates and experiments by considering \gls{trans contacts} and \gls{cis contacts}
+seperately\cite{yaffe2011}.  However, their analysis pipeline is computationally intensive, prompting further research into Hi-C analysis.
 
 Other methods exist for normalizing contact maps.  Hu and collegues propose a method `HiCNorm' based on Poisson regression and achieve
-9000x speed up compared to Tanay's method\cite{hu2012}.  However, we employ a normalization proceedure, \gls{ICE}, developed by Imakaev
-and collegues, due to the availability of its source code for analysis and performance\cite{imakaev2012}.   We will analyze the
-algorithm in detail and provide correctness proofs beyond what the authors report in their paper\cite{imakaev2012}.
+9000x speed up compared to Tanay's method\cite{hu2012}.  Recently, Ay and collegues provide a statistical method `Fit-Hi-C' that does
+not assume a particular underlying statistical distribution, instead normalizing cis contacts based on probabilistic analysis of polymer looping
+dynamics\cite{ay2014}.
+
+Imakaev and collegues propose a normalization and analysis pipeline \gls{ICE}\cite{imakaev2012}.  We employ \gls{ICE} as the normalization
+algorithm in this thesis, due to the availability of its source code\footnote{source: \url{http://mirnylab.bitbucket.org/hiclib/}} and good
+performance.   We analyze the algorithm in detail.
 
 \subsection*{\gls{ICE}}
 
-Pursuant of the true contact probility for each genomic region, the \gls{ICE} algorithm makes an important observation that bias matrices
-determined by Yaffe and Tanay\cite{yaffe2011} can be successfully reproduced ($r = 0.99$) by a product of biases $B_i \times B_j$.  This
-leads to the following proposition
+Pursuant of the true contact probility for each genomic region, \gls{ICE} makes a critical observation that bias matrices determined by
+Yaffe and Tanay\cite{yaffe2011} can be successfully reproduced ($r = 0.99$) by a product of biases $B_i \times B_j$.  This observation leads
+immediately to the following proposition
 
 \begin{prop}
   Given the assumption of factorizable biases, the expected contact frequency $\varepsilon_{ij}$ for every pair of regions $(i,j)$ can
@@ -63,6 +66,21 @@ $T_{ij}$.
   }
   \caption{Iterative Correction}
 \end{algorithm}
+
+It is not apparent that this algorithm is correct or converges.  To gain an intuitive understanding of the solution, let us investigate a
+simpler proposition.  Suppose that, instead of defining $O_{ij}$ to be the matrix product $B_{i}B_{j}T_{ij}$, we consider that the counts
+in $O_{ij}$ are the expectation of some multi-nomially distributed random variable $X_{ij}$, where $E[X_{ij}] = NB_{i}B_j$ for some
+constant $N$ and vector $B$ whose cumulative sum is 1 ($\sum_{i}B_i = 1$).  In this formulation, each of the cells of $O_{ij}$ are
+independent and distributed according to $B$.  The count of cell $i,j$ is given by the probability
+
+\[
+  \log{p_{ij}} =  c + u_i + u_j - Z
+\]
+
+where $c = \log{N}, u_i = \log{B_i}, u_j = \log{B_j}$, and $Z (=c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
+model is called a \gls{log-linear} or \gls{toric} model, and the convergence properties have been extensively studied in the
+literature\cite{fienburg2012}\cite{pachter2005}.
+
 
 The proposed algorithm is claimed to converge $W_{ij} \rightarrow T_{ij}$.  However, the authors do not provide a proof of convergence or
 explicit bounds on the convergence time.  We will attempt to show the algorithm converges for an interaction matrix $O_{ij}$.
@@ -235,9 +253,9 @@ analyze, reducing the dimensionality of the dataset the chosen components.
 
 \section*{Detecting chromatin transformation}
 
-\gls{PCA} is a useful technique for identifying gross differences between datasets.  For subtle changes of local chromatin structure, we appropriate a 
+\gls{PCA} is a useful technique for identifying gross differences between datasets.  For subtle changes of local chromatin structure, we appropriate a
 technique developed by Bin Ren and colleagues\cite{ren2013}, termed the \gls{DI}.
 
 The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, we calculate the number of upstream and downstream interactions and
 assign the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the downstream or upstream bias of
-a genomic region.  
+a genomic region.
