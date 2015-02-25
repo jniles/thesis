@@ -80,13 +80,13 @@ independent and distributed according to $B$.  The count of cell $i,j$ is given 
 where $c = \log{N}, u_i = \log{B_i}, u_j = \log{B_j}$, and $Z (=c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
 model is called a \gls{log-linear} or \gls{toric} model.  The problem is now a maximization problem: what are the maximum likelihood parameters
 that best fit the model to the observed data?  Luckily, the methods and their convergence properties have been extensively studied in the
-literature\cite{fienburg2012}\cite{pachter2005}.
+literature\cite{fienberg2012}\cite{pachter2005}.
 
 In the realm of statistics, the contact matrix, along with the calculated margins, is called a \gls{contingency table}.  Importantly, assuming
 that the margins are positive, and that the matrix cannot be permuted into block diagonal shape, Birch's theorem guarantees that there is a
-unique maximum to the likelihood function\cite{prachter2005}.  For full details, consult Prachter and Sturmfels\cite{prachter2005}.  Furthermore,
+unique maximum to the likelihood function\cite{pachter2005}.  For full details, consult Prachter and Sturmfels\cite{pachter2005}.  Furthermore,
 the marginal values are the \gls{sufficient statistic} of the model.  In other words, the maximum likelihood parameters for this data is given
-by the normalized row and column sums of the matrix\cite{prachter2005}.
+by the normalized row and column sums of the matrix\cite{pachter2005}.
 
 With the observation that there exists a global maximum of the likelihood function, all that remains is to compute the `true' values by some
 process.  One common algorithm is the \gls{EM} algorithm\cite{fuchs1982}.  Imakaev and collegues employ a simpler algorithm known as \gls{IPF},
