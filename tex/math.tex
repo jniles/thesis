@@ -90,14 +90,25 @@ by the normalized row and column sums of the matrix\cite{prachter2005}.
 
 With the observation that there exists a global maximum of the likelihood function, all that remains is to compute the `true' values by some
 process.  One common algorithm is the \gls{EM} algorithm\cite{fuchs1982}.  Imakaev and collegues employ a simpler algorithm known as \gls{IPF},
-developed by Demming and Stephan in 1940, and apparently rediscovered by Imakaev's group\cite{demming1940}.  
+developed by Demming and Stephan in 1940, and apparently rediscovered by Imakaev's group\cite{deming1940}.  \gls{IPF} works generally by solving
+the \gls{MLE} while leaving the margins ($p_{i+} = \sum_{j}p_{ij}$ and $p_{j+} = \sum_{i}p_{ij}$) fixed.  A proof of convergence for contingency
+tables follows from Feinberg's work in algebriac geometry in 1970\cite{feinberg1970}.
 
+Finally, we return to the \gls{toric} model we described above.  Since the log-likelihood function is concave, the \gls{IPF} algorithm first
+computes the roots of the partial derivatives of the log-likelihood function and sets them to zero to solve for the global maximum.  Imakaev
+and colleagues consider the likelihood function on the Poisson distribution.
+
+\[
+  L(B) = \sum_{i,j}O_{ij} \dot (\log{B_i} + \log{B_j}) - NB_{i}B_{j} + C
+\]
+
+in which $C$ is a constant.
 
 % TODO
 
 \section*{Gene Expression Profiling}
 
-The set of genes expressed in a cell, collectively known as the \textit{transcriptome}, provides insight into chromatin accessibility
+The set of genes expressed in a cell, collectively known as the \gls{transcriptome}, provides insight into chromatin accessibility
 and cell state.  A gene expressed in $n$ conditions (or $n$ samples) forms vector in $n-$dimensional space.  Similarly, the expression
 profile the entire transcriptome for a single sample is a vector in $m-$dimensional space, where $m$ is the number of genes assessed.
 We therefore denote an experiment interrogating $n$ genes across $m$ samples as an $m \times n$ matrix $S_{m,n}$.
@@ -120,7 +131,7 @@ We wish to compare differences in gene expression profiles for particular, or al
 
 \subsection*{Euclidean Distance}
 
-The simplest genomic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \textit{norm}, known as
+The simplest genomic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \gls{norm}, known as
 the 2-norm.  Geometrically, the norm is a measure of `size' or `proximity' in $n-$dimensional space.  The 2-norm for a vector $x$ is
 defined as
 \[
@@ -256,11 +267,20 @@ component, one must analyze the \gls{eigenspectrum}, usually in the form of a \g
 associated eigenvalue conveys the amount of variation that component captures.  A researcher can the choose a suitable subset of components to
 analyze, reducing the dimensionality of the dataset the chosen components.
 
-\section*{Detecting chromatin transformation}
+\section*{Detecting changes in local chromatin interaction}
 
 \gls{PCA} is a useful technique for identifying gross differences between datasets.  For subtle changes of local chromatin structure, we appropriate a
-technique developed by Bin Ren and colleagues\cite{ren2013}, termed the \gls{DI}.
+technique developed by Bin Ren and colleagues\cite{ren2013}, termed the \gls{DI}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
+relative `upstream' or `downstream' character of the interactions involving that particular chromatin region.
 
 The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, we calculate the number of upstream and downstream interactions and
 assign the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the downstream or upstream bias of
-a genomic region.
+a genomic region. The formulation of the directionality index is given in the supplementary methods of Ren's paper\cite{ren2013}
+
+\[
+  DI = (\frac{B - A}{\abs{B - A}})(\frac{{(A - E)}^2}{E} + frac{{(B - E)}^2}{E})
+\]
+
+where $A$ is the number of upstream reads in a given window, $B$ is the number of downstream reads, and $E$ is the expected number of interactions under
+the null distribution ($\frac{A + B}{2}$).  Ren and colleagues apply the directionality index to a normalized contact map at 40kb resolutions, examining
+2Mb windows upstream and downstream.
