@@ -1,4 +1,4 @@
-% An Applied Mathematics/Biology Thesis
+% Bn Applied Mathematics/Biology Thesis
 % By Jonathan Niles
 
 \documentclass[phd,tocprelim]{cornell}
@@ -17,8 +17,7 @@
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
 \usepackage{natbib}
-\usepackage[toc]{glossaries}
-%\usepackage{setspace} % remove for double spacing
+\usepackage[toc,nogroupskip]{glossaries}
 
 %
 % Definitions
@@ -46,14 +45,10 @@
 % cite package, to clean up citations in the main text. Do not remove.
 %\usepackage{cite}
 
-% Remove comment for double spacing
-%\doublespacing
-
 % Set tolerance for box model
 \tolerance=9999
 
 % New Commands, refreshers
-%\renewcommand{\caption}[1]{\singlespacing\hangcaption{#1}\normalspacing}
 \renewcommand{\topfraction}{0.85}
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.75}
@@ -66,9 +61,9 @@
 \AtBeginEnvironment{longtabu}{\tiny}{}{}   %% change all longtabu content to foot note size
 
 % Make a glossary using the glossaries package
+\loadglsentries{./tex/glossary.tex}
+%\input{./tex/glossary}
 \makeglossaries
-
-
 
 %
 % Actual Document Starts here!
@@ -88,16 +83,7 @@
 \input{./tex/introduction}
 \input{./tex/math}
 \input{./tex/bio}
-
-% TODO NOT SURE WHERE THIS GOES
-
-%% Data Validation
-
-%% Iterative Correction and Eigenvalue Expansion
-
-%% Visualization Tools
-%% Replication Timing Analysis..?
-
+\input{./tex/methods}
 \input{./tex/results}
 
 %
@@ -112,13 +98,12 @@
 %
 % BIBLIOGRAPHY
 %
-\bibliography{bibliography}{}
-\bibliographystyle{plos2015}
+%\bibliography{bibliography}{}
+%\bibliographystyle{plos2015}
 
 %
 % Glossary
 %
-\input{./tex/glossary}
 \printglossaries
 
 \end{document}
