@@ -6,13 +6,13 @@
 
 Molecular biology changes daily as new discoveries reinforce or deconstruct previous models of cell function.  The task of
 explaining all important aspects of genetics and molecular biology is too large a scope for this thesis; even if we limited
-our discussion to simply archetictural interactions.  In the following chapter, we will attempt to cherry-pick topics and recent
+our discussion to simply architectural interactions.  In the following chapter, we will attempt to cherry-pick topics and recent
 developments in genetics and molecular biology to motivate an intuition into chromatin architecture and the potential implications
 of a shifting interaction map.  Readers are strongly encouraged to consult a text, such as Molecular Biology of the Cell by
 Alberts\cite{alberts2002}, for a more in depth discussion than is possible here.
 
-This chapter begins with a discussion of each actor influencing and influence by nuclear archeticture.  Subsequently, the experiments
-to investigate this archeture are introduced, and Hi-C is discussed in detail.  Finally, a theoretical discussion concerning
+This chapter begins with a discussion of each actor influencing and influence by nuclear architecture.  Subsequently, the experiments
+to investigate this archetype are introduced, and Hi-C is discussed in detail.  Finally, a theoretical discussion concerning
 fragility in the genome presents a backdrop in which to interpret the results of our analytical experiments.
 
 
@@ -28,15 +28,15 @@ information from primary sequence through protein.  At the highest level, the ce
   % TODO : The central dogma of mol bio
 \end{figure}
 
-The sheer complexity of the nucleus is best decomposed into a structural heirarchy with several layers of granularity: the primary
+The sheer complexity of the nucleus is best decomposed into a structural hierarchy with several layers of granularity: the primary
 sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, and \gls{chromosomal
-  territories} and other macromolecular chromatin structures.
+  territories} and other macro molecular chromatin structures.
 
 Ironically, the highest nuclear resolution is the most well studied: the primary sequence of nucleic acid bases that compose the \gls{DNA}
 molecule itself.  A single level of abstraction above the primary sequence considers interactions between \gls{DNA} and  architectural
-proteins such as histones.  Further up the abstraction heirarchy are \gls{epigenetic} interactions, meaning `above genetics'\cite{dictepi2014},
+proteins such as histones.  Further up the abstraction hierarchy are \gls{epigenetic} interactions, meaning `above genetics'\cite{dictepi2014},
 a loose classification of secondary modifications to \gls{DNA} and architectural proteins that are characteristic of cell type and state.
-Finally, chromosomes and chromosomal territories comprise the highest layer of nuclear architecture.  This conceptual heirarchy is useful
+Finally, chromosomes and chromosomal territories comprise the highest layer of nuclear architecture.  This conceptual hierarchy is useful
 to keep in mind when investigating the origin of gene expression changes, differentiation, or disease states.
 
 \subsection*{The Primary Sequence}
@@ -78,7 +78,7 @@ The pursuit of an accurate \textit{\gls{in vivo}} model for \gls{DNA} and protei
 conceptual, and mathematical models.
 
 In 1974, Kornberg discovered that chromatin contained roughly equal amounts of \gls{DNA} and protein\cite{kornberg1974}.  A year later, Pierre Chambon
-and colleagues described the separation of chromatin into protein complexes spaced evenly on the gls{DNA} molecule as `beads on a string.'\cite{oudet1975}
+and colleagues described the separation of chromatin into protein complexes spaced evenly on the \gls{DNA} molecule as `beads on a string.'\cite{oudet1975}
 The observed beads are nucleosomes, bundles composed of a histone octamer and $\sim200$ bases (later reported to be $167$ bases\cite{robinson2006}) of
 coiled \gls{DNA}. Much as the nucleotide is the fundamental unit of the genome, nucleosomes are the fundamental units of the epigenome.  Nucleosomes in
 series are called a \gls{nucleosome array}.  A nucleosome consists of two components: a core particle wrapping $\sim146$ base pairs of DNA, yielding a
@@ -186,7 +186,7 @@ junction, allowing fine control over the amplified sequences through primer care
 reverse \gls{5C} primers are ligated across ligation junctions of select loci in the \gls{3C} library.  Furthermore, \gls{5C} primers also
 contain universal tails for amplification, permitting all bound sequences to be simultaneously amplified.  Thus, through the appropriate choice of
 primers, a selected genomic loci is `carbon-copied' and amplified, allowing high resolution analysis of a given target interaction\cite{dostie2006}.
-The most recent derivation of the technique, Hi-C, allows comprehensive capture of all interacting segments in the genoma using \gls{NGS} techniques.
+The most recent derivation of the technique, Hi-C, allows comprehensive capture of all interacting segments in the genome using \gls{NGS} techniques.
 To purify all interacting segments of the genome, the Hi-C protocol calls for the labeling of all junctions with biotin markers, effectively
 marking each genomic junction. Like other derivative methods, Hi-C abolishes the PCR step of \gls{3C} and replaces it with filtration using
 streptavidin beads to pull down chimeric DNA sequences.  The captured sequences can then be sequenced using next generation sequences or hybridized
