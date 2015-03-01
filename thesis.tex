@@ -4,20 +4,17 @@
 \documentclass[phd,tocprelim]{cornell}
 
 % packages
-\usepackage{fixltx2e}
-\usepackage{geometry}
-\usepackage{graphicx}
-\usepackage{amsmath,amssymb,amsthm}
-\usepackage{mathtools}
-\usepackage{algorithm2e}
-\usepackage{tabu}
-\usepackage{longtable}
-\usepackage{booktabs}
 \usepackage{ifpdf}
-\usepackage{appendix}
+\usepackage{geometry}
+\usepackage{graphicx,subfigure}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{algorithm2e}
+\usepackage{booktabs,caption,fixltx2e}
+\usepackage[flushleft]{threeparttable}
 \usepackage{natbib}
+\usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
-\usepackage[toc,nogroupskip]{glossaries}
+\usepackage[toc,nogroupskip,nonumberlist]{glossaries}
 
 %
 % Definitions
@@ -105,5 +102,7 @@
 % Glossary
 %
 \printglossaries
+
+\input{./tex/supplementary/supplementary}
 
 \end{document}

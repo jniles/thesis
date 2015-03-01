@@ -106,47 +106,6 @@ in which $C$ is a constant.
 
 % TODO
 
-\section*{Gene Expression Profiling}
-
-The set of genes expressed in a cell, collectively known as the \gls{transcriptome}, provides insight into chromatin accessibility
-and cell state.  A gene expressed in $n$ conditions (or $n$ samples) forms vector in $n-$dimensional space.  Similarly, the expression
-profile the entire transcriptome for a single sample is a vector in $m-$dimensional space, where $m$ is the number of genes assessed.
-We therefore denote an experiment interrogating $n$ genes across $m$ samples as an $m \times n$ matrix $S_{m,n}$.
-\[
-  S_{m,n} = \left[
-    \begin{array}{cccc}
-      s_{1,1} & s_{1,2} & \cdots & s_{1,n} \\
-      s_{2,1} & s_{2,2} & \cdots & s_{2,n} \\
-      \vdots & \vdots & \ddots  & \vdots \\
-      s_{m,1} & s_{m,2} & \cdots & s_{m,n}
-    \end{array}
-  \right]
-\]
-
-and a single gene's expression profile is
-\[ G_{i} = \begin{pmatrix} g_{i1} & g_{i2} & g_{i3} & \cdots & g_{in} & \end{pmatrix} \]
-
-We wish to compare differences in gene expression profiles for particular, or all, genes between samples.  This amounts to comparing
-\textit{distances} between gene expression vectors.  There are several methods for doing so.
-
-\subsection*{Euclidean Distance}
-
-The simplest genomic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \gls{norm}, known as
-the 2-norm.  Geometrically, the norm is a measure of `size' or `proximity' in $n-$dimensional space.  The 2-norm for a vector $x$ is
-defined as
-\[
-  \|x\|_{2} = {(|x_1|^2 + |x_2|^2 + \cdots + |x_n|^2)}^{\frac{1}{2}}
-\]
-
-The distance between two vectors in a vector space can now be found using the triangle inequality on the 2-norm.  As a norm, the Euclidean
-norm has some desirable properties, notably, non-negativity, positivity, and a definition of the triangle inequality
-$\|x + y\| = \|x\| + \|y\|$~\cite{horn2013}.  Directly from the triangle inequality, we define the Euclidean distance in $n-$dimensions to
-be
-\[
-  D_{Euc}(x,y) = \|x\| - \|y\| = {(\sum_{i = 1}^{n}{(a_i - b_i)}^2)}^{\frac{1}{2}}
-\]
-
-
 \section*{Principal Component Analysis}
 
 The holy grail of data analysis on high-dimensional data is dimensionality reduction --- that is, to find an accurate representation of

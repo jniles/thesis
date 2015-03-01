@@ -2,128 +2,108 @@
 
 \chapter{Biological Preliminaries}
 
+\section*{Introduction}
+
+Molecular biology changes daily as new discoveries reinforce or deconstruct previous models of cell function.  The task of
+explaining all important aspects of genetics and molecular biology is too large a scope for this thesis; even if we limited
+our discussion to simply archetictural interactions.  In the following chapter, we will attempt to cherry-pick topics and recent
+developments in genetics and molecular biology to motivate an intuition into chromatin architecture and the potential implications
+of a shifting interaction map.  Readers are strongly encouraged to consult a text, such as Molecular Biology of the Cell by
+Alberts\cite{alberts2002}, for a more in depth discussion than is possible here.
+
+This chapter begins with a discussion of each actor influencing and influence by nuclear archeticture.  Subsequently, the experiments
+to investigate this archeture are introduced, and Hi-C is discussed in detail.  Finally, a theoretical discussion concerning
+fragility in the genome presents a backdrop in which to interpret the results of our analytical experiments.
+
+
 \section*{Building from the Basics}
 
-It is difficult to overstate the importance of chromatin topology in every aspect of a eukaryotic cell's life.
-The morass of nucleic acids and proteins packed tightly inside the nuclear envelope contains all the
-information necessary for cell function and duplication.
+It is difficult to overstate the importance of chromatin topology.  The morass of nucleic acids and proteins packed tightly inside the
+nuclear envelope somehow contains all the information required for cell function and duplication.  The central dogma of molecular biology,
+outlined in the notes of Francis Crick `Ideas on Protein Synthesis' in 1956\cite{crick1970} most eloquently illustrates the flow of
+information from primary sequence through protein.  At the highest level, the central dogma strongly reinforces the importance of
+\gls{DNA} sequence content, readability, and expression.
 
-The sheer complexity of the nucleus requires us to investigate its biological
-structure at multiple layers of granularity.  Ironically, the smallest resolution
-of the nucleus is also the most well studied: the primary sequence of nucleic
-acid bases which compose the DNA molecule itself.  One level of abstraction
-above the primary sequence considers the interactions of the primary sequence
-with architectural proteins such as histones, and the secondary structures that
-result from these couplings.  Even higher up the abstraction tree lies
-\textit{epigenetics} (literally `above genetics'\cite{dictepi2014}), a loose
-classification for secondary modifications to DNA and architectural proteins
-which may be heritable or characteristic of cell state.  Finally, chromosomes
-and chromosomal territories comprise the highest and most recently understood
-levels of nuclear architecture.  Conceptualizing nuclear organization in
-strata such as this furnishes researchers with a conceptual tool to model
-and categorize the topology of nuclear contents.
+\begin{figure}[ht]
+  % TODO : The central dogma of mol bio
+\end{figure}
+
+The sheer complexity of the nucleus is best decomposed into a structural heirarchy with several layers of granularity: the primary
+sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, and \gls{chromosomal
+  territories} and other macromolecular chromatin structures.
+
+Ironically, the highest nuclear resolution is the most well studied: the primary sequence of nucleic acid bases that compose the \gls{DNA}
+molecule itself.  A single level of abstraction above the primary sequence considers interactions between \gls{DNA} and  architectural
+proteins such as histones.  Further up the abstraction heirarchy are \gls{epigenetic} interactions, meaning `above genetics'\cite{dictepi2014},
+a loose classification of secondary modifications to \gls{DNA} and architectural proteins that are characteristic of cell type and state.
+Finally, chromosomes and chromosomal territories comprise the highest layer of nuclear architecture.  This conceptual heirarchy is useful
+to keep in mind when investigating the origin of gene expression changes, differentiation, or disease states.
 
 \subsection*{The Primary Sequence}
 
-The fundamental informational unit of the cell is the nucleotide, often
-termed base or base pair when joined in a molecule or strand.  Eukaryotic
-cells have a principle four character alphabet of nucleotides, distinguished
-by their \textit{nucleobases}: adenine, cytosine, guanine, and thymine.  These
-nucleotides are affixed to a phosphate backbone into a long, coiling polymer
-chain.  The famous publication of the structure of DNA in 1953 by researchers
-Watson and Crick demonstrated these polymers exist in the nucleus as double
-helices\cite{watson1953}, with hydrogen bonds holding the opposing strands
-together.  Adenine and guanine are purine bases, while thymine and cytosine are
-pyridine bases.  It is important to note that adenine and thymine are
-complementary bases and form two hydrogen bonds between them.  Similarly,
-guanine and cytosine are complementary, and form three hydrogen bonds between
-their bases.  In this fashion, one particular side of the helix completely
-determines the opposing side and perturbations from this structure may lead
-to strand mutations\cite{cox2008}.
+The fundamental informational unit of the cell is the \gls{nucleotide}, often called a nucleotide base or base pair when joined in a
+molecule or strand.  Eukaryotic cells have a principle four character alphabet of nucleotides, distinguished by their \gls{nucleobases}:
+adenine, cytosine, guanine, and thymine.  These nucleotides are affixed to a phosphate backbone in a long, coiling polymer chain.  The
+famous publication of the structure of \gls{DNA} in 1953 by researchers James Watson and Francis Crick demonstrated these polymers
+exist in the nucleus as double helices\cite{watson1953}.  Hydrogen bonds between opposing nucleotides hold the double helix together.
+Importantly, there are two main classifications nucleotides base on structural similarities.  Adenine and guanine are called purine bases,
+while thymine and cytosine are called pyridine bases.  Adenine and thymine are complimentary bases that form two hydrogen bonds.  Similarly,
+guanine and cytosine are also complementary, and form three hydrogen bonds between their bases.  In this fashion, one strand of the helix completely
+determines the opposing side and perturbations from this structure may lead strand mutations\cite{cox2008}.
 
-One cannot ignore the constituents of the primary sequence, particularly when
-considering macroscopic properties of the genome.  The order and
-nucleotide content can change the local flexibility and directly (by
-encoding binding sites) and indirectly (by supporting the binding of histones)
-modulates the binding of important architectural proteins\cite{travers2004}.
-Although a DNA strand is a helical structure, it is an intrinsically
-flexible molecule.  A naive calculation reveals that the human genome is
-roughly two meters in length%
+One cannot ignore the constituents of the primary sequence, particularly when considering macroscopic properties of the genome.  The order and
+nucleotide content can change local flexibility and directly (by encoding binding sites) or indirectly (by supporting the binding of histones)
+modulates the binding of important architectural proteins\cite{travers2004}.  Although a \gls{DNA} strand is a helical structure, it is an intrinsically
+flexible molecule.  A naive calculation reveals that the human genome is roughly two meters in length%
 \footnote{%
-  A diploid human genome consists of two copies of the $\sim3.1MB$ DNA molecule,
-  based off estimates from the NCBI human genome reference build 37.
-  Each base pair is assumed to be roughly $0.34\times10^{-9}m$.  Therefore, the
-  entire length is $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176m$
+  A diploid human genome consists of two copies of the $\sim3.1MB$ DNA molecule, based off estimates from the \gls{NCBI} human genome reference build 37.
+  Each base pair is assumed to be roughly $0.34\times10^{-9}m$.  The entire length is $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176m$.
 },
-yet the entire genome fits into a nuclear volume of $\sim523\mu{}m$
-\cite{marks2011}.  Furthermore, loops as small as 100 bases in length have been
-reported in enhancer and repressor element activation pathways\cite{wong2008}.
-These loops can form independently of proteins\cite{vafabakhsh2012}.  Altogether, DNA's
-inherent flexibility is the foundation for  many complex higher order
-chromatin structures.
+yet the entire genome fits into a nuclear volume of $\sim523\mu{}m$\cite{marks2011}.  Furthermore, loops as small as 100 bases in length have been
+reported in enhancer and repressor element activation pathways\cite{wong2008}. These loops can form independently of proteins\cite{vafabakhsh2012}.
+Altogether, \gls{DNA}'s inherent flexibility is the foundation for  many complex higher order chromatin structures.
 
-%% FIXME DNA METHLYATION
-\textbf{TODO: DNA METHYLATION}
+For completeness, we note that cytosine may undergo methylation, often known as \gls{DNA} methylation or GC methylation to distinguish it
+from a histone modification of the same name\cite{bird2002}.  \gls{DNA} methylation is an important epigenetic mark, involved in imprinting,
+\gls{X-inactivation}, and heritable epigenetic states\cite{law2010}.  In mammals, \gls{DNA} methylation occurs almost exclusively along
+symmetric \gls{GC} dinucleotides, and is estimated to occur at $\sim70-80\%$ of the \gls{GC} sites throughout the genome\cite{ehrlich1982}\cite{law2010}.
+In the context of overall chromatin architecture, \gls{DNA} methylation serves a minor role, often reinforcing silencing histone marks; however
+one must be cognizant that this repressive mark is a critical regulator local sequence accessibility.
 
 \subsection*{Epigenetics And Chromatin Modeling}
 
-How a DNA molecule is packaged and condensed within a cell nucleus remains
-one of the basic questions of cell biology.  Intellectual curiosity aside,
-why is it so important to unravel the chromosomal architecture?  J.C. Hansen
-notes, `In biology, structure is inexorably linked to function.'\cite{hansen2012}
-The pursuit of an accurate \textit{in vivo} model for DNA and protein packaging
-continues to persist today, despite a legacy of experimental, conceptual, and
-mathematical models.
+How a \gls{DNA} molecule is packaged and condensed within a cell nucleus remains one of the basic questions of cell biology.  Intellectual curiosity aside,
+why is it so important to unravel the chromosomal architecture?  Researcher J.C. Hansen notes, `In biology, structure is inexorably linked to function.'\cite{hansen2012}
+The pursuit of an accurate \textit{\gls{in vivo}} model for \gls{DNA} and protein packaging continues to persist today, despite a legacy of experimental,
+conceptual, and mathematical models.
 
-In 1974, Kornberg discovered that chromatin contained roughly equal amounts of
-DNA and protein\cite{kornberg1974}.  A year later, Pierre Chambon and colleagues
-described the separation of chromatin into protein complexes spaced evenly on the DNA
-molecule as `beads on a string.'\cite{oudet1975}  The observed beads are nucleosomes,
-bundles composed of a histone octamer and $\sim200$ bases (later reported to be
-$167$ bases\cite{robinson2006}) of coiled DNA\@.
-Much as the nucleotide is the fundamental unit of the genome, nucleosomes are
-the fundamental units of the epigenome.  Nucleosomes in series are called a
-nucleosome array.  A nucleosome consists of two components: a core particle
-wrapping $\sim146$ base pairs of DNA, yielding a 6 fold compaction in length,
-and a linker portion of varying length of $0$ to $\sim80$ base pairs.  The
-linker component connects adjacent nucleosomes in a nucleosome array\cite{wu2007}%
-\cite{hansen2012}.  These arrays are $10-nm$ in diameter, provoking them to be
-often called the `$10-nm$' fibers.
+In 1974, Kornberg discovered that chromatin contained roughly equal amounts of \gls{DNA} and protein\cite{kornberg1974}.  A year later, Pierre Chambon
+and colleagues described the separation of chromatin into protein complexes spaced evenly on the gls{DNA} molecule as `beads on a string.'\cite{oudet1975}
+The observed beads are nucleosomes, bundles composed of a histone octamer and $\sim200$ bases (later reported to be $167$ bases\cite{robinson2006}) of
+coiled \gls{DNA}. Much as the nucleotide is the fundamental unit of the genome, nucleosomes are the fundamental units of the epigenome.  Nucleosomes in
+series are called a \gls{nucleosome array}.  A nucleosome consists of two components: a core particle wrapping $\sim146$ base pairs of DNA, yielding a
+6 fold compaction in length, and a linker portion of varying length of $0$ to $\sim80$ base pairs.  The linker component connects adjacent nucleosomes
+in a nucleosome array\cite{wu2007}\cite{hansen2012}.  These arrays are $10-nm$ in diameter, provoking them to be often called the `$10-nm$' fibers.
 
-Despite decades of research on nucleosome arrays, their structural conformation
-\textit{in vivo} remains enigmatic.   Does another higher order structure exist
-beyond the $10-nm$ fiber?  Nucleosome arrays and linker histones suspended in ionic
-solution fold naturally into a $30-nm$ fiber\cite{tremethick2007}; however, it
-is unclear whether this motif forms \textit{in vivo} and its conformation may
-be different in the nuclear context\cite{bian2012}.  The $30-nm$ fiber model
-is appealing as it readily explains the highly compacted structure of mitotic
-chromosomes.  To form the fiber, arrays of nucleosomes are arranged in a
-solenoid or double-helix structure (for full review, see Grigoryev and
-Woodcock\cite{grigoryev2012}).  Whether one or both structures are present in
-sub-chromosomal architectures is still an open question\cite{song2014}.  Recently,
-experiments using cryogenic electron microscopy (cryo-EM) suggested an
-alternative fractal arrangement of $10-nm$ fibers, without invoking a higher
-organizational unit\cite{nishino2012}\cite{hansen2012}.  It likely that a
-mixture of these organizational schemas exist \textit{in vivo}.  Further
-research as needed to assess the biological relevance of the $30-nm$ fiber in
+Despite decades of research on nucleosome arrays, their structural conformation \textit{\gls{in vivo}} remains enigmatic.   Does a higher order structure
+exist beyond the $10-nm$ fiber?  Nucleosome arrays and linker histones suspended in ionic solution fold naturally into a $30-nm$ fiber\cite{tremethick2007};
+however, it is unclear whether this motif forms \textit{\gls{in vivo}} and its conformation may be different in the nuclear context\cite{bian2012}.
+The $30-nm$ fiber model is appealing as it readily explains the highly compacted structure of mitotic chromosomes.  To form the fiber, arrays of nucleosomes
+are arranged in a solenoid or double-helix structure (for full review, see Grigoryev and Woodcock\cite{grigoryev2012}).  Whether one or both structures
+are present in sub-chromosomal architectures is still an open question\cite{song2014}.  Recently, experiments using cryogenic electron microscopy
+(cryo-EM) suggested an alternative fractal arrangement of $10-nm$ fibers, without invoking a higher organizational unit\cite{nishino2012}\cite{hansen2012}.
+It likely that a mixture of these organizational schemas exist in the cell.  Further research as needed to assess the biological relevance of the $30-nm$ fiber in
 both interphase and mitotic chromosome structure.
 
-The nucleosome core particle is a central actor controlling gene expression
-through local transcription regulation.  It is well established that nucleosomes
-cause an attenuation of gene expression when present at physiological
-concentrations\cite{brown1984}\cite{lorch1987}\cite{laybourn1991}\cite{juan1994}.
-How then does the cell maintain some genes as actively transcribed while others
-are silenced?  Nucleosomes regulate gene expression by regulating accessibility.
-Gene expression is mediated by a confluence of protein-DNA interactions:
-enhancers bind to enhancer elements, polymerases to the transcription start
-site (TSS), and polymerase recruitment proteins line the promoter region to
-facilitate polymerase binding and transcription activation\cite{cox2008}.  At
-any protein-DNA junction, local chromatin compaction can exclude binding by
-physically restricting access to the primary sequence.  This tightly packed
-form of DNA is called \textit{heterochromatin}, while open and accessible
-sequence is called \textit{euchromatin}.
+The nucleosome core particle is a central actor controlling gene expression through local transcription regulation.  It is well established that nucleosomes
+cause an attenuation of gene expression when present at physiological concentrations\cite{brown1984}\cite{lorch1987}\cite{laybourn1991}\cite{juan1994}. How
+then does the cell maintain some genes as actively transcribed while others are silenced?  Nucleosomes regulate gene expression by regulating accessibility.
+Gene expression is mediated by a confluence of protein-DNA interactions: enhancers bind to enhancer elements, polymerases to the transcription start site
+(TSS), and polymerase recruitment proteins line the promoter region to facilitate polymerase binding and transcription activation\cite{cox2008}.  At
+any protein-DNA junction, local chromatin compaction can exclude binding by physically restricting access to the primary sequence.  This tightly packed
+form of DNA is called \textit{\gls{heterochromatin}}, while open and accessible sequence is called \textit{\gls{euchromatin}}.
 
-\textbf{TODO}
+%%TODO
 A critical feature of gene regulation is the ability to form long range
 interactions between distal elements of the genome.  Note, cite heintzman et al.
 
@@ -290,7 +270,6 @@ introduced in any replacement protocol.
 
 Chromosome Conformation Capture is a quantitative assay and meaningful
 results are gleaned by comparison of relative interaction frequencies
-
 
 
 % TODO

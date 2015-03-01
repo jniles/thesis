@@ -1,16 +1,16 @@
 \chapter{Methods}
 
-\section{Data Collection}
+\section*{Data Collection}
 
-The cell lines used in this thesis are the IMR90 lung fibroblast cell line and the H1 human embryonic stem
-cell line.  Unless otherwise stated, the data obtained for these cell lines are wild type, reference sequences
-and mappings.
+We chose the IMR90 lung fibroblast and the H1 \gls(hESC) cell lines for analysis due to the availability of data and the volume of
+preexisting literature on these cells lines.  The data obtained for these cell lines are wild type, reference sequences and mappings.
 
-\subsection{Processing Chromatin Interaction Data}
+\subsection*{Processing Chromatin Interaction Data}
 
 The Hi-C data sets used in this thesis were obtained from the Gene Expression Omnibus (GEO)\cite{edgar2002}
 as Sequence Read Archive (SRA) files\footnote{Accession Number %
-\href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.}.  A bash script was written
+  \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.}.  Shell scripts (see Appendix) automated the process
+pof
 to download six experimental replicates of IMR90 cells and two replicates of H1 hESCs from GEO onto a
 local machine for analysis.  Using the Hi-C library prepared by Imakaev and colleagues\cite{imakaev2012},
 the chimeric reads were realigned to the human genome (UCSC build hg19) using the Bowtie2 alignment
@@ -18,7 +18,7 @@ algorithm\cite{langmead2012} with default parameters.  The interactions matrices
 using custom scripts written in the Python programming language.
 
 % FIXME Make sure appendix numbers/labels are correct
-I noted that the aligned interactions matrices by replicate are highly correlated (Spearman's $\rho \geq 0.69$)  % FIXME p-value!
+We noted that the aligned interactions matrices by replicate are highly correlated (Spearman's $\rho \geq 0.69$)  % FIXME p-value!
 for both cell lines, and significantly different from random (Appendix III).  The
 
 % TODO Do the python statistics here to validate that the data is good.  This includes:
@@ -29,11 +29,11 @@ for both cell lines, and significantly different from random (Appendix III).  Th
 % 5) Include p-values for everything I state
 
 
-\subsection{DNA Methylation Analysis}
+\subsection*{DNA Methylation Analysis}
 
 % TODO
 
-\subsection{Gene Expression and Pathway Analysis}
+\subsection*{Gene Expression and Pathway Analysis}
 
 Affymetrix gene expression microarray data for IMR90 and H1 hESCs were obtained from GEO (GSE2672\cite{kim2005}
 and GSE54186\cite{kim2014}, respectively).  Probe annotations were downloaded from the Affymetrix site for
@@ -49,11 +49,11 @@ Two groups of genes were selected for further analysis: the 100 most upregulated
 genes.  I was curious to find out whether classes of genes were changing together.  Using the ConsensusPathDB
 tool\cite{kamburov2012}, I performed over-representation analysis for pathways and gene ontologies.
 
-\subsection{Histone Binding}
+\subsection*{Histone Binding}
 
 % TODO
 
-\subsection{Chromatin Accessibility Assay}
+\subsection*{Chromatin Accessibility Assay}
 
 % TODO
 
@@ -87,7 +87,7 @@ building what is known as a Hi-C library.
 %% Hg19 from UCSC
 
 
-\section{Mapping and Alignment}
+\section*{Mapping and Alignment}
 
 A Hi-C library is formed largely of \textit{chimeric} DNA sequences,
 sequences composed of material from more than one source.  The ligation process
@@ -103,7 +103,7 @@ this procedure to realign the IMR90 Hi-C libraries for six replicates to
 the human genome build 19 (CRCh38/hg19), with an average of XX million reads
 mapped per replicate.
 
-\section{Normalization of Contact Maps}
+\section*{Normalization of Contact Maps}
 
 Understanding and accounting the biases inherent in a data set is vital to
 producing accurate, biologically relevant analysis.  To this end, several methods
@@ -131,4 +131,52 @@ of a true interaction frequency and a set of experimental biases.  These biases
 are present in all chromosomal capture techniques.  They include biases due to
 PCR in efficiency, read depth per region, sequencing bias, chromatin compaction,
 and random background collisions during ligation\cite{benner2014}\cite{dekker2006}.
+
+\section*{Gene Expression Profiling}
+
+We obtained total gene expression data for IMR90 and \gls{hESC} lines from \gls{GEO}.  The Affymetrix probe annotations were
+downloaded from the Affymetrix website and reads were aligned to UCSC genes.  Probes without a gene match were discarded.  Raw
+expression values were converted to log fold change values for each replicate.  The replicates were highly correlated ($\mu = 2$)
+and expression histograms revealed high similarity in total gene expression between replicates.
+
+
+The set of genes expressed in a cell, collectively known as the \gls{transcriptome}, provides insight into chromatin accessibility
+and cell state.  A gene expressed in $n$ conditions (or $n$ samples) forms vector in $n-$dimensional space.  Similarly, the expression
+profile the entire transcriptome for a single sample is a vector in $m-$dimensional space, where $m$ is the number of genes assessed.
+We therefore denote an experiment interrogating $n$ genes across $m$ samples as an $m \times n$ matrix $S_{m,n}$.
+\[
+  S_{m,n} = \left[
+    \begin{array}{cccc}
+      s_{1,1} & s_{1,2} & \cdots & s_{1,n} \\
+      s_{2,1} & s_{2,2} & \cdots & s_{2,n} \\
+      \vdots & \vdots & \ddots  & \vdots \\
+      s_{m,1} & s_{m,2} & \cdots & s_{m,n}
+    \end{array}
+  \right]
+\]
+
+and a single gene's expression profile is
+\[ G_{i} = \begin{pmatrix} g_{i1} & g_{i2} & g_{i3} & \cdots & g_{in} & \end{pmatrix} \]
+
+We wish to compare differences in gene expression profiles for particular, or all, genes between samples.  This amounts to comparing
+\textit{distances} between gene expression vectors.  There are several methods for doing so.
+
+\subsection*{Euclidean Distance}
+
+The simplest genomic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \gls{norm}, known as
+the 2-norm.  Geometrically, the norm is a measure of `size' or `proximity' in $n-$dimensional space.  The 2-norm for a vector $x$ is
+defined as
+\[
+  \|x\|_{2} = {(|x_1|^2 + |x_2|^2 + \cdots + |x_n|^2)}^{\frac{1}{2}}
+\]
+
+The distance between two vectors in a vector space can now be found using the triangle inequality on the 2-norm.  As a norm, the Euclidean
+norm has some desirable properties, notably, non-negativity, positivity, and a definition of the triangle inequality
+$\|x + y\| = \|x\| + \|y\|$~\cite{horn2013}.  Directly from the triangle inequality, we define the Euclidean distance in $n-$dimensions to
+be
+\[
+  D_{Euc}(x,y) = \|x\| - \|y\| = {(\sum_{i = 1}^{n}{(a_i - b_i)}^2)}^{\frac{1}{2}}
+\]
+
+
 
