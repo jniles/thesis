@@ -2,25 +2,55 @@
 \setacronymstyle{long-short}
 
 % Biology
-\newacronym{DNA}{DNA}{deoxyribonucleic acid}
-\newacronym{RNA}{RNA}{ribonucleic acid}
-\newacronym{GEO}{GEO}{Gene Expression Omnibus}
-\newacronym{NCBI}{NCBI}{National Center for Biotechnology Information}
-\newacronym{SRA}{SRA}{Sequence Read Archive}
-\newacronym{TAD}{TAD}{Topologically Associating Domain}
-\newacronym{LAD}{LAD}{Lamina Associating Domain}
+\newacronym[description=any of various nucleic acids that are usually the molecular basis of heredity]
+{DNA}{DNA}{deoxyribonucleic acid}
+
+\newacronym[description=any of various nucleic acids that contain ribose and uracil as structural components and are associated with the control of cellular chemical activities—called also ribonucleic acid]
+{RNA}{RNA}{ribonucleic acid}
+
+\newacronym[description=the Gene Expression Omnibus.  Located at \url{http://www.ncbi.nlm.nih.gov/geo/}]{GEO}{GEO}{Gene Expression Omnibus}
+
+\newacronym[description=the National Center for Biotechnology Information.  Located at \url{http://www.ncbi.nlm.nih.gov/}]
+{NCBI}{NCBI}{National Center for Biotechnology Information}
+
+\newacronym[description=stores raw sequencing data and alignment information from high-throughput sequencing platforms.  For more information see \url{http://www.ncbi.nlm.nih.gov/sra}]
+{SRA}{SRA}{Sequence Read Archive}
+
+\newacronym[description=local regions of highly enriched chromatin interactions]
+{TAD}{TAD}{Topologically Associating Domain}
+
+\newacronym[description=genome-lamina interacting domains found to be 0.1--10 megabases in size]
+{LAD}{LAD}{Lamina Associated Domain}
+
 \newacronym{DS}{DS}{double-stranded}
+
 \newacronym{GC}{GC}{guanine-cytosine}
-\newacronym{hESC}{hESC}{Human Embryonic Stem Cell}
-\newacronym{TSS}{TSS}{Transcriptional Start Site}
-\newacronym[\glsshortpluralkey={GTFs}]{GTF}{GTF}{General Transcription Factor}
+
+\newacronym[description=human embryonic stem cell line cultured in lab]
+{hESC}{hESC}{Human embryonic stem cell}
+
+\newacronym[description=the location where transcription starts at the 5'-end of a gene sequence]
+{TSS}{TSS}{Transcriptional Start Site}
+
+\newacronym[
+  \glsshortpluralkey={GTFs},
+  description=a class of protein transcription factors that bind to specific sites (promoter) on DNA to activate transcription of genetic information from DNA to messenger RNA
+]{GTF}{GTF}{General Transcription Factor}
+
 \newacronym{PIC}{PIC}{preinitiation complex}
-\newacronym[\glsshortpluralkey={CTs},longplural={chromosome territories}]{CT}{CT}{chromosome territory}
+
+\newacronym[longplural={chromosome territories}]{CT}{CT}{chromosome territory}
+
 \newacronym{3C}{3C}{Chromosome Conformation Capture}
+
 \newacronym{4C}{4C}{Chromosome Conformation Capture-on-Chip}
+
 \newacronym{5C}{5C}{Chromosome Conformation Capture Carbon-Copy}
+
 \newacronym{NGS}{NGS}{Next Generation Sequencing}
-\newacronym{CFS}{CFS}{chromosomal fragile sites}
+
+\newacronym[description=a specific heritable point on a chromosome that tends to form a gap or constriction and may tend to break when the cell is exposed to partial replication stress]
+{CFS}{CFS}{chromosome fragile site}
 
 
 % maths
@@ -35,151 +65,156 @@
 
 % Glossary definitions
 \newglossaryentry{karyotype}{%
-  name={Karyotype},
-  description={A photomicrograph of chromosomes arranged according to a standard classification}%
+  name={karyotype},
+  description={a photomicrograph of chromosomes arranged according to a standard classification}%
 }
 
-\newglossaryentry{trans contacts}{%
-  name={\textit{Trans} contacts},
-  description={Interactions that occur between bins on two different chromosomes}%
+\newglossaryentry{trans contact}{%
+  name={\textit{trans} contact},
+  plural={\textit{trans} contacts},
+  description={interactions that occur between bins on two different chromosomes}%
 }
 
-\newglossaryentry{cis contacts}{%
-  name={\textit{Cis} contacts},
-  description={Interactions that occur between bins on the same chromosome}%
+\newglossaryentry{cis contact}{%
+  name={\textit{cis} contact},
+  plural={\textit{cis} contacts},
+  description={interactions that occur between bins on the same chromosome}%
 }
 
 \newglossaryentry{contact map}{%
-  name={Contact map},
-  description={A non-negative, square matrix recording observed interactions between different genomic regions}%
+  name={contact map},
+  description={a non-negative, square matrix recording observed interactions between different genomic regions}%
 }
 
 \newglossaryentry{nucleobase}{%
-  name={Nucleobase},
-  description={Nitrogen-containing biological compounds (nitrogenous bases) found linked to a sugar within nucleosides—the basic building blocks of deoxyribonucleic acid (DNA) and ribonucleic acid (RNA).A substance that has a molecular structure consisting chiefly or entirely of a large number of similar units bonded together, e.g., many synthetic organic materials used as plastics and resins}
+  name={nucleobase},
+  description={nitrogen-containing biological compounds (nitrogenous bases) found linked to a sugar within nucleosides—the basic building blocks of deoxyribonucleic acid (DNA) and ribonucleic acid (RNA).A substance that has a molecular structure consisting chiefly or entirely of a large number of similar units bonded together, e.g., many synthetic organic materials used as plastics and resins}
 }
 
 \newglossaryentry{polymer}{%
   name={Polymer},
-  description={A substance that has a molecular structure consisting chiefly or entirely of a large number of similar units bonded together, e.g., many synthetic organic materials used as plastics and resins}
+  description={a substance that has a molecular structure consisting chiefly or entirely of a large number of similar units bonded together, e.g., many synthetic organic materials used as plastics and resins}
 }
 
 \newglossaryentry{epigenetic}{%
-  name={Epigenetic},
-  description={Any heritable influence on gene activity, unaccompanied by a change in the DNA}
+  name={epigenetic},
+  description={any heritable influence on gene activity, unaccompanied by a change in the DNA}
 }
 
 \newglossaryentry{restriction enzyme}{%
-  name={Restriction enzyme},
-  description={An enzyme that restricts, or performs double-strand cut, at a specific DNA sequence motif}
+  name={restriction enzyme},
+  description={an enzyme that restricts, or performs double-strand cut, at a specific DNA sequence motif}
 }
 
 \newglossaryentry{ligation}{%
-  name={Ligation},
-  description={The joining of two DNA strands or other molecules by a phosphate ester linkage}
+  name={ligation},
+  description={the joining of two DNA strands or other molecules by a phosphate ester linkage}
 }
 
 \newglossaryentry{nucleotide}{%
-  name={Nucleotide},
-  description={A compound consisting of a nucleoside linked to a phosphate group. Nucleotides form the basic structural unit of nucleic acids such as DNA}
+  name={nucleotide},
+  description={a compound consisting of a nucleoside linked to a phosphate group. Nucleotides form the basic structural unit of nucleic acids such as DNA}
 }
 
 \newglossaryentry{oligonucleotide}{%
-  name={Oligonucleotide},
-  description={A polynucleotide whose molecules contain a relatively small number of nucleotides}
+  name={oligonucleotide},
+  description={a polynucleotide whose molecules contain a relatively small number of nucleotides}
 }
 
 \newglossaryentry{nucleosome}{%
-  name={Nucleosome},
-  description={A chromatin secondary structure consisting of $\sim147$ base pairs of DNA wrapped 1.75 times around an octamer of core histone proteins}
+  name={nucleosome},
+  description={a chromatin secondary structure consisting of $\sim147$ base pairs of DNA wrapped 1.75 times around an octamer of core histone proteins}
 }
 
 \newglossaryentry{scree plot}{%
-  name={Scree plot},
-  description={A graph displaying the eigenvalue associated with each component in descending order versus the component number.  Used in PCA to determine how many components to consider in the analysis}
+  name={scree plot},
+  description={a graph displaying the eigenvalue associated with each component in descending order versus the component number.  Used in PCA to determine how many components to consider in the analysis}
 }
 
 \newglossaryentry{eigenspectrum}{%
-  name={Eigenspectrum},
-  description={A spectrum of eigenvalues}
+  name={eigenspectrum},
+  description={a spectrum of eigenvalues}
 }
 
 \newglossaryentry{normalization}{%
-  name={Normalization},
-  description={An attempt to compensate for noise and systematic bias from in a particular data set, while preserving the differences in a data set}
+  name={normalization},
+  description={an attempt to compensate for noise and systematic bias from in a particular data set, while preserving the differences in a data set}
 }
 
 \newglossaryentry{toric model}{%
   name={Toric},
-  description={A background model for a distribution.  Also known as a log-linear model}
+  description={a background model for a distribution.  Also known as a log-linear model}
 }
 
 \newglossaryentry{log-linear model}{%
   name={Log-linear model},
-  description={See toric model.}
+  description={see toric model}
 }
 
 \newglossaryentry{transcriptome}{%
-  name={Transcriptome},
-  description={The sum total of all messenger RNA molecules expressed from genes of an organism}
+  name={transcriptome},
+  description={the sum total of all messenger RNA molecules expressed from genes of an organism}
 }
 
 \newglossaryentry{contingency table}{%
-  name={Contingency table},
-  description={A type of table in statistics that displays the frequency distribution of variables.  Also called a crosstab}
+  name={contingency table},
+  description={a type of table in statistics that displays the frequency distribution of variables.  Also called a crosstab}
 }
 
 \newglossaryentry{sufficient statistic}{%
   name={Sufficient statistic},
-  description={A statistic that does as good a job estimating an unknown parameter as the entire sample}
+  description={a statistic that does as good a job estimating an unknown parameter as the entire sample}
 }
 
 \newglossaryentry{norm}{%
-  name={Norm},
-  description={In linear algebra, a function that assigns a strictly non-negative length to each vector in a vector space}
+  name={norm},
+  description={in linear algebra, functional analysis and related areas of mathematics, a function that assigns a strictly positive length or size to each vector in a vector space—save possibly for a single zero vector, with length zero}
 }
 
 \newglossaryentry{X-inactivation}{%
-  name={X-inactivation},
-  description={TODO}
+  name={x-inactivation},
+  description={a process by which one of the two copies of the X chromosome present in female mammals is inactivated}
 }
 
 \newglossaryentry{in vivo}{%
   name={in vivo},
-  description={TODO}
+  description={performed or taking place in a living organism}
 }
 
 \newglossaryentry{nucleosome array}{%
   name={nucleosome array},
-  description={TODO}
+  description={the fundamental building block of chromosomal superstructures, the substrate for transcription, and the first nucleoprotein assembly laid down after DNA replication}
 }
 
 \newglossaryentry{euchromatin}{%
   name={euchromatin},
-  description={TODO}
+  plural={euchromatin},
+  description={a lightly packed form of chromatin (DNA, RNA and protein) that is rich in gene concentration, and is often (but not always) under active transcription}
 }
 
 \newglossaryentry{heterochromatin}{%
   name={heterochromatin},
-  description={TODO}
+  plural={heterochromatin},
+  description={chromosome material of different density from normal (usually greater), in which the activity of the genes is modified or suppressed}
 }
 
 \newglossaryentry{preinitiation complex}{%
   name={preinitiation complex},
-  description={TODO}
+  plural={preinitiation complexes},
+  description={large complex of promoter-bound proteins that is necessary for the transcription of protein-coding genes in eukaryotes}
 }
 
 \newglossaryentry{high-throughput}{%
   name={high-throughput},
-  description={TODO}
-}
-
-\newglossaryentry{high-throughput}{%
-  name={high-throughput},
-  description={TODO}
+  description={the use of automation equipment with classical cell biology techniques to address biological questions that are otherwise unattainable using conventional methods}
 }
 
 \newglossaryentry{fragile site}{%
   name={fragile site},
-  description={TODO}
+  description={heritable-specific loci on human chromosomes that exhibit nonrandom gaps or breaks when chromosomes are exposed to specific cell culture conditions}
+}
+
+\newglossaryentry{core promoter}{%
+  name={core promoter},
+  description={the minimal portion of the promoter required to properly initiate gene transcription}
 }

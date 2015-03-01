@@ -11,6 +11,7 @@
 \usepackage{algorithm2e}
 \usepackage{booktabs,caption,fixltx2e}
 \usepackage[flushleft]{threeparttable}
+\usepackage{bibentry}
 \usepackage{natbib}
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
@@ -59,8 +60,10 @@
 
 % Make a glossary using the glossaries package
 \loadglsentries{./tex/glossary.tex}
-%\input{./tex/glossary}
 \makeglossaries
+
+% tells bibentry to (re)use the bibliographic data from the standard BibTeX setup by
+\nobibliography*
 
 %
 % Actual Document Starts here!
@@ -95,8 +98,8 @@
 %
 % BIBLIOGRAPHY
 %
-%\bibliography{bibliography}{}
-%\bibliographystyle{plos2015}
+\bibliography{bibliography}{}
+\bibliographystyle{plos2015}
 
 %
 % Glossary
