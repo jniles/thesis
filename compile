@@ -1,0 +1,9 @@
+#!/bin/sh
+
+find . -name "*.tex" -exec aspell --lang=en --mode=tex check "{}" \;
+pdflatex thesis
+makeglossaries thesis
+bibtex thesis
+pdflatex thesis
+pdflatex thesis
+
