@@ -6,9 +6,10 @@
 % packages
 \usepackage{ifpdf}
 \usepackage{geometry}
-\usepackage{graphicx,subfigure}
+\usepackage{graphicx}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{algorithm2e}
+\usepackage{tabularx}
 \usepackage{booktabs,caption,fixltx2e}
 \usepackage[flushleft]{threeparttable}
 \usepackage{bibentry}
@@ -16,6 +17,10 @@
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,nogroupskip,nonumberlist]{glossaries}
+
+% TODO
+\usepackage{caption}
+\usepackage{subcaption}
 
 %
 % Definitions
@@ -34,9 +39,9 @@
 % and \norm resizes the size of the brackets, and the
 % starred version does not.
 \makeatletter
-\let\oldabs\abs
+\let\oldabs\abs%
 \def\abs{\@ifstar{\oldabs}{\oldabs*}}
-\let\oldnorm\norm
+\let\oldnorm\norm%
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 \makeatother
 
@@ -60,7 +65,7 @@
 
 % Make a glossary using the glossaries package
 \loadglsentries{./tex/glossary.tex}
-\makeglossaries
+\makeglossaries%
 
 % tells bibentry to (re)use the bibliographic data from the standard BibTeX setup by
 \nobibliography*
@@ -73,12 +78,12 @@
 % import titlepage
 \input{./tex/title}
 
-%\maketitle
-%\makecopyright
+\maketitle
+\makecopyright%
 
-%\contentspage
-%\tablelistpage
-%\figurelistpage
+\contentspage%
+\tablelistpage%
+\figurelistpage%
 
 \input{./tex/introduction}
 \input{./tex/math}
@@ -89,9 +94,9 @@
 %
 % APPENDIX
 %
-\appendix
-\appendixpage
-\addappheadtotoc
+\appendix%
+\appendixpage%
+\addappheadtotoc%
 
 \input{./tex/appendix/appendix}
 
@@ -104,8 +109,7 @@
 %
 % Glossary
 %
-\printglossaries
-
 \input{./tex/supplementary/supplementary}
+\printglossaries%
 
 \end{document}

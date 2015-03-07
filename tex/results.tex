@@ -5,10 +5,10 @@
 \section*{The number of interactions is a function of distance and chromosome}
 In earlier treatments of the Hi-C data sets, the analysis of folding patterns by various groups\cite{imakaev2012}\cite{ren2013}
 the density of bound probes as a function of distance for the entire genome.  However, in our analysis, we remark that chromosomes
-have heterogeneous scaling properties, as seen in \fig{2}.  
+have heterogeneous scaling properties, as seen figure~\ref{fig:interactionScaling}.
 
-\begin{figure}[ht]
-  \caption{Number of interactions as a function of distance.}
+\begin{figure}[h]
+  \caption{Number of interactions as a function of distance.}\label{fig:interactionScaling}
 \end{figure}
 
 We find that the relative ordering of these curves are reproducible between replicates (Pearson=?).  This implies th.
@@ -16,8 +16,7 @@ We find that the relative ordering of these curves are reproducible between repl
 Notably, the scaling ratios are unchanged by normalization, indicating that scaling may be a property of the underlying distribution
 rather than an artifact of out data processing.  Indeed, this indicates that perhaps normalization should be performed, as is
 done in HiCNorm\cite{} on a chromosome by chromosome basis, estimating different background distributions for each chromosome
-rather than using a generalized fitting algorithm such as IPF.
-
+rather than using a generalized fitting algorithm such as IPF\@.  This.
 
 \section*{Differentiation induces fibroblast-specific gene products in IMR90}
 
@@ -33,7 +32,7 @@ and signalling pathways.  Furthermore, downregulated genes are involved in trans
 We asked whether transcriptional upregulation during differentiation could predict mutations, lesions, or break points seen in lung
 cancer studies.  We acquired data for every type of lung cancer lesions from the Catalogue of Somatic Mutations in Cancer
 (COSMIC)\cite{forbes2009} by gene.  Interestingly, the frequency of lesions reported by COSMIC was uncorrelated to those genes
-expression changes (Pearsons $0.07$, $p < 1 \times 10^{-18}$.  There are a number of potential causes for the lack of signal in
+expression changes (Pearsons $0.07$, $p < 1 \times 10^{-18}$).  There are a number of potential causes for the lack of signal in
 our expression data.  Perhaps the expression arrays are not able to identify gene fusion products, a non-negligible portion of
 the COSMIC mutation database.  More likely, as reported recently by Ashworth and colleagues, it is mutations in transcription factors
 that cause gene expression changes in cancers, rather than in the genes themselves\cite{ashworth2014}.
@@ -42,5 +41,3 @@ that cause gene expression changes in cancers, rather than in the genes themselv
 % TODO
 
 \section*{ETC is conserved}
-
-

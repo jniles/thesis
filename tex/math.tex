@@ -10,8 +10,22 @@ dabbled in linear algebra, numerical optimization, probability and statistics.
 \section*{Normalization of Chromatin Contact Maps}
 
 The entry point for topological analysis begins with a chromatin \gls{contact map}.  The experimental procedure, called a Hi-C
-experiment, for generating chromatin contact maps is described in detail in Chapter 3.  For now, an analytical definition will
-suffice.
+experiment, generating a chromatin contact map is described in detail in Chapter 3.  For now, we will attempt to motivate our
+analysis with a simple thought experiment.
+
+Suppose that one wished to record the conformation of a string; in particular, the loops and intersections where the string crosses
+itself or regions lies in close proximity.  One possibility would be to place a one-dimensional coordinate system on the string, say
+$0 \geq x \leq  L, x \in \mathbb{N}$.  Regions in close proximity are represented by coordinate pairs $(u,v)$, and we can assemble
+them into a graph.  As $L \rightarrow \infty$, the resolution of the matrix increases, and interactions on a smller scale can be
+differentiated.  Figure~\ref{fig:stringmapx} is an example of once such diagram.
+
+\begin{figure}[b]
+
+\end{figure}
+
+The data structure for chromatin modeling is identical in spirit to the model produced in our thought experiment.  However, instead of
+interactions occuring on one string, the genome consists of 24 independent chromosome `strings'.  Furthermore, interaction maps are
+generated from populations of cells, yielding millions of copies of each genome.  With this in mind, we propose the following definition:
 
 \begin{defn}
   A chromatin contact map $O$ is a symmetric $N \times N$ matrix.  Each cell or bin $O_{ij}$ contains the number of observed contacts
@@ -68,8 +82,8 @@ $T_{ij}$.
     $\Delta{}B^k_i = \frac{S_i}{\mean{S_i}}$\;
     $W^{k+1}_{ij} = \frac{W^k_{ij}}{\Delta{}B^k_i\Delta{}B^k_j}$\;
     $B^{k+1}_i = B^k_i \dot \Delta{}B^k_i$\;
-    \eIf{$Var(B^{k+1}) < threshold$}{%
-      converged\;
+    \eIf{$\abs{B^{k+1} - B^{k}} < \delta$}{%
+      stop\;
     }{%
       $k = k + 1$\;
     }
@@ -151,8 +165,7 @@ In practice, \gls{PCA} often derived in conjunction with \gls{SVD} and we will h
 
 \end{thm}
 
-In order to prove that any square matrix $\matr{A} \in M_n(\mathbb{R})$ can be decomposed into singular values, we must first recall some
-matrix definitions.
+To prove that any square matrix $\matr{A} \in M_n(\mathbb{R})$ can be decomposed into singular values, we will use some matrix definitions.
 
 % Hermetian
 \begin{defn}

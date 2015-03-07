@@ -2,20 +2,19 @@
 
 \section*{Data Collection}
 
-We chose the IMR90 lung fibroblast and the H1 \gls{hESC} cell lines for analysis due to the availability of data and the volume of
-preexisting literature on these cells lines.  The data obtained for these cell lines are wild type, reference sequences and mappings.
+We selected IMR90 lung fibroblast and H1 \glsentryfull{hESC} cell lines for analysis due to the availability of data and
+preexisting literature on these cells lines.
 
 \subsection*{Processing Chromatin Interaction Data}
 
-The Hi-C data sets used in this thesis were obtained from the Gene Expression Omnibus (GEO)\cite{edgar2002}
-as Sequence Read Archive (SRA) files\footnote{Accession Number %
-  \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.}.  Shell scripts (see Appendix) automated the process
-pof
-to download six experimental replicates of IMR90 cells and two replicates of H1 hESCs from GEO onto a
-local machine for analysis.  Using the Hi-C library prepared by Imakaev and colleagues\cite{imakaev2012},
-the chimeric reads were realigned to the human genome (UCSC build hg19) using the Bowtie2 alignment
-algorithm\cite{langmead2012} with default parameters.  The interactions matrices were prepared and processed
-using custom scripts written in the Python programming language.
+We obtained Hi-C data sets from the Gene Expression Omnibus (GEO)\cite{edgar2002} as \gls{Sequence Read Archive} files,
+accession number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.  Chimeric reads were realigned
+to the human genome (hg19) using the BowTie2 alignment algorithm on 16 threads\cite{langmead2012}.  The resultant mapped
+reads were stored as HDF5 heatmaps.
+
+\subsection*{Iterative correction}
+Using the Hi-C library developed by Imakaev and colleagues\cite{imakaev2012}, the heatmaps were iteratively corrected
+and decomposed into principal components.
 
 % FIXME Make sure appendix numbers/labels are correct
 We noted that the aligned interactions matrices by replicate are highly correlated (Spearman's $\rho \geq 0.69$)  % FIXME p-value!
@@ -177,6 +176,5 @@ be
 \[
   D_{Euc}(x,y) = \|x\| - \|y\| = {(\sum_{i = 1}^{n}{(a_i - b_i)}^2)}^{\frac{1}{2}}
 \]
-
 
 
