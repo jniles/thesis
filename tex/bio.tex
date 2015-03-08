@@ -19,58 +19,58 @@ fragility in the genome presents a backdrop in which to interpret the results of
 \section*{Building from the Basics}
 
 It is difficult to overstate the importance of chromatin topology.  The morass of nucleic acids and proteins packed tightly inside the
-nuclear envelope somehow contains all the information required for cell function and duplication.  The central dogma of molecular biology,
-outlined in the notes of Francis Crick `Ideas on Protein Synthesis' in 1956\cite{crick1970} most eloquently illustrates the flow of
+nuclear envelope somehow contain all the information required for cell function and proliferation.  The central dogma of molecular biology,
+outlined in the notes of Francis Crick `Ideas on Protein Synthesis' in 1956\cite{crick1970} eloquently illustrates the flow of
 information from primary sequence through protein.  At the highest level, the central dogma strongly reinforces the importance of
 \gls{DNA} sequence content, readability, and expression.
 
 \begin{figure}[b]
   \centering
-  \caption{The central dogma of molecular biology\cite{crick1970}}
-  \includegraphics[width=\textwidth]{fig/dogma}\label{fig:dogma}
+  \caption{The original central dogma of molecular biology\cite{crick1970}}
+  \includegraphics[width=\textwidth]{fig/biology/dogma}\label{fig:dogma}
 \end{figure}
 
-The sheer complexity of the nucleus is best decomposed into a structural hierarchy with several layers of granularity: the primary
+The sheer complexity of the nucleus is best understood in a  hierarchy of several layers of granularity: the primary
 sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, and \glspl{CT}
 and other macro molecular chromatin structures.
 
-Ironically, the highest nuclear resolution is the most well studied: the primary sequence of nucleic acid bases that compose the \gls{DNA}
+Ironically, the smallest nuclear resolution is the most well studied: the primary sequence of nucleic acid bases that compose the \gls{DNA}
 molecule itself.  A single level of abstraction above the primary sequence considers interactions between \gls{DNA} and  architectural
-proteins such as histones.  Further up the abstraction hierarchy are \gls{epigenetic} interactions, meaning `above genetics'\cite{dictepi2014},
+proteins such as histones.  Further up the abstraction hierarchy are \gls{epigenetic} interactions, literally `above genetics'\cite{dictepi2014},
 a loose classification of secondary modifications to \gls{DNA} and architectural proteins that are characteristic of cell type and state.
-Finally, chromosomes and chromosomal territories comprise the highest layer of nuclear architecture.  This conceptual hierarchy is useful
+Finally, chromosomes and chromosomal territories comprise the highest domain of nuclear architecture.  This conceptual hierarchy is useful
 to keep in mind when investigating the origin of gene expression changes, differentiation, or disease states.
 
 \subsection*{The Primary Sequence}
 
-The fundamental informational unit of the cell is the \gls{nucleotide}, often called a nucleotide base or base pair when joined in a
+The fundamental informational unit of the cell is the \gls{nucleotide}, often called a nucleotide base or \gls{base pair} when joined in a
 molecule or strand.  Eukaryotic cells have a principle four character alphabet of nucleotides, distinguished by their \glspl{nucleobase}:
 adenine, cytosine, guanine, and thymine.  These nucleotides are affixed to a phosphate backbone in a long, coiling polymer chain.  The
-famous publication of the structure of \gls{DNA} in 1953 by researchers James Watson and Francis Crick demonstrated these polymers
-exist in the nucleus as double helices\cite{watson1953}.  Hydrogen bonds between opposing nucleotides hold the double helix together.
-Importantly, there are two main classifications nucleotides base on structural similarities.  Adenine and guanine are called purine bases,
-while thymine and cytosine are called pyridine bases.  Adenine and thymine are complimentary bases that form two hydrogen bonds.  Similarly,
-guanine and cytosine are also complementary, and form three hydrogen bonds between their bases.  In this fashion, one strand of the helix completely
-determines the opposing side and perturbations from this structure may lead strand mutations\cite{cox2008}.
+famous publication of the structure of \gls{DNA} in 1953 by researchers James Watson and Francis Crick demonstrates these polymers
+exist in the nucleus as double helices\cite{watson1953}.  Hydrogen bonds between opposing nucleotides hold the double helix together in solution.
+Nucleotides are classified based on the structure of the nucleotide base as purine or pyridine bases.  Adenine and guanine are purine bases,
+while thymine and cytosine are pyridine bases.  \gls{DNA} bonds form between complementary nucleotides from opposite groups: adenine and thymine form
+two hydrogen bonds and guanine and cytosine form three hydrogen bonds between their bases.  Thus, one half of the helix completely
+determines the other half and perturbations of this structure may lead strand mutations\cite{cox2008}.
 
 One cannot ignore the constituents of the primary sequence, particularly when considering macroscopic properties of the genome.  The order and
-nucleotide content can change local flexibility and directly (by encoding binding sites) or indirectly (by supporting the binding of histones)
+nucleotide content can change local sequence flexibility, and directly (by encoding binding sites) or indirectly (by supporting the binding of histones)
 modulates the binding of important architectural proteins\cite{travers2004}.  Although a \gls{DNA} strand is a helical structure, it is an intrinsically
 flexible molecule.  A naive calculation reveals that the human genome is roughly two meters in length%
 \footnote{%
-  A diploid human genome consists of two copies of the $\sim3.1MB$ DNA molecule, based off estimates from the \gls{NCBI} human genome reference build 37.
+  A diploid human genome consists of two copies of the $\sim3.1Gb$ DNA molecule, based off estimates from the \gls{NCBI} human genome reference build 37.
   Each base pair is assumed to be roughly $0.34\times10^{-9}m$.  The entire length is $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176m$.
 },
-yet the entire genome fits into a nuclear volume of $\sim523\mu{}m$\cite{marks2011}.  Furthermore, loops as small as 100 bases in length have been
+yt the entire genome fits into a nuclear volume of $\sim523\mu{}m$\cite{marks2011}.  Loops as small as 100 bases in length have been
 reported in enhancer and repressor element activation pathways\cite{wong2008}. These loops can form independently of proteins\cite{vafabakhsh2012}.
 Altogether, \gls{DNA}'s inherent flexibility is the foundation for  many complex higher order chromatin structures.
 
-For completeness, we note that cytosine may undergo methylation, often known as \gls{DNA} methylation or GC methylation to distinguish it
+For completeness, we note that cytosine may undergo methylation, also known as \gls{DNA} methylation or GC methylation to distinguish it
 from a histone modification of the same name\cite{bird2002}.  \gls{DNA} methylation is an important epigenetic mark, involved in imprinting,
 \gls{X-inactivation}, and heritable epigenetic states\cite{law2010}.  In mammals, \gls{DNA} methylation occurs almost exclusively along
 symmetric \gls{GC} dinucleotides, and is estimated to occur at $\sim70-80\%$ of the \gls{GC} sites throughout the genome\cite{ehrlich1982,law2010}.
-In the context of overall chromatin architecture, \gls{DNA} methylation serves a minor role, often reinforcing silencing histone marks; however
-one must be cognizant that this repressive mark is a critical regulator local sequence accessibility.
+In the context of global chromatin architecture, \gls{DNA} methylation is thought to change chromatin conformation by recruiting histone
+de-acetylaces\cite{schubeler2000}, recruiting architectural proteins directly\cite{yu2000}, and inhibiting transcription\cite{kass1997}.
 
 \subsection*{Epigenetics And Chromatin Modeling}
 
@@ -197,7 +197,7 @@ to a microarray.  More targeted methods ChIA-PET and ChIP-loop incorporate immun
 \begin{figure}[b]
   \centering
   \caption{An overview of \gls{3C} methods.}\label{fi:captureTechniques}
-  \includegraphics[width=\textwidth]{fig/CompareChromosomeCapture}
+  \includegraphics[width=\textwidth]{fig/biology/CompareChromosomeCapture}
   \medskip
   \small
   Here in a new line a long description about the figure, in a smaller text
