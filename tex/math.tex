@@ -3,9 +3,10 @@
 \chapter{Mathematical Preliminaries}
 
 We endeavor to secure a relationship between chromatin topology and genomic fragility to elucidate the progression towards
-disease states.  Unfortunately, the mathematical tools we leverage, while both appropriate and necessary, do not flow
-naturally from a single mathematical field.  Therefore, the following chapter will feel disjointed.  By the end, we will have
-dabbled in linear algebra, numerical optimization, probability and statistics.
+disease states.  The analytical tools leveraged in the analysis draw from diverse area of mathematics, computational sciences,
+and statistics.  We assume the reader has familiarity with the mechanics of linear algebra, an elementary course in statistics,
+and numerical analysis.  The reader is heartily encouraged to peruse the references to gain a more complete understanding than
+possible to present here.
 
 \section*{Normalization of Chromatin Contact Maps}
 
@@ -13,7 +14,7 @@ The entry point for topological analysis begins with a chromatin \gls{contact ma
 experiment, generating a chromatin contact map is described in detail in Chapter 3.  For now, we will attempt to motivate our
 analysis with a simple thought experiment.
 
-Suppose that one wished to record the conformation of a string; in particular, the loops and intersections where the string crosses
+Suppose that one wished to record the conformation of a string, in particular, the loops and intersections where the string crosses
 itself or regions lies in close proximity.  One possibility would be to place a one-dimensional coordinate system on the string, say
 $0 \geq x \leq  L, x \in \mathbb{N}$.  Regions in close proximity are represented by coordinate pairs $(u,v)$, and we can assemble
 them into a graph.  As $L \rightarrow \infty$, the resolution of the matrix increases, and interactions on a smaller scale can be
@@ -37,12 +38,13 @@ Contacts are recorded by binning the genome into equally sized intervals and con
 Typically, bins are ordered by increasing genomic coordinates, from the first bin of chromosome 1 to the last bin of chromosome X.
 Depending on data quality, bin sizes range from tens of kilobases to megabases.
 
-The first step of any data analysis pipeline is data \gls{normalization}; that is, remove experimental biases and establish reproducibility.
+The first step of any data analysis pipeline is data \gls{normalization}, which removes experimental biases and noise.  Coupled with quality
+control measurements and experimental replicates, normalization also establishes a level of reproducibility.
 Several methods exist to normalize contact maps.  Tanay and Yaffe were among the first researchers to undertake a statistical analysis of the
 Hi-C experiment in 2011\cite{yaffe2011}.  They identify several sources systematic experimental bias in the Hi-C assay and propose a
-probabilistic background model that computes the probability of \glspl{trans contacts} and \glspl{cis contact} based on a the regional
+probabilistic background model that computes the probability of \glspl{trans contact} and \glspl{cis contact} based on a the regional
 \gls{GC} content, fragment length, and genome mappability.  Corrected contact maps are calculated by solving the maximum-likelihood model
-parameters on the empirically produced contact maps, which are then applied to the experimentally derived contact maps.  The mappings
+parameters on model contact maps, which are then applied to the experimentally derived contact maps.  The mappings
 achieved using Tanay and Yaffe's methods provide robust reproducibility between replicates and experiments by considering
 \glspl{trans contact} and \glspl{cis contact} separately\cite{yaffe2011}.  However, their analysis pipeline is computationally
 intensive, prompting others to research less strenuous methods for Hi-C analysis.
@@ -58,14 +60,15 @@ performance.   We analyze the algorithm in detail.
 
 \subsection*{\glsentryfull{ICE}}
 
-Pursuant of the true contact probability for each genomic region, \gls{ICE} makes a critical observation that bias matrices determined by
+In pursuit of the true contact probability for each genomic region, \gls{ICE} makes a critical observation that bias matrices determined by
 Yaffe and Tanay\cite{yaffe2011} can be successfully reproduced ($r = 0.99$) by a product of biases $B_i \times B_j$.  This observation leads
 immediately to the following proposition
 
 \begin{prop}
   Given the assumption of factorizable biases, the expected contact frequency $\varepsilon_{ij}$ for every pair of regions $(i,j)$ can
   be written as $\varepsilon_{ij} = B_{i}B_{j}T_{ij}$, where $B_i$ and $B_j$ are biases and $T_{ij}$ is the sought matrix of relative contact
-  probabilities, normalized as $\sum_{i, i \neq j, j \pm 1}T_{ij} = 1$.
+  probabilities, normalized as $\sum_{i, i \neq j, j \pm 1}T_{ij} = 1$.  The normalized contact map is give as
+  $T_{ij} = \frac{\varepsilon_{ij}}{B_{i}B_{j}}$.
 \end{prop}
 
 The authors note that this normalization procedure results in `equal visibility' regions across the entire genome and maps which are
@@ -83,7 +86,7 @@ $T_{ij}$.
     $W^{k+1}_{ij} = \frac{W^k_{ij}}{\Delta{}B^k_i\Delta{}B^k_j}$\;
     $B^{k+1}_i = B^k_i \dot \Delta{}B^k_i$\;
     \eIf{$\abs{B^{k+1} - B^{k}} < \delta$}{%
-      stop\;
+      break\;
     }{%
       $k = k + 1$\;
     }
@@ -94,13 +97,13 @@ $T_{ij}$.
 It is not apparent that this algorithm is correct or converges.  To gain an intuitive understanding of the solution, let us investigate a
 simpler proposition.  Suppose that, instead of defining $O_{ij}$ to be the matrix product $B_{i}B_{j}T_{ij}$, we consider that the counts
 in $O_{ij}$ are the expectation of some multinomially distributed random variable $X_{ij}$, where $E[X_{ij}] = NB_{i}B_j$ for some
-constant $N$ and vector $B$ whose cumulative sum is 1 ($\sum_{i}B_i = 1$).  In this formulation, each of the cells of $O_{ij}$ are
-independent and distributed according to $B$.  The count of cell $i,j$ is given by the probability
+constant $N$ and vector $B$ whose cumulative sum is 1 ($\sum_{i}B_i = 1$).  In this formulation, we relax our criteria such that each cell
+$O_{ij}$ is independent and distributed according to $B$.  The count of cell $i,j$ is given by the probability
 
-\[
+\begin{equation}
   p_{ij} = NB_{i}B_{j}
   \log{p_{ij}} =  c + u_i + u_j - Z
-\]
+\end{equation}
 
 where $c = \log{N}, u_i = \log{B_i}, u_j = \log{B_j}$, and $Z (=c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
 model is called a \gls{log-linear model} or \gls{toric model}.  The problem is now a maximization problem: what are the maximum likelihood parameters
@@ -109,9 +112,9 @@ literature\cite{fienberg2012, pachter2005}.
 
 In the realm of statistics, the contact matrix, along with the calculated margins, is called a \gls{contingency table}.  Importantly, assuming
 that the margins are positive, and that the matrix cannot be permuted into block diagonal shape, Birch's theorem guarantees that there is a
-unique maximum to the likelihood function\cite{pachter2005}.  For full details, consult Prachter and Sturmfels\cite{pachter2005}.  Furthermore,
-the marginal values are the \glspl{sufficient statistic} of the model.  In other words, the maximum likelihood parameters for this data is given
-by the normalized row and column sums of the matrix\cite{pachter2005}.
+unique maximum to the likelihood function\cite{bishop1975,pachter2005}.  For full details, consult Discrete Multivariate Analysis by
+Bishop\cite{bishop1975}.  Furthermore, the marginal values are the \glspl{sufficient statistic} of the model.  In other words, the maximum
+likelihood parameters for this data is given by the normalized row and column sums of the matrix\cite{pachter2005}.
 
 With the observation that there exists a global maximum of the likelihood function, all that remains is to compute the `true' values by some
 process.  One common algorithm is the \gls{EM} algorithm\cite{fuchs1982}.  Imakaev and colleagues employ a simpler algorithm known as \gls{IPF},
@@ -121,28 +124,47 @@ tables follows from Fienberg's work in algebraic geometry in 1970\cite{fienberg1
 
 Finally, we return to the \gls{toric model} we described above.  Since the log-likelihood function is concave, the \gls{IPF} algorithm first
 computes the roots of the partial derivatives of the log-likelihood function and sets them to zero to solve for the global maximum.  Imakaev
-and colleagues consider the likelihood function on the Poisson distribution.
+and colleagues consider the likelihood function on the Poisson distribution, given by the \gls{pdf} $f(O;E) = \frac{E^{O}}{O!e^{-E}}$.  The
+log-likelihood function for the Poisson distribution is given
 
-\[
-  L(B) = \sum_{i,j}O_{ij} \dot (\log{B_i} + \log{B_j}) - NB_{i}B_{j} + C
-\]
+\begin{equation}
+  LL = \sum_{ij}\left[O_{ij}\log{T_{ij}B_{i}B_{j}} - T_{ij}B_{i}B_{j} - \log{O_{ij}!}\right]
+\end{equation}
 
-in which $C$ is a constant.
+Differentiating with respect to $T_{lm}$ and $B_m$ and setting the derivatives to zero yields
 
-% TODO
+\begin{multicols}{2}
+  \begin{equation}
+    \frac{dLL}{d\matr{T}_{lm}} = \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} = 0
+    \frac{dLL}{dB_{m}} = \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] = 0
+  \end{equation}
 
-\section*{Principal Component Analysis}
+  \break%
+
+  \begin{equation}*
+    T_{lm} = \frac{\matr{O}_{lm}}{B_{l}B_{m}}
+    \sum_i\left[\frac{\matr{O}_{ij}}{B_{m}B_{i}} - \matr{T}_{im}\right]
+  \end{equation}
+\end{multicols}
+
+It is clear that the second equation is satisfied if a solution is found for the first.  Taking the first equation with the normalization $T_{ij}$ yields
+
+\begin{equation}
+  \sum_i \frac{\matr{O}_{ij}}{B_{i}B_{j}} = 1
+\end{equation}
+
+A similar process yields that a broad class of distributions give the same result\cite{imakaev2009}.  \section*{Principal Component Analysis}
 
 The holy grail of data analysis on high-dimensional data is dimensionality reduction --- that is, to find an accurate representation of
 the experiment that need not invoke all the dimensions measured.  The benefits of preprocessing the data set into fewer dimensions are
-increases in storage capacity and analysis speed.  Since experiments such as Hi-C produce large and larger quantities of data, researchers
+increases in storage capacity and analysis speed.  Since experiments such as Hi-C produce data on larger numbers of features, researchers
 attempt to find ways to remove redundancy, eliminate unneeded parameters and compress data sets.  One of the most popular methods is
 called \gls{PCA}\cite{law1987}.
 
 Data in high dimensions are difficult to visualize and interpret.  The most common questions in data analysis are `what changed?' or `what
 remained the same?' between different experiments.  \gls{PCA} answers these questions by finding a representation of the data that maximizes
 the \gls{variance} or variation between observations in the data set.  The output of \gls{PCA} is a transformed data set on a new coordinate
-system, called components.  The \gls{PCs} are a subset of these components that capture `most' of the variation in the data set.  It is the
+system, called components.  The \glspl{PC} are a subset of these components that capture `most' of the variation in the data set.  It is the
 researcher's obligation to compare these components to the original data set and determine what variables or combination thereof, they may
 represent.
 
@@ -151,9 +173,10 @@ represent.
 \end{defn}
 
 In practice, there are two methods used for \gls{PCA}.  The simplest to explain, but more error-prone, is the eigen-decomposition
-method\cite{}.  In this procedure, the eigenvalues of the covariance matrix $\matr{A}\matr{A}^T$ are calculated directly.  However,
-because this involves an extra matrix multiplication, numerical errors are more likely to be introduced during large computations.
-In practice, \gls{PCA} often derived in conjunction with \gls{SVD} and we will hold to that standard here.
+method\cite{smith2006}.  In this procedure, for a data matrix $\matr{A}$, the eigenvalues of the covariance matrix $\matr{A}\matr{A}^T$
+are computed directly as the principal components.  However, since this method requires an extra matrix multiplication, numerical
+errors are more likely to be introduced during large computations. In practice, \gls{PCA} often derived in conjunction with \gls{SVD}
+and we will hold to that standard here.
 
 \begin{thm}[Singular Value Decomposition]
   Let $\matr{A} \in M_{n}(\mathbb{R})$ be given. Then there are unitary matrices $\matr{V} \in M_n$ and $\matr{W} \in M_n$, and a square diagonal
@@ -174,7 +197,7 @@ In practice, \gls{PCA} often derived in conjunction with \gls{SVD} and we will h
 To prove that any square matrix $\matr{A} \in M_n(\mathbb{R})$ can be decomposed into singular values, we will use some matrix definitions. The
 reader is reminded of the definitions of \textit{normal} $(\matr{A}\matr{A}^* = \matr{A}^*\matr{A})$, \textit{Hermetian} $(\matr{A}^* =  \matr{A})$,
 unitary $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = 1)$ matrices.  Further, two matrices $\matr{A}, \matr{B} \in M_n$ are said to be
-\textit{unitarily similar} they are similar by a unitary matrix $(matr{A} = \matr{U}\matr{B}\matr{U}^*)$.  Now, we are ready to begin the proof.
+\textit{unitarily similar} they are similar by a unitary matrix $(\matr{A} = \matr{U}\matr{B}\matr{U}^*)$.  Now, we are ready to begin the proof.
 
 \begin{proof}[Singular Value Decomposition]
   It should be clear the matrices $\matr{A}\matr{A}^* \in M_n$ and $\matr{A}^*\matr{A} \in M_n$ have the same eigenvalues, and hence, they are
@@ -253,4 +276,5 @@ a genomic region. The formulation of the directionality index is given in the su
 \]
 
 where $A$ is the number of upstream reads in a given window, $B$ is the number of downstream reads, and $E$ is the expected number of interactions under
-the null distribution ($\frac{A + B}{2}$).  Ren and colleagues apply the directionality index to examine 2Mb widows upstream and downstream on a normalized contact map at 40Kb resolution.
+the null distribution ($\frac{A + B}{2}$).  Ren and colleagues apply the directionality index to examine 2Mb windows upstream and downstream on a
+normalized contact map at 40Kb resolution.

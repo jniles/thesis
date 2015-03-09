@@ -30,7 +30,7 @@ information from primary sequence through protein.  At the highest level, the ce
   \includegraphics[width=\textwidth]{fig/biology/dogma}\label{fig:dogma}
 \end{figure}
 
-The sheer complexity of the nucleus is best understood in a  hierarchy of several layers of granularity: the primary
+The sheer complexity of the nucleus is best decomposed into a structural hierarchy with several layers of granularity: the primary
 sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, and \glspl{CT}
 and other macro molecular chromatin structures.
 
@@ -53,8 +53,8 @@ while thymine and cytosine are pyridine bases.  \gls{DNA} bonds form between com
 two hydrogen bonds and guanine and cytosine form three hydrogen bonds between their bases.  Thus, one half of the helix completely
 determines the other half and perturbations of this structure may lead strand mutations\cite{cox2008}.
 
-One cannot ignore the constituents of the primary sequence, particularly when considering macroscopic properties of the genome.  The order and
-nucleotide content can change local sequence flexibility, and directly (by encoding binding sites) or indirectly (by supporting the binding of histones)
+One cannot ignore the constituents of the primary sequence, particularly when considering macroscopic properties of the genome.  The nucleotide content and
+order can change local sequence flexibility directly (by encoding binding sites) or indirectly (by supporting the binding of histones)
 modulates the binding of important architectural proteins\cite{travers2004}.  Although a \gls{DNA} strand is a helical structure, it is an intrinsically
 flexible molecule.  A naive calculation reveals that the human genome is roughly two meters in length%
 \footnote{%
@@ -70,7 +70,8 @@ from a histone modification of the same name\cite{bird2002}.  \gls{DNA} methylat
 \gls{X-inactivation}, and heritable epigenetic states\cite{law2010}.  In mammals, \gls{DNA} methylation occurs almost exclusively along
 symmetric \gls{GC} dinucleotides, and is estimated to occur at $\sim70-80\%$ of the \gls{GC} sites throughout the genome\cite{ehrlich1982,law2010}.
 In the context of global chromatin architecture, \gls{DNA} methylation is thought to change chromatin conformation by recruiting histone
-de-acetylaces\cite{schubeler2000}, recruiting architectural proteins directly\cite{yu2000}, and inhibiting transcription\cite{kass1997}.
+de-acetylaces\cite{schubeler2000}, suppressing large domains as in X-inactivation, recruiting architectural proteins directly\cite{yu2000},
+and inhibiting transcription\cite{kass1997}.
 
 \subsection*{Epigenetics And Chromatin Modeling}
 
@@ -81,7 +82,7 @@ conceptual, and mathematical models.
 
 In 1974, Kornberg discovered that chromatin contained roughly equal amounts of \gls{DNA} and protein\cite{kornberg1974}.  A year later, Pierre Chambon
 and colleagues described the separation of chromatin into protein complexes spaced evenly on the \gls{DNA} molecule as `beads on a string.'\cite{oudet1975}
-The observed beads are nucleosomes, bundles composed of a histone octamer and $\sim200$ bases (later reported to be $167$ bases\cite{robinson2006}) of
+The observed beads are nucleosomes, bundles composed of a histone octamer and $\sim200$ bases (later reported to be $167$ bases)\cite{robinson2006} of
 coiled \gls{DNA}. Much as the nucleotide is the fundamental unit of the genome, nucleosomes are the fundamental units of the epigenome.  Nucleosomes in
 series are called a \gls{nucleosome array}.  A nucleosome consists of two components: a core particle wrapping $\sim146$ base pairs of DNA, yielding a
 6 fold compaction in length, and a linker portion of varying length of $0$ to $\sim80$ base pairs.  The linker component connects adjacent nucleosomes
@@ -153,7 +154,7 @@ reference build of the human genome is a testament to their success\cite{hgsc200
 remained an exhaustively manual process, relying on fluorescence microscopy experiments and visual inspection by researchers.  It was not until 2003,
 when Job Dekker and colleagues described a technique known as \gls{3C} that the study of nuclear architecture gained a high throughput methodology
 \cite{dekker2002}. Since then, a family of high-throughput capture techniques, most named a variation on `\gls{3C}', have been developed to interrogate
-different resolutions and types of chromatin interactions.
+different resolutions and types of chromatin interactions (see Figure\ref{fig:captureTechniques}).
 
 The original chromosome conformation capture technique developed by Dekker and colleagues provides an average measurement of the juxtaposition frequency
 between two specific genomic loci in a cell population\cite{frase2014}.  This interaction frequency measurement is thought to be reflective of
@@ -194,9 +195,9 @@ marking each genomic junction. Like other derivative methods, Hi-C abolishes the
 streptavidin beads to pull down chimeric DNA sequences.  The captured sequences can then be sequenced using next generation sequences or hybridized
 to a microarray.  More targeted methods ChIA-PET and ChIP-loop incorporate immunoprecipitation to select complexes containing certain proteins.
 
-\begin{figure}[b]
+\begin{figure}[h]
   \centering
-  \caption{An overview of \gls{3C} methods.}\label{fi:captureTechniques}
+  \caption{An overview of \gls{3C} methods.}\label{fig:captureTechniques}
   \includegraphics[width=\textwidth]{fig/biology/CompareChromosomeCapture}
   \medskip
   \small
@@ -240,5 +241,5 @@ most chromosomes and to all humans, while rare fragile sites may be expressed in
 
 Rearrangements play pivotal roles in severely debilitating genetic diseases such as Fragile X Syndrome.  All males and an estimated that 60\% of females
 with repeat anomalies near the FRM1 gene on the X chromosome suffer from severe mental handicap due to these alterations\cite{sutherland1995}. Additionally,
-fragile sites are often found rearranged in human cancers\cite{glover2005}.  Despite these findings, reason fragile site are fragile is still an
+fragile sites are often found rearranged in human cancers\cite{glover2005}.  Despite these findings, the basis of fragility in fragile sites is still an
 unanswered question.
