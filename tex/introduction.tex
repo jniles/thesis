@@ -2,23 +2,23 @@
 
 \chapter{Introduction}
 
-What causes the genome to break?  The human genome is an assemblage of six billion nucleotides that encodes the vast instruction set
-controlling cell growth, function, and death.  All possible expression patterns are encoded in the genome, yet particular
+What causes the genome to break?  The human genome is an assemblage of six billion nucleotides encoding the vast instruction set
+which controls cell growth, function, and death.  Every possible gene expression pattern is embedded in the genome, yet particular
 cell and tissue types arise when the instructions are compiled differently during differentiation.  Some of the great mysteries
 of molecular biology surround the establishment and maintenance of the genome structure, and its implications on cell fate.  
-Modern cancer research indicates the establishment of this \gls{epigenetic} landscape determining cell fate may play a
-strategic role in cancer genesis.
+Current research indicates the establishment of this \gls{epigenetic} landscape determining cell fate may play an important
+role in cancer genesis.
 
-We investigate the mechanical and structural changes during cell differentiation to establish an architectural link between
-nuclear topology and the probability of developing lesions or breaks in the genomic sequence.  We hypothesize that mutations
+We investigated the structural changes during cell differentiation to establish an architectural link between
+nuclear topology and the probability of developing lesions or breaks in the genomic sequence.  We hypothesized that mutations
 occurring frequently in specific cancers are based on the epigenetic architecture of the original cell type.  Using human
-embryonic stem cells and lung fibroblasts as models, we propose that topological changes similar to those that establish
-patterns of differentiation are responsible for introducing lesions seen in many cell type specific cancers.  We examine
-gene expression data from both cell lines to understand how topology affects gene expression, and propose a model
-for the further development of lung cancers using mutation and expression data from \gls{COSMIC}.
+embryonic stem cells and lung fibroblasts as models, we proposed that topological changes similar to those that establish
+patterns of differentiation are responsible for introducing lesions seen in many cell type specific cancers.  To validate our
+claim, we applied a heuristic to discover local chromatin topological domains in lung fibroblasts and compared these
+domains to lesions from in the \gls{TCGA}.
 
-This document will proceed as follows.  First, the analytical tools to perform data analysis on genomic data sets are introduced.
-These tools include iterative normalization of chromatin contact maps, eigenvector decomposition, and an algorithm to detect
-topological associating domains from normalized contact maps.  A literature review of chromatin architecture is presented to
+This document will proceed as follows.  First, the analytical tools used to perform analysis on genomic data sets are introduced.
+These tools include iterative normalization of chromatin contact maps, principal component analysis, and an algorithm to detect
+topological domains from contact maps.  A literature review of chromatin architecture is presented to
 provide a strong biological foundation from which to interpret results.  Our methods for data acquisition and processing is
 described, and we conclude with a discussion of the results and propose areas of further investigation and improvement.

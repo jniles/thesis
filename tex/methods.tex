@@ -9,8 +9,9 @@ preexisting literature on these cells lines.
 
 We obtained Hi-C data sets from the Gene Expression Omnibus (GEO)\cite{edgar2002} as \gls{SRA} files,
 accession number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.  Chimeric reads were realigned
-to the human genome (hg19) using the BowTie2 alignment algorithm on 16 threads\cite{langmead2012}.  The resultant mapped
-reads were stored as HDF5 heatmaps.
+to the human genome (hg19) using the BowTie2 alignment algorithm on 16 threads\cite{langmead2012}.  The resulting mapped
+reads were stored as HDF5 heat maps on disk for later interrogation.
+
 
 \subsection*{Iterative correction}
 Using the Hi-C library developed by Imakaev and colleagues\cite{imakaev2012}, the heatmaps were iteratively corrected
@@ -27,10 +28,10 @@ for both cell lines, and significantly different from random (Appendix III).  Th
 % 4) Show that normalization does not significantly decrease the correlation
 % 5) Include p-values for everything I state
 
+\subsection*{Probe Scaling}
 
-\subsection*{DNA Methylation Analysis}
 
-% TODO
+
 
 \subsection*{Gene Expression and Pathway Analysis}
 
@@ -47,134 +48,4 @@ signal from the stem cell line.  Taking the log2 transform yields the fold chang
 Two groups of genes were selected for further analysis: the 100 most upregulated genes and the 100 most downregulated
 genes.  I was curious to find out whether classes of genes were changing together.  Using the ConsensusPathDB
 tool\cite{kamburov2012}, I performed over-representation analysis for pathways and gene ontologies.
-
-\subsection*{Histone Binding}
-
-% TODO
-
-\subsection*{Chromatin Accessibility Assay}
-
-% TODO
-
-Additionally, analyzed tracks for DNA methylation at base pair
-resolution were obtained from GEO\cite{lister2009}.  The liftOver tool from
-the University of California Santa Cruise was used to update the methylation
-data from human genome build hg18 to hg19 for meaningful comparison\cite{hinrichs2006}.
-For detailed data collection notes, see Appendix I.
-
-The detailed description of the treatment protocol used in creating the Hi-C
-library can be found in the original paper\cite{ren2013}.  Briefly, the IMR90
-cells were cultured in growth media.
-
-The cell lines were prepared with no treatment according to the protocol
-described by Dekker and colleagues\cite{dekker2013}.  In brief, the cells
-are washed with a formaldehyde fixation solution to cross-links DNA and
-protein molecules near each other in genomic space.  The cells are
-lysed and the nuclear contents are treated with a non-specific restriction
-enzyme, \textit{HindIII}.  After restriction, the remaining nuclear material
-is washed so that the remaining contents are short DNA sequences or cross
--linked DNA-protein complexes.  The DNA reads are labeled with a biotin
-marker and ligated at low concentrations that favor within ligation between
-reads bound to the same complex.  The reads are captured and sequenced,
-building what is known as a Hi-C library.
-
-%% Regulatory Elements from Ensembl
-
-%% Translocations from COSMIC
-
-%% Genes from Biomart
-%% Hg19 from UCSC
-
-
-\section*{Mapping and Alignment}
-
-A Hi-C library is formed largely of \textit{chimeric} DNA sequences,
-sequences composed of material from more than one source.  The ligation process
-creates novel DNA sequences with a portion of sequence from one region of
-the genome and the remaining portion from a different genomic region.  In
-order to discover to which two regions each probe corresponds, the probes
-must be realigned to the human genome.  Previous methods (\textit{citation needed})
-have truncated reads to a fixed cutoff size before realignment with a short
-read alignment algorithm.  In a recent paper, Imakaev and colleagues
-describe an algorithm to repeated align reads with different truncation sizes
-and analyzing reads with the maximum alignment score\cite{imakaev2012}.  We followed
-this procedure to realign the IMR90 Hi-C libraries for six replicates to
-the human genome build 19 (CRCh38/hg19), with an average of XX million reads
-mapped per replicate.
-
-\section*{Normalization of Contact Maps}
-
-Understanding and accounting the biases inherent in a data set is vital to
-producing accurate, biologically relevant analysis.  To this end, several methods
-have been proposed identify biases and normalize contact maps between replicates
-and experiments\cite{yaffe2011}\cite{hu2012}\cite{yang2014}.  The earliest methods on low
-resolution samples did not perform any normalization at all\cite{aiden2009};
-however, as higher resolution data sets have come available, better
-normalization methods are being explored to identify reproducible,
-fine-grained chromatin structures.
-
-Normalizing data from Hi-C experiments is quite challenging.  As previously
-discussed, the Hi-C data sets are heterogeneous in nature, incorporating
-interactions from cells in every position of cell cycle.  As evidence of phenomena,
-the interaction matrices produced by the Hi-C experiments have nonzero contact
-probabilities between nearly every genomic coordinate\cite{dekker2013}.  This
-finding is further reinforced by the observation that single cell Hi-C analysis
-shows high variability in chromatin architecture\cite{nagano2013}.  Despite this
-variability, existing normalization techniques for Hi-C data sets typically
-assume the majority of the cells in the sampled ensemble are in a static
-chromatin conformation reflective of \textit{in vivo} cell populations.
-
-One approach to normalization described by Yaffe and colleagues\cite{yaffe2011}
-attempts to describe the total interaction frequency between loci as the product
-of a true interaction frequency and a set of experimental biases.  These biases
-are present in all chromosomal capture techniques.  They include biases due to
-PCR in efficiency, read depth per region, sequencing bias, chromatin compaction,
-and random background collisions during ligation\cite{benner2014}\cite{dekker2006}.
-
-\section*{Gene Expression Profiling}
-
-We obtained total gene expression data for IMR90 and \gls{hESC} lines from \gls{GEO}.  The Affymetrix probe annotations were
-downloaded from the Affymetrix website and reads were aligned to UCSC genes.  Probes without a gene match were discarded.  Raw
-expression values were converted to log fold change values for each replicate.  The replicates were highly correlated ($\mu = 2$)
-and expression histograms revealed high similarity in total gene expression between replicates.
-
-
-The set of genes expressed in a cell, collectively known as the \gls{transcriptome}, provides insight into chromatin accessibility
-and cell state.  A gene expressed in $n$ conditions (or $n$ samples) forms vector in $n-$dimensional space.  Similarly, the expression
-profile the entire transcriptome for a single sample is a vector in $m-$dimensional space, where $m$ is the number of genes assessed.
-We therefore denote an experiment interrogating $n$ genes across $m$ samples as an $m \times n$ matrix $S_{m,n}$.
-\[
-  S_{m,n} = \left[
-    \begin{array}{cccc}
-      s_{1,1} & s_{1,2} & \cdots & s_{1,n} \\
-      s_{2,1} & s_{2,2} & \cdots & s_{2,n} \\
-      \vdots & \vdots & \ddots  & \vdots \\
-      s_{m,1} & s_{m,2} & \cdots & s_{m,n}
-    \end{array}
-  \right]
-\]
-
-and a single gene's expression profile is
-\[ G_{i} = \begin{pmatrix} g_{i1} & g_{i2} & g_{i3} & \cdots & g_{in} & \end{pmatrix} \]
-
-We wish to compare differences in gene expression profiles for particular, or all, genes between samples.  This amounts to comparing
-\textit{distances} between gene expression vectors.  There are several methods for doing so.
-
-\subsection*{Euclidean Distance}
-
-The simplest genomic distance measure is \textbf{Euclidean} distance.  Euclidean distance is a particular \gls{norm}, known as
-the 2-norm.  Geometrically, the norm is a measure of `size' or `proximity' in $n-$dimensional space.  The 2-norm for a vector $x$ is
-defined as
-\[
-  \|x\|_{2} = {(|x_1|^2 + |x_2|^2 + \cdots + |x_n|^2)}^{\frac{1}{2}}
-\]
-
-The distance between two vectors in a vector space can now be found using the triangle inequality on the 2-norm.  As a norm, the Euclidean
-norm has some desirable properties, notably, non-negativity, positivity, and a definition of the triangle inequality
-$\|x + y\| = \|x\| + \|y\|$~\cite{horn2013}.  Directly from the triangle inequality, we define the Euclidean distance in $n-$dimensions to
-be
-\[
-  D_{Euc}(x,y) = \|x\| - \|y\| = {(\sum_{i = 1}^{n}{(a_i - b_i)}^2)}^{\frac{1}{2}}
-\]
-
 
