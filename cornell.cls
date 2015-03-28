@@ -44,7 +44,6 @@
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %%   Right brace   \}     Tilde         \~}
 %%
-\usepackage{ifpdf}
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{cornell}
 [2008/4/17 v2.9
@@ -105,6 +104,17 @@
 \ProcessOptions
 
 \iffinal\LoadClass[12pt]{report}[1994/06/01]\else\LoadClass{report}[1994/06/01]\fi
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+\else
+  \ifx\pdfoutput\relax
+  \else
+    \ifcase\pdfoutput
+    \else
+      \pdftrue
+    \fi
+  \fi
+\fi
 \ifpdf
   \setlength{\pdfpagewidth}{8.5in}
   \setlength{\pdfpageheight}{11in}
@@ -265,10 +275,10 @@
     \begin{center}
       \@subtitlesize
       A \ifphd Dissertation \else Thesis \fi \\
-      Presented to the Faculty of the \\
-      New College of Florida \\
+      Presented to the Faculty of the Graduate School \\
+      of Cornell University \\
       in Partial Fulfillment of the Requirements for the Degree of \\
-      \ifphd Bachelor of Arts in Applied Mathematics/Biology\else \@degreefield \fi
+      \ifphd Doctor of Philosophy \else \@degreefield \fi
     \end{center}
     \vfill
     \begin{center}
@@ -334,8 +344,8 @@
     \ifphd%
       {\def\\{\noexpand\\} \xdef\@abstracttitle{\@abstracttitle}}
       \expandafter\uppercase\expandafter{\@abstracttitle} \\
-      \@author \\
-      New College of Florida \ \@conferralyear%
+      \@author,\ Ph.D. \\
+      Cornell University\ \@conferralyear%
     \else
       \normalsize \bfseries\selectfont
       ABSTRACT
