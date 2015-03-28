@@ -8,7 +8,7 @@ preexisting literature on these cells lines.  We obtained Hi-C data sets for bot
 two technical replicates for the stem cell line and six technical replicates of lung fibroblast cells.  Chimeric reads were
 aligned to the human genome build 19 using the BowTie2 alignment
 software\footnote{\url{http://bowtie-bio.sourceforge.net/bowtie2/index.shtml}} on 16 threads\cite{langmead2012}.  Reads containing
-segments mapping to unique portions of the genome were called \gls{double sided} reads and stored on disk in a high performance
+segments mapping to unique portions of the genome were called double sided reads and stored on disk in a high performance
 HDF5\footnote{\url{http://www.hdfgroup.org/HDF5/}} format using the python library \href{https://bitbucket.org/mirnylab/hiclib}{hiclib}
 by Mirny and colleagues\cite{imakaev2012}.  Low-scoring or single sided reads were discarded from future analysis.  Raw and
 corrected maps were exported at 2Mb, 1Mb, 200kb, 40kb, 20kb, and 10kb resolutions.

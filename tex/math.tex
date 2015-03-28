@@ -279,12 +279,12 @@ the data set to the number of chosen components.
 \section*{Detecting changes in local chromatin interaction}
 
 \gls{PCA} is a useful technique for identifying gross differences between data sets.  For subtle changes of local chromatin structure, we appropriate a
-technique developed by Bin Ren and colleagues\cite{ren2013}, termed the \gls{DI}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
+technique developed by Dixon and colleagues\cite{dixon2012}, termed the \gls{DI}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
 relative `upstream' or `downstream' character of the interactions involving that particular chromatin region.
 
 The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, we calculate the number of upstream and downstream interactions and
 assign the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the downstream or upstream bias of
-a genomic region. The formulation of the directionality index is given in the supplementary methods of Ren's paper\cite{ren2013}
+a genomic region. The formulation of the directionality index is given in the supplementary methods of Dixon's paper\cite{dixon2012}
 
 \begin{align}
   \label{eqn:di}
@@ -292,6 +292,7 @@ a genomic region. The formulation of the directionality index is given in the su
 \end{align}
 
 where $A$ is the number of upstream reads in a given window, $B$ is the number of downstream reads, and $E$ is the expected number of interactions under
-the null distribution ($\frac{A + B}{2}$).  Ren and colleagues apply the directionality index to examine 2Mb windows upstream and downstream on a
-normalized contact map at 40Kb resolution, finding that these parameters maximize the reproducibility of the \gls{DI}.  From the \gls{DI}, they employ a
-\gls{HMM} to discover domains of prominent upstream and downstream bias.
+the null distribution ($\frac{A + B}{2}$).  Dixon and colleagues apply the directionality index to examine 2Mb windows upstream and downstream on a
+normalized 40kb resolution contact map.  From the \gls{DI} vector, they employ a \gls{HMM} to discover X domains with prominent upstream and downstream bias.
+They concluded that these domains were (not) conserved across cell types, but may represent an underlying regulatory structure in particular cell or tissue
+types\cite{dixon2012}.
