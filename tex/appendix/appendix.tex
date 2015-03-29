@@ -23,7 +23,7 @@ To make valid comparisons between disparate data sets, it is crucial to ensure a
 build of the human genome.  A genome build is a haploid assembly of sequences from several individuals published by
 the NCBI to provide a reference for an organism gene and feature set, though not necessarily every allele.  A build assembly
 refers to a particular published sequence annotation set.  Human Genome Build 19 (HG19) is the University of California Santa
-Cruz nomenclature for the NCBI Build GRCh37 published in 2009\cite{lander2001}.
+Cruz nomenclature for the NCBI Build GRCh37 published in 2009 \citep{lander2001}.
 
 In this thesis, the methylation and histone assays were all reported against human genome build 18.  Experiments aligned
 against previous builds of the human genome may be updated informatically, either by re-alignment of the
@@ -48,7 +48,7 @@ batch coordinate conversion.  Each file was unzipped and updated to HG19 prior t
 \chapter{Iterative Alignment of Probes}
 
 Probes were aligned to the human genome build hg19 using procedures outlined by
-Imakaev and colleagues\cite{imakaev2012}.  The chimeric nature of the reads
+Imakaev and colleagues \citep{imakaev2012}.  The chimeric nature of the reads
 requires that probes be aligned iteratively, starting from a small, truncated
 region from the beginning of the read, mapping this truncated area, increasing
 the truncation size and recursing a fixed number of steps or until the alignment
@@ -59,11 +59,11 @@ for the truncation and step size can be found in the the iterativeMapping.py
 script provided in the Appendix: Code.  Most reads were 100 base pairs, resulting
 in an initial truncation length of 28 base pairs, and step size of 18 base pairs.
 
-Using the mapping functionality from the hiclib python package\cite{imakaev2012},
+Using the mapping functionality from the hiclib python package \citep{imakaev2012},
 sequences from the six experimental replicates were realigned to the genome.  The
-alignment employed the fast Bowtie2 alignment algorithm\cite{langmead2012}.  Once
+alignment employed the fast Bowtie2 alignment algorithm \citep{langmead2012}.  Once
 aligned, the probes were stored as an interaction matrix in the high performance
-HDF5\cite{hdf5} data format, a total of 25Gb for all replicates.
+HDF5 \citep{hdf5} data format, a total of 25Gb for all replicates.
 
 Statistics for iterative alignment are given below:
 

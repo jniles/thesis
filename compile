@@ -1,9 +1,26 @@
 #!/bin/sh
 
-find . -name "*.tex" -exec aspell --lang=en --mode=tex check "{}" \;
-pdflatex thesis
-makeglossaries thesis
-bibtex thesis
-pdflatex thesis
-pdflatex thesis
-
+while test $# -gt 0; do
+  case "$1" in
+    -h)
+      echo "Use the -a flag to do a full compile."
+      exit 0
+      ;;
+    -a)
+      shift
+      find . -name "*.tex" -exec aspell --lang=en --mode=tex check "{}" \;
+      pdflatex thesis
+      makeglossaries thesis
+      bibtex thesis
+      pdflatex thesis
+      pdflatex thesis
+      exit 0
+      ;;
+    *)
+      pdflatex thesis
+      bibtex thesis
+      pdflatex thesis
+      exit 0
+      ;;
+  esac
+done

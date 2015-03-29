@@ -21,6 +21,8 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,nogroupskip,nonumberlist]{glossaries}
 
+\bibpunct{(}{)}{;}{a}{,}{,}
+
 % TODO
 \usepackage{caption}
 
@@ -112,14 +114,14 @@
 \input{./tex/supplementary/fragile}
 
 %
-% BIBLIOGRAPHY
-%
-\bibliography{bibliography}{}
-\bibliographystyle{plos2015}
-
-%
 % Glossary
 %
 \printglossaries%
+
+%
+% BIBLIOGRAPHY
+%
+\bibliography{bibliography}{}
+\bibliographystyle{cell}
 
 \end{document}

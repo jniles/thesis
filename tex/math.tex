@@ -23,8 +23,8 @@ an example of one such diagram.
 
 \begin{figure}[b]
   \centering
-  \caption{Interactions on a string}
-  \includegraphics{figures/mathematics/strmtx}\label{fig:string}
+  \caption{Example: Interactions on a string}
+  \includegraphics[width=\textwidth]{figures/mathematics/strmtx}\label{fig:string}
 \end{figure}
 
 The data structure produced by a Hi-C experiment is identical in spirit to the model developed in our thought experiment.  However, instead of
@@ -43,27 +43,27 @@ Depending on data quality, bin sizes range from tens of kilobases to megabases.
 The first step of any data analysis pipeline is data \gls{normalization}, which removes experimental biases and noise.  Coupled with quality
 control measurements and experimental replicates, normalization also establishes a level of reproducibility.
 Several methods exist to normalize contact maps.  Tanay and Yaffe were among the first researchers to undertake a statistical analysis of the
-Hi-C experiment in 2011\cite{yaffe2011}.  They identify several sources systematic experimental bias in the Hi-C assay and propose a
+Hi-C experiment in 2011 \citep{yaffe2011}.  They identify several sources systematic experimental bias in the Hi-C assay and propose a
 probabilistic background model that computes the probability of \glspl{trans contact} and \glspl{cis contact} based on regional
 \gls{GC} content, fragment length, and genome mappability.  Corrected contact maps are calculated by solving the maximum-likelihood model
 parameters on model contact maps, which are then applied to the experimentally derived contact maps.  The mappings
 achieved using Tanay and Yaffe's methods provide robust reproducibility between replicates and experiments by considering
-\glspl{trans contact} and \glspl{cis contact} separately\cite{yaffe2011}.  This requirement renders their analysis computationally
+\glspl{trans contact} and \glspl{cis contact} separately \citep{yaffe2011}.  This requirement renders their analysis computationally
 intensive, prompting further research into simpler methods for Hi-C analysis.
 
 Alternative methods have been developed to normalize contact maps.  Hu and colleagues propose a method `HiCNorm' based on Poisson
-regression and achieve a $9000X$ speed up compared to Tanay and Yaffe's method\cite{hu2012}.  Recently, Ay and colleagues provide a statistical
+regression and achieve a $9000X$ speed up compared to Tanay and Yaffe's method \citep{hu2012}.  Recently, Ay and colleagues provide a statistical
 method `Fit-Hi-C' that does not assume a particular underlying statistical distribution, instead normalizing \glspl{cis contact} based on probabilistic
-analysis of polymer looping dynamics\cite{ay2014}.
+analysis of polymer looping dynamics \citep{ay2014}.
 
-Imakaev and colleagues propose a normalization and analysis pipeline \gls{ICE}\cite{imakaev2012}.  We employ \gls{ICE} as the normalization
+Imakaev and colleagues propose a normalization and analysis pipeline \gls{ICE} \citep{imakaev2012}.  We employ \gls{ICE} as the normalization
 algorithm in this thesis, due to the availability of its source code\footnote{source: \url{http://mirnylab.bitbucket.org/hiclib/}} and good
 performance.  In the following section, we will discuss their algorithm in detail.
 
 \subsection*{\glsentryfull{ICE}}
 
 In pursuit of the true contact probability for each genomic region, \gls{ICE} makes a critical observation that the bias matrices determined by
-Yaffe and Tanay\cite{yaffe2011} can be successfully reproduced ($r = 0.99$) as a product of biases $B_i \times B_j$.  This observation leads
+Yaffe and Tanay \citep{yaffe2011} can be successfully reproduced ($r = 0.99$) as a product of biases $B_i \times B_j$.  This observation leads
 immediately to the following proposition
 
 \begin{prop}
@@ -111,20 +111,20 @@ where $c = \log{N}, u_i = \log{B_i}, u_j = \log{B_j}$, and $Z (= c)$ is a normal
 model is called a \gls{log-linear} or \gls{toric model}.  $p$ is an observation from some distribution $p \sim \mathcal{f}(X)$.  The challenge to
 parameterize the model and fit the model to the observed map.  The problem one of \gls{MLE}: what are the maximum likelihood parameters
 that best fit the model to the observed data?  Fortunately, methods and their convergence properties for solving \glspl{MLE} have been extensively
-studied in the literature\cite{fienberg2012, pachter2005}.
+studied in the literature \citep{fienberg2012, pachter2005}.
 
 % TODO
 In the realm of statistics, the contact matrix, together the vector sums of the rows and columns (margins), is called a \gls{contingency table}.  Assuming
 that the margins are positive, and that the matrix cannot be permuted into block diagonal shape, Birch's theorem guarantees that there is a
-unique maximum to the likelihood function\cite{pachter2005,bishop1975}.  For full details, consult Discrete Multivariate Analysis by
-Bishop\cite{bishop1975}.  Furthermore, the marginal values are the \glspl{sufficient statistic} of the model.  In other words, the maximum
-likelihood parameters for this data is given by the normalized row and column sums of the matrix\cite{pachter2005}.
+unique maximum to the likelihood function \citep{pachter2005,bishop1975}.  For full details, consult Discrete Multivariate Analysis by
+Bishop \citep{bishop1975}.  Furthermore, the marginal values are the \glspl{sufficient statistic} of the model.  In other words, the maximum
+likelihood parameters for this data is given by the normalized row and column sums of the matrix \citep{pachter2005}.
 
 With the observation that there exists a global maximum of the likelihood function, all that remains is to compute the true values by some
-process.  One common algorithm is the \gls{EM} algorithm\cite{fuchs1982}.  Imakaev and colleagues employ a simpler algorithm known as \gls{IPF},
-developed by Deming and Stephan in 1940, and apparently rediscovered by Imakaev's group\cite{deming1940}.  \gls{IPF} works generally by solving
+process.  One common algorithm is the \gls{EM} algorithm \citep{fuchs1982}.  Imakaev and colleagues employ a simpler algorithm known as \gls{IPF},
+developed by Deming and Stephan in 1940, and apparently rediscovered by Imakaev's group \citep{deming1940}.  \gls{IPF} works generally by solving
 the \gls{MLE} problem while leaving the margins ($p_{i+} = \sum_{j}p_{ij}$ and $p_{j+} = \sum_{i}p_{ij}$) fixed.  A proof of convergence for contingency
-tables follows from Fienberg's work in algebraic geometry in 1970\cite{fienberg1970}. %TODO explain feinburg more
+tables follows from Fienberg's work in algebraic geometry in 1970 \citep{fienberg1970}. %TODO explain feinburg more
 
 Finally, we return to the \gls{toric model} we described in Eqn.~\eqref{eqn:probmodel}.  Since the log-likelihood function is concave, the \gls{IPF} algorithm first
 computes the roots of the partial derivatives of the log-likelihood function and sets them to zero to solve for the global maximum.  Imakaev
@@ -168,14 +168,14 @@ normalization $T_{ij}$ yields
   \sum_i \frac{\matr{O}_{ij}}{B_{i}B_{j}} = 1
 \end{align}
 
-A similar process yields that a broad class of distributions give the same result\cite{imakaev2012}.
+A similar process yields that a broad class of distributions give the same result \citep{imakaev2012}.
 
 \section*{Principal Component Analysis}
 
 The holy grail of data analysis on high-dimensional data is dimensionality reduction --- that is, to find an accurate representation of
 the experiment that need not invoke all the dimensions measured.  This is often performed as a preprocessing step to increase storage capacity
 and algorithm speed.  Since experiments such as Hi-C produce data on large numbers of features, researchers must find ways to remove redundancy,
-eliminate unneeded parameters and compress data sets.  One of the most popular methods is called \gls{PCA}\cite{law1987}.
+eliminate unneeded parameters and compress data sets.  One of the most popular methods is called \gls{PCA} \citep{law1987}.
 
 Data in high dimensions are difficult to visualize and interpret.  Two common questions in data analysis are `what changed?' and `what
 remained the same?' between measurements.  \gls{PCA} answers these questions by finding a representation of the data that maximizes
@@ -188,7 +188,7 @@ must compare the calculated components to the original data set and determine wh
 \end{defn}
 
 In practice, there are two methods used for \gls{PCA}.  The simplest to explain, but more error-prone, is the eigen-decomposition
-method\cite{smith2006}.  In this procedure, for a data matrix $\matr{A}$, the eigenvalues of the covariance matrix $\matr{A}\matr{A}^T$
+method \citep{smith2006}.  In this procedure, for a data matrix $\matr{A}$, the eigenvalues of the covariance matrix $\matr{A}\matr{A}^T$
 are computed directly as the principal components.  However, since this method requires an extra matrix multiplication, numerical
 errors are more likely to be introduced during large computations. In practice, \gls{PCA} often derived in conjunction with \gls{SVD}
 and we will hold to that standard here.
@@ -239,7 +239,7 @@ and unitary $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = 1)$ matrices.  Further, 
   $\sigma_j = \abs{\lambda_j}, j = 1, \ldots, n$.
 \end{proof}
 
-A full proof of \gls{SVD} for rectangular matrices can be found in Horn and Johnson\cite{horn2013}. The relationship between
+A full proof of \gls{SVD} for rectangular matrices can be found in Horn and Johnson \citep{horn2013}. The relationship between
 \gls{SVD} and \gls{PCA} follows directly from the definition of \gls{SVD}.
 
 \begin{thm}
@@ -279,12 +279,12 @@ the data set to the number of chosen components.
 \section*{Detecting changes in local chromatin interaction}
 
 \gls{PCA} is a useful technique for identifying gross differences between data sets.  For subtle changes of local chromatin structure, we appropriate a
-technique developed by Dixon and colleagues\cite{dixon2012}, termed the \gls{DI}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
+technique developed by Dixon and colleagues \citep{dixon2012}, termed the \gls{DI}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
 relative `upstream' or `downstream' character of the interactions involving that particular chromatin region.
 
 The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, we calculate the number of upstream and downstream interactions and
 assign the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the downstream or upstream bias of
-a genomic region. The formulation of the directionality index is given in the supplementary methods of Dixon's paper\cite{dixon2012}
+a genomic region. The formulation of the directionality index is given in the supplementary methods of Dixon's paper  \citep{dixon2012}
 
 \begin{align}
   \label{eqn:di}
@@ -295,4 +295,4 @@ where $A$ is the number of upstream reads in a given window, $B$ is the number o
 the null distribution ($\frac{A + B}{2}$).  Dixon and colleagues apply the directionality index to examine 2Mb windows upstream and downstream on a
 normalized 40kb resolution contact map.  From the \gls{DI} vector, they employ a \gls{HMM} to discover X domains with prominent upstream and downstream bias.
 They concluded that these domains were (not) conserved across cell types, but may represent an underlying regulatory structure in particular cell or tissue
-types\cite{dixon2012}.
+types \citep{dixon2012}.
