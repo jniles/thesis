@@ -18,7 +18,11 @@ rather than an artifact of out data processing.  Indeed, this indicates that per
 done in HiCNorm \citep{hu2012} on a chromosome by chromosome basis, estimating different background distributions for each chromosome
 rather than using a generalized fitting algorithm such as IPF\@.  This.
 
-\section*{Differentiation induces fibroblast-specific gene products in IMR90}
+\section*{Principal Components and Gene Expression}
+
+We were curious whether a shift in the eigenvector for genomic regions could bring about a change in gene expression.  Using replicated
+IMR90 and hESC gene expression experiments, we plotted the changes in gene expression against the compartment changes.
+
 
 The transition from embryonic pluripotency to a specialized cell type naturally introduces a change in the expressed cell products.
 Using Affymetrix microarrays, we observe that the overall trend towards differentiation marginally increases gene expression across
@@ -36,6 +40,10 @@ expression changes (Pearsons $0.07$, $p < 1 \times 10^{-18}$).  There are a numb
 our expression data.  Perhaps the expression arrays are not able to identify gene fusion products, a non-negligible portion of
 the COSMIC mutation database.  More likely, as reported recently by Ashworth and colleagues, it is mutations in transcription factors
 that cause gene expression changes in cancers, rather than in the genes themselves \citep{ashworth2014}.
+
+\section*{Fragile sites and eigenvectors}
+
+
 
 \section*{Contact maps of cell lines change drastically during differentiation}
 % TODO

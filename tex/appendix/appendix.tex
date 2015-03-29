@@ -1,123 +1,53 @@
 % appendix.tex
-\chapter{Data Collection}
+
+\chapter{Data collection}
 
 Methylation data was downloaded from the Salk Institute for Biology Studies in
 two files from two biological replicates.  Each file contained $\sim600$ million
-reads from the
-
-\begin{table}
-  \centering
-  \begin{tabular}{lccr}
-    \hline
-    Replicate & Hg18 Reads & Hg19 Reads & Unlifted Reads \\ \hline
-    1 & 563,354,527 & 563,071,323 & 566,408 \\
-    2 & 620,520,572 & 620,227,842 & 585,460 \\
-    \hline
-  \end{tabular}
-  \caption{Genomic methylation data for IMR90}
-\end{table}
-
-\chapter{Data Migration to Human Genome Build 19}
-
-To make valid comparisons between disparate data sets, it is crucial to ensure all data sets are aligned to the same
-build of the human genome.  A genome build is a haploid assembly of sequences from several individuals published by
-the NCBI to provide a reference for an organism gene and feature set, though not necessarily every allele.  A build assembly
-refers to a particular published sequence annotation set.  Human Genome Build 19 (HG19) is the University of California Santa
-Cruz nomenclature for the NCBI Build GRCh37 published in 2009 \citep{lander2001}.
-
-In this thesis, the methylation and histone assays were all reported against human genome build 18.  Experiments aligned
-against previous builds of the human genome may be updated informatically, either by re-alignment of the
-sequence probes or through coordinate transposition.  The UCSC Genome Browser provides a command line utility liftOver for
-batch coordinate conversion.  Each file was unzipped and updated to HG19 prior to further analysis using the liftOver tool.
-
-\begin{table}
-  \centering
-  \begin{tabular}{lccr}
-    \hline
-    Sample & HG18 Reads & HG19 Reads & Unlifted Reads \\ \hline
-    H3K27ac & 16374518 & 16371125 & 3,393 \\
-    p65 & 16371125 & 6165230 & 947 \\
-    H3K4me1 & 18713234 & 18709033 & 4201 \\
-    H3K36me3 & 15808706 & 15807726 & 980 \\
-    CTCF & 5501307 & 5499946 & 1361 \\
-    \hline
-  \end{tabular}
-  \caption{Genomic methylation data for IMR90}
-\end{table}
+reads from the.
 
 \chapter{Iterative Alignment of Probes}
 
-Probes were aligned to the human genome build hg19 using procedures outlined by
-Imakaev and colleagues \citep{imakaev2012}.  The chimeric nature of the reads
-requires that probes be aligned iteratively, starting from a small, truncated
-region from the beginning of the read, mapping this truncated area, increasing
-the truncation size and recursing a fixed number of steps or until the alignment
-scores become sufficiently poor.  Due to the large number of reads requiring
-alignment, we opted to use a fixed truncation length (based on sequence length)
-and four steps in the iterative alignment protocol.  The calculation
-for the truncation and step size can be found in the the iterativeMapping.py
-script provided in the Appendix: Code.  Most reads were 100 base pairs, resulting
+Probes were aligned to the human genome build hg19 using procedures outlined by Imakaev and colleagues \citep{imakaev2012}.  The chimeric nature of the reads
+requires that probes be aligned iteratively, starting from a small, truncated region from the beginning of the read, mapping this truncated area, increasing
+the truncation size and recursing a fixed number of steps or until the alignment scores become sufficiently poor.  Due to the large number of reads requiring
+alignment, we opted to use a fixed truncation length (based on sequence length) and four steps in the iterative alignment protocol.  The calculation
+for the truncation and step size can be found in the iterativeMapping.py script provided online.  The majority of reads 100 base pairs in length, resulting
 in an initial truncation length of 28 base pairs, and step size of 18 base pairs.
 
-Using the mapping functionality from the hiclib python package \citep{imakaev2012},
-sequences from the six experimental replicates were realigned to the genome.  The
-alignment employed the fast Bowtie2 alignment algorithm \citep{langmead2012}.  Once
-aligned, the probes were stored as an interaction matrix in the high performance
-HDF5 \citep{hdf5} data format, a total of 25Gb for all replicates.
-
-Statistics for iterative alignment are given below:
-
-\begin{center}
-  \begin{table}
-    \begin{tabular}{l l}
-    Total Reads & 2,124,453,478 \\
-    Total DS Reads & 1,422,870,270 \\
-    Valid Pairs & 713,897,554 \\
-    Filtered Reads & 457,298,174 \\
+\begin{table}[ht]
+  \centering
+  \caption{Hi-C reads captured for all datasets}
+  \label{tab:reads}
+  \begin{tabular}{l l}
+    \toprule
+    Total Reads                  & 2,124,453,478 \\
+    Total DS Reads               & 1,422,870,270 \\
+    Walid Pairs                  & 713,897,554 \\
+    Filtered Reads               & 457,298,174 \\
     Percent \textit{trans} Reads & 49.42\% \\
-    \end{tabular}
-  \end{table}
-\end{center}
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 
 \chapter{Data Validation}
 
-In order to make meaningful comparisons between data sets (replicates,
-in this case), we must show that some degree of relationship exists between
-the data sets and comparisons or combinations of the data from disparate sets
-are valid to a degree of uncertainty.  It is also essential to understand if the
-experimental replicates indeed managed to replicate the conditions of the primary
-experiment, or if experimental errors prevent the comparison between replicates.
+We assessed the degree of similarity between datasets using Spearman's rank correlation coefficent $\rho$.  Correlations were calculated between experimental
+replicates as well as cross experiment.  The details are given in table~\ref{tab:correlations}.
 
-Spearman's Rank Correlation Coefficient (denoted by the Greek letter $\rho$) is
-a non-parametric measure of association between two variables.
-Spearman's coefficient assumes some monotonic relationship between variables,
-rather than a linear relationship (as in Pearson's), making it appropriate
-to compare the IMR90 interaction data sets.  The formula for Spearman's $\rho$ is
-given as follows:
-
-\begin{equation}
-\rho = 1 - \frac{\sum_{i=1}{n}(d_i^2)}{n(n^2 - 1)}
-\end{equation}
-
-where $\rho$ is the correlation coefficient taking values between $-1$ and $+1$,
-$d_i = x_i - y_i$ where $x_i, y_i$ are ranks derived from the raw scores $X$ and
-$Y$ respectively.
-
-The first replicate IMR90 interaction data set was labeled the primary data set
-and the remaining five were compared using Spearman's Rank Correlation.  The
-results are given in Table X.
-
-\begin{table}
-  \begin{tabular}{|c|*{6}{c|}}
+\begin{table}[ht]
+  \centering
+  \caption{Hi-C reads captured for all datasets}
+  \label{tab:correlations}
+  \begin{tabular}{cccccc}
     \toprule
-    \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\ \midrule
-    0.83 & \textbf{R2} & 0.82 & 0.83 & 0.79 & 0.75 \\ \midrule
-    0.77 & 0.82 & \textbf{R3} & 0.77 & 0.74 & 0.73 \\ \midrule
-    0.77 & 0.83 & 0.77 & \textbf{R4} & 0.75 & 0.71 \\ \midrule
-    0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\ \midrule
-    0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\ \midrule
+    \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\
+    0.83 & \textbf{R2} & 0.82 & 0.83 & 0.79 & 0.75 \\
+    0.77 & 0.82 & \textbf{R3} & 0.77 & 0.74 & 0.73 \\
+    0.77 & 0.83 & 0.77 & \textbf{R4} & 0.75 & 0.71 \\
+    0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\
+    0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\
+    \bottomrule
   \end{tabular}
-  \caption{Spearman's $\rho$ across all data sets.}
-\label{tab:correlations}
 \end{table}
