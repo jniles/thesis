@@ -3,7 +3,7 @@
 \chapter{Results \& Discussion}
 
 \section*{The number of interactions is a function of distance and chromosome}
-In earlier treatments of the Hi-C data sets, the analysis of folding patterns by various groups\cite{imakaev2012}\cite{dixon2012}
+In earlier treatments of the Hi-C data sets, the analysis of folding patterns by various groups \citep{imakaev2012} \citep{dixon2012}
 the density of bound probes as a function of distance for the entire genome.  However, in our analysis, we remark that chromosomes
 have heterogeneous scaling properties, as seen figure~\ref{fig:interactionScaling}.
 
@@ -15,27 +15,27 @@ We find that the relative ordering of these curves are reproducible between repl
 
 Notably, the scaling ratios are unchanged by normalization, indicating that scaling may be a property of the underlying distribution
 rather than an artifact of out data processing.  Indeed, this indicates that perhaps normalization should be performed, as is
-done in HiCNorm\cite{hu2012} on a chromosome by chromosome basis, estimating different background distributions for each chromosome
+done in HiCNorm \citep{hu2012} on a chromosome by chromosome basis, estimating different background distributions for each chromosome
 rather than using a generalized fitting algorithm such as IPF\@.  This.
 
 \section*{Differentiation induces fibroblast-specific gene products in IMR90}
 
 The transition from embryonic pluripotency to a specialized cell type naturally introduces a change in the expressed cell products.
 Using Affymetrix microarrays, we observe that the overall trend towards differentiation marginally increases gene expression across
-the entire proteome (mean=?).  This observation is not surprising, and is thoroughly documented in the literature\cite{tuomela2012}
+the entire proteome (mean=?).  This observation is not surprising, and is thoroughly documented in the literature \citep{tuomela2012}
 for various cell types.
 
 We then sought to understand how expression changes were related to molecular function in the cell.  Using the ConsensusPathDB
-tool\cite{kamburov2012}, we performed both over expression and gene ontology analysis of the 1\%  largest positively and negatively
+tool \citep{kamburov2012}, we performed both over expression and gene ontology analysis of the 1\%  largest positively and negatively
 and signalling pathways.  Furthermore, downregulated genes are involved in transcriptional regulation of pluripotent stem cells.
 
 We asked whether transcriptional upregulation during differentiation could predict mutations, lesions, or break points seen in lung
 cancer studies.  We acquired data for every type of lung cancer lesions from the Catalogue of Somatic Mutations in Cancer
-(COSMIC)\cite{forbes2009} by gene.  Interestingly, the frequency of lesions reported by COSMIC was uncorrelated to those genes
+(COSMIC) \citep{forbes2009} by gene.  Interestingly, the frequency of lesions reported by COSMIC was uncorrelated to those genes
 expression changes (Pearsons $0.07$, $p < 1 \times 10^{-18}$).  There are a number of potential causes for the lack of signal in
 our expression data.  Perhaps the expression arrays are not able to identify gene fusion products, a non-negligible portion of
 the COSMIC mutation database.  More likely, as reported recently by Ashworth and colleagues, it is mutations in transcription factors
-that cause gene expression changes in cancers, rather than in the genes themselves\cite{ashworth2014}.
+that cause gene expression changes in cancers, rather than in the genes themselves \citep{ashworth2014}.
 
 \section*{Contact maps of cell lines change drastically during differentiation}
 % TODO
