@@ -1,8 +1,7 @@
 % results.tex
-
 \chapter{Results \& Discussion}
 
-\section*{The number of interactions is a function of distance and chromosome}
+\section*{Genome Interaction Scaling}
 In earlier treatments of the Hi-C data sets, the analysis of folding patterns by various groups \citep{imakaev2012} \citep{dixon2012}
 the density of bound probes as a function of distance for the entire genome.  However, in our analysis, we remark that chromosomes
 have heterogeneous scaling properties, as seen figure~\ref{fig:interactionScaling}.
@@ -21,31 +20,31 @@ rather than using a generalized fitting algorithm such as IPF\@.  This.
 \section*{Principal Components and Gene Expression}
 
 We were curious whether a shift in the eigenvector for genomic regions could bring about a change in gene expression.  Using replicated
-IMR90 and hESC gene expression experiments, we plotted the changes in gene expression against the compartment changes.
+IMR90 and hESC gene expression experiments, we plotted the changes in gene expression against the compartment changes, but did not
+find any correlation between changes in compartment character and gene expression levels ($\rho = -0.009$, $p$-value negligible.
+See Figure~\ref{fig:expressionChangeByCompartment}.)
 
+\begin{figure}[thp]
+  \begin{minipage}{0.5\textwidth}%
+    \centering
+    \caption{Gene Expression Change by Compartment Change}\label{fig:expressionChangeByCompartmentChange}
+    \includegraphics[width=\textwidth]{./figures/results/volcano.png}
+  \end{minipage}
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \caption{Compartmentalized Gene Expression}\label{fig:expressionChangeByCompartment}
+    \includegraphics[width=\textwidth]{./figures/results/compartment-expression-IMR90-R5-200k.png}
+  \end{minipage}
+\end{figure}
 
-The transition from embryonic pluripotency to a specialized cell type naturally introduces a change in the expressed cell products.
-Using Affymetrix microarrays, we observe that the overall trend towards differentiation marginally increases gene expression across
-the entire proteome (mean=?).  This observation is not surprising, and is thoroughly documented in the literature \citep{tuomela2012}
-for various cell types.
+\section*{Directionality Indices}
 
-We then sought to understand how expression changes were related to molecular function in the cell.  Using the ConsensusPathDB
-tool \citep{kamburov2012}, we performed both over expression and gene ontology analysis of the 1\%  largest positively and negatively
-and signalling pathways.  Furthermore, downregulated genes are involved in transcriptional regulation of pluripotent stem cells.
+If the nuclear architecture can be decomposed into layers as we have hypothesized, topological domains may exist at different
+scales or resolutions within the nucleus.  We tested this hypothesis by calculating directionality indices at various window sizes
+on a high resolution contact map.  Interestingly, we found that the minimum correlations between indices at a given window size increased with
+higher resolution map ($\rho_{\min}^{200kb} = 0.77, \rho_{\min}^{1Mb} = 0.70$).  % Does this mean that domains are well preserved at lower resolutions as well?
 
-We asked whether transcriptional upregulation during differentiation could predict mutations, lesions, or break points seen in lung
-cancer studies.  We acquired data for every type of lung cancer lesions from the Catalogue of Somatic Mutations in Cancer
-(COSMIC) \citep{forbes2009} by gene.  Interestingly, the frequency of lesions reported by COSMIC was uncorrelated to those genes
-expression changes (Pearsons $0.07$, $p < 1 \times 10^{-18}$).  There are a number of potential causes for the lack of signal in
-our expression data.  Perhaps the expression arrays are not able to identify gene fusion products, a non-negligible portion of
-the COSMIC mutation database.  More likely, as reported recently by Ashworth and colleagues, it is mutations in transcription factors
-that cause gene expression changes in cancers, rather than in the genes themselves \citep{ashworth2014}.
 
 \section*{Fragile sites and eigenvectors}
-
-
-
-\section*{Contact maps of cell lines change drastically during differentiation}
-% TODO
 
 \section*{Cancerous lesions are in close proximity to topological domains}
