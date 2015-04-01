@@ -1,41 +1,46 @@
 \chapter{Methods}
 
+The methods used in our analyses depend on publicly available open-source packages and custom scripts developed in house.
+These scripts are permissively licensed under the GNU public license (version 3) and
+\href{https://github.com/New-College-of-Florida/Jonathan-Niles-Thesis}{available online}.  Hi-C analysis was conducted using
+the excellent hiclib from the lab of Leonid Mirny \citep{imakaev2012}.  Visualizations were created in the R programming
+language \citep{r2009} and the matplotlib python package \citep{hunter2007}.  Genome distance calculations leveraged the
+bedtools suite \citep{quinlan2010} and pybedtools package \citep{dale2011}.
+
 \section*{Data Collection and Processing}
 
-We selected IMR90 lung fibroblast and H1 \glsentryfull{hESC} cell lines for analysis due to the availability of data and
-preexisting literature on these cells lines.  We obtained Hi-C data sets for both cell lines from the Gene Expression Omnibus
-(GEO) \citep{edgar2002}, accession number \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.  We obtained
-two technical replicates for the stem cell line and six technical replicates of lung fibroblast cells.  Chimeric reads were
-aligned to the human genome build 19 using the BowTie2 alignment
-software\footnote{\url{http://bowtie-bio.sourceforge.net/bowtie2/index.shtml}} on 16 threads \citep{langmead2012}.  Reads containing
-segments mapping to unique portions of the genome were called double sided reads and stored on disk in a high performance
-HDF5\footnote{\url{http://www.hdfgroup.org/HDF5/}} format using the python library \href{https://bitbucket.org/mirnylab/hiclib}{hiclib}
-by Mirny and colleagues \citep{imakaev2012}.  Low-scoring or single sided reads were discarded from future analysis.  Raw and
-corrected maps were exported at 2Mb, 1Mb, 200kb, 40kb, 20kb, and 10kb resolutions.
+IMR90 lung fibroblast and H1 \glsentryfull{hESC} cell lines were examined due to the availability of data and body of preexisting
+literature.  Hi-C data sets for both cell lines were obtained from \glsentryfull{GEO} \citep{edgar2002}, accession number
+\href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.  Two and six technical replicates were examined for
+\gls{hESC} and IMR90 cell lines respectively.  Chimeric HI-C reads were aligned to the human genome build 19 using the BowTie2
+alignment software\footnote{\url{http://bowtie-bio.sourceforge.net/bowtie2/index.shtml}} \citep{langmead2012}. Reads containing
+segments mapping to unique portions of the genome were stored on disk in the high performance
+HDF5\footnote{\url{http://www.hdfgroup.org/HDF5/}} format using the \href{https://bitbucket.org/mirnylab/hiclib}{hiclib} python
+library \citep{imakaev2012}.  Low-scoring or single sided reads were discarded from future analysis.  Interaction maps were
+stored in 2Mb, 1Mb, 200kb, 40kb, 20kb, and 10kb bin sizes.
 
-\section*{Iterative Correction}
+\section*{Iterative Correction and Eigenvector Decomposition}
 
-Using the Hi-C library developed by Imakaev and colleagues, the heatmaps were iteratively corrected as previously
-described \citep{imakaev2012}.  Pearson correlations between replicates were taken to control for unexpected behavior.
-The iteratively corrected maps were decomposed by \gls{PCA} into component vectors.
+Exported maps were corrected using the `correctIC' function from hiclib.  The heatmaps were iteratively corrected as previously
+described \citep{imakaev2012}, at an average of 10 iterations per map.  Pearson correlations were calculated between each sample
+for both replicates.  The maps were decomposed into eigenvector components by \gls{PCA} using the `doPCA' functions in hiclib.
+\gls{PCA} was performed on interaction maps of 1Mb and 200kb bin sizes.
 
 \section*{Gene Expression and Pathway Analysis}
 
 Gene expression data sets were obtained from \gls{GEO} (\href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE2672}{GSE2672},
 \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE54186}{GSE54186}) for each cell line \citep{kim2005} \citep{kim2014}.  Probe
 annotations for the Affymetrix GeneChip Human Genome U133 Plus 2.0 microarray and gene annotations for hg19 were obtained from
-Biomart \citep{kasprzyk2011}.  Upregulated genes were determined by taking a log ratio of the mean signal between each cell line
+Biomart \citep{kasprzyk2011}.  Upregulated genes were determined by taking a $\log_2$ ratio of the mean signal intensity between
+replicates
 
 \begin{align}
   \delta_i = \log_2{\frac{\bar{E_i^I}}{\bar{E_i^H}}}
 \end{align}
 
 where $\delta_i$ is the expression change for a gene $i$, $\bar{E_i^I}$ and $\bar{E_i^H}$ are the mean expression values across
-IMR90 and hESC replicates, respectively.
-
-Pathway analysis was performed using the online utilities provided by \href{http://consensuspathdb.org/}{ConsensusPathDB} \citep{kamburov2012}.
-Pathways and histograms were visualized by python scripts in the library functions
-\href{https://github.com/New-College-of-Florida/Jonathan-Niles-Thesis}{provided with this thesis}.
+IMR90 and hESC replicates, respectively.  Pathway analysis was performed using the online utilities provided by
+\href{http://consensuspathdb.org/}{ConsensusPathDB} \citep{kamburov2012}.
 
 \section*{Directionality Index and Domain Discovery}
 
@@ -43,12 +48,12 @@ The directionality index was calculated as previously described by Dixon and col
 resolution (10kb) map generated by \gls{ICE} to compute the directionality index for 100kb, 200kb, 400kb, 800kb, 1Mb windows
 genome wide.  We reasoned that domains exist between indices where a sign change occurs of the directionality index.  We located
 regions of the directionality index with the 10\% largest peaks, and defined a topological domain to be the entire positive (negative)
-region beneath (above) the index between sign changes.   The domains were then exported to \.bed format for analysis using
-bedtools \citep{quinlan2010,dale2011}.
+region beneath (above) the index between sign changes.   `True' domains were determined as conserved domains between replicates.  The
+The domains were exported to \.bed format for analysis using the pybedtools package \citep{quinlan2010,dale2011}.
 
 \section*{Comparison to Cancerous Lesions}
 
 Lung cancer data sets were obtained from the \gls{TCGA} for
 \href{https://tcga-data.nci.nih.gov/tcga/tcgaCancerDetails.jsp?diseaseType=LUAD&diseaseName=Lung\%20adenocarcinoma}{514 cases}
-of lung adenocarcinoma \citep{cerami2012,gao2013}.  We compared the distances between domains and cancerous lesions for all domain
-sizes discovered.
+of lung adenocarcinoma \citep{cerami2012,gao2013}.  The number of intersections between lesions and conserved domains were computed.
+

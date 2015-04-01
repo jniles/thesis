@@ -8,19 +8,19 @@ Even if limited in scope to genome architecture, a satisfactory discussion of re
 be too voluminous for this document.  In the following chapter, we will attempt to cherry-pick topics and recent
 developments from genetics and molecular biology to develop an intuition about chromatin architecture and the implications
 of a shifting interaction map.  Readers are strongly encouraged to consult a molecular biology text, such as Molecular Biology of the Cell by
-Alberts \citep{alberts2002}, for a more in depth discussion afforded here.
+Alberts \citep{alberts2002}, for a deeper discussion.
 
-This chapter begins with a discussion of each actor influencing and influence by nuclear architecture.  Subsequently, the experiments
-to investigate this archetype are introduced, and Hi-C is discussed in detail.  Finally, a theoretical discussion concerning
-fragility in the genome presents a backdrop in which to interpret the results of our analytical experiments.
+The sheer complexity of the nucleus is best decomposed into a structural hierarchy with several layers of granularity: the primary
+sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, and \glspl{CT}
+and other macro molecular chromatin structures.
 
 \section*{Building from the Basics}
 
 It is difficult to overstate the importance of chromatin topology.  The morass of nucleic acids and proteins packed tightly inside the
 nuclear envelope somehow contain all the information required for cell function and proliferation.  The central dogma of molecular biology,
-outlined in the notes of Francis Crick `Ideas on Protein Synthesis' in 1956 \citep{crick1970} eloquently illustrates the flow of
-information from primary sequence through protein.  At the highest level, the central dogma strongly reinforces the importance of
-\gls{DNA} sequence content, readability, and expression.
+outlined in the notes of Francis Crick `Ideas on Protein Synthesis' \citep{crick1970} illustrates the flow of
+information from primary sequence through protein.  The central dogma therefore strongly reinforces the importance of \gls{DNA} content,
+readability, and expression.
 
 \begin{figure}[b]
   \centering
@@ -28,16 +28,13 @@ information from primary sequence through protein.  At the highest level, the ce
   \includegraphics[width=\textwidth]{figures/biology/dogma}\label{fig:dogma}
 \end{figure}
 
-The sheer complexity of the nucleus is best decomposed into a structural hierarchy with several layers of granularity: the primary
-sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, and \glspl{CT}
-and other macro molecular chromatin structures.
 
-Ironically, the smallest nuclear resolution is the most well studied: the primary sequence of nucleic acid bases that compose the \gls{DNA}
-molecule itself.  A single level of abstraction above the primary sequence considers interactions between \gls{DNA} and  architectural
-proteins such as histones.  Further up the abstraction hierarchy are \gls{epigenetic} interactions, literally `above genetics',
-a loose classification of secondary modifications to \gls{DNA} and architectural proteins that are characteristic of cell type and state.
-Finally, chromosomes and chromosomal territories comprise the highest domain of nuclear architecture.  This conceptual hierarchy is useful
-to keep in mind when investigating the origin of gene expression changes, differentiation, or disease states.
+Ironically, the smallest nuclear resolution is the most well studied: the primary sequence of nucleic acid bases which compose the \gls{DNA}
+molecule itself.  A single layer of abstraction above the primary sequence considers interactions between \gls{DNA} and  architectural
+proteins such as histones.  Further up the abstraction hierarchy are \gls{epigenetic} interactions, a loose classification of secondary
+modifications to \gls{DNA} and architectural proteins that are characteristic of cell type and state. Finally, chromosomes and chromosomal
+territories comprise the highest domain of nuclear architecture.  This conceptual hierarchy is useful to keep in mind when investigating
+the origin of gene expression changes, differentiation, or disease states.
 
 \subsection*{The Primary Sequence}
 
