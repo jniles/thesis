@@ -38,6 +38,28 @@ See Figure~\ref{fig:expressionChangeByCompartment}.)
   \end{minipage}
 \end{figure}
 
+\section*{Eigenvector Partitioning}
+
+The original Hi-C experiment revealed that the genome can be compartmentalized by \gls{PC} into two characteristic classes, arbitrarily 
+labeled A and B.  Lieberman-Aiden and colleagues showed positive correlations between compartment identity, gene density, and chromatin
+accessibility, concluding that compartment A consists of largely open chromatin, while compartment B is densely packed \citep{aiden2009}.
+Interestingly, we did not observe any correlation between the eigenvector and gene expression data (via genome-wide mRNA expression,
+Spearman's $\rho = -0.014$, p negligible; Supplementary Information~\ref{}).  Furthermore, shifts in compartment character did not correlate to 
+changes in gene expression level (Spearman's $\rho = -0.01$, p negligible).  Given these results, it seems unlikely that cells regulate
+gene expression at the compartment level.  Compartmentalization appears to be part of the larger nuclear architectural scheme, rather than
+a dynamic regulatory mechanism.
+
+Given the known differences between nuclear compartments, we investigated whether common fragile sites were clustered in a particular
+compartment, conferring a level of fragility. 
+
+\begin{figure}[thp]
+  \centering
+  \caption{Fragile Sites in Compartments}\label{fig:compartmentCfs}
+  \includegraphics[width=\textwidth]{./figures/results/cfs.png}
+\end{figure}
+
+
+
 \section*{Directionality Indices}
 
 If the nuclear architecture can be decomposed into layers as we have hypothesized, topological domains may exist at different
