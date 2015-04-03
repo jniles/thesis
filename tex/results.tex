@@ -15,7 +15,7 @@ We find that the relative ordering of these curves are reproducible between repl
 Notably, the scaling ratios are unchanged by normalization, indicating that scaling may be a property of the underlying distribution
 rather than an artifact of out data processing.  Indeed, this indicates that perhaps normalization should be performed, as is
 done in HiCNorm \citep{hu2012} on a chromosome by chromosome basis, estimating different background distributions for each chromosome
-rather than using a generalized fitting algorithm such as IPF\@.  This.
+rather than using a generalized fitting algorithm such as IPF\@.
 
 \section*{Principal Components and Gene Expression}
 
@@ -25,15 +25,16 @@ find any correlation between changes in compartment character and gene expressio
 See Figure~\ref{fig:expressionChangeByCompartment}.)
 
 \begin{figure}[thp]
-  \begin{minipage}{0.5\textwidth}%
+  \begin{minipage}{0.45\textwidth}%
     \centering
     \caption{Gene Expression Change by Compartment Change}\label{fig:expressionChangeByCompartmentChange}
     \includegraphics[width=\textwidth]{./figures/results/volcano.png}
   \end{minipage}
-  \begin{minipage}{0.5\textwidth}
+
+  \begin{minipage}{0.45\textwidth}
     \centering
     \caption{Compartmentalized Gene Expression}\label{fig:expressionChangeByCompartment}
-    \includegraphics[width=\textwidth]{./figures/results/compartment-expression-IMR90-R5-200k.png}
+    \includegraphics[width=\textwidth]{./figures/results/compartment_ir5_200k.png}
   \end{minipage}
 \end{figure}
 
@@ -41,10 +42,28 @@ See Figure~\ref{fig:expressionChangeByCompartment}.)
 
 If the nuclear architecture can be decomposed into layers as we have hypothesized, topological domains may exist at different
 scales or resolutions within the nucleus.  We tested this hypothesis by calculating directionality indices at various window sizes
-on a high resolution contact map.  Interestingly, we found that the minimum correlations between indices at a given window size increased with
-higher resolution map ($\rho_{\min}^{200kb} = 0.77, \rho_{\min}^{1Mb} = 0.70$).  % Does this mean that domains are well preserved at lower resolutions as well?
+on a high resolution contact map.  Interestingly, we found that the minimum correlations between indices at a given window size increased
+with higher resolution map ($\rho_{\min}(100kb) = 0.77, \rho_{\min}(1Mb) = 0.70$, Supplementary Information~\ref{sec:SuppDirectionality}).
+
+\section*{Fragile Sites and Eigenvectors}
+
+\section*{Domain Discovery}
+
+The We dicovered a number of conserved domains between technical replicates of each cell line.  
+
+\begin{figure}[thp]
+  \caption{Number of Domains by Chromosome}
+  \begin{minipage}{0.5\textwidth}%
+    \centering
+    \includegraphics[width=\textwidth]{./figures/results/domain_imr90_bar.png}
+  \end{minipage}
+
+  \begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./figures/results/domain_hesc_bar.png}
+  \end{minipage}
+\end{figure}
+
+\section*{Domain Boundary Proximity to Lesions}
 
 
-\section*{Fragile sites and eigenvectors}
-
-\section*{Cancerous lesions are in close proximity to topological domains}

@@ -274,11 +274,12 @@
     \vfill
     \begin{center}
       \@subtitlesize
-      A \ifphd Dissertation \else Thesis \fi \\
+      A \ifphd Thesis \else Thesis \fi \\
       Presented to the Faculty of the \\
       New College of Florida \\
       in Partial Fulfillment of the Requirements for the Degree of \\
       \ifphd Bachelor of Arts \else \@degreefield \fi
+      in Applied Mathematics/Biology
     \end{center}
     \vfill
     \begin{center}
