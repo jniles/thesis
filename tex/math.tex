@@ -19,7 +19,7 @@ analysis with a simple thought experiment.
 Suppose that one wished to record the conformation of a string folded randomly on a surface.  In particular, suppose we focus on intersections
 where two strands cross or lie in close proximity.  One possibility would be to place a one-dimensional coordinate system on the string, say
 $0 \leq  x \leq  L, x \in \mathbb{N}$.  Since we are interested in overlapping regions, we refer to the region $X_i = \left[ x_{i}, x_{i+1}\right]$
-as a bin.  We can record overlapping regions as pairs $(X_i,X_j)$, where position $X_i$ is in close proximity to position $X_j$.  The 
+as a bin.  We can record overlapping regions as pairs $(X_i,X_j)$, where position $X_i$ is in close proximity to position $X_j$.  The
 coordinate pairs naturally form a graph, which we represent computationally as a matrix $\matr{O}$.  As $L \rightarrow \infty$, the
 resolution of the matrix increases (bin sizes become smaller), and precise interactions on a smaller scale can be differentiated.
 Figure~\ref{fig:string} is an example of one such diagram.
@@ -80,7 +80,7 @@ The authors note that this normalization procedure results in `equal visibility'
 comparable between Hi-C data sets.  They propose the following algorithm to obtain the biases $B_i$ and `true' relative contact probabilities
 $T_{ij}$.
 
-\begin{algorithm}[H]
+\begin{algorithm}[htb]
   \KwData{A matrix of observed interactions $O_{ij}$}
   \KwResult{A matrix of relative contact probabilities $T_{ij}$ and bias vector $B_i$}
   Initialize $W^{0}_{ij} = raw contact matrix$; $B^0 = 1$; $k = 1$\;
@@ -280,15 +280,18 @@ and colleagues \citep{dekker2012} focus on the component that captures genome `c
 observed on Hi-C maps, regardless of captured variance.  In our case, the \gls{PCA} decomposition provides a measure of compartment character
 for a given bin on the Hi-C map.
 
-\section*{Detecting changes in local chromatin interaction}
+\section*{Detecting features in local chromatin interaction}
 
-\gls{PCA} is a useful technique for identifying gross differences between data sets.  For subtle changes of local chromatin structure, we appropriate a
-technique developed by Dixon and colleagues \citep{dixon2012}, termed the \gls{DI}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
-relative `upstream' or `downstream' character of the interactions involving that particular chromatin region.
+\gls{PCA} is a useful technique for identifying gross differences between data sets; however, the method is computationally infeasable for large
+datasets.  For subtle changes of local chromatin structure on high resolution maps, Dixon and colleagues developed a measure of chromatin
+association bias for each bin termed the \gls{DI} \citep{dixon2012}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
+relative `upstream' or `downstream' bias of the interactions involving a particular chromatin region.  Regions constrained between promiment
+downstream biases followed by high upstream bias form pockets of interactions called topological domains~\cite{dixon2012}.
 
-The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, we calculate the number of upstream and downstream interactions and
-assign the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the downstream or upstream bias of
-a genomic region. The formulation of the directionality index is given in the supplementary methods of Dixon's paper  \citep{dixon2012}
+The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, the algorithm calculates the number of upstream and downstream
+interactions and assigns the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the
+downstream or upstream bias of a genomic region. The formulation of the directionality index is given in the supplementary methods
+of Dixon's paper \citep{dixon2012}
 
 \begin{align}
   \label{eqn:di}
@@ -297,6 +300,7 @@ a genomic region. The formulation of the directionality index is given in the su
 
 where $A$ is the number of upstream reads in a given window, $B$ is the number of downstream reads, and $E$ is the expected number of interactions under
 the null distribution ($\frac{A + B}{2}$).  Dixon and colleagues apply the directionality index to examine 2Mb windows upstream and downstream on a
-normalized 40kb resolution contact map.  From the \gls{DI} vector, they employ a \gls{HMM} to discover X domains with prominent upstream and downstream bias.
-They concluded that these domains were (not) conserved across cell types, but may represent an underlying regulatory structure in particular cell or tissue
-types \citep{dixon2012}.
+normalized 40kb resolution contact map.  From the \gls{DI} vector, they employ a \gls{HMM}, with the \gls{DI} as observations and labels `upstream bias',
+`downsteam bias' or `no bias' to discover conserved domains on contact maps.  For the full mathematical formulation of the \gls{HMM}, see \citet{dixon2012}.
+They concluded that the domain boundaries were conserved across human and mouse cell types, and may represent part of the fundemental organizing principles
+ of the metazoan genome \citep{dixon2012}.

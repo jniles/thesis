@@ -1,25 +1,37 @@
 % results.tex
-\chapter{Results \& Discussion}
+\chapter{Results}
 
 \section*{Genome Interaction Scaling}
-In earlier treatments of the Hi-C data sets, the analysis of folding patterns by various groups \citep{imakaev2012} \citep{dixon2012}
-the density of bound probes as a function of distance for the entire genome.  However, in our analysis, we remark that chromosomes
-have heterogeneous scaling properties, as seen figure~\ref{fig:interactionScaling}.
+We mapped the reads to the genome as described in the Methods.  Upon mapping reads to interaction matrices, we noted that the number
+of observed interactions per bin scales differently by chromosome.  We plotted the percentage of reads observed for each chromosome
+in 1Mb bins~\ref{fig:probeScalesMb} and by percentage of chromosome length~\ref{fig:probeScalesPercent}.
 
-\begin{figure}[h]
-  \caption{Number of interactions as a function of distance.}\label{fig:interactionScaling}
+\begin{figure}[thp]
+  \caption{Chromosome Contacts by Bin}
+  \begin{minipage}{0.45\textwidth}%
+    \centering
+    \caption{}\label{fig:probeScalesMb}
+    \includegraphics[width=\textwidth]{./figures/results/probeScalesMb.png}
+  \end{minipage}
+
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \caption{Contacts by Percent Distance}\label{fig:probeScalesPercent}
+    \includegraphics[width=\textwidth]{./figures/results/probeScalesPercent.png}
+  \end{minipage}
 \end{figure}
 
-We find that the relative ordering of these curves are reproducible between replicates (Pearson=?).  This implies something.
+% TODO: remark on trans interactions
 
-Notably, the scaling ratios are unchanged by normalization, indicating that scaling may be a property of the underlying distribution
-rather than an artifact of out data processing.  Indeed, this indicates that perhaps normalization should be performed, as is
-done in HiCNorm \citep{hu2012} on a chromosome by chromosome basis, estimating different background distributions for each chromosome
-rather than using a generalized fitting algorithm such as IPF\@.
+%We remarked that chromosomes have heterogenous scaling properties.  We examined the character of the chromosome for all replicates
+%by computing the x coordinate at which we observed $50\%$ of the total chromosome contacts.  These finding are shown below~\ref{fig:probeCom}.
+%
+%\begin{figure}
+%\end{figure}
 
 \section*{Principal Components and Gene Expression}
 
-We were curious whether a shift in the eigenvector for genomic regions could bring about a change in gene expression.  Using replicated
+We tested whether a change in the compartment character (measured by the principal component) for genomic regions .  Using replicated
 IMR90 and hESC gene expression experiments, we plotted the changes in gene expression against the compartment changes, but did not
 find any correlation between changes in compartment character and gene expression levels ($\rho = -0.009$, $p$-value negligible.
 See Figure~\ref{fig:expressionChangeByCompartment}.)
@@ -40,24 +52,23 @@ See Figure~\ref{fig:expressionChangeByCompartment}.)
 
 \section*{Eigenvector Partitioning}
 
-The original Hi-C experiment revealed that the genome can be compartmentalized by \gls{PC} into two characteristic classes, arbitrarily 
+The original Hi-C experiment revealed that the genome can be compartmentalized by \gls{PC} into two characteristic classes, arbitrarily
 labeled A and B.  Lieberman-Aiden and colleagues showed positive correlations between compartment identity, gene density, and chromatin
 accessibility, concluding that compartment A consists of largely open chromatin, while compartment B is densely packed \citep{aiden2009}.
 Interestingly, we did not observe any correlation between the eigenvector and gene expression data (via genome-wide mRNA expression,
-Spearman's $\rho = -0.014$, p negligible; Supplementary Information~\ref{}).  Furthermore, shifts in compartment character did not correlate to 
+Spearman's $\rho = -0.014$, p negligible; Supplementary Information~\ref{}).  Furthermore, shifts in compartment character did not correlate to
 changes in gene expression level (Spearman's $\rho = -0.01$, p negligible).  Given these results, it seems unlikely that cells regulate
 gene expression at the compartment level.  Compartmentalization appears to be part of the larger nuclear architectural scheme, rather than
 a dynamic regulatory mechanism.
 
 Given the known differences between nuclear compartments, we investigated whether common fragile sites were clustered in a particular
-compartment, conferring a level of fragility. 
+compartment, conferring a level of fragility.
 
 \begin{figure}[thp]
   \centering
   \caption{Fragile Sites in Compartments}\label{fig:compartmentCfs}
   \includegraphics[width=\textwidth]{./figures/results/cfs.png}
 \end{figure}
-
 
 \section*{Directionality Indices}
 
