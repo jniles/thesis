@@ -21,8 +21,8 @@ in 1Mb bins~\ref{fig:probeScalesMb} and by percentage of chromosome length~\ref{
   \end{minipage}
 \end{figure}
 
-We remarked that chromosomes have heterogenous scaling properties.  We examined the character of the chromosome for all replicates
-by computing the x coordinate at which we observed $50\%$ of the total chromosome contacts.  These finding are shown below~\ref{fig:probeCom}.
+We remarked that chromosomes have heterogeneous scaling properties.  We examined the character of the chromosome for all replicates
+by computing the coordinate at which we observed $50\%$ of the total chromosome contacts.  These finding are shown below~\ref{fig:probeCom}.
 
 \begin{figure}[thp]
   \centering
@@ -30,18 +30,19 @@ by computing the x coordinate at which we observed $50\%$ of the total chromosom
   \includegraphics[width=0.5\textwidth]{./figures/results/com.png}
   \medskip
   \small
-  Intra-chromosomal interactions are considered for each chromosome across all replicates.  For the entire chomrosome, the average number of
-  contacts at a given genomic distance was calcuated using Equation~\ref{eq:probeScale}.  For each replicate, the distance at which the number
+  Intra-chromosomal interactions are considered for each chromosome across all replicates.  For the entire chromosome, the average number of
+  contacts at a given genomic distance was calculated using Equation~\ref{eq:probeScale}.  For each replicate, the distance at which the number
   of contacts exceeded one half the total number of contacts for that chromosome was determined.  The mean and standard error of the half max
   is plotted above for each chromosome in IMR90.
 \end{figure}
 
-\section*{Principal Components and Gene Expression}
+\section*{Eigenvector Partitioning of Chromatin Compartments}
 
-We tested whether a change in the compartment character (measured by the principal component) for genomic regions.  Using replicated
-IMR90 and hESC gene expression experiments, we plotted the changes in gene expression against the compartment changes, but did not
-find any correlation between changes in compartment character and gene expression levels ($\rho = -0.009$, $p$-value negligible.
-See Figure~\ref{fig:expressionChangeByCompartment}.)
+We tested whether a change in the compartment character (measured by the principal component) plays a significant role in regulation
+by plotting and computing correlations between the eigenvector and gene expression.  Using replicated IMR90 and hESC \gls{mRNA} expression
+experiments, we plotted changes in gene expression against the gene's compartment character in IMR90 (Figure~\ref{fig:expressionChangeByCompartment}).
+We also considered the change between compartments character against gene expression levels, finding no significant correlation ($\rho = -0.01$,
+$p$-value negligible. See Figure~\ref{fig:expressionChangeByCompartmentChange}).
 
 \begin{figure}[thp]
   \begin{minipage}{0.45\textwidth}%
@@ -55,26 +56,14 @@ See Figure~\ref{fig:expressionChangeByCompartment}.)
     \caption{Compartmentalized Gene Expression}\label{fig:expressionChangeByCompartment}
     \includegraphics[width=\textwidth]{./figures/results/compartment_ir5_200k.png}
   \end{minipage}
-  \small
 \end{figure}
 
-\section*{Eigenvector Partitioning}
-
-The original Hi-C experiment revealed that the genome can be compartmentalized by \gls{PC} into two characteristic classes, arbitrarily
-labeled A and B.  Lieberman-Aiden and colleagues showed positive correlations between compartment identity, gene density, and chromatin
-accessibility, concluding that compartment A consists of largely open chromatin, while compartment B is densely packed \citep{aiden2009}.
-Interestingly, we did not observe any correlation between the eigenvector and gene expression data (via genome-wide mRNA expression,
-Spearman's $\rho = -0.014$, p negligible; Supplementary Information~\ref{}).  Furthermore, shifts in compartment character did not correlate to
-changes in gene expression level (Spearman's $\rho = -0.01$, p negligible).  Given these results, it seems unlikely that cells regulate
-gene expression at the compartment level.  Compartmentalization appears to be part of the larger nuclear architectural scheme, rather than
-a dynamic regulatory mechanism.
-
-Given the known differences between nuclear compartments, we investigated whether common fragile sites were clustered in a particular
-compartment, conferring a level of fragility.
+We asked if \gls{CFS} were enriched in a given compartment.  We computed the compartment character from the first \gls{PC} across fragile
+sites, displaying them in a histogram.  The fragile sites were evenly distributed between nuclear compartments (Figure~\ref{fig:compartmentCFS}).
 
 \begin{figure}[thp]
   \centering
-  \caption{Fragile Sites in Compartments}\label{fig:compartmentCfs}
+  \caption{Fragile Sites in Compartments}\label{fig:compartmentCFS}
   \includegraphics[width=\textwidth]{./figures/results/cfs.png}
 \end{figure}
 
