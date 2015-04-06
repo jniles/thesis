@@ -2,11 +2,13 @@
 
 \chapter{Mathematical Preliminaries}
 
-We endeavor to secure a relationship between chromatin topology and genomic fragility to elucidate the progression towards
-disease states.  The analytical tools leveraged in the analysis draw from diverse area of mathematics, computational sciences,
-and statistics.  We assume the reader has familiarity with the mechanics of linear algebra, an elementary course in statistics,
-and perhaps numerical analysis.  The reader is heartily encouraged to consult the references to gain a more complete understanding than
-possible to present here.
+To extract biologically meaningful information from large data sets, researcher rely heavily on mathematical insights which
+guarantee run time estimates, bounds on the problem domain, or interpretation of significance.  While studying the relationship
+between chromatin topology and fragility, we leveraged several statistical and linearly algebraic tools.  The following section
+will explain the underlying mathematical notions behind the algorithms, the biological rationale, and an interpretation of their
+results.  We assume the reader is familiar with the mechanics of linear algebra, an elementary course in statistics, and numerical
+analysis.  The reader is heartily encouraged to consult the references to gain a more complete understanding than possible to
+present here.
 
 \section*{Normalization of Chromatin Contact Maps}
 
@@ -16,14 +18,15 @@ analysis with a simple thought experiment.
 
 Suppose that one wished to record the conformation of a string folded randomly on a surface.  In particular, suppose we focus on intersections
 where two strands cross or lie in close proximity.  One possibility would be to place a one-dimensional coordinate system on the string, say
-$0 \leq  x \leq  L, x \in \mathbb{N}$.  We can record overlapping regions as coordinate pairs $(u,v)$, where position $u$ is in close proximity
-to position $v$.  The coordinate pairs naturally form a graph, which we represent computationally as a matrix $\matr{O}$.  As $L \rightarrow \infty$,
-the resolution of the matrix increases, and precise interactions on a smaller scale can be differentiated.  Figure~\ref{fig:string} is
-an example of one such diagram.
+$0 \leq  x \leq  L, x \in \mathbb{N}$.  Since we are interested in overlapping regions, we refer to the region $X_i = \left[ x_{i}, x_{i+1}\right]$
+as a bin.  We can record overlapping regions as pairs $(X_i,X_j)$, where position $X_i$ is in close proximity to position $X_j$.  The 
+coordinate pairs naturally form a graph, which we represent computationally as a matrix $\matr{O}$.  As $L \rightarrow \infty$, the
+resolution of the matrix increases (bin sizes become smaller), and precise interactions on a smaller scale can be differentiated.
+Figure~\ref{fig:string} is an example of one such diagram.
 
-\begin{figure}[t]
+\begin{figure}[thb]
   \centering
-  \caption{Example: Interactions on a string}
+  \caption{Example: Interactions on a String}
   \includegraphics[width=\textwidth]{figures/mathematics/strmtx}\label{fig:string}
 \end{figure}
 
@@ -40,10 +43,10 @@ Contacts are recorded by binning the genome into equally sized intervals and con
 Typically, bins are ordered by increasing genomic coordinates, from the first bin of chromosome 1 to the last bin of chromosome X.
 Depending on data quality, bin sizes range from tens of kilobases to megabases.
 
-The first step of any data analysis pipeline is data \gls{normalization}, which removes experimental biases and noise.  Coupled with quality
+The critical step of any data analysis pipeline is data \gls{normalization}, which removes experimental biases and noise.  Coupled with quality
 control measurements and experimental replicates, normalization also establishes a level of reproducibility.
 Several methods exist to normalize contact maps.  Tanay and Yaffe were among the first researchers to undertake a statistical analysis of the
-Hi-C experiment in 2011 \citep{yaffe2011}.  They identify several sources systematic experimental bias in the Hi-C assay and propose a
+Hi-C experiment in 2011 \citep{yaffe2011}.  They identify several sources of systematic experimental bias in the Hi-C assay and propose a
 probabilistic background model that computes the probability of \glspl{trans contact} and \glspl{cis contact} based on regional
 \gls{GC} content, fragment length, and genome mappability.  Corrected contact maps are calculated by solving the maximum-likelihood model
 parameters on model contact maps, which are then applied to the experimentally derived contact maps.  The mappings
@@ -52,7 +55,7 @@ achieved using Tanay and Yaffe's methods provide robust reproducibility between 
 intensive, prompting further research into simpler methods for Hi-C analysis.
 
 Alternative methods have been developed to normalize contact maps.  Hu and colleagues propose a method `HiCNorm' based on Poisson
-regression and achieve a $9000X$ speed up compared to Tanay and Yaffe's method \citep{hu2012}.  Recently, Ay and colleagues provide a statistical
+regression and achieve a $9000$-fold speed increase compared to Tanay and Yaffe's method \citep{hu2012}.  Recently, Ay and colleagues provide a statistical
 method `Fit-Hi-C' that does not assume a particular underlying statistical distribution, instead normalizing \glspl{cis contact} based on probabilistic
 analysis of polymer looping dynamics \citep{ay2014}.
 
@@ -211,8 +214,8 @@ and we will hold to that standard here.
 
 To prove that any square matrix $\matr{A} \in M_n(\mathbb{R})$ can be decomposed into singular values, we will use some matrix definitions. The
 reader is reminded of the definitions of \textit{normal} $(\matr{A}\matr{A}^* = \matr{A}^*\matr{A})$, \textit{Hermetian} $(\matr{A}^* =  \matr{A})$,
-and unitary $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = 1)$ matrices.  Further, two matrices $\matr{A}, \matr{B} \in M_n$ are said to be
-\textit{unitarily similar} they are similar by a unitary matrix $(\matr{A} = \matr{U}\matr{B}\matr{U}^*)$.  Now, we are ready to begin the proof.
+and \textit{unitary} $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = 1)$ matrices.  Further, two matrices $\matr{A}, \matr{B} \in M_n$ are said to be
+\textit{unitarily similar} they are similar by a unitary matrix $(\matr{A} = \matr{U}\matr{B}\matr{U}^*)$.  We are now ready to begin the proof.
 
 \begin{proof}[Singular Value Decomposition]
   It should be clear the matrices $\matr{A}\matr{A}^* \in M_n$ and $\matr{A}^*\matr{A} \in M_n$ have the same eigenvalues, and hence, they are
@@ -271,10 +274,11 @@ A full proof of \gls{SVD} for rectangular matrices can be found in Horn and John
   $\lambda_i = \frac{\sigma_i}{n - 1}$.
 \end{proof}
 
-The ordered eigenvectors are the \glspl{PC} we desire.  How much variation does each component capture?  The answer lies in the \gls{eigenspectrum},
-typically represented in the form of a \gls{scree plot}.  Conceptually, the normalized absolute value of a component's associated eigenvalue conveys the
-amount of variation that component captures.  A researcher can the choose a suitable subset of components to analyze, reducing the dimensionality of
-the data set to the number of chosen components.
+The ordered eigenvectors are the \glspl{PC} we desire.  In exploratory data analysis, the variance captured by each \gls{PC} is found
+by analyzing the relative sizes of the positive eigenvalues, typically in the form of a scree plot.  In the Hi-C capture experiment, Dekker
+and colleagues \citep{dekker2012} focus on the component that captures genome `compartment character', the banding pattern of interactions
+observed on Hi-C maps, regardless of captured variance.  In our case, the \gls{PCA} decomposition provides a measure of compartment character
+for a given bin on the Hi-C map.
 
 \section*{Detecting changes in local chromatin interaction}
 
