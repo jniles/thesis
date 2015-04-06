@@ -19,6 +19,16 @@ HDF5\footnote{\url{http://www.hdfgroup.org/HDF5/}} format using the \href{https:
 library \citep{imakaev2012}.  Low-scoring or single sided reads were discarded from future analysis.  Interaction maps were
 stored in 2Mb, 1Mb, 200kb, 40kb, 20kb, and 10kb bin sizes.
 
+In addition to plotting, the average scaling properties were computed as follows.  For each off chromosome, the number average
+number of contacts at a given distance was computed by averaging the $k-$diagonal of the contact matrix
+
+\begin{align}
+  c_j = \frac{\sum_{i=1}^{n - j} \matr{O_{i, i+k}}}{n - j} \label{eq:probeScale}
+\end{align}
+
+The vector $\vec{c} = \left(c_1, c_2, \hdots, c_{n-1}\right)$ records the average number of contacts see across the chromosome
+at each distance.
+
 \section*{Iterative Correction and Eigenvector Decomposition}
 
 Exported maps were corrected using the `correctIC' function from hiclib.  The heatmaps were iteratively corrected as previously

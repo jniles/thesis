@@ -21,17 +21,24 @@ in 1Mb bins~\ref{fig:probeScalesMb} and by percentage of chromosome length~\ref{
   \end{minipage}
 \end{figure}
 
-% TODO: remark on trans interactions
+We remarked that chromosomes have heterogenous scaling properties.  We examined the character of the chromosome for all replicates
+by computing the x coordinate at which we observed $50\%$ of the total chromosome contacts.  These finding are shown below~\ref{fig:probeCom}.
 
-%We remarked that chromosomes have heterogenous scaling properties.  We examined the character of the chromosome for all replicates
-%by computing the x coordinate at which we observed $50\%$ of the total chromosome contacts.  These finding are shown below~\ref{fig:probeCom}.
-%
-%\begin{figure}
-%\end{figure}
+\begin{figure}[thp]
+  \centering
+  \caption{Chromosome Interaction Half-Max}
+  \includegraphics[width=0.5\textwidth]{./figures/results/com.png}
+  \medskip
+  \small
+  Intra-chromosomal interactions are considered for each chromosome across all replicates.  For the entire chomrosome, the average number of
+  contacts at a given genomic distance was calcuated using Equation~\ref{eq:probeScale}.  For each replicate, the distance at which the number
+  of contacts exceeded one half the total number of contacts for that chromosome was determined.  The mean and standard error of the half max
+  is plotted above for each chromosome in IMR90.
+\end{figure}
 
 \section*{Principal Components and Gene Expression}
 
-We tested whether a change in the compartment character (measured by the principal component) for genomic regions .  Using replicated
+We tested whether a change in the compartment character (measured by the principal component) for genomic regions.  Using replicated
 IMR90 and hESC gene expression experiments, we plotted the changes in gene expression against the compartment changes, but did not
 find any correlation between changes in compartment character and gene expression levels ($\rho = -0.009$, $p$-value negligible.
 See Figure~\ref{fig:expressionChangeByCompartment}.)
@@ -48,6 +55,7 @@ See Figure~\ref{fig:expressionChangeByCompartment}.)
     \caption{Compartmentalized Gene Expression}\label{fig:expressionChangeByCompartment}
     \includegraphics[width=\textwidth]{./figures/results/compartment_ir5_200k.png}
   \end{minipage}
+  \small
 \end{figure}
 
 \section*{Eigenvector Partitioning}
