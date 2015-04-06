@@ -22,6 +22,7 @@
 *.out
 *.pdf
 *.toc
+*.gl*
 
 # ignore templates
 template/*
