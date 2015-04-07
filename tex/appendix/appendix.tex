@@ -17,8 +17,7 @@ in an initial truncation length of 28 base pairs, and step size of 18 base pairs
 
 \begin{table}[ht]
   \centering
-  \caption{Hi-C reads captured for all data sets}
-  \label{tab:reads}
+  \caption{Hi-C reads captured for all data sets}\label{tab:reads}
   \begin{tabular}{l l}
     \toprule
     Total Reads                  & 2,124,453,478 \\
@@ -30,24 +29,9 @@ in an initial truncation length of 28 base pairs, and step size of 18 base pairs
   \end{tabular}
 \end{table}
 
+\chapter{Code}
 
-\chapter{Data Validation}
-
-We assessed the degree of similarity between data sets using Spearman's rank correlation coefficient $\rho$.  Correlations were calculated between experimental
-replicates as well as cross experiment.  The details are given in table~\ref{tab:correlations}.
-
-\begin{table}[ht]
-  \centering
-  \caption{Hi-C reads captured for all data sets}
-  \label{tab:correlations}
-  \begin{tabular}{cccccc}
-    \toprule
-    \textbf{R1} & 0.83 & 0.77 & 0.77 & 0.75 & 0.71 \\
-    0.83 & \textbf{R2} & 0.82 & 0.83 & 0.79 & 0.75 \\
-    0.77 & 0.82 & \textbf{R3} & 0.77 & 0.74 & 0.73 \\
-    0.77 & 0.83 & 0.77 & \textbf{R4} & 0.75 & 0.71 \\
-    0.75 & 0.79 & 0.74 & 0.74 & \textbf{R5} & 0.69 \\
-    0.71 & 0.75 & 0.73 & 0.71 & 0.69 & \textbf{R6} \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+All analysis was performed on a Debian Linux server (24GB RAM, 1TB HDD), using open source tools or custom scripts written in Python or bash.
+The full source code is licensed liberally and hosted on \href{https://github.com/New-College-of-Florida/Jonathan-Niles-Thesis}{\underline{Github}},
+along with the full text of this thesis document.  To install and run the source code, consult the INSTALL file in the base directory.  To
+compile this document, make sure that you have a valid \LaTeX{} compiler and compile the file thesis.tex.

@@ -11,53 +11,68 @@ domains, leaving a small, conserved subset.  Overlaps between window sizes and r
   \centering
   \caption{Conserved Domains between IMR90 Replicates}
   \includegraphics[width=\textwidth]{figures/supplementary/domains/venn3.png}\label{fig:SuppVenn3}
+  \medskip
+  \small
+  Domain conservation between the first three IMR90 replicates.  The window size here is 200kb for each
+  replicate.
 \end{figure}
 
 \begin{figure}[H]
   \caption{Domain Overlaps by Window Size}
-  \begin{minipage}{0.45\textwidth}%
+  \begin{minipage}{0.5\textwidth}%
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-100-vs-IMR90-R1-200.png}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.45\textwidth}
+  \begin{minipage}{0.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-200-vs-IMR90-R1-400.png}
   \end{minipage}%
 
   \vfill
 
-  \begin{minipage}{0.45\textwidth}%
+  \begin{minipage}{0.5\textwidth}%
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-400-vs-IMR90-R1-800.png}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.45\textwidth}
+  \begin{minipage}{0.5\textwidth}
     \centering
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-800-vs-IMR90-R1-1000.png}
   \end{minipage}
+  \medskip
+  \small
+  Venn diagrams illustrating overlaps between domains discovered at increasing window sizes.  In general, the
+  increasing window size led to increasingly larger domains.  Larger domains often subsumed domains discovered
+  with a smaller window size.
 \end{figure}
-\newpage
 
+\newpage
 \subsection*{Domain Overlaps with Lesions}
 
 \begin{figure}[H]
   \caption{Domain Overlaps by Window Size}
-  \begin{minipage}{0.45\textwidth}%
-    \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-100-vs-IMR90-R1-200.png}
+  \begin{minipage}{0.5\textwidth}%
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/boundaries-IMR90-200kb.png}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.45\textwidth}
+  \begin{minipage}{0.5\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-200-vs-IMR90-R1-400.png}
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/boundaries-IMR90-400kb.png}
   \end{minipage}%
 
   \vfill
 
-  \begin{minipage}{0.45\textwidth}%
-    \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-400-vs-IMR90-R1-800.png}
+  \begin{minipage}{0.5\textwidth}%
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/IMR90boundaries200kbwindows10000kbslop.png}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.45\textwidth}
+  \begin{minipage}{0.5\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-800-vs-IMR90-R1-1000.png}
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/IMR90boundaries400kbwindows10000kbslop.png}
   \end{minipage}
+  \medskip
+  \small
+  Lesions are clustered around domain boundaries at higher frequencies than expected by chance.  Using shuffling and
+  resampling procedures (See Section~\ref{sec:resampling}), we constructed the null hypothesis `lesions are distributed evenly
+  throughout boundaries and non-boundary regions.'  In regions of 5kb (top) and 10kb (bottom) around the boundary regions, we are
+  able to reject the null hypothesis with negligible $p-$value.
 \end{figure}

@@ -6,7 +6,7 @@ We calculated Spearman's correlation coefficients between principle components f
 % data from  pca/correlations/*.csv
 \begin{table}[H]
   \centering
-  \caption{Correlation of PC1 between all experimental replicates}\label{table:PC1Correlations}
+  \caption{Correlation of \gls{PC} I}\label{table:PC1Correlations}
   \begin{tabularx}{\textwidth}{@{}cccccccc@{}}
     \toprule
     \multicolumn{6}{l}{IMR90} & \multicolumn{2}{l}{hESC} \\
@@ -15,7 +15,7 @@ We calculated Spearman's correlation coefficients between principle components f
     0.981       & \textbf{R2} & 0.985       & 0.982       & 0.976       & 0.974       & 0.654       & 0.652 \\
     0.972       & 0.985       & \textbf{R3} & 0.982       & 0.977       & 0.980       & 0.634       & 0.629 \\
     0.983       & 0.982       & 0.982       & \textbf{R4} & 0.986       & 0.982       & 0.655       & 0.655 \\
-    0.983       & 0.976       & 0.977       & 0.986       & \textbf{R5} & 0.98        & 0.633       & 0.633 \\
+    0.983       & 0.976       & 0.977       & 0.986       & \textbf{R5} & 0.980       & 0.633       & 0.633 \\
     0.977       & 0.974       & 0.980       & 0.982       & 0.985       & \textbf{R6} & 0.610       & 0.607 \\
     0.656       & 0.654       & 0.634       & 0.655       & 0.633       & 0.610       & \textbf{R1} & 0.973  \\
     0.658       & 0.652       & 0.629       & 0.655       & 0.633       & 0.607       & 0.973       & \textbf{R2}    \\
@@ -23,9 +23,14 @@ We calculated Spearman's correlation coefficients between principle components f
   \end{tabularx}
 \end{table}
 
-We also examined the scree plots of each \gls{PC} by experiment and replicate.  The plot for hESC R1 is included for reference.
-
-\begin{figure}
+\begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{./figures/supplementary/hESC-R1-scree.png}\label{fig:hESCScree}
+  \caption{Principal Components for IMR90 \& hESC Replicates}
+  \includegraphics[width=\textwidth]{./figures/supplementary/components/hESC-R1.png}
+  \vfill
+  \includegraphics[width=\textwidth]{./figures/supplementary/components/hESC-R2.png}
+  \vfill
+  \includegraphics[width=\textwidth]{./figures/supplementary/components/IMR90-R1.png}
+  \vfill
+  \includegraphics[width=\textwidth]{./figures/supplementary/components/IMR90-R2.png}
 \end{figure}

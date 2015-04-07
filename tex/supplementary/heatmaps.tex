@@ -1,29 +1,49 @@
 \newpage
-\section*{Genome Heatmaps}
+\section*{Interaction Heatmaps}
 
 \begin{figure}[H]
-  \begin{minipage}{0.45\textwidth}%
+  \caption{Whole Genome Heatmaps}\label{fig:WholeGenomeHeatmaps}
+  \begin{minipage}{0.5\textwidth}%
     \includegraphics[width=\textwidth]{./figures/supplementary/hm/hesc_raw_1Mb.png}
-    \caption{hESC Raw Heatmap at 1Mb Resolution}\label{fig:hm_hesc_raw}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.45\textwidth}
+  \begin{minipage}{0.5\textwidth}
     \includegraphics[width=\textwidth]{./figures/supplementary/hm/hesc_ic_1Mb.png}
-    \caption{hESC Corrected Heatmap at 1Mb Resolution}\label{fig:hm_hesc_ic}
   \end{minipage}
 \end{figure}
 
 \begin{figure}[H]
-  \begin{minipage}{0.45\textwidth}%
+  \begin{minipage}{0.5\textwidth}%
     \includegraphics[width=\textwidth]{./figures/supplementary/hm/imr90_raw_1Mb.png}
-    \caption{IMR90 Raw Heatmap at 1Mb Resolution}\label{fig:hm_imr90_raw}
   \end{minipage}%
   \hfill
-  \begin{minipage}{0.45\textwidth}
+  \begin{minipage}{0.5\textwidth}
     \includegraphics[width=\textwidth]{./figures/supplementary/hm/imr90_ic_1Mb.png}
-    \caption{IMR90 Corrected Heatmap at 1Mb Resolution}\label{fig:hm_imr90_ic}
   \end{minipage}
+  \medskip
+  \small
+  Genome heatmaps constructed from raw (left) and normalized (right) interaction maps.
+  Chromosomes are arranged as blocks on the diagonal.  Each light colored block on the
+  diagonal shows regions of increased interactions.  White bands correspond to regions
+  of noise removed due to noise, typically around centromeres and telomeres.
 \end{figure}
+
+\begin{figure}[H]
+  \caption{IMR90 Chromosome 2 Banding}\label{fig:Chrom2Banding}
+  \begin{minipage}{0.5\textwidth}%
+    \includegraphics[width=\textwidth]{./figures/supplementary/hm/IMR90-R1-200k-Chr2.png}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \includegraphics[width=\textwidth]{./figures/supplementary/hm/IMR90-R1-200k-Chr2.png}
+  \end{minipage}
+  \medskip
+  \small
+  IMR90 Replicates I and II\@.  The red and blue coloring reveals the banding patterns described by
+  \citet{dekker2012}, indicating areas of above average or lower than average interactions.  These chromatin
+  compartments are captured in the first two principal components.
+\end{figure}
+
 
 \begin{table}[H]
   \centering
@@ -40,6 +60,8 @@
     IMR90 R4 & 463140318 & 53109981  & 54.2\% \\
     IMR90 R5 & 203181628 & 41901503  & 46.9\% \\
     IMR90 R6 & 181708889 & 41429368  & 49.0\% \\
+    \midrule
+    Total & 2757992984 & 601174950 & {} \\
     \bottomrule
   \end{tabular}
 \end{table}

@@ -1,32 +1,15 @@
 \newpage
 \section*{Directionality Indices}\label{sec:SuppDirectionality}
 
-Pearson correlations calculated between directionality indices for different window sizes.
+Spearman's correlations calculated between directionality indices for different window sizes.  We calculated the
+correlations for each window size.  The correlations for 100kb and 1Mb represented below show the spread of the
+correlation coefficient values.
 
 \begin{table}[H]
   \caption{Directionality Indices}
   \parbox{.45\linewidth}{%
     \centering
-    \caption{1Mb Windows}\label{tab:SuppDi1MBWindows}
-    \begin{tabular}{*{8}{c}}
-      \toprule
-      \multicolumn{6}{c}{IMR90} & \multicolumn{2}{c}{hESC} \\
-      R1 & R2 & R3 & R4 & R5 & R6 & R1 & R2 \\
-      \midrule
-      1.00 & 0.89 & 0.74 & 0.81 & 0.83 & 0.83 & 0.83 & 0.82 \\
-      0.89 & 1.00 & 0.76 & 0.78 & 0.70 & 0.79 & 0.81 & 0.70 \\
-      0.74 & 0.76 & 1.00 & 0.95 & 0.82 & 0.92 & 0.93 & 0.84 \\
-      0.81 & 0.78 & 0.95 & 1.00 & 0.91 & 0.96 & 0.97 & 0.91 \\
-      0.83 & 0.70 & 0.82 & 0.91 & 1.00 & 0.91 & 0.90 & 0.97 \\
-      0.83 & 0.79 & 0.92 & 0.96 & 0.91 & 1.00 & 0.96 & 0.92 \\
-      0.83 & 0.81 & 0.93 & 0.96 & 0.90 & 0.96 & 1.00 & 0.91 \\
-      0.82 & 0.70 & 0.84 & 0.91 & 0.97 & 0.92 & 0.91 & 1.00 \\
-      \bottomrule
-    \end{tabular}
-  }%
-  \hfill
-  \parbox{.45\linewidth}{%
-    \centering
+    \tiny
     \caption{100kb Windows}\label{tab:SuppDi100kbWindows}
     \begin{tabular}{*{8}{c}}
       \toprule
@@ -43,5 +26,39 @@ Pearson correlations calculated between directionality indices for different win
       0.77 & 0.79 & 0.77 & 0.81 & 0.82 & 0.77 & 0.77 & 1.00 \\
       \bottomrule
     \end{tabular}
+  }%
+  \hfill
+  \parbox{.45\linewidth}{%
+    \centering
+    \tiny
+    \caption{1Mb Windows}\label{tab:SuppDi1MBWindows}
+    \begin{tabular}{*{8}{c}}
+      \toprule
+      \multicolumn{6}{c}{IMR90} & \multicolumn{2}{c}{hESC} \\
+      R1 & R2 & R3 & R4 & R5 & R6 & R1 & R2 \\
+      \midrule
+      1.00 & 0.89 & 0.74 & 0.81 & 0.83 & 0.83 & 0.83 & 0.82 \\
+      0.89 & 1.00 & 0.76 & 0.78 & 0.70 & 0.79 & 0.81 & 0.70 \\
+      0.74 & 0.76 & 1.00 & 0.95 & 0.82 & 0.92 & 0.93 & 0.84 \\
+      0.81 & 0.78 & 0.95 & 1.00 & 0.91 & 0.96 & 0.97 & 0.91 \\
+      0.83 & 0.70 & 0.82 & 0.91 & 1.00 & 0.91 & 0.90 & 0.97 \\
+      0.83 & 0.79 & 0.92 & 0.96 & 0.91 & 1.00 & 0.96 & 0.92 \\
+      0.83 & 0.81 & 0.93 & 0.96 & 0.90 & 0.96 & 1.00 & 0.91 \\
+      0.82 & 0.70 & 0.84 & 0.91 & 0.97 & 0.92 & 0.91 & 1.00 \\
+      \bottomrule
+    \end{tabular}
   }
 \end{table}
+
+\begin{figure}[H]
+  \centering
+  \caption{hESC Directionality Indices}\label{fig:hescDirectionalityIndices}
+  \includegraphics[width=\textwidth]{./figures/supplementary/directions/hESC-R1-1000kb.png}
+  \vfill
+  \includegraphics[width=\textwidth]{./figures/supplementary/directions/hESC-R2-1000kb.png}
+  \vfill
+  \includegraphics[width=\textwidth]{./figures/supplementary/directions/IMR90-R4-1000kb.png}
+  \vfill
+  \includegraphics[width=\textwidth]{./figures/supplementary/directions/IMR90-R6-1000kb.png}
+\end{figure}
+
