@@ -5,6 +5,7 @@
 \let\ifpdf\relax
 
 % packages
+\usepackage{float}
 \usepackage{ifpdf}
 \usepackage{geometry}
 \usepackage{svg}
@@ -48,9 +49,6 @@
 \let\oldnorm\norm%
 \def\norm{\@ifstar{\oldnorm}{\oldnorm*}}
 \makeatother
-
-% cite package, to clean up citations in the main text. Do not remove.
-%\usepackage{cite}
 
 % Set tolerance for box model
 \tolerance=9999

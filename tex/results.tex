@@ -4,30 +4,27 @@
 \section*{Genome Interaction Scaling}
 We mapped the reads to the genome as described in the Methods.  Upon mapping reads to interaction matrices, we noted that the number
 of observed interactions per bin scales differently by chromosome.  We plotted the percentage of reads observed for each chromosome
-in 1Mb bins~\ref{fig:probeScalesMb} and by percentage of chromosome length~\ref{fig:probeScalesPercent}.
+in 1Mb bins (Figure~\ref{fig:probeScalesMb}) and by percentage of chromosome length (Figure~\ref{fig:probeScalesPercent}).
 
-\begin{figure}[thp]
-  \caption{Chromosome Contacts by Bin}
-  \begin{minipage}{0.45\textwidth}%
-    \centering
-    \caption{}\label{fig:probeScalesMb}
-    \includegraphics[width=\textwidth]{./figures/results/probeScalesMb.png}
-  \end{minipage}
-
-  \begin{minipage}{0.45\textwidth}
-    \centering
-    \caption{Contacts by Percent Distance}\label{fig:probeScalesPercent}
+\begin{figure}[H]
+  \caption{Chromosome Contact Scaling}
+  \noindent%
+  \begin{minipage}[b]{0.45\textwidth}\label{fig:probeScalesMb}
+    \includegraphics[width=\linewidth]{./figures/results/probeScalesMb.png}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[b]{0.45\linewidth}\label{fig:probeScalesPercent}
     \includegraphics[width=\textwidth]{./figures/results/probeScalesPercent.png}
   \end{minipage}
 \end{figure}
 
 We remarked that chromosomes have heterogeneous scaling properties.  We examined the character of the chromosome for all replicates
-by computing the coordinate at which we observed $50\%$ of the total chromosome contacts.  These finding are shown below~\ref{fig:probeCom}.
+by computing the coordinate at which we observed $50\%$ of the total chromosome contacts.  These finding are shown below (Figure~\ref{fig:probeCom}).
 
-\begin{figure}[thp]
+\begin{figure}[H]
   \centering
-  \caption{Chromosome Interaction Half-Max}
-  \includegraphics[width=0.5\textwidth]{./figures/results/com.png}
+  \caption{Chromosome Interaction Half-Max}\label{fig:probeCom}
+  \includegraphics[width=\textwidth]{./figures/results/com.png}
   \medskip
   \small
   Intra-chromosomal interactions are considered for each chromosome across all replicates.  For the entire chromosome, the average number of
@@ -44,16 +41,13 @@ experiments, we plotted changes in gene expression against the gene's compartmen
 We also considered the change between compartments character against gene expression levels, finding no significant correlation ($\rho = -0.01$,
 $p$-value negligible. See Figure~\ref{fig:expressionChangeByCompartmentChange}).
 
-\begin{figure}[thp]
-  \begin{minipage}{0.45\textwidth}%
-    \centering
-    \caption{Gene Expression Change by Compartment Change}\label{fig:expressionChangeByCompartmentChange}
+\begin{figure}[H]
+  \caption{Gene Expression Change by Compartment Change}
+  \begin{minipage}[b]{0.45\textwidth}\label{fig:expressionChangeByCompartmentChange}
     \includegraphics[width=\textwidth]{./figures/results/volcano.png}
-  \end{minipage}
-
-  \begin{minipage}{0.45\textwidth}
-    \centering
-    \caption{Compartmentalized Gene Expression}\label{fig:expressionChangeByCompartment}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}\label{fig:expressionChangeByCompartment}
     \includegraphics[width=\textwidth]{./figures/results/compartment_ir5_200k.png}
   \end{minipage}
 \end{figure}
@@ -61,7 +55,7 @@ $p$-value negligible. See Figure~\ref{fig:expressionChangeByCompartmentChange}).
 We asked if \gls{CFS} were enriched in a given compartment.  We computed the compartment character from the first \gls{PC} across fragile
 sites, displaying them in a histogram.  The fragile sites were evenly distributed between nuclear compartments (Figure~\ref{fig:compartmentCFS}).
 
-\begin{figure}[thp]
+\begin{figure}[H]
   \centering
   \caption{Fragile Sites in Compartments}\label{fig:compartmentCFS}
   \includegraphics[width=\textwidth]{./figures/results/cfs.png}
@@ -80,16 +74,13 @@ Topological domains represent a novel level of genomic regulation.  Previous dis
 housekeeping genes, and retrotransposons at the topological domain boundaries \citep{dixon2012}.  We used a naive heuristic to discover conserved
 topological domain sets at smaller resolutions than previously reported.
 
-\begin{figure}[thp]
+\begin{figure}[H]
   \caption{Number of Domains by Chromosome}
-  \begin{minipage}{0.5\textwidth}%
-    \centering
+  \begin{minipage}{0.45\textwidth}%
     \includegraphics[width=\textwidth]{./figures/results/domain_imr90_bar.png}
-  \end{minipage}
-
-  \begin{minipage}{0.5\textwidth}
-    \centering
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.45\textwidth}
     \includegraphics[width=\textwidth]{./figures/results/domain_hesc_bar.png}
   \end{minipage}
 \end{figure}
-

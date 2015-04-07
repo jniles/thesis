@@ -346,7 +346,9 @@
       {\def\\{\noexpand\\} \xdef\@abstracttitle{\@abstracttitle}}
       \expandafter\uppercase\expandafter{\@abstracttitle} \\
       \@author \\
-      New College of Florida\ \@conferralyear%
+      New College of Florida\ \@conferralyear \\
+      \normalsize \bfseries\selectfont
+      ABSTRACT
     \else
       \normalsize \bfseries\selectfont
       ABSTRACT
