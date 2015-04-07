@@ -84,4 +84,31 @@ boundaries \citep{dixon2012}.  We used a naive heuristic to discover conserved t
   \end{minipage}
 \end{figure}
 
-We computed domains using DI window sizes as 10kb
+We computed domains for directionality indices with window sizes 100kb, 200kb, 400kb, 800kb, and 1Mb.  In general, domain sizes are well conserved
+between window sizes (Supplementary Information~\ref{sec:domainConservation}).  We noticed less conservation between replicates.  Even so,
+we discovered more than 1K domains conserved across all replicates for each window size (Table~\ref{tab:conservedDomains}).
+
+\begin{table}
+  \centering\label{tab:conservedDomains}
+  \begin{tabularx}{\textwidth}{@{}ccc@{}}
+    \toprule
+    Cell Type & Window Size & Num. Conserved Domains \\
+    \midrule
+     hESC  & 100kb  & 4435 \\
+     hESC  & 200kb  & 6290 \\
+     hESC  & 400kb  & 5148 \\
+     hESC  & 800kb  & 3451 \\
+     hESC  & 1000kb & 2949 \\
+     IMR90 & 100kb  & 1513 \\
+     IMR90 & 200kb  & 3216 \\
+     IMR90 & 400kb  & 3426 \\
+     IMR90 & 800kb  & 2881 \\
+     IMR90 & 1000kb & 2637 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+
+\section*{Lesions Surrounding Domains}
+
+Randomization of domains yielded estimates for the likelihood that the observed overlaps between cancerous lesions and domains
+developed by chance.

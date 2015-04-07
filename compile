@@ -9,17 +9,17 @@ while test $# -gt 0; do
     -a)
       shift
       find . -name "*.tex" -exec aspell --lang=en --mode=tex check "{}" \;
-      pdflatex thesis
+      pdflatex --shell-escape thesis
       makeglossaries thesis
       bibtex thesis
-      pdflatex thesis
-      pdflatex thesis
+      pdflatex  --shell-escape thesis
+      pdflatex  --shell-escape thesis
       exit 0
       ;;
     *)
-      pdflatex thesis
+      pdflatex  --shell-escape thesis
       bibtex thesis
-      pdflatex thesis
+      pdflatex  --shell-escape thesis
       exit 0
       ;;
   esac

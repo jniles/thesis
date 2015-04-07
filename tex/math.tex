@@ -141,23 +141,21 @@ log-likelihood function for the Poisson distribution is given
 
 Differentiating with respect to $T_{lm}$ and $B_m$ and setting the derivatives to zero yields
 
-\begin{multicols}{2}
+\noindent\begin{minipage}{.5\linewidth}
   \begin{align}
     \label{eqn:modelderivative1}
     \frac{dLL}{d\matr{T}_{lm}} &= \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} &= 0
     \\
     \frac{dLL}{dB_{m}} &= \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] &= 0
   \end{align}
-
-  \break%
-
+\end{minipage}%
+\begin{minipage}{.5\linewidth}
   \begin{align}
     \label{eqn:modelderivative2}
-    T_{lm} &= \frac{\matr{O}_{lm}}{B_{l}B_{m}}
-    \\
+    T_{lm} &= \frac{\matr{O}_{lm}}{B_{l}B_{m}} \\
     \sum_i\left[\frac{\matr{O}_{ij}}{B_{m}B_{i}} - \matr{T}_{im}\right]
   \end{align}
-\end{multicols}
+\end{minipage}
 
 It is clear that Eqn.~\eqref{eqn:modelderivative2} is satisfied if a solution is found for Eqn.~\eqref{eqn:modelderivative1}.  Taking the first equation together  with the
 normalization $T_{ij}$ yields
@@ -273,12 +271,13 @@ A full proof of \gls{SVD} for rectangular matrices can be found in Horn and John
 The ordered eigenvectors are the \glspl{PC} we desire.  In exploratory data analysis, the variance captured by each \gls{PC} is found
 by analyzing the relative sizes of the positive eigenvalues, typically in the form of a scree plot.  In the Hi-C capture experiment, Dekker
 and colleagues \citep{dekker2012} focus on the component that captures genome `compartment character', the banding pattern of interactions
-observed on Hi-C maps, regardless of captured variance.  In our case, the \gls{PCA} decomposition provides a measure of compartment character
-for a given bin on the Hi-C map.
+observed on Hi-C maps, regardless of captured variance.  For most chromosomes, the first \gls{PC} correlated with the observed banding, though
+for a small subset, the second \gls{PC} was used.  In our case, the \gls{PCA} decomposition provides a measure of compartment character
+for a given bin on the Hi-C map using the results found by \citet{dekker2012}.
 
 \section*{Detecting features in local chromatin interaction}
 
-\gls{PCA} is a useful technique for identifying gross differences between data sets; however, the method is computationally infeasable for large
+\gls{PCA} is a useful technique for identifying gross differences between data sets; however, the method is computationally unfeasible for large
 data sets.  For subtle changes of local chromatin structure on high resolution maps, Dixon and colleagues developed a measure of chromatin
 association bias for each bin termed the \gls{DI} \citep{dixon2012}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
 relative `upstream' or `downstream' bias of the interactions involving a particular chromatin region.  Regions constrained between prominent

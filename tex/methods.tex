@@ -76,3 +76,10 @@ intrachromosomally $1000$ times, and recording the overlaps between mutations an
 where $T$ is the test statistic, $X$ is the observed value, and the function $P(\dots)$ is the probability function on $X$.  The upper-tailed
 test was used to calculate the $p-value$ for the shuffled distribution ($p-value = 1 - cdf(T)$).  The same test was performed on windows
 $\pm5$kb and $\pm10$kb windows surrounding the domain boundaries.
+
+\section*{Bio-marker Discovery}
+
+The epigenetic state surrounding boundaries were evaluated in windows of $\pm500$kb using bedtools.  Regions of $\pm500$kb around
+domain boundaries were divided into $100$bp windows, and chromatin modeling proteins MAFK, Rad21, CEBPB, and CTCF were mapped to
+the bins, as well as RNA polymerase II\@.  Plots were generated using the R programming language, and lowess smoothing was applied
+to the data to form well-defined peaks (smoothing parameter $\frac{1}{12}$).
