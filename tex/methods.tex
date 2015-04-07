@@ -65,5 +65,14 @@ The domains were exported to \.bed format for analysis using the pybedtools pack
 
 Lung cancer data sets were obtained from the \gls{TCGA} for
 \href{https://tcga-data.nci.nih.gov/tcga/tcgaCancerDetails.jsp?diseaseType=LUAD&diseaseName=Lung\%20adenocarcinoma}{514 cases}
-of lung adenocarcinoma \citep{cerami2012,gao2013}.  The number of intersections between lesions and conserved domains were computed.
+of lung adenocarcinoma \citep{cerami2012,gao2013}.  The frequency of lung cancer mutations within domains were computed by resampling
+a randomized set of domains.  For each domain size, a normal distribution (null hypothesis $H_0$) was constructed by shuffling domains
+intrachromosomally $1000$ times, and recording the overlaps between mutations and domains.  $p-values$ were calculated as
 
+\begin{align}
+  p-value &= P(X \geq T | H_0)
+\end{align}
+
+where $T$ is the test statistic, $X$ is the observed value, and the function $P(\dots)$ is the probability function on $X$.  The upper-tailed
+test was used to calculate the $p-value$ for the shuffled distribution ($p-value = 1 - cdf(T)$).  The same test was performed on windows
+$\pm5$kb and $\pm10$kb windows surrounding the domain boundaries.

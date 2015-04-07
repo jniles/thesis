@@ -144,22 +144,18 @@ Differentiating with respect to $T_{lm}$ and $B_m$ and setting the derivatives t
 \begin{multicols}{2}
   \begin{align}
     \label{eqn:modelderivative1}
-    \begin{split}
-      \frac{dLL}{d\matr{T}_{lm}} = \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} = 0
-      //
-      \frac{dLL}{dB_{m}} = \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] = 0
-    \end{split}
+    \frac{dLL}{d\matr{T}_{lm}} &= \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} &= 0
+    \\
+    \frac{dLL}{dB_{m}} &= \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] &= 0
   \end{align}
 
   \break%
 
   \begin{align}
     \label{eqn:modelderivative2}
-    \begin{split}
-      T_{lm} = \frac{\matr{O}_{lm}}{B_{l}B_{m}}
-      \\
-      \sum_i\left[\frac{\matr{O}_{ij}}{B_{m}B_{i}} - \matr{T}_{im}\right]
-    \end{split}
+    T_{lm} &= \frac{\matr{O}_{lm}}{B_{l}B_{m}}
+    \\
+    \sum_i\left[\frac{\matr{O}_{ij}}{B_{m}B_{i}} - \matr{T}_{im}\right]
   \end{align}
 \end{multicols}
 
