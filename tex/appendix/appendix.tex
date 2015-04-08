@@ -1,34 +1,5 @@
 % appendix.tex
 
-\chapter{Data collection}
-
-Methylation data was downloaded from the Salk Institute for Biology Studies in
-two files from two biological replicates.  Each file contained $\sim600$ million
-reads from the.
-
-\chapter{Iterative Alignment of Probes}
-
-Probes were aligned to the human genome build hg19 using procedures outlined by Imakaev and colleagues \citep{imakaev2012}.  The chimeric nature of the reads
-requires that probes be aligned iteratively, starting from a small, truncated region from the beginning of the read, mapping this truncated area, increasing
-the truncation size and recursing a fixed number of steps or until the alignment scores become sufficiently poor.  Due to the large number of reads requiring
-alignment, we opted to use a fixed truncation length (based on sequence length) and four steps in the iterative alignment protocol.  The calculation
-for the truncation and step size can be found in the iterativeMapping.py script provided online.  The majority of reads 100 base pairs in length, resulting
-in an initial truncation length of 28 base pairs, and step size of 18 base pairs.
-
-\begin{table}[ht]
-  \centering
-  \caption{Hi-C reads captured for all data sets}\label{tab:reads}
-  \begin{tabular}{l l}
-    \toprule
-    Total Reads                  & 2,124,453,478 \\
-    Total DS Reads               & 1,422,870,270 \\
-    Valid Pairs                  & 713,897,554 \\
-    Filtered Reads               & 457,298,174 \\
-    Percent \textit{trans} Reads & 49.42\% \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
 \chapter{Code}
 
 All analysis was performed on a Debian Linux server (24GB RAM, 1TB HDD), using open source tools or custom scripts written in Python or bash.

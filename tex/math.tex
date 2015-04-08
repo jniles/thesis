@@ -2,32 +2,32 @@
 
 \chapter{Mathematical Preliminaries}
 
-To extract biologically meaningful information from large data sets, researcher rely heavily on mathematical insights which
-guarantee run time estimates, bounds on the problem domain, or interpretation of significance.  While studying the relationship
-between chromatin topology and fragility, we leveraged several statistical and linearly algebraic tools.  The following section
-will explain the underlying mathematical notions behind the algorithms, the biological rationale, and an interpretation of their
+To extract biologically meaningful information from large data sets, researchers rely heavily on mathematical insights
+guaranteeing run time estimates, bounds on a problem domain, or interpretation of significance.  While studying the relationship
+between chromatin topology and fragility, we leveraged several statistical and linearly algebraic tools in this regard.  The following
+section will develop the underlying mathematical notions behind the algorithms, the biological rationale, and an interpretation of their
 results.  We assume the reader is familiar with the mechanics of linear algebra, an elementary course in statistics, and numerical
 analysis.  The reader is heartily encouraged to consult the references to gain a more complete understanding than possible to
 present here.
 
 \section*{Normalization of Chromatin Contact Maps}
 
-The entry point for topological analysis begins with a chromatin \gls{contact map}.  The experimental procedure generating a chromatin
-contact map, called a Hi-C experiment, is described in detail in Chapter 3.  For now, we will attempt to motivate our
-analysis with a simple thought experiment.
+The entry point for topological analysis begins with a chromatin \gls{contact map}.  The experimental procedure generating a contact map,
+called a Hi-C experiment, is described in detail in Chapter 3.  For now, we will attempt to motivate our analysis with a simple thought
+experiment.
 
 Suppose that one wished to record the conformation of a string folded randomly on a surface.  In particular, suppose we focus on intersections
 where two strands cross or lie in close proximity.  One possibility would be to place a one-dimensional coordinate system on the string, say
-$0 \leq  x \leq  L, x \in \mathbb{N}$.  Since we are interested in overlapping regions, we refer to the region $X_i = \left[ x_{i}, x_{i+1}\right]$
-as a bin.  We can record overlapping regions as pairs $(X_i,X_j)$, where position $X_i$ is in close proximity to position $X_j$.  The
-coordinate pairs naturally form a graph, which we represent computationally as a matrix $\matr{O}$.  As $L \rightarrow \infty$, the
+$0 \leq  x \leq  L, x \in \mathbb{N}$.  Since we are interested in overlapping regions, we refer to the region $y_i = \left[ x_{i}, x_{i+1}\right]$
+as a bin.  We can record overlapping regions as pairs $(y_i,y_j)$, where position $y_i$ is in close proximity to position $y_j$.  The
+coordinate pairs naturally form a graph, which we represent computationally as a matrix $\matr{O} \in \mathbb{R}^n$.  As $L \rightarrow \infty$, the
 resolution of the matrix increases (bin sizes become smaller), and precise interactions on a smaller scale can be differentiated.
 Figure~\ref{fig:string} is an example of one such diagram.
 
 \begin{figure}[H]
   \centering
   \caption{Example: Interactions on a String}\label{fig:string}
-  \includegraphics[width=\textwidth]{figures/mathematics/strmtx}
+  \includegraphics[width=\textwidth]{figures/mathematics/strmtx2}
 \end{figure}
 
 The data structure produced by a Hi-C experiment is identical in spirit to the model developed in our thought experiment.  However, instead of
@@ -40,8 +40,9 @@ generated from populations of cells, yielding millions of copies of each genome.
 \end{defn}
 
 Contacts are recorded by binning the genome into equally sized intervals and considering the pairwise interactions between each bin.
-Typically, bins are ordered by increasing genomic coordinates, from the first bin of chromosome 1 to the last bin of chromosome X.
-Depending on data quality, bin sizes range from tens of kilobases to megabases.
+Typically, bins are ordered by increasing genomic coordinate, from the first bin of chromosome 1 to the last bin of chromosome X (most
+experiments are performed in female cell lines, leaving out chromosome Y).  Depending on data quality, bin sizes range from tens of
+kilobases to megabases.
 
 The critical step of any data analysis pipeline is data \gls{normalization}, which removes experimental biases and noise.  Coupled with quality
 control measurements and experimental replicates, normalization also establishes a level of reproducibility.
@@ -51,8 +52,8 @@ probabilistic background model that computes the probability of \glspl{trans con
 \gls{GC} content, fragment length, and genome mappability.  Corrected contact maps are calculated by solving the maximum-likelihood model
 parameters on model contact maps, which are then applied to the experimentally derived contact maps.  The mappings
 achieved using Tanay and Yaffe's methods provide robust reproducibility between replicates and experiments by considering
-\glspl{trans contact} and \glspl{cis contact} separately \citep{yaffe2011}.  This requirement renders their analysis computationally
-intensive, prompting further research into simpler methods for Hi-C analysis.
+\glspl{trans contact} and \glspl{cis contact} separately \citep{yaffe2011}.  Unfortunately, the number of bias matrix calculations renders their
+analysis computationally intensive, prompting further research into simpler methods for Hi-C analysis.
 
 Alternative methods have been developed to normalize contact maps.  Hu and colleagues propose a method `HiCNorm' based on Poisson
 regression and achieve a $9000$-fold speed increase compared to Tanay and Yaffe's method \citep{hu2012}.  Recently, Ay and colleagues provide a statistical
@@ -83,13 +84,13 @@ $T_{ij}$.
 \begin{algorithm}[H]
   \KwData{A matrix of observed interactions $O_{ij}$}
   \KwResult{A matrix of relative contact probabilities $T_{ij}$ and bias vector $B_i$}
-  Initialize $W^{0}_{ij} = raw contact matrix$; $B^0 = 1$; $k = 1$\;
+  Initialize $W^{0}_{ij} = \matr{O_{ij}}$; $B^0 = 1$; $k = 0$\;
   \While{$\abs{B^{k+1} - B^{k}} < \delta$}{%
     $S_i = \sum_{j}W^{k}_{ij}$\;
     $\mean{S_i} = \frac{1}{n}\sum_{i = 1}^{n}S_i$\;
     $\Delta{}B^k_i = \frac{S_i}{\mean{S_i}}$\;
     $W^{k+1}_{ij} = \frac{W^k_{ij}}{\Delta{}B^k_i\Delta{}B^k_j}$\;
-    $B^{k+1}_i = B^k_i \dot \Delta{}B^k_i$\;
+    $B^{k+1}_i = B^k_i \cdot \Delta{}B^k_i$\;
     $k = k + 1$\;
   }
   \caption{Iterative Correction}
@@ -111,15 +112,14 @@ $O_{ij}$ is independent and distributed according to $B$.  The count of cell $i,
 \end{align}
 
 where $c = \log{N}, u_i = \log{B_i}, u_j = \log{B_j}$, and $Z (= c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
-model is called a \gls{log-linear} or \gls{toric model}.  $p$ is an observation from some distribution $p \sim \mathcal{f}(X)$.  The challenge to
+model is called a \gls{log-linear} or \gls{toric model}.  $p$ is an observation from some distribution $p \sim f(X)$.  The challenge to
 parameterize the model and fit the model to the observed map.  The problem one of \gls{MLE}: what are the maximum likelihood parameters
 that best fit the model to the observed data?  Fortunately, methods and their convergence properties for solving \glspl{MLE} have been extensively
-studied in the literature \citep{fienberg2012, pachter2005}.
+studied in the literature \citep{pachter2005,fienberg2012}.
 
-% TODO
 In the realm of statistics, the contact matrix, together the vector sums of the rows and columns (margins), is called a \gls{contingency table}.  Assuming
 that the margins are positive, and that the matrix cannot be permuted into block diagonal shape, Birch's theorem guarantees that there is a
-unique maximum to the likelihood function \citep{pachter2005,bishop1975}.  For full details, consult Discrete Multivariate Analysis by
+unique maximum to the likelihood function \citep{bishop1975, pachter2005}.  For full details, consult Discrete Multivariate Analysis by
 Bishop \citep{bishop1975}.  Furthermore, the marginal values are the \glspl{sufficient statistic} of the model.  In other words, the maximum
 likelihood parameters for this data is given by the normalized row and column sums of the matrix \citep{pachter2005}.
 
@@ -127,7 +127,7 @@ With the observation that there exists a global maximum of the likelihood functi
 process.  One common algorithm is the \gls{EM} algorithm \citep{fuchs1982}.  Imakaev and colleagues employ a simpler algorithm known as \gls{IPF},
 developed by Deming and Stephan in 1940, and apparently rediscovered by Imakaev's group \citep{deming1940}.  \gls{IPF} works generally by solving
 the \gls{MLE} problem while leaving the margins ($p_{i+} = \sum_{j}p_{ij}$ and $p_{j+} = \sum_{i}p_{ij}$) fixed.  A proof of convergence for contingency
-tables follows from Fienberg's work in algebraic geometry in 1970 \citep{fienberg1970}. %TODO explain feinburg more
+tables follows from Fienberg's work in algebraic geometry in 1970 \citep{fienberg1970}.
 
 Finally, we return to the \gls{toric model} we described in Eqn.~\eqref{eqn:probmodel}.  Since the log-likelihood function is concave, the \gls{IPF} algorithm first
 computes the roots of the partial derivatives of the log-likelihood function and sets them to zero to solve for the global maximum.  Imakaev
@@ -141,21 +141,17 @@ log-likelihood function for the Poisson distribution is given
 
 Differentiating with respect to $T_{lm}$ and $B_m$ and setting the derivatives to zero yields
 
-\noindent\begin{minipage}{.5\linewidth}
-  \begin{align}
-    \label{eqn:modelderivative1}
-    \frac{dLL}{d\matr{T}_{lm}} &= \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} &= 0
-    \\
-    \frac{dLL}{dB_{m}} &= \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] &= 0
-  \end{align}
-\end{minipage}%
-\begin{minipage}{.5\linewidth}
-  \begin{align}
-    \label{eqn:modelderivative2}
-    T_{lm} &= \frac{\matr{O}_{lm}}{B_{l}B_{m}} \\
-    \sum_i\left[\frac{\matr{O}_{ij}}{B_{m}B_{i}} - \matr{T}_{im}\right]
-  \end{align}
-\end{minipage}
+\begin{align}
+  \label{eqn:modelderivative1}
+  \frac{dLL}{d\matr{T}_{lm}} &= \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} &= 0 \\
+  T_{lm} &= \frac{\matr{O}_{lm}}{B_{l}B_{m}}
+\end{align}
+
+\begin{align}
+  \label{eqn:modelderivative2}
+  \frac{dLL}{dB_{m}} &= \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] &= 0 \\
+  \sum_i\left[\frac{\matr{O}_{ij}}{B_{m}B_{i}} - \matr{T}_{im}\right] &= 0
+\end{align}
 
 It is clear that Eqn.~\eqref{eqn:modelderivative2} is satisfied if a solution is found for Eqn.~\eqref{eqn:modelderivative1}.  Taking the first equation together  with the
 normalization $T_{ij}$ yields
@@ -165,7 +161,8 @@ normalization $T_{ij}$ yields
   \sum_i \frac{\matr{O}_{ij}}{B_{i}B_{j}} = 1
 \end{align}
 
-A similar process yields that a broad class of distributions give the same result \citep{imakaev2012}.
+This equation is solved by iterations to find $B_i$, and then to find $\matr{T_{ij}} = \frac{\matr{O_{ij}}}{B_{i}B_j}$.  A similar process yields that a broad class of
+distributions give the same result \citep{imakaev2012}.
 
 \section*{Principal Component Analysis}
 
