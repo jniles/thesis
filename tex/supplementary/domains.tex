@@ -1,5 +1,5 @@
 \newpage
-\section*{Domain Discovery}
+\section*{Domain Discovery}\label{sec:SuppDomainDiscovery}
 
 Using the directionality indices computed on at 10kb resolution map, we computed domains by selecting the regions with the top
 $10\%$ directionality bias.  Domains were further refined by intersecting between replicates and discarding non-overlapping
@@ -8,7 +8,6 @@ domains, leaving a small, conserved subset.  Overlaps between window sizes and r
 \subsection*{Domain Conservation}\label{sec:domainConservation}
 
 \begin{figure}[H]
-  \centering
   \caption{Conserved Domains between IMR90 Replicates}
   \includegraphics[width=\textwidth]{figures/supplementary/domains/venn3.png}\label{fig:SuppVenn3}
   \medskip
@@ -18,13 +17,36 @@ domains, leaving a small, conserved subset.  Overlaps between window sizes and r
 \end{figure}
 
 \begin{figure}[H]
+  \caption{Domain Size Histograms}
+  \begin{minipage}{0.5\textwidth}%
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/size200kb.png}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/size400kb.png}
+  \end{minipage}%
+
+  \vfill
+
+  \begin{minipage}{0.5\textwidth}%
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/size800kb.png}
+  \end{minipage}%
+  \hfill
+  \begin{minipage}{0.5\textwidth}
+    \includegraphics[width=\textwidth]{./figures/supplementary/domains/size1000kb.png}
+  \end{minipage}
+  \medskip
+  \small
+  Histogram of domain sizes computed for IMR90 Replicate V.
+\end{figure}
+
+\begin{figure}[H]
   \caption{Domain Overlaps by Window Size}
   \begin{minipage}{0.5\textwidth}%
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-100-vs-IMR90-R1-200.png}
   \end{minipage}%
   \hfill
   \begin{minipage}{0.5\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-200-vs-IMR90-R1-400.png}
   \end{minipage}%
 
@@ -35,7 +57,6 @@ domains, leaving a small, conserved subset.  Overlaps between window sizes and r
   \end{minipage}%
   \hfill
   \begin{minipage}{0.5\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/venn2-IMR90-R1-800-vs-IMR90-R1-1000.png}
   \end{minipage}
   \medskip
@@ -55,7 +76,6 @@ domains, leaving a small, conserved subset.  Overlaps between window sizes and r
   \end{minipage}%
   \hfill
   \begin{minipage}{0.5\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/boundaries-IMR90-400kb.png}
   \end{minipage}%
 
@@ -66,7 +86,6 @@ domains, leaving a small, conserved subset.  Overlaps between window sizes and r
   \end{minipage}%
   \hfill
   \begin{minipage}{0.5\textwidth}
-    \centering
     \includegraphics[width=\textwidth]{./figures/supplementary/domains/IMR90boundaries400kbwindows10000kbslop.png}
   \end{minipage}
   \medskip
@@ -76,3 +95,9 @@ domains, leaving a small, conserved subset.  Overlaps between window sizes and r
   throughout boundaries and non-boundary regions.'  In regions of 5kb (top) and 10kb (bottom) around the boundary regions, we are
   able to reject the null hypothesis with negligible $p-$value.
 \end{figure}
+
+\begin{figure}[H]
+  \caption{Mutation Types from TCGA}
+  \includegraphics[width=\textwidth]{./figures/supplementary/domains/mutationTypePieChart.png}
+\end{figure}
+

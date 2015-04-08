@@ -1,19 +1,34 @@
 % discussion.tex
 \chapter{Discussion}
 
-\section*{Normalization and Interaction Scaling}
-Notably, the scaling ratios are unchanged by normalization, indicating that scaling may be a property of the underlying distribution
-rather than an artifact of out data processing.  Indeed, this indicates that perhaps normalization should be performed, as is
-done in HiCNorm \citep{hu2012} on a chromosome by chromosome basis, estimating different background distributions for each chromosome
-rather than using a generalized fitting algorithm such as IPF\@.
+The shadowy mechanisms that bring about catastrophic diseases such as cancer are slowly being elucidated.  Using previously published normalization
+algorithms, we were able to reproduce topological domain and chromatin compartments seen in previous papers \citep{dekker2012, dixon2012}. Our results
+yielded two intriguing findings: chromatin compartments do not seem to serve a regulatory role, and cancerous lesions are clustered within domains
+and domain boundaries.
 
-\section*{Chromatin Compartmentalization}
+\section*{Chromatin Compartments and Regulation}
 
 The original Hi-C experiment revealed that the genome can be compartmentalized by \gls{PC} into two characteristic classes, arbitrarily
 labeled A and B.  Lieberman-Aiden and colleagues showed positive correlations between compartment identity, gene density, and chromatin
 accessibility, concluding that compartment A consists of largely open chromatin, while compartment B is densely packed \citep{aiden2009}.
 Interestingly, we did not observe any correlation between the eigenvector and gene expression data (via genome-wide mRNA expression,
-Spearman's $\rho = -0.014$, p negligible; Supplementary Information~\ref{}).  Furthermore, shifts in compartment character did not correlate to
-changes in gene expression level (Spearman's $\rho = -0.01$, p negligible).  Given these results, it seems unlikely that cells regulate
-gene expression at the compartment level.  Compartmentalization appears to be part of the larger nuclear architectural scheme, rather than
-a dynamic regulatory mechanism.
+Spearman's $\rho = -0.014$, $p-$value negligible; Figure~\ref{fig:expressionChangeByCompartment}).  Furthermore, shifts in compartment character did not correlate to
+changes in gene expression level (Spearman's $\rho = -0.01$, $p-$value negligible).  Given these results, it seems unlikely that cells regulate
+gene expression at the compartment level.
+
+\section*{Lesions and Topological Domains}
+
+The pursuit of an underlying topological explanation for genomic fragility is not yet over.  We demonstrated that boundary regions of topological
+domains show higher numbers of mutations than expected on average, yet the mechanistic insight into the causes of these mutations is yet to be
+fully described.  Early results show differentiable peaks for certain \gls{DNA} binding proteins; however, a full set of epigenetic factors (histone
+modifications, transcription factors, etc) should be analyzed for a cohesive understanding of their importance.  The origin of genomic fragility on
+the macroscopic level defined by common fragile sites is yet undiscovered, and we did not observe a relationship between the macro-molecular
+compartments seen by \citet{dekker2012} and fragile site placement.  It may be that fragile sites are organized on higher orders, such as chromosome
+territories.
+
+Many questions remain: what types of lesions occur most frequently at domain boundaries?  How are the genome's fractally structured topological
+domains regulated?  In this analysis, we studied lung cancer specific mutations; however, there is strong evidence that boundaries are conserved
+across cell types \citep{dixon2012,pope2014}.  Future studies can expand off this base, searching for mutations across many different cancers to
+identify a conserved mechanism.  Finally, there is still much work to be done in characterizing the role that topological domains play in the
+greater scheme of genome architecture and expression.  Only once we understand the intricate interactions surrounding these domains, will we be
+equipped conquer the diseases that plague them.
