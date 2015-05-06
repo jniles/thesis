@@ -1,53 +1,12 @@
+%% This is file `thesis.cls'.
 %%
-%% This is file `cornell.cls',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% cornell.dtx  (with options: `class')
-%% 
 %% IMPORTANT NOTICE:
-%% 
 %% For the copyright see the source file.
-%% 
-%% Any modified versions of this file must be renamed
-%% with new filenames distinct from cornell.cls.
-%% 
-%% For distribution of the original source see the terms
-%% for copying and modification in the file cornell.dtx.
-%% 
-%% This generated file may be distributed as long as the
-%% original source files, as listed above, are part of the
-%% same distribution. (The sources need not necessarily be
-%% in the same archive or directory.)
-%% Document class `cornell' to use with LaTeX 2e.
-%% Based on `crnlphd' class.  The following is from the file `crnlphd.dtx':
-%%   Based loosely on old cuphdthesis style file.
-%%   Found to give good results, according to the thesis secretary.
-%%   File: crnlphd.dtx Copyright (C) 1994 Sergio Gelato
-%%   Made available without any warranty, express or implied.
-%%
-%% $Id: cornell.dtx,v 1.11 2008/04/17 16:56:31 andru Exp $
-%% \CharacterTable
-%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%%   Digits        \0\1\2\3\4\5\6\7\8\9
-%%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%%   Dollar        \$     Percent       \%     Ampersand     \&
-%%   Acute accent  \'     Left paren    \(     Right paren   \)
-%%   Asterisk      \*     Plus          \+     Comma         \,
-%%   Minus         \-     Point         \.     Solidus       \/
-%%   Colon         \:     Semicolon     \;     Less than     \<
-%%   Equals        \=     Greater than  \>     Question mark \?
-%%   Commercial at \@     Left bracket  \[     Backslash     \\
-%%   Right bracket \]     Circumflex    \^     Underscore    \_
-%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%%   Right brace   \}     Tilde         \~}
-%%
+
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{cornell}
-[2008/4/17 v2.9
-  Cornell University thesis class]
+\ProvidesClass{thesis}
+[2015/05/06 v2.9
+New College of Florida thesis class]
 \newif\ifphd
 \DeclareOption{phd}{\phdtrue}
 \DeclareOption{master}{\phdfalse}
@@ -78,6 +37,7 @@
   \PassOptionsToClass{11pt}{report}%
  \fi
 }
+
 \newcommand{\prelim@contents}[1]{}
 \DeclareOption{tocprelim}{%
   \renewcommand{\prelim@contents}[1]{\addcontentsline{toc}{section}{#1}}
@@ -263,32 +223,46 @@
 }
 \newcommand{\@degreefield}{Master of Science}
 \newcommand{\degreefield}[1]{\renewcommand{\@degreefield}{#1}}
+\newcommand{\Author}{\expandafter\MakeUppercase\expandafter{\@author}}
 
 \renewcommand{\maketitle}{%
   \begin{titlepage}%
     \realsinglespacing
     \begin{center}%
-      \hrule height 0.5in width 0pt % force vertical space at top
+      \hrule height 0.25in width 0pt % force vertical space at top
       \@titlesize \expandafter\uppercase\expandafter{\@title}
     \end{center}
-    \vfill
-    \begin{center}
-      \@subtitlesize
-      A \ifphd Thesis \else Thesis \fi \\
-      Presented to the Faculty of the \\
-      New College of Florida \\
-      in Partial Fulfillment of the Requirements for the Degree of \\
-      \ifphd Bachelor of Arts \else \@degreefield \fi
-      in Applied Mathematics/Biology
-    \end{center}
+    \vspace*{0.5\baselineskip}%
     \vfill
     \begin{center}
       \@authorsize
-      by \\
-      \@author \\
-      \@conferralmonth\ \@conferralyear
+      BY \\
+      \Author
     \end{center}
-    \vspace{0.25in}
+    \vspace*{0.75\baselineskip}%
+    \vfill
+    \begin{center}
+      \@authorsize
+      A Thesis
+    \end{center}
+    \vspace*{0.5\baselineskip}%
+    \vfill
+    \begin{center}
+      \@subtitlesize
+      Submitted to the Division of Natural Sciences \\
+      New College of Florida \\
+      in partial fulfillment of the requirements for the degree \\
+      Bachelor of Arts in Applied Mathematics/Biology \\
+      Under the sponsorship of Dr. Tyrone Ryba
+    \end{center}
+    \vspace*{0.5\baselineskip}%
+    \vfill
+    \begin{center}
+      \@authorsize
+      Sarasota, Florida \\
+      April, 2015
+    \end{center}
+    \vfill
   \end{titlepage}
 }
 
@@ -331,6 +305,7 @@
   \end{copyrightpage}%
 }
 
+\newcommand{\Title}{\expandafter\MakeUppercase\expandafter{\@title}}
 
 \newlength{\@abhdskip}%
 \renewenvironment{abstract}{
@@ -342,18 +317,12 @@
   \addtolength{\@abhdskip}{-\baselineskip}
   \begin{center}%
     \vspace*{\@abhdskip}%
-    \ifphd%
-      {\def\\{\noexpand\\} \xdef\@abstracttitle{\@abstracttitle}}
-      \expandafter\uppercase\expandafter{\@abstracttitle} \\
-      \@author \\
-      New College of Florida\ \@conferralyear \\
-      \normalsize \bfseries\selectfont
-      ABSTRACT
-    \else
-      \normalsize \bfseries\selectfont
-      ABSTRACT
-    \fi%
-    \vspace{0.5\baselineskip}
+    \Title \\ % defined above
+    \normalsize \bfseries\selectfont
+    \@author \\
+    New College of Florida, 2015 \\[3ex]
+    ABSTRACT
+    \vspace{0.5\baselineskip}%
   \end{center}%
   \pagestyle{empty}
   \thispagestyle{empty}
@@ -363,17 +332,6 @@
 
 \newcommand{\@abstracttitle}{\@title}
 \newcommand{\abstracttitle}[1]{\renewcommand{\@abstracttitle}{#1}}
-
-\newenvironment{biosketch}{%
-  \typeout{Vita}
-  \pagestyle{plain}
-  \pagenumbering{roman}
-  \setcounter{page}{3}
-  \prelim@contents{Biographical Sketch}
-  \chapter*{Biographical Sketch}
-}{%
-  \clearpage
-}
 
 \newenvironment{dedication}{%
   \prelim@contents{Dedication}
@@ -500,4 +458,4 @@
 
 \endinput
 %%
-%% End of file `cornell.cls'.
+%% End of file `thesis.cls'.

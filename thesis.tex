@@ -1,31 +1,37 @@
 % An Applied Mathematics/Biology Thesis
 % By Jonathan Niles
 
-\documentclass[phd,tocprelim]{cornell}
+\documentclass[phd,tocprelim]{thesis}
+
+% escape for previously defined ifpdf
 \let\ifpdf\relax
 
-% packages
-\usepackage{float}
+% layout packages
 \usepackage{ifpdf}
-\usepackage{geometry}
-\usepackage{graphicx}
-\usepackage{svg}
+\usepackage[top=1in, bottom=1in, left=1.5in, right=1in]{geometry}
+
+% font packages
+\usepackage{lmodern}
+\usepackage{ebgaramond}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{algorithm2e}
+\usepackage[T1]{fontenc}
+
+% figure and graphics packages
+\usepackage{float}
 \usepackage{tabularx}
 \usepackage{booktabs,caption,fixltx2e}
 \usepackage[flushleft]{threeparttable}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{caption}
+
+% bibliography, appendix, and reference packages
+\usepackage{algorithm2e}
 \usepackage{bibentry}
 \usepackage{natbib}
-\usepackage{multicol}
 \usepackage{appendix}
 \usepackage[hidelinks]{hyperref}
 \usepackage[toc,nogroupskip,nonumberlist]{glossaries}
-
-%\bibpunct{(}{)}{;}{a}{,}{,}
-
-% TODO
-\usepackage{caption}
 
 %
 % Definitions
@@ -34,8 +40,8 @@
 \newtheorem{thm}{Theorem}
 \newtheorem{prop}{Proposition}
 \newcommand{\matr}[1]{\mathbf{#1}}
-\newcommand*\mean[1]{\bar{#1}}
-\newcommand*\conj[1]{\bar{#1}}
+\newcommand*\mean[1]{\overline{#1}}
+\newcommand*\conj[1]{\overline{#1}}
 
 % make the absolute value command
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
@@ -82,6 +88,7 @@
 \maketitle
 
 \input{./tex/abstract}
+\input{./tex/acknowledgements}
 
 \contentspage%
 \tablelistpage%

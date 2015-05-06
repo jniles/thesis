@@ -6,9 +6,8 @@ To extract biologically meaningful information from large data sets, researchers
 guaranteeing run time estimates, bounds on a problem domain, or interpretation of significance.  While studying the relationship
 between chromatin topology and fragility, we leveraged several statistical and linearly algebraic tools in this regard.  The following
 section will develop the underlying mathematical notions behind the algorithms, the biological rationale, and an interpretation of their
-results.  We assume the reader is familiar with the mechanics of linear algebra, an elementary course in statistics, and numerical
-analysis.  The reader is heartily encouraged to consult the references to gain a more complete understanding than possible to
-present here.
+results.  We assume the reader is familiar with the mechanics of linear algebra, statistics, and numerical analysis.  The reader is
+heartily encouraged to consult the references to gain a more complete understanding than possible to present here.
 
 \section*{Normalization of Chromatin Contact Maps}
 
@@ -26,8 +25,9 @@ Figure~\ref{fig:string} is an example of one such diagram.
 
 \begin{figure}[H]
   \centering
-  \caption{Example: Interactions on a String}\label{fig:string}
+  \caption[Interactions on a String]{Example: Interactions on a String}\label{fig:string}
   \includegraphics[width=\textwidth]{figures/mathematics/strmtx2}
+  \
 \end{figure}
 
 The data structure produced by a Hi-C experiment is identical in spirit to the model developed in our thought experiment.  However, instead of
@@ -36,13 +36,14 @@ generated from populations of cells, yielding millions of copies of each genome.
 
 \begin{defn}
   A chromatin contact map $\matr{O}$ is a symmetric $N \times N$ matrix.  Each cell or bin $O_{ij}$ contains the number of observed contacts
-  between regions $i$ and $j$ on the genome.  The contact map is a measure of the contact probability between loci on a genome-wide scale.
+  between regions $i$ and $j$ on the genome.
 \end{defn}
 
 Contacts are recorded by binning the genome into equally sized intervals and considering the pairwise interactions between each bin.
 Typically, bins are ordered by increasing genomic coordinate, from the first bin of chromosome 1 to the last bin of chromosome X (most
 experiments are performed in female cell lines, leaving out chromosome Y).  Depending on data quality, bin sizes range from tens of
-kilobases to megabases.
+kilobases to megabases.  We consider the chromatin contact map, or simply contact map, to be a measure of the interaction probability between
+loci on a genome-wide scale.
 
 The critical step of any data analysis pipeline is data \gls{normalization}, which removes experimental biases and noise.  Coupled with quality
 control measurements and experimental replicates, normalization also establishes a level of reproducibility.
@@ -56,13 +57,13 @@ achieved using Tanay and Yaffe's methods provide robust reproducibility between 
 analysis computationally intensive, prompting further research into simpler methods for Hi-C analysis.
 
 Alternative methods have been developed to normalize contact maps.  Hu and colleagues propose a method `HiCNorm' based on Poisson
-regression and achieve a $9000$-fold speed increase compared to Tanay and Yaffe's method \citep{hu2012}.  Recently, Ay and colleagues provide a statistical
-method `Fit-Hi-C' that does not assume a particular underlying statistical distribution, instead normalizing \glspl{cis contact} based on probabilistic
-analysis of polymer looping dynamics \citep{ay2014}.
+regression and achieve a $9000$-fold speed increase compared to Tanay and Yaffe's method \citep{hu2012} in practice.  Recently, Ay and colleagues
+provide a statistical method `Fit-Hi-C' that does not assume a particular underlying statistical distribution, instead normalizing \glspl{cis contact}
+based on probabilistic analysis of polymer looping dynamics \citep{ay2014}.
 
 Imakaev and colleagues propose a normalization and analysis pipeline \gls{ICE} \citep{imakaev2012}.  We employ \gls{ICE} as the normalization
-algorithm in this thesis, due to the availability of its source code\footnote{source: \url{http://mirnylab.bitbucket.org/hiclib/}} and good
-performance.  In the following section, we will discuss their algorithm in detail.
+algorithm in this thesis, due to the availability of its source code\footnote{source: \url{http://mirnylab.bitbucket.org/hiclib/}} and the low
+memory requirements described in their paper.  In the following section, we will discuss the \gls{ICE} algorithm in detail.
 
 \subsection*{\glsentryfull{ICE}}
 
@@ -84,12 +85,12 @@ $T_{ij}$.
 \begin{algorithm}[H]
   \KwData{A matrix of observed interactions $O_{ij}$}
   \KwResult{A matrix of relative contact probabilities $T_{ij}$ and bias vector $B_i$}
-  Initialize $W^{0}_{ij} = \matr{O_{ij}}$; $B^0 = 1$; $k = 0$\;
-  \While{$\abs{B^{k+1} - B^{k}} < \delta$}{%
-    $S_i = \sum_{j}W^{k}_{ij}$\;
+  Initialize $\matr{W}^{0}_{ij} = \matr{O}_{ij}$; $B^0 = 1$; $B^1 = \infty$; $k = 0$\;
+  \While{$\abs{B^{k+1} - B^{k}} > \delta$}{%
+    $S_i = \sum_{j}\matr{W}^{k}_{ij}$\;
     $\mean{S_i} = \frac{1}{n}\sum_{i = 1}^{n}S_i$\;
     $\Delta{}B^k_i = \frac{S_i}{\mean{S_i}}$\;
-    $W^{k+1}_{ij} = \frac{W^k_{ij}}{\Delta{}B^k_i\Delta{}B^k_j}$\;
+    $\matr{W}^{k+1}_{ij} = \frac{\matr{W}^k_{ij}}{\Delta{}B^k_i\Delta{}B^k_j}$\;
     $B^{k+1}_i = B^k_i \cdot \Delta{}B^k_i$\;
     $k = k + 1$\;
   }
@@ -97,8 +98,8 @@ $T_{ij}$.
 \end{algorithm}
 
 It is not apparent that this algorithm is correct or even converges.  To gain an intuitive understanding of the solution, let us investigate a
-simpler proposition.  Suppose that, instead of defining $O_{ij}$ to be the matrix product $B_{i}B_{j}T_{ij}$, we consider the counts
-in $O_{ij}$ are the expectation of some multinomially distributed random variable $X_{ij}$, where $E[X_{ij}] = NB_{i}B_j$ for some
+simpler proposition.  Suppose that, instead of defining $O_{ij}$ to be the matrix product $B_{i}B_{j}T_{ij}$, we consider a count
+in $O_{ij}$ is the expectation of some multinomially distributed random variable $X_{ij}$, where $E[X_{ij}] = NB_{i}B_j$ for some
 constant $N$ and vector $B$ whose cumulative sum is 1 ($\sum_{i}B_i = 1$).  In this formulation, we relax our criteria such that each cell
 $O_{ij}$ is independent and distributed according to $B$.  The count of cell $i,j$ is given by the probability
 
@@ -107,17 +108,17 @@ $O_{ij}$ is independent and distributed according to $B$.  The count of cell $i,
   \begin{split}
     p_{ij} &= NB_{i}B_{j}
     \\
-    \log{p_{ij}} &=  c + u_i + u_j - Z
+    \log{p_{ij}} &=  c + u_i + u_j
   \end{split}
 \end{align}
 
-where $c = \log{N}, u_i = \log{B_i}, u_j = \log{B_j}$, and $Z (= c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
-model is called a \gls{log-linear} or \gls{toric model}.  $p$ is an observation from some distribution $p \sim f(X)$.  The challenge to
+where $c = \log{N}, u_i = \log{B_i}$, and $Z (= c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
+model is called a \gls{log-linear} or \gls{toric model}.  $p$ is an observation from some distribution $p \sim f(X)$.  The challenge is to
 parameterize the model and fit the model to the observed map.  The problem one of \gls{MLE}: what are the maximum likelihood parameters
 that best fit the model to the observed data?  Fortunately, methods and their convergence properties for solving \glspl{MLE} have been extensively
 studied in the literature \citep{pachter2005,fienberg2012}.
 
-In the realm of statistics, the contact matrix, together the vector sums of the rows and columns (margins), is called a \gls{contingency table}.  Assuming
+In the realm of statistics, the contact matrix, together with the vector sums of the rows and columns (margins), is called a \gls{contingency table}.  Assuming
 that the margins are positive, and that the matrix cannot be permuted into block diagonal shape, Birch's theorem guarantees that there is a
 unique maximum to the likelihood function \citep{bishop1975, pachter2005}.  For full details, consult Discrete Multivariate Analysis by
 Bishop \citep{bishop1975}.  Furthermore, the marginal values are the \glspl{sufficient statistic} of the model.  In other words, the maximum
@@ -129,9 +130,9 @@ developed by Deming and Stephan in 1940, and apparently rediscovered by Imakaev'
 the \gls{MLE} problem while leaving the margins ($p_{i+} = \sum_{j}p_{ij}$ and $p_{j+} = \sum_{i}p_{ij}$) fixed.  A proof of convergence for contingency
 tables follows from Fienberg's work in algebraic geometry in 1970 \citep{fienberg1970}.
 
-Finally, we return to the \gls{toric model} we described in Eqn.~\eqref{eqn:probmodel}.  Since the log-likelihood function is concave, the \gls{IPF} algorithm first
-computes the roots of the partial derivatives of the log-likelihood function and sets them to zero to solve for the global maximum.  Imakaev
-and colleagues consider the likelihood function on the Poisson distribution, given by the \gls{pdf} $f(O;E) = \frac{E^{O}}{O!e^{-E}}$.  The
+Finally, we return to the \gls{toric model} we described in Eqn.~\eqref{eqn:probmodel}.  Since the log-likelihood function is concave, the \gls{IPF}
+algorithm first computes the partial derivatives of the log-likelihood function and sets them to zero to solve for the global maximum.  Imakaev
+and colleagues consider the likelihood function on the Poisson distribution, given by the \gls{pdf} $f(O;E) = \frac{E^{O}}{O!}e^{-E}$.  The
 log-likelihood function for the Poisson distribution is given
 
 \begin{align}
@@ -182,7 +183,7 @@ must compare the calculated components to the original data set and determine wh
 \end{defn}
 
 In practice, there are two methods used for \gls{PCA}.  The simplest to explain, but more error-prone, is the eigen-decomposition
-method \citep{smith2006}.  In this procedure, for a data matrix $\matr{A}$, the eigenvalues of the covariance matrix $\matr{A}\matr{A}^T$
+method \citep{smith2006}.  In this procedure, for a data matrix $\matr{A}$, the eigenvectors of the covariance matrix $\matr{A}\matr{A}^T$
 are computed directly as the principal components.  However, since this method requires an extra matrix multiplication, numerical
 errors are more likely to be introduced during large computations. In practice, \gls{PCA} often derived in conjunction with \gls{SVD}
 and we will hold to that standard here.
@@ -204,9 +205,9 @@ and we will hold to that standard here.
 \end{thm}
 
 To prove that any square matrix $\matr{A} \in M_n(\mathbb{R})$ can be decomposed into singular values, we will use some matrix definitions. The
-reader is reminded of the definitions of \textit{normal} $(\matr{A}\matr{A}^* = \matr{A}^*\matr{A})$, \textit{Hermetian} $(\matr{A}^* =  \matr{A})$,
-and \textit{unitary} $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = 1)$ matrices.  Further, two matrices $\matr{A}, \matr{B} \in M_n$ are said to be
-\textit{unitarily similar} they are similar by a unitary matrix $(\matr{A} = \matr{U}\matr{B}\matr{U}^*)$.  We are now ready to begin the proof.
+reader is reminded of the definitions of \textit{normal} $(\matr{A}\matr{A}^* = \matr{A}^*\matr{A})$, \textit{Hermitian} $(\matr{A}^* =  \matr{A})$,
+and \textit{unitary} $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = \matr{I})$ matrices.  Further, two matrices $\matr{A}, \matr{B} \in M_n$ are said to be
+\textit{unitarily similar} if they are similar by a unitary matrix $(\matr{A} = \matr{U}\matr{B}\matr{U}^*)$.  We are now ready to begin the proof.
 
 \begin{proof}[Singular Value Decomposition]
   It should be clear the matrices $\matr{A}\matr{A}^* \in M_n$ and $\matr{A}^*\matr{A} \in M_n$ have the same eigenvalues, and hence, they are
@@ -222,8 +223,8 @@ and \textit{unitary} $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = 1)$ matrices.  
 
   so $\matr{UA}$ is normal.  Let $\lambda_1 = \abs{\lambda_1}e^{i\theta_1}, \ldots, \lambda_n = \abs{\lambda_n}e^{i\theta_n}$ be the positive eigenvalues of
   $\matr{UA}$ in decreasing order.  Furthermore, let $\Delta = diag(\lambda_1, \ldots, \lambda_n)$, let $D = diag(e^{i\theta_1}, \ldots, e^{i\theta_n})$,
-  let $\Sigma = diag(\abs{\lambda_1}, \ldots, \abs{\lambda_n})$, and let $\matr{X}$ be a unitary matrix such that $\matr{UA} = \matr{X\Delta}\matr{X}^*$.  Then
-  $D$ is unitary and
+  let $\Sigma = diag(\abs{\lambda_1}, \ldots, \abs{\lambda_n})$, and, by the spectral theorem, let $\matr{X}$ be a unitary matrix such that
+  $\matr{UA} = \matr{X\Delta}\matr{X}^*$.  Then $\matr{D}$ is unitary and
 
   \[
     \matr{A} = \matr{U}^*\matr{X}\Sigma\matr{D}\matr{X}^* = (\matr{U}^*\matr{X})\Sigma(\matr{D}\matr{X}^*)
@@ -278,7 +279,7 @@ for a given bin on the Hi-C map using the results found by \citet{dekker2012}.
 data sets.  For subtle changes of local chromatin structure on high resolution maps, Dixon and colleagues developed a measure of chromatin
 association bias for each bin termed the \gls{DI} \citep{dixon2012}.  Intuitively, the \gls{DI} for a given region of chromatin gives the
 relative `upstream' or `downstream' bias of the interactions involving a particular chromatin region.  Regions constrained between prominent
-downstream biases followed by high upstream bias form pockets of interactions called topological domains~\cite{dixon2012}.
+downstream biases followed by high upstream bias form pockets of interactions called topological domains \citep{dixon2012}.
 
 The basic premise of the \gls{DI} algorithm is simple.  For each bin along the genome, the algorithm calculates the number of upstream and downstream
 interactions and assigns the normalized difference ($downstream - upstream$) as the \gls{DI} for that particular bin.  The index captures the
