@@ -25,9 +25,14 @@ Figure~\ref{fig:string} is an example of one such diagram.
 
 \begin{figure}[H]
   \centering
-  \caption[Interactions on a String]{Example: Interactions on a String}\label{fig:string}
+  \caption[Interactions on a String]{Interactions on a String}\label{fig:string}
   \includegraphics[width=\textwidth]{figures/mathematics/strmtx2}
-  \
+  \medskip
+  \small
+  A contrived example shows have interactions are decomposed into matrix form.  Overlapping regions (a, b) and
+  (c,d) are recorded by writing $O_{ab} = O_{cd} = 1$.  There are no interactions between other regions so the
+  matrix is filled with zeros.  In a Hi-C experiment, interactions seen repeatedly in nuclei from the experimental
+  population are accumulated by summing.
 \end{figure}
 
 The data structure produced by a Hi-C experiment is identical in spirit to the model developed in our thought experiment.  However, instead of
@@ -114,7 +119,7 @@ $O_{ij}$ is independent and distributed according to $B$.  The count of cell $i,
 
 where $c = \log{N}, u_i = \log{B_i}$, and $Z (= c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
 model is called a \gls{log-linear} or \gls{toric model}.  $p$ is an observation from some distribution $p \sim f(X)$.  The challenge is to
-parameterize the model and fit the model to the observed map.  The problem one of \gls{MLE}: what are the maximum likelihood parameters
+parameterize the model and fit the model to the observed map.  The problem is one of \gls{MLE}: what are the maximum likelihood parameters
 that best fit the model to the observed data?  Fortunately, methods and their convergence properties for solving \glspl{MLE} have been extensively
 studied in the literature \citep{pachter2005,fienberg2012}.
 
@@ -227,7 +232,7 @@ and \textit{unitary} $(\matr{A}^*\matr{A} = \matr{A}\matr{A}^* = \matr{I})$ matr
   $\matr{UA} = \matr{X\Delta}\matr{X}^*$.  Then $\matr{D}$ is unitary and
 
   \[
-    \matr{A} = \matr{U}^*\matr{X}\Sigma\matr{D}\matr{X}^* = (\matr{U}^*\matr{X})\Sigma(\matr{D}\matr{X}^*)
+    \matr{A} = \matr{U}^*\matr{X}\Sigma\matr{D}\matr{X}^* = (\matr{U}^*\matr{X})\Sigma(\matr{D}\matr{X}^*) \addtag
   \]
 
   If we denote $\matr{V} = \matr{U}^*\matr{X}$ and $\matr{W} = \matr{X}\matr{D}^*$, we have our desired factorization, and
@@ -254,11 +259,11 @@ A full proof of \gls{SVD} for rectangular matrices can be found in Horn and John
     \matr{A}^*\matr{A} =
     \matr{V\Sigma}\matr{W}^*\matr{W\Sigma}\matr{V}^* =
     \matr{V\Sigma\Sigma}\matr{V}^* =
-    \matr{V}\matr{\Sigma}^2\matr{V}^*
+    \matr{V}\matr{\Sigma}^2\matr{V}^* \addtag
   \]
 
   \[
-    \matr{C} = \matr{V}\frac{\matr{\Sigma}^2}{n - 1}\matr{V}^*
+    \matr{C} = \matr{V}\frac{\matr{\Sigma}^2}{n - 1}\matr{V}^* \addtag
   \]
 
   $\matr{C}$ is symmetric, and unitarily diagnolizable.  Hence, the eigenvectors of the covariance matrix $\matr{C}$ are the same as the
@@ -295,5 +300,5 @@ where $A$ is the number of upstream reads in a given window, $B$ is the number o
 the null distribution ($\frac{A + B}{2}$).  Dixon and colleagues apply the directionality index to examine 2Mb windows upstream and downstream on a
 normalized 40kb resolution contact map.  From the \gls{DI} vector, they employ a \gls{HMM}, with the \gls{DI} as observations and labels `upstream bias',
 `downsteam bias' or `no bias' to discover conserved domains on contact maps.  For the full mathematical formulation of the \gls{HMM}, see \citet{dixon2012}.
-They concluded that the domain boundaries were conserved across human and mouse cell types, and may represent part of the fundamental organizing principles
+They conclude that the domain boundaries were conserved across human and mouse cell types, and may represent part of the fundamental organizing principles
  of the metazoan genome \citep{dixon2012}.

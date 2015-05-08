@@ -1,6 +1,6 @@
 % bio.tex
 
-\chapter{Biological Preliminaries}
+\chapter{Biological Foundations}
 
 \section*{Introduction}
 
@@ -11,8 +11,8 @@ to consult a molecular biology text, such as Molecular Biology of the Cell \cite
 regulating cell state and function.
 
 The sheer complexity of the nucleus is best decomposed into a structural hierarchy with several layers of granularity: the primary
-sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, and \glspl{CT}
-and other macro molecular chromatin structures.  Within these categories there are deeper layers of regulation, such as nested
+sequence of \gls{DNA} base pairs, architectural modeling proteins, transcription factors and other binding proteins, intermediate levels,\glspl{CT}
+and other macro molecular chromatin structures.  Within these categories are deeper layers of regulation, such as nested
 organization of topological domains or alternative splicing in transcription.  Conformational changes at smaller resolutions generally
 invoke targeted, local events, while genome-wide conformation shifts enable regulation on whole cell level.  This conceptual hierarchy
 is useful to keep in mind when investigating the origin of gene expression changes, differentiation, or disease states.  We will
@@ -21,7 +21,7 @@ consider each of these levels in sequence.
 \section*{The Nuclear Hierarchy}
 
 It is difficult to overstate the importance of chromatin topology.  The morass of nucleic acids and proteins packed tightly inside the
-nuclear envelope somehow contain all the information required for cell function and proliferation.  The central dogma of molecular biology,
+nuclear envelope somehow contains all the information required for cell function and proliferation.  The central dogma of molecular biology,
 outlined in the notes of Francis Crick's `Ideas on Protein Synthesis' \citep{crick1970} illustrates how information flows from primary
 sequence through protein.  The central dogma therefore strongly reinforces the importance of \gls{DNA} content, readability, and expression.
 
@@ -38,7 +38,7 @@ The fundamental informational unit of the cell is the \gls{nucleotide}, often ca
 adenine, cytosine, guanine, and thymine.  Nucleotides are affixed to a phosphate backbone in a long, coiling polymer chain, called \gls{DNA}.  The
 famous publication of the structure of \gls{DNA} in 1953 by researchers James Watson and Francis Crick demonstrates these polymers
 exist in the nucleus as double helices \citep{watson1953}.  Strong hydrogen bonds between opposing nucleotides hold the double helix together
-in solution.  Nucleotides are classified based on the chemical structure of there nucleobase into purine or pyridine bases; adenine and guanine are purine bases,
+in solution.  Nucleotides are classified based on the chemical structure of their nucleobase into purine or pyridine bases; adenine and guanine are purine bases,
 while thymine and cytosine are pyridine bases.  \gls{DNA} bonds form between complementary nucleotides from opposite groups: adenine and thymine form
 two hydrogen bonds and guanine and cytosine form three hydrogen bonds between their bases.  Thus, one half of the helix completely
 determines the other half and perturbations of this structure may lead to strand mutations \citep{alberts2002,cox2008}.
@@ -51,7 +51,7 @@ flexible molecule.  A naive calculation reveals that the human genome is roughly
   A diploid human genome consists of two copies of the $\sim3.1Gb$ DNA molecule, based off estimates from the \gls{NCBI} human genome reference build 37.
   Each base pair is assumed to be roughly $0.34\times10^{-9}m$.  The entire length is $2(0.34 \times 10^{-9})(3.2 \times 10^9) = 2.176m$.
 },
-yet the entire genome fits into a nuclear volume of $\sim523\mu$m \citep{marks2011}.  Loops as small as 100 bases in length have been
+yet the entire genome fits into a nuclear volume of $\sim523\mu$m$^3$ \citep{marks2011}.  Loops as small as 100 bases in length have been
 reported in enhancer and repressor element activation pathways \citep{wong2008}.  Furthermore, These loops can form independently of proteins
 \citep{vafabakhsh2012}, indicating these loops do not impose excessive torsional strain.  Altogether, \gls{DNA}'s inherent flexibility furnishes the
 foundation for complex higher order chromatin structures.
@@ -214,7 +214,6 @@ that are particularly sensitive to forming gaps or breaks on metaphase chromosom
 under mitosis \citep{leyden2008}, and non-randomly distributed loci that exhibit an increased frequency of breakage under replicational
 stress \citep{franchitto2013}.  For the purposes of this discussion, a \gls{fragile site} is a region on the chromosome prone to
 forming complex rearrangements, particularly double-strand breaks, repeat extensions, and translocations, when subjected to replicational stress.
-These rearrangements play a pivotal role in many severely deliberating genetic diseases.
 
 Fragile sites come in two flavors: common fragile sites (CFS) and rare fragile sites (RFS).  Fragile sites are classified into a group based on their
 prevalence in the population, and the conditions under which their fragility is induced \citep{leyden2008}.  Common fragile sites are thought to be common
