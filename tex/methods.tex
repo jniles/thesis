@@ -13,20 +13,20 @@ IMR90 lung fibroblast and H1 \glsentryfull{hESC} cell lines were examined due to
 literature.  Hi-C data sets for both cell lines were obtained from \glsentryfull{GEO} \citep{edgar2002}, accession number
 \href{http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE43070}{GSE43070}.  Two and six biological replicates were examined from
 \gls{hESC} and fetal lung fibroblasts (IMR90) cell lines respectively.  Chimeric HI-C reads were aligned to the human genome build 19 using the BowTie2
-alignment software\footnote{\url{http://bowtie-bio.sourceforge.net/bowtie2/index.shtml}} \citep{langmead2012}. Reads containing
-segments mapping to unique portions of the genome were stored on disk in the high performance
+alignment software\footnote{\url{http://bowtie-bio.sourceforge.net/bowtie2/index.shtml}} \citep{langmead2012}.  Reads with a low
+mapping score or aligned to only one region of the genome (`single sided') were discarded from future analysis.  The remaining reads
+contain sequences mapped to unique segments of the genome and were stored on disk as interaction maps, in a high performance
 HDF5\footnote{\url{http://www.hdfgroup.org/HDF5/}} format using the \href{https://bitbucket.org/mirnylab/hiclib}{hiclib} python
-library \citep{imakaev2012}.  Low-scoring or single sided reads were discarded from future analysis.  Interaction maps were
-stored in 2Mb, 1Mb, 200kb, 40kb, 20kb, and 10kb bin sizes.
+library \citep{imakaev2012}.  The raw reads were binned into interaction maps of resolution 2Mb, 1Mb, 200kb, 40kb, 20kb, and 10kb.
 
-In addition to plotting, the average scaling properties were computed as follows.  For each off chromosome, the number average
-number of contacts at a given distance was computed by averaging the $k-$diagonal of the contact matrix
+In addition to plotting, the average scaling properties were computed as follows.  For each off chromosome, the average number of
+contacts at a given distance was computed by averaging the $k-$diagonal of the contact matrix
 
 \begin{align}
   c_j = \frac{\sum_{i=1}^{n - j} \matr{O_{i, i+k}}}{n - j} \label{eq:probeScale}
 \end{align}
 
-The vector $\vec{c} = \left(c_1, c_2, \hdots, c_{n-1}\right)$ records the average number of contacts see across the chromosome
+The vector $\vec{c} = \left(c_1, c_2, \hdots, c_{n-1}\right)$ records the average number of contacts seen across the chromosome
 at each distance.
 
 \section*{Iterative Correction and Eigenvector Decomposition}
@@ -34,7 +34,8 @@ at each distance.
 Exported maps were corrected using the `correctIC' function from hiclib.  The heatmaps were iteratively corrected as previously
 described \citep{imakaev2012}, at an average of 10 iterations per map.  Pearson correlations were calculated between each sample
 for both replicates.  The maps were decomposed into eigenvector components by \gls{PCA} using the `doPCA' functions in hiclib.
-\gls{PCA} was performed on interaction maps of 1Mb and 200kb bin sizes.
+\gls{PCA} was performed on interaction maps of two resolutions: 1Mb resolution for comparison to previous components, and 200kb
+resolution to investigate the potential heterogeneity of the 1Mb map.
 
 \section*{Gene Expression and Pathway Analysis}
 
@@ -65,21 +66,23 @@ The domains were exported to \.bed format for analysis using the pybedtools pack
 
 Lung cancer data sets were obtained from the \gls{TCGA} for
 \href{https://tcga-data.nci.nih.gov/tcga/tcgaCancerDetails.jsp?diseaseType=LUAD&diseaseName=Lung\%20adenocarcinoma}{514 cases}
-of lung adenocarcinoma \citep{cerami2012,gao2013}.  The frequency of lung cancer mutations within domains were computed by resampling
-a randomized set of domains.  For each domain size, a normal distribution (null hypothesis $H_0$) was constructed by shuffling domains
-intrachromosomally $1000$ times, and recording the overlaps between mutations and domains.  $p-values$ were calculated as
+of lung adenocarcinoma \citep{cerami2012,gao2013}.  The frequency of lung cancer mutations within domains were computed as follows.
+Using bedtools, $\pm 5$kb and $\pm 10$kb ranges were constructed around domain boundaries discovered at each directionality index
+resolution.  The domain boundaries were shuffled intrachromosomally $1000$ times, each time recording the number of point mutations
+overlapping the boundary ranges.  The sampled overlaps form a normal distribution ($H_0$), the expected number of overlaps between
+cancerous mutations and domain boundaries if mutations were randomly distribution.  $p-values$ were calculated as
 
 \begin{align}
   p-value &= P(X \geq T | H_0)
 \end{align}
 
 where $T$ is the test statistic, $X$ is the observed value, and the function $P(\dots)$ is the probability function on $X$.  The upper-tailed
-test was used to calculate the $p-value$ for the shuffled distribution ($p-value = 1 - cdf(T)$).  The same test was performed on windows
+test was used to calculate the $p-value$ for the shuffled distribution ($p-value = 1 - P(X < T)$).  The same test was performed on windows
 $\pm5$kb and $\pm10$kb windows surrounding the domain boundaries.
 
 \section*{Bio-marker Discovery}
 
 The epigenetic state surrounding boundaries were evaluated in windows of $\pm500$kb using bedtools.  Regions of $\pm500$kb around
 domain boundaries were divided into $100$bp windows, and chromatin modeling proteins MAFK, Rad21, CEBPB, and CTCF were mapped to
-the bins, as well as RNA polymerase II\@.  Plots were generated using the R programming language, and lowess smoothing was applied
+the bins, along with RNA polymerase II\@.  Plots were generated using the R programming language, and Loess smoothing was applied
 to the data to form well-defined peaks (smoothing parameter $\frac{1}{12}$).

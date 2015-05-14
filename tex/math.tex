@@ -117,7 +117,7 @@ $O_{ij}$ is independent and distributed according to $B$.  The count of cell $i,
   \end{split}
 \end{align}
 
-where $c = \log{N}, u_i = \log{B_i}$, and $Z (= c)$ is a normalization factor to ensure that $\sum p = 1$.  This type of
+where $c = \log{N}, u_i = \log{B_i}$.  The transformation changes a product into the sum of two random variables.  This type of
 model is called a \gls{log-linear} or \gls{toric model}.  $p$ is an observation from some distribution $p \sim f(X)$.  The challenge is to
 parameterize the model and fit the model to the observed map.  The problem is one of \gls{MLE}: what are the maximum likelihood parameters
 that best fit the model to the observed data?  Fortunately, methods and their convergence properties for solving \glspl{MLE} have been extensively
@@ -149,13 +149,14 @@ Differentiating with respect to $T_{lm}$ and $B_m$ and setting the derivatives t
 
 \begin{align}
   \label{eqn:modelderivative1}
-  \frac{dLL}{d\matr{T}_{lm}} &= \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} &= 0 \\
+  \frac{dLL}{d\matr{T}_{lm}} &= \frac{O_{lm}}{T_{lm}} - B_{l}B_{m} = 0 \\
   T_{lm} &= \frac{\matr{O}_{lm}}{B_{l}B_{m}}
 \end{align}
 
 \begin{align}
   \label{eqn:modelderivative2}
-  \frac{dLL}{dB_{m}} &= \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] &= 0 \\
+  \frac{dLL}{dB_{m}} &= \\
+  \sum_i\left[\frac{\matr{O}_{im}}{B_m} - T_{im}B_i\right] &= 0 \\
   \sum_i\left[\frac{\matr{O}_{ij}}{B_{m}B_{i}} - \matr{T}_{im}\right] &= 0
 \end{align}
 

@@ -324,8 +324,8 @@ New College of Florida thesis class]
     ABSTRACT
     \vspace{0.5\baselineskip}%
   \end{center}%
-  \pagestyle{empty}
-  \thispagestyle{empty}
+  \pagestyle{plain}
+  \thispagestyle{plain}
 }{%
   \clearpage
 }
@@ -457,5 +457,3 @@ New College of Florida thesis class]
 }
 
 \endinput
-%%
-%% End of file `thesis.cls'.

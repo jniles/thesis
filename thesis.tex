@@ -84,16 +84,23 @@
 %
 \begin{document}
 
+% set page numbering to roman for front matter
+\renewcommand{\thepage}{\roman{page}}
+
 % import titlepage
 \input{./tex/title}
 \maketitle
 
-\input{./tex/abstract}
 \input{./tex/acknowledgements}
 
 \contentspage%
 \tablelistpage%
 \figurelistpage%
+
+\input{./tex/abstract}
+
+% set page numbering to arabic for thesis body
+\renewcommand{\thepage}{\arabic{page}}
 
 \input{./tex/introduction}
 \input{./tex/math}
